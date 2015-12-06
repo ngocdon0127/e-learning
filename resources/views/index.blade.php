@@ -24,6 +24,7 @@
             @foreach ($allcourse as $course)
                 <a href="/course/{{$course['id']}}">{{$course['Title']}}</a>
             @endforeach
+            <a href="/admin/addcourse">Add Course</a>
         </ul>
     </div>
 </div>

@@ -3,15 +3,30 @@
 namespace App\Http\Controllers;
 
 use App\Answers;
-use App\Courses;
-use App\Posts;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
-class PostsController extends Controller
+class AnswersController extends Controller
 {
+
+    public function addAnswer($postID){
+        return view('admin.addanswer')->with("postid", $postID);
+    }
+
+    public function saveAnswer(Request $request){
+        $data = $request->all();
+        $answer = new Answers();
+        $answer->PostID = $data['PostID'];
+        if (array_key_exists('Logical', $data))
+            $answer->Logical = $data['Logical'];
+        $answer->Detail = $data['Detail'];
+        $answer->toArray();
+        $answer->save();
+        return redirect('/post/'.$answer->PostID);
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -27,35 +42,6 @@ class PostsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-
-    public function addPost(){
-//        $courses = Courses::all();
-//        $courses->toArray();
-        $courses = array(['1'=>1], '2'=>3);
-        $t = array('hehe'=>$courses);
-            return view('admin.addpost', $t);
-    }
-
-    public function savePost(Request $request){
-        $data = $request->all();
-        $post = new Posts();
-        $post->CourseID = $data['CourseID'];
-        $post->FormatID = $data['FormatID'];
-        $post->Question = $data['Question'];
-        $post->Photo = $data['Photo'];
-        $post->Description = $data['Description'];
-        $post->save();
-        return redirect('/course/'.$post->CourseID);
-    }
-
-    public function viewPost($postID){
-//        $post = Posts::findOrNew($postID)->toArray();
-        $answers = Answers::where('PostID', '=', $postID)->get()->toArray();
-        $result = array('PostID' => $postID, 'Answers' => $answers);
-        return view('admin.addanswer', $result);
-//        return var_dump($result);
-    }
-
     public function create()
     {
         //

@@ -12,7 +12,7 @@
     <title>Form trong Laravel 5</title>
 </head>
 <body>
-<h1>Them Bai Viet Moi</h1>
+<h1>Thêm khóa học mới</h1>
     {!! Form::open(['url' => '/admin/addcourse']) !!}
     {!! Form::label('Title', 'Title: ') !!}
     {!! Form::text('Title') !!}

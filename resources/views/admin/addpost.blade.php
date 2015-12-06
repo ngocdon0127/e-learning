@@ -10,7 +10,8 @@
         {!! Form::select('CourseID', \App\Courses::getColumn('Title')) !!}
 {{--        {!! Form::select('CourseTitle', array(1=>1, 3=>4)) !!};--}}
         {!! Form::label('FormatID', 'FormatID: ') !!}
-        {!! Form::text('FormatID') !!}
+        {{--{!! Form::text('FormatID') !!}--}}
+        <input type="text" name="FormatID" />
         {!! Form::label('Question', 'Question: ') !!}
         {!! Form::text('Question') !!}
         {!! Form::label('Photo', 'Photo: ') !!}
