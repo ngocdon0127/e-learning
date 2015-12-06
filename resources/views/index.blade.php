@@ -2,8 +2,8 @@
 /**
  * Created by PhpStorm.
  * User: NgocDon
- * Date: 12/6/2015
- * Time: 7:41 PM
+ * Date: 12/7/2015
+ * Time: 1:09 AM
  */?>
 
         <!DOCTYPE html>
@@ -20,14 +20,12 @@
 <body>
 <div class="container">
     <div class="content">
-        <div class="title">{{$Title}}</div>
         <ul>
-            @foreach ($posts as $key => $value)
-                <li>{{$value['Question']}}</li>
+            @foreach ($allcourse as $course)
+                <a href="/course/{{$course['id']}}">{{$course['Title']}}</a>
             @endforeach
         </ul>
     </div>
 </div>
 </body>
 </html>
-
