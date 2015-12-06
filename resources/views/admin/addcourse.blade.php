@@ -1,24 +1,22 @@
-<?php
-/**
- * Created by PhpStorm.
- * User: NgocDon
- * Date: 12/6/2015
- * Time: 6:24 PM
- */?>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Form trong Laravel 5</title>
-</head>
-<body>
-<h1>Thêm khóa học mới</h1>
-    {!! Form::open(['url' => '/admin/addcourse']) !!}
-    {!! Form::label('Title', 'Title: ') !!}
-    {!! Form::text('Title') !!}
-    {!! Form::label('Description', 'Description: ') !!}
-    {!! Form::text('Description') !!}
-    {!! Form::submit('Thêm') !!}
-    {!! Form::close() !!}
-</body>
-</html>
+@extends('layouts.master')
+@section('head.title')
+	Thêm khóa học
+@endsection
+@section('body.content')
+<div class="container">
+	<div class="col-sm-6 col-sm-offset-3">
+		<h1>Thêm khóa học mới</h1>
+	    {!! Form::open(['url' => '/admin/addcourse']) !!}
+	    <div class="form-group">
+	    {!! Form::label('Title', 'Title: ', ['class' => 'control-label'])!!}
+	    {!! Form::text('Title') !!}
+	    </div>
+	    <div class="form-group">
+	    {!! Form::label('Description', 'Description: ', ['class' => 'control-label']) !!}
+	    {!! Form::text('Description') !!}
+	    </div>
+	    {!! Form::submit('Thêm', ['class' => 'btn btn-primary']) !!}
+	    {!! Form::close() !!}
+	</div>
+</div>
+@endsection
