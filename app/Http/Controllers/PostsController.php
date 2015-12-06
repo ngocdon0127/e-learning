@@ -44,7 +44,7 @@ class PostsController extends Controller
         $post->Photo = $data['Photo'];
         $post->Description = $data['Description'];
         $post->save();
-        return redirect('/admin/addpost');
+        return redirect('/course/'.$post->CourseID);
     }
 
     public function create()

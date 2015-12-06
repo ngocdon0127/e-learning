@@ -16,7 +16,15 @@ class CoursesController extends Controller
         $course = Courses::findOrNew($courseid)->toArray();
 //        $result = array('Title' => $course['Title']);
         $posts = Posts::all()->toArray();
-        return view('viewcourse', $course);
+        $result = array();
+        foreach ($posts as $post) {
+            if ($post['CourseID'] == $courseid)
+                $result += array($post['id'] => $post);
+        }
+        $r = array('posts' => $result);
+        $r += array('Title' => $course['Title']);
+//        return var_dump($r);
+        return view('viewcourse', $r);
     }
 
     public function addCourse(){
