@@ -11,12 +11,13 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+//Route::get('/', function () {
+//    return view('welcome');
+//});
 
 Route::get('/admin/addpost', 'PostsController@addpost');
 Route::post('/admin/addpost', 'PostsController@savepost');
 Route::get('/admin/addcourse', 'CoursesController@addcourse');
 Route::post('/admin/addcourse', 'CoursesController@savecourse');
 Route::get('/course/{courseid}', 'CoursesController@viewcourse');
+Route::get('/', 'CoursesController@viewallcourses');

@@ -2,10 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="5593e30f-99c0-44d3-a44a-286cbe679adc" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Http/Controllers/CoursesController.php" afterPath="$PROJECT_DIR$/app/Http/Controllers/CoursesController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Http/Controllers/PostsController.php" afterPath="$PROJECT_DIR$/app/Http/Controllers/PostsController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/viewcourse.blade.php" afterPath="$PROJECT_DIR$/resources/views/viewcourse.blade.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Http/routes.php" afterPath="$PROJECT_DIR$/app/Http/routes.php" />
     </list>
     <ignored path="elearning.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -57,16 +55,6 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="2015_12_06_105320_create_courses_table.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/database/migrations/2015_12_06_105320_create_courses_table.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="17" column="45" selection-start-line="17" selection-start-column="45" selection-end-line="17" selection-end-column="45" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="2014_10_12_000000_create_users_table.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/database/migrations/2014_10_12_000000_create_users_table.php">
           <provider selected="true" editor-type-id="text-editor">
@@ -77,10 +65,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="PostsController.php" pinned="false" current-in-tab="true">
+      <file leaf-file-name="PostsController.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/Http/Controllers/PostsController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.4675">
+            <state vertical-scroll-proportion="-12.064516">
               <caret line="46" column="52" selection-start-line="46" selection-start-column="52" selection-end-line="46" selection-end-column="52" />
               <folding>
                 <element signature="e#40#56#0#PHP" expanded="true" />
@@ -92,8 +80,8 @@
       <file leaf-file-name="CoursesController.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/Http/Controllers/CoursesController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-3.548387">
-              <caret line="23" column="25" selection-start-line="23" selection-start-column="25" selection-end-line="23" selection-end-column="25" />
+            <state vertical-scroll-proportion="-16.32258">
+              <caret line="35" column="58" selection-start-line="35" selection-start-column="58" selection-end-line="35" selection-end-column="58" />
               <folding>
                 <element signature="e#40#56#0#PHP" expanded="true" />
               </folding>
@@ -101,11 +89,21 @@
           </provider>
         </entry>
       </file>
+      <file leaf-file-name="index.blade.php" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/resources/views/index.blade.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.66">
+              <caret line="24" column="61" selection-start-line="24" selection-start-column="61" selection-end-line="24" selection-end-column="61" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file leaf-file-name="viewcourse.blade.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/resources/views/viewcourse.blade.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-9.4838705">
-              <caret line="16" column="0" selection-start-line="16" selection-start-column="0" selection-end-line="16" selection-end-column="0" />
+            <state vertical-scroll-proportion="-22.0">
+              <caret line="31" column="7" selection-start-line="8" selection-start-column="8" selection-end-line="31" selection-end-column="7" />
               <folding />
             </state>
           </provider>
@@ -124,8 +122,8 @@
       <file leaf-file-name="routes.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/Http/routes.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-8.5161295">
-              <caret line="21" column="62" selection-start-line="21" selection-start-column="62" selection-end-line="21" selection-end-column="62" />
+            <state vertical-scroll-proportion="-9.225806">
+              <caret line="22" column="13" selection-start-line="22" selection-start-column="13" selection-end-line="22" selection-end-column="13" />
               <folding />
             </state>
           </provider>
@@ -150,10 +148,11 @@
         <option value="$PROJECT_DIR$/app/Courses.php" />
         <option value="$PROJECT_DIR$/database/migrations/2015_12_06_105320_create_courses_table.php" />
         <option value="$PROJECT_DIR$/resources/views/admin/addpost.blade.php" />
-        <option value="$PROJECT_DIR$/app/Http/routes.php" />
-        <option value="$PROJECT_DIR$/app/Http/Controllers/CoursesController.php" />
         <option value="$PROJECT_DIR$/resources/views/viewcourse.blade.php" />
         <option value="$PROJECT_DIR$/app/Http/Controllers/PostsController.php" />
+        <option value="$PROJECT_DIR$/app/Http/Controllers/CoursesController.php" />
+        <option value="$PROJECT_DIR$/app/Http/routes.php" />
+        <option value="$PROJECT_DIR$/resources/views/index.blade.php" />
       </list>
     </option>
   </component>
@@ -658,14 +657,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/Http/routes.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-8.5161295">
-          <caret line="21" column="62" selection-start-line="21" selection-start-column="62" selection-end-line="21" selection-end-column="62" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/resources/views/admin/addpost.blade.php">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-6.387097">
@@ -674,31 +665,47 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/viewcourse.blade.php">
+    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/PostsController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-9.4838705">
-          <caret line="16" column="0" selection-start-line="16" selection-start-column="0" selection-end-line="16" selection-end-column="0" />
-          <folding />
+        <state vertical-scroll-proportion="-12.064516">
+          <caret line="46" column="52" selection-start-line="46" selection-start-column="52" selection-end-line="46" selection-end-column="52" />
+          <folding>
+            <element signature="e#40#56#0#PHP" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/Http/Controllers/CoursesController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-3.548387">
-          <caret line="23" column="25" selection-start-line="23" selection-start-column="25" selection-end-line="23" selection-end-column="25" />
+        <state vertical-scroll-proportion="-16.32258">
+          <caret line="35" column="58" selection-start-line="35" selection-start-column="58" selection-end-line="35" selection-end-column="58" />
           <folding>
             <element signature="e#40#56#0#PHP" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/PostsController.php">
+    <entry file="file://$PROJECT_DIR$/resources/views/viewcourse.blade.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.4675">
-          <caret line="46" column="52" selection-start-line="46" selection-start-column="52" selection-end-line="46" selection-end-column="52" />
-          <folding>
-            <element signature="e#40#56#0#PHP" expanded="true" />
-          </folding>
+        <state vertical-scroll-proportion="-22.0">
+          <caret line="31" column="7" selection-start-line="8" selection-start-column="8" selection-end-line="31" selection-end-column="7" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Http/routes.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-9.225806">
+          <caret line="22" column="13" selection-start-line="22" selection-start-column="13" selection-end-line="22" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/index.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.66">
+          <caret line="24" column="61" selection-start-line="24" selection-start-column="61" selection-end-line="24" selection-end-column="61" />
+          <folding />
         </state>
       </provider>
     </entry>
