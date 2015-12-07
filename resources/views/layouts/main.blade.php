@@ -2,16 +2,21 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
-	<title id="title">
-		@yield('title')
-	</title>
+	<title>@yield('head.title')</title>
+	<link rel="stylesheet" type="text/css" href="/css/bootstrap.css">
+	<link rel="stylesheet" type="text/css" href="/css/style.css">
+	@yield('head.css')
 </head>
 <body>
-	@include('layouts.header')
-	@include('layouts.nav')
-	<section id='content'>
-		@yield('content')
-	</section>
-	@include('layouts.footer')
+	<div class="wrapper">
+		@include('layouts.header')
+		<div class="content">
+			@yield('body.content')
+		</div>
+		@include('layouts.footer')
+		<script type="text/javascript" src="/js/jquery/jquery.js"></script>
+		<script type="text/javascript" src="/js/bootstrap.min.js"></script>
+		@yield('body.js')
+	</div>
 </body>
 </html>

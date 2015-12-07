@@ -1,17 +1,19 @@
 @extends('layouts.main')
 
- @section('title')
+ @section('head.title')
  ADD COURSE
  @endsection
 
- @section('content')
+ @section('body.content')
 <!--   <form action="<?php Asset('user/info');?>" method="post" >
 	<input type="text" name="tit"/>
 	<input type="text" name="des"/>
 	<input type="submit">
 </form> -->
  	<div class="container">
-		<h1 class="col-md-6">Thêm khóa học mới</h1>
+ 		<div class="col-md-offset-3">
+			<h1>Thêm khóa học mới</h1>
+		</div>
 	    {!! Form::open(['url' => '/admin/addcourse','class'=>'form-horizontal']) !!}
 
 	    <div class="form-group">

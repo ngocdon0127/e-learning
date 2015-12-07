@@ -1,11 +1,14 @@
 @extends('layouts.main')
-@section('title')
+@section('head.title')
 ADD POST
 @endsection
-@section('content')
+@section('body.content')
 <div class="container">
-        <h1 class="col-md-6">Thêm bài viết mới</h1>
+
         {!! Form::open(['url' => '/admin/addpost','class'=>'form-horizontal']) !!}
+            <div class="col-sm-offset-3">
+                <h1>Thêm bài viết mới</h1>
+            </div>
             <div class="form-group">
                 {!! Form::label('CourseID', 'Course ID : ',['class' => 'col-md-3 control-label']) !!}
                 <div class="col-sm-6">
