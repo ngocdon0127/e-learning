@@ -1,32 +1,46 @@
-@extends('layouts.master')
-@section('head.title')
-    Them bai viet moi
+@extends('layouts.main')
+@section('title')
+ADD POST
 @endsection
-@section('body.content')
-<<div class="container">
-    <<div class="col-sm-6 col-sm-offset-3">
-        <h1>Thêm bài viết mới</h1>
-        {!! Form::open(['url' => '/admin/addpost']) !!}
+@section('content')
+<div class="container">
+        <h1 class="col-md-6">Thêm bài viết mới</h1>
+        {!! Form::open(['url' => '/admin/addpost','class'=>'form-horizontal']) !!}
             <div class="form-group">
-            {!! Form::label('FormatID', 'FormatID: ') !!}
-            {!! Form::text('FormatID') !!}
-            {!! Form::select('CourseID', \App\Courses::getColumn('Title')) !!}
-             {{--  {!! Form::select('CourseTitle', array(1=>1, 3=>4)) !!};--}}
+                {!! Form::label('CourseID', 'Course ID : ',['class' => 'col-md-3 control-label']) !!}
+                <div class="col-sm-6">
+                    {!! Form::select('CourseID', \App\Courses::getColumn('Title'),['class'=>'selectpicker']) !!}
+                </div>
+            </div>
+   
+             <div class="form-group">
+                {!! Form::label('FormatID', 'Format ID : ',['class' => 'col-md-3 control-label']) !!}
+                <div class="col-sm-6">
+                    {!! Form::text('FormatID','',['class'=>'form-control']) !!}
+                </div>
             </div>
             <div class="form-group">
-            {!! Form::label('Question', 'Question: ') !!}
-            {!! Form::text('Question') !!}
+                {!! Form::label('Question','Question : ',['class' => 'col-md-3 control-label']) !!}
+                <div class="col-sm-6">
+                    {!! Form::text('Question','',['class'=>'form-control']) !!}
+                </div>
+            </div>
+             <div class="form-group">
+                {!! Form::label('Photo', 'Photo : ',['class' => 'col-md-3 control-label']) !!}
+                <div class="col-sm-6">
+                    {!! Form::text('Photo','',['class'=>'form-control']) !!}
+                </div>
             </div>
             <div class="form-group">
-            {!! Form::label('Photo', 'Photo: ') !!}
-            {!! Form::text('Photo') !!}
+                {!! Form::label('Description', 'Description : ',['class' => 'col-md-3 control-label']) !!}
+                <div class="col-sm-6">
+                    {!! Form::text('Description','',['class'=>'form-control']) !!}
+                </div>
             </div>
-            <div class="form-group">
-            {!! Form::label('Description', 'Description: ') !!}
-            {!! Form::text('Description') !!}
+            <div class="col-sm-offset-3 col-sm-10">
+                {!! Form::submit('Thêm',['class' => 'btn btn-default']) !!}
             </div>
-            {!! Form::submit('Thêm', ['class' => 'btn btn-primary']) !!}
         {!! Form::close() !!}
-    </div>
 </div>
+
 @endsection
