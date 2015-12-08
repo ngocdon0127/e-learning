@@ -1,32 +1,49 @@
-@extends('layouts.master')
+@extends('layouts.main')
 @section('head.title')
-    Them bai viet moi
+ADD POST
 @endsection
 @section('body.content')
-<<div class="container">
-    <<div class="col-sm-6 col-sm-offset-3">
-        <h1>Thêm bài viết mới</h1>
-        {!! Form::open(['url' => '/admin/addpost']) !!}
-            <div class="form-group">
-            {!! Form::label('FormatID', 'FormatID: ') !!}
-            {!! Form::text('FormatID') !!}
-            {!! Form::select('CourseID', \App\Courses::getColumn('Title')) !!}
-             {{--  {!! Form::select('CourseTitle', array(1=>1, 3=>4)) !!};--}}
+<div class="container">
+
+        {!! Form::open(['url' => '/admin/addpost','class'=>'form-horizontal']) !!}
+            <div class="col-sm-offset-3">
+                <h1>Thêm bài viết mới</h1>
             </div>
             <div class="form-group">
-            {!! Form::label('Question', 'Question: ') !!}
-            {!! Form::text('Question') !!}
+                {!! Form::label('CourseID', 'Course ID : ',['class' => 'col-md-3 control-label']) !!}
+                <div class="col-sm-6">
+                    {!! Form::select('CourseID', \App\Courses::getColumn('Title'),['class'=>'selectpicker']) !!}
+                </div>
+            </div>
+   
+             <div class="form-group">
+                {!! Form::label('FormatID', 'Format ID : ',['class' => 'col-md-3 control-label']) !!}
+                <div class="col-sm-6">
+                    {!! Form::text('FormatID','',['class'=>'form-control']) !!}
+                </div>
             </div>
             <div class="form-group">
-            {!! Form::label('Photo', 'Photo: ') !!}
-            {!! Form::text('Photo') !!}
+                {!! Form::label('Question','Question : ',['class' => 'col-md-3 control-label']) !!}
+                <div class="col-sm-6">
+                    {!! Form::text('Question','',['class'=>'form-control']) !!}
+                </div>
+            </div>
+             <div class="form-group">
+                {!! Form::label('Photo', 'Photo : ',['class' => 'col-md-3 control-label']) !!}
+                <div class="col-sm-6">
+                    {!! Form::text('Photo','',['class'=>'form-control']) !!}
+                </div>
             </div>
             <div class="form-group">
-            {!! Form::label('Description', 'Description: ') !!}
-            {!! Form::text('Description') !!}
+                {!! Form::label('Description', 'Description : ',['class' => 'col-md-3 control-label']) !!}
+                <div class="col-sm-6">
+                    {!! Form::text('Description','',['class'=>'form-control']) !!}
+                </div>
             </div>
-            {!! Form::submit('Thêm', ['class' => 'btn btn-primary']) !!}
+            <div class="col-sm-offset-3 col-sm-10">
+                {!! Form::submit('Thêm',['class' => 'btn btn-default']) !!}
+            </div>
         {!! Form::close() !!}
-    </div>
 </div>
+
 @endsection
