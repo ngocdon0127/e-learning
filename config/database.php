@@ -54,10 +54,10 @@ return [
 
         'mysql' => [
             'driver'    => 'mysql',
-            'host'      => env('DB_HOST', 'localhost'),
-            'database'  => env('DB_DATABASE', 'hoasinhvie_laptopcali'),
-            'username'  => env('DB_USERNAME', 'hoasinhvie_don'),
-            'password'  => env('DB_PASSWORD', 'Don20130941'),
+            'host'      => env('DB_HOST', 'mysql.hostinger.com'),
+            'database'  => env('DB_DATABASE', 'u457988214_tec'),
+            'username'  => env('DB_USERNAME', 'u457988214_tec'),
+            'password'  => env('DB_PASSWORD', 'ngocdon942'),
             'charset'   => 'utf8',
             'collation' => 'utf8_unicode_ci',
             'prefix'    => '',
