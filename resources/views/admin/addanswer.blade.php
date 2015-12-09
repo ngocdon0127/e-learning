@@ -1,18 +1,8 @@
-<?php
-/**
- * Created by PhpStorm.
- * User: NgocDon
- * Date: 12/7/2015
- * Time: 1:56 AM
- */?>
-
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Form trong Laravel 5</title>
-</head>
-<body>
+@extends('layouts.main')
+@section('head.title')
+	ADD ANSWER
+@endsection
+@section('body.content')
 <ul>
     @foreach(\App\Answers::where('PostID', '=', $PostID)->get()->toArray() as $answer)
         <li>{{$answer['Detail']}}
@@ -24,11 +14,10 @@
 </ul>
 <h1>Thêm câu trả lời mới</h1>
 {!! Form::open(['url' => '/admin/addanswer/'.'{{PostID}}']) !!}
-{!! Form::label('Detail', 'Câu trả lời: ') !!}
-{!! Form::text('Detail') !!}
+{!! Form::label('Detail', 'Câu trả lời: ',['class' => 'cotrol-label']) !!}
+{!! Form::text('Detail','',['id' => 'Detail', 'class'=> 'form-control']) !!}
 {!! Form::checkbox('Logical') !!}
 <input type="text" value="{{$PostID}}" style="display: none" readonly name="PostID" />
-{!! Form::submit('Thêm') !!}
+{!! Form::submit('Thêm',['class'=>'btn btn-primary btn-sm']) !!}
 {!! Form::close() !!}
-</body>
-</html>
+@endsection
