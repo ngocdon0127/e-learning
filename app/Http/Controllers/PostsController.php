@@ -12,6 +12,7 @@ use App\Http\Controllers\Controller;
 
 class PostsController extends Controller
 {
+    var $imagePost = '/images/imagePost/';
     /**
      * Display a listing of the resource.
      *
@@ -31,7 +32,7 @@ class PostsController extends Controller
     public function addPost(){
 //        $courses = Courses::all();
 //        $courses->toArray();
-        $courses = array(['1'=>1], '2'=>3);
+        $courses = array('1'=>1, '2'=>3);
         $t = array('hehe'=>$courses);
             return view('admin.addpost', $t);
     }
@@ -42,10 +43,17 @@ class PostsController extends Controller
         $post->CourseID = $data['CourseID'];
         $post->FormatID = $data['FormatID'];
         $post->Question = $data['Question'];
-        $post->Photo = $data['Photo'];
+
+        //Photo
+        $file = $request->file('Photo');
+//        $file = Request::file('Photo');
+        $post->Photo = $data['CourseID'] . '_' . (intval(Posts::orderBy('created_at', 'desc')->first()->id) + 1) . "." . $file->getClientOriginalExtension();
+        $file->move(base_path() . '/public/images/imagePost/', $post->Photo);
+
         $post->Description = $data['Description'];
         $post->save();
         return redirect('/course/'.$post->CourseID);
+//        return $post;
     }
 
     public function viewPost($postID){

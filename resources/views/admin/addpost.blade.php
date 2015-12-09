@@ -5,7 +5,7 @@ ADD POST
 @section('body.content')
 <div class="container">
 
-        {!! Form::open(['url' => '/admin/addpost','class'=>'form-horizontal']) !!}
+        {!! Form::open(['url' => '/admin/addpost', 'class'=>'form-horizontal', 'files' => true]) !!}
             <div class="col-sm-offset-3">
                 <h1>Thêm bài viết mới</h1>
             </div>
@@ -31,7 +31,7 @@ ADD POST
              <div class="form-group">
                 {!! Form::label('Photo', 'Photo : ',['class' => 'col-md-3 control-label']) !!}
                 <div class="col-sm-6">
-                    {!! Form::text('Photo','',['class'=>'form-control']) !!}
+                    {!! Form::file('Photo','',['class'=>'form-control']) !!}
                 </div>
             </div>
             <div class="form-group">

@@ -21,6 +21,11 @@
         @endif
         </li>
     @endforeach
+        @foreach(\App\Posts::where('id', '=', $PostID)->get()->toArray() as $answer)
+            <li><img src = "{{'/images/imagePost/' . $answer['Photo']}}" />
+            </li>
+        @endforeach
+
 </ul>
 <h1>Thêm câu trả lời mới</h1>
 {!! Form::open(['url' => '/admin/addanswer/'.'{{PostID}}']) !!}
