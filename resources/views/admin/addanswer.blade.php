@@ -1,6 +1,6 @@
 @extends('layouts.main')
 @section('head.title')
-    ADD POST
+    ADD ANSWER
 @endsection
 @section('body.content')
     <div class="container">
@@ -24,5 +24,4 @@
         {!! Form::submit('Thêm') !!}
         {!! Form::close() !!}
     </div>
-
 @endsection

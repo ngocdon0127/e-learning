@@ -11,7 +11,15 @@
 	<div class="wrapper">
 		@include('layouts.header')
 		<div class="content">
-			@yield('body.content')
+<!-- 			<div class= "col-sm-3">
+					
+			</div> -->
+			<div class="col-sm-6">
+				@yield('body.content')
+			</div>
+<!-- 			<div class="col-sm-3">
+				
+			</div> -->
 		</div>
 		@include('layouts.footer')
 		<script type="text/javascript" src="/js/jquery/jquery.js"></script>
