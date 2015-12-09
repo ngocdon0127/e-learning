@@ -1,6 +1,6 @@
 <header>
 	<div class="row" style="height: 100px;">
-		<div class="col-sm-offset-2" style="color: #9400D3;"> <h1><b>TEC Club</h1></b></div>
+		<div class="col-sm-offset-2" style="color: #9400D3;"> <h1><b><a href="/" style="text-decoration: none;">TEC Club</a></h1></b></div>
 	</div>
 	<div>
 		<nav class="navbar navbar-default" role="navigation">

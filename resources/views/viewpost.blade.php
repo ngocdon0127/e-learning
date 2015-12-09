@@ -4,20 +4,18 @@
 @endsection
 @section('body.content')
     <div class="container">
+        <img src = "{{'/images/imagePost/' . $Photo}}" />
         <ul>
-            @foreach(\App\Answers::where('PostID', '=', $PostID)->get()->toArray() as $answer)
+            @foreach($Answers as $answer)
                 <li>{{$answer['Detail']}}
                     @if ($answer['Logical'] != 0)
                         <span>Đúng</span>
                     @endif
                 </li>
             @endforeach
-            @foreach(\App\Posts::where('id', '=', $PostID)->get()->toArray() as $answer)
-                <li><img src = "{{'/images/imagePost/' . $answer['Photo']}}" />
-                </li>
-            @endforeach
 
         </ul>
+        <a href="/admin/addanswer/{{$PostID}}">Thêm câu trả lời</a>
     </div>
 
 @endsection

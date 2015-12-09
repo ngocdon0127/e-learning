@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Answers;
+use App\Posts;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
@@ -12,7 +13,11 @@ class AnswersController extends Controller
 {
 
     public function addAnswer($postID){
-        return view('admin.addanswer')->with("postid", $postID);
+        $post = Posts::findOrNew($postID)->toArray();
+        $photo = $post['Photo'];
+        $answers = Answers::where('PostID', '=', $postID)->get()->toArray();
+        $result = array('PostID' => $postID, 'Answers' => $answers, 'Photo' => $photo);
+        return view('admin.addanswer')->with(["PostID" => $postID, 'Photo' => $photo, 'Answers' => $answers]);
     }
 
     public function saveAnswer(Request $request){

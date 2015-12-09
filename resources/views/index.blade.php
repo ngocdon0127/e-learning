@@ -5,7 +5,7 @@
 @section('body.content')
     <div class="container">
         <ul>
-        @foreach (\App\Courses::all()->toArray() as $course)
+        @foreach ($allcourse as $course)
             <li><a href="/course/{{$course['id']}}">{{$course['Title']}}</a></li>
         @endforeach
         </ul>
@@ -13,8 +13,3 @@
     </div>
 
 @endsection
-
-
-<ul>
-
-</ul>

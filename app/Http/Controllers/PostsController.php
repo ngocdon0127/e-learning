@@ -57,10 +57,11 @@ class PostsController extends Controller
     }
 
     public function viewPost($postID){
-//        $post = Posts::findOrNew($postID)->toArray();
+        $post = Posts::findOrNew($postID)->toArray();
+        $photo = $post['Photo'];
         $answers = Answers::where('PostID', '=', $postID)->get()->toArray();
-        $result = array('PostID' => $postID, 'Answers' => $answers);
-        return view('admin.addanswer', $result);
+        $result = array('PostID' => $postID, 'Answers' => $answers, 'Photo' => $photo);
+        return view('viewpost', $result);
 //        return var_dump($result);
     }
 
