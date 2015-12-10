@@ -14,13 +14,24 @@
                 return document.getElementById(x);
             }
             function check(questionID, answerID){
+                console.log('start');
+//                var date = new Date();
+                var id = 'answer_' + questionID + '_' + answerID;
+                ob(id).disabled = true;
+                var set = document.getElementsByName('question_' + questionID);
+                for(i = 0; i < set.length; i++){
+                    set[i].disabled = true;
+                }
                 var obj = new XMLHttpRequest();
                 obj.onreadystatechange = function(){
                     if ((obj.readyState == 4) && (obj.status == 200)){
+                        console.log('receive');
+//                        var date1 = new Date();
+//                        console.log(date1.getTime() - date.getTime())
 //                        ob('answer_' + questionID + '_' + answerID).innerHTML = obj.responseText;
-                        var id = 'answer_' + questionID + '_' + answerID;
+
                         var xml = jQuery.parseXML(obj.responseText);
-                        console.log(xml.getElementsByTagName('logical')[0].innerHTML);
+//                        console.log(xml.getElementsByTagName('logical')[0].innerHTML);
                         switch (xml.getElementsByTagName('logical')[0].innerHTML) {
                             case '1':
                                 ob(id).style.background = 'green';
@@ -32,11 +43,6 @@
                             default:
                                 ob(id).style.background = 'yellow';
                                 break;
-                        }
-                        ob(id).disabled = true;
-                        var set = document.getElementsByName('question_' + questionID);
-                        for(i = 0; i < set.length; i++){
-                            set[i].disabled = true;
                         }
                         var idTrue = 'answer_' + questionID + '_' + xml.getElementsByTagName('answer')[0].innerHTML;
                         ob(idTrue).style.background = 'green';
