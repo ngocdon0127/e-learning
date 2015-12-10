@@ -7,6 +7,31 @@
  margin: 0  auto;
 }
 
+h1.title{
+  color: #660066;
+  font-weight: bold;
+}
+.btn-info{
+  background: #ccffcc;
+  color: #660066;
+  font-size: 20px;
+  font-weight: bold;;
+}
+.badge-span{
+  background: white;
+  color: blue;
+}
+.list-group-item{
+  color: #ff3300;
+  /*font-weight: bold;*/
+  font-size: 20px;
+}
+.list-group{
+  padding:5% 0;
+}
+.form-horizontal .control-label{
+  text-align: left;
+}
 h1.col-md-6 {
   text-align: center;
   margin: 30px auto;
@@ -15,19 +40,40 @@ h1.col-md-6 {
 /*.dropdown-tongle{
   padding-right: 30px;
 }*/
-.footer{
+.content{
+  padding-bottom: 20px;
+}
+footer{
+  position: absolute;
+  width: 100%;
   font-size: 30px;
   padding-top: 20px;
   font-weight: bold;
   color: green;
-  margin:0 auto;
+  background: #ebebeb;
+  padding-left: 25%;
+  /*margin:0 auto;*/
+  /*text-align: center;*/
+}
+footer:after{
+  clear: both;
+}
+footer:before,
+footer:after{
+  content: " ";
+  display: table;
+}
+img {
+  width: 100%;
+  height: 400px;
 }
 .header{
   font-size: 60px;
   padding-top: 20px;
   font-weight: bold;
   color: green;
-  margin:0 auto;
+  /*text-align: center;*/
+  /*margin:0 auto;*/
 }
 .nav-container {
   background: #ebebeb;
@@ -69,4 +115,11 @@ background:#ebebeb;
 .a {
   padding-left: 10px;
   padding-right: 10px; 
+}.control-label{
+  color: #ff0066;
+  font-weight: bold;
+  font-size: 20px;
 }
+/*    .list-group,.image{
+            padding: 5% 25%;
+        }*/

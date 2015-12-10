@@ -3,14 +3,17 @@
     ADD POST
 @endsection
 @section('body.content')
-    <div class="container">
-        <div class="title">{{$Title}}</div>
-        <ul>
+    <div class="container col-md-6">
+        <h1 class="title">Chủ đề : {{$Title}}</h1>
+        <ul class="list-group">
             @foreach ($posts as $key => $value)
-                <li><a href="/post/{{$value['id']}}">{{$value['Title']}}</a></li>
+                <li class="list-group-item list-group-item-success">
+                    <a href="/post/{{$value['id']}}">{{$value['Title']}}</a>
+                    <span class="badge badge-span">Hiện có {{$CountPost}} bài đăng</span>
+                </li>
             @endforeach
         </ul>
-        <a href="/admin/addpost">Thêm Post</a>
+        <a class="btn btn-info" href="/admin/addpost">Thêm Post</a>
     </div>
 
 @endsection
