@@ -17,8 +17,14 @@ class AnswersController extends Controller
         return '/js/' . $fileName;
     }
 
-    public function getAnswer($QuestionID){
-
+    public static function getAnswer($QuestionID){
+        $answers = Answers::where('QuestionID', '=', $QuestionID)->get()->toArray();
+        foreach($answers as $a){
+            if ($a['Logical'] == 1){
+                return $a['id'];
+            }
+        }
+        return -1;
     }
 
     public function checkAnswer($QuestionID, $AnswerID){
@@ -31,7 +37,6 @@ class AnswersController extends Controller
                 $answerid = $a['id'];
                 break;
             }
-
         }
         $result .= $answerid . '</answer></response>';
         return $result;
