@@ -4,7 +4,7 @@
 @endsection
 @section('body.content')
     <div class="container">
-        <img src = "{{'/images/imagePost/' . $Photo}}" />
+        <img src = "{{'/images/imageQuestion/' . $Photo}}" />
         <ul>
             @foreach($Answers as $answer)
                 <li>{{$answer['Detail']}}
@@ -16,11 +16,11 @@
 
         </ul>
         <h1>Thêm câu trả lời mới</h1>
-        {!! Form::open(['url' => '/admin/addanswer/'.'{{PostID}}']) !!}
+        {!! Form::open(['url' => '/admin/addanswer/'.'{{QuestionID}}']) !!}
         {!! Form::label('Detail', 'Câu trả lời: ') !!}
         {!! Form::text('Detail') !!}
         {!! Form::checkbox('Logical') !!}
-        <input type="text" value="{{$PostID}}" style="display: none" readonly name="PostID" />
+        <input type="text" value="{{$QuestionID}}" style="display: none" readonly name="QuestionID" />
         {!! Form::submit('Thêm') !!}
         {!! Form::close() !!}
     </div>

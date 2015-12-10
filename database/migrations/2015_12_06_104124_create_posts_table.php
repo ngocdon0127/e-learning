@@ -17,7 +17,7 @@ class CreatePostsTable extends Migration
             $table->timestamps();
             $table->integer('FormatID');
             $table->integer('CourseID');
-            $table->string('Question');
+            $table->string('Title');
             $table->string('Photo')->default('');
             $table->string('Description')->default('');
         });

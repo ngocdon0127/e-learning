@@ -15,6 +15,8 @@
 //    return view('welcome');
 //});
 Route::get('/', 'CoursesController@viewallcourses');
+Route::get('/admin/addquestion/{postid}', 'QuestionsController@addquestion');
+Route::post('/admin/addquestion/{postid}', 'QuestionsController@savequestion');
 Route::get('/admin/addpost', 'PostsController@addpost');
 Route::post('/admin/addpost', 'PostsController@savepost');
 Route::get('/admin/addcourse', 'CoursesController@addcourse');
@@ -22,4 +24,5 @@ Route::post('/admin/addcourse', 'CoursesController@savecourse');
 Route::get('/admin/addanswer/{postid}', 'AnswersController@addanswer');
 Route::post('/admin/addanswer/{postid}', 'AnswersController@saveanswer');
 Route::get('/course/{courseid}', 'CoursesController@viewcourse');
-Route::get('post/{postid}', 'PostsController@viewpost');
+Route::get('/post/{postid}', 'PostsController@viewpost');
+Route::get('/question/{questionid}', 'QuestionsController@viewquestion');

@@ -3,33 +3,50 @@
 namespace App\Http\Controllers;
 
 use App\Answers;
-use App\Posts;
+use App\Questions;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
-class AnswersController extends Controller
+class QuestionsController extends Controller
 {
 
-    public function addAnswer($QuestionID){
-        $post = Posts::findOrNew($QuestionID)->toArray();
-        $photo = $post['Photo'];
-        $answers = Answers::where('QuestionID', '=', $QuestionID)->get()->toArray();
-        $result = array('QuestionID' => $QuestionID, 'Answers' => $answers, 'Photo' => $photo);
-        return view('admin.addanswer')->with(["QuestionID" => $QuestionID, 'Photo' => $photo, 'Answers' => $answers]);
+    public function viewQuestion($QuestionID){
+        $question = Questions::findOrNew($QuestionID)->toArray();
+        $photo = $question['Photo'];
+        $answer = Answers::where('QuestionID', '=', $QuestionID)->get()->toArray();
+        $result = array('QuestionID' => $QuestionID, 'Answers' => $answer, 'Photo' => $photo);
+        return view('viewquestion', $result);
     }
 
-    public function saveAnswer(Request $request){
-        $data = $request->all();
-        $answer = new Answers();
-        $answer->QuestionID = $data['QuestionID'];
-        if (array_key_exists('Logical', $data))
-            $answer->Logical = $data['Logical'];
-        $answer->Detail = $data['Detail'];
-        $answer->toArray();
-        $answer->save();
-        return redirect('/question/'.$answer->QuestionID);
+    public function addQuestion($PostID){
+        return view('admin.addquestion')->with(['PostID' => $PostID]);
+    }
+
+    public function saveQuestion($PostID){
+        $data = Request::capture();
+        $question = new Questions();
+        $question->PostID = $PostID;
+        $question->Question = $data['Question'];
+        $question->Description = $data['Description'];
+        $question->save();
+
+
+        $question = Questions::orderBy('id', 'desc')->first();
+
+        //Photo
+        $file = Request::capture()->file('Photo');
+//        $file = Request::file('Photo');
+        $question->Photo = 'Question_' . $PostID . '_' . $question->id  . "." . $file->getClientOriginalExtension();
+        $file->move(base_path() . '/public/images/imageQuestion/', $question->Photo);
+
+
+        // (intval(Posts::orderBy('created_at', 'desc')->first()->id) + 1)
+
+
+        $question->update();
+        return redirect('/post/'.$PostID);
     }
 
     /**

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Answers;
 use App\Courses;
 use App\Posts;
+use App\Questions;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
@@ -42,16 +43,23 @@ class PostsController extends Controller
         $post = new Posts();
         $post->CourseID = $data['CourseID'];
         $post->FormatID = $data['FormatID'];
-        $post->Question = $data['Question'];
+        $post->Title = $data['Title'];
+        $post->Description = $data['Description'];
+        $post->save();
+
+        $post = Posts::orderBy('id', 'desc')->first();
 
         //Photo
         $file = $request->file('Photo');
 //        $file = Request::file('Photo');
-        $post->Photo = $data['CourseID'] . '_' . (intval(Posts::orderBy('created_at', 'desc')->first()->id) + 1) . "." . $file->getClientOriginalExtension();
+        $post->Photo = 'Post_' . $data['CourseID'] . '_' . $post->id  . "." . $file->getClientOriginalExtension();
         $file->move(base_path() . '/public/images/imagePost/', $post->Photo);
 
-        $post->Description = $data['Description'];
-        $post->save();
+
+        // (intval(Posts::orderBy('created_at', 'desc')->first()->id) + 1)
+
+
+        $post->update();
         return redirect('/course/'.$post->CourseID);
 //        return $post;
     }
@@ -59,8 +67,8 @@ class PostsController extends Controller
     public function viewPost($postID){
         $post = Posts::findOrNew($postID)->toArray();
         $photo = $post['Photo'];
-        $answers = Answers::where('PostID', '=', $postID)->get()->toArray();
-        $result = array('PostID' => $postID, 'Answers' => $answers, 'Photo' => $photo);
+        $questions = Questions::where('PostID', '=', $postID)->get()->toArray();
+        $result = array('PostID' => $postID, 'Questions' => $questions, 'Photo' => $photo);
         return view('viewpost', $result);
 //        return var_dump($result);
     }

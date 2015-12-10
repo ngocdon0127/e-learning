@@ -7,10 +7,10 @@
         <div class="title">{{$Title}}</div>
         <ul>
             @foreach ($posts as $key => $value)
-                <li><a href="/post/{{$value['id']}}">{{$value['Question']}}</a></li>
+                <li><a href="/post/{{$value['id']}}">{{$value['Title']}}</a></li>
             @endforeach
         </ul>
-        <a href="/admin/addpost">Thêm câu hỏi</a>
+        <a href="/admin/addpost">Thêm Post</a>
     </div>
 
 @endsection

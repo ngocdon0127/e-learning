@@ -4,18 +4,16 @@
 @endsection
 @section('body.content')
     <div class="container">
-        <img src = "{{'/images/imagePost/' . $Photo}}" />
+        <img src="{{'/images/imagePost/' . $Photo}}" width="500px" height="500px"/>
         <ul>
-            @foreach($Answers as $answer)
-                <li>{{$answer['Detail']}}
-                    @if ($answer['Logical'] != 0)
-                        <span>Đúng</span>
-                    @endif
+            @foreach($Questions as $q)
+                <li>
+                    <a href="/question/{{$q['id']}}"> {{$q['Question']}} </a>
                 </li>
             @endforeach
 
         </ul>
-        <a href="/admin/addanswer/{{$PostID}}">Thêm câu trả lời</a>
+        <a href="/admin/addquestion/{{$PostID}}">Thêm câu hỏi</a>
     </div>
 
 @endsection
