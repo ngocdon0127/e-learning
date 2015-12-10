@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="5593e30f-99c0-44d3-a44a-286cbe679adc" name="Default" comment="">
+<<<<<<< HEAD
       <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/images/imagePost/Post_1_3.png" />
       <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/images/imagePost/Post_2_4.png" />
       <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/images/imageQuestion/Question_4_3.png" />
@@ -20,6 +21,10 @@
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/layouts/header.blade.php" afterPath="$PROJECT_DIR$/resources/views/layouts/header.blade.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/layouts/main.blade.php" afterPath="$PROJECT_DIR$/resources/views/layouts/main.blade.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/viewcourse.blade.php" afterPath="$PROJECT_DIR$/resources/views/viewcourse.blade.php" />
+=======
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Http/Controllers/AnswersController.php" afterPath="$PROJECT_DIR$/app/Http/Controllers/AnswersController.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Http/Controllers/PostsController.php" afterPath="$PROJECT_DIR$/app/Http/Controllers/PostsController.php" />
+>>>>>>> non_ajax
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/viewpost.blade.php" afterPath="$PROJECT_DIR$/resources/views/viewpost.blade.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/viewquestion.blade.php" afterPath="$PROJECT_DIR$/resources/views/viewquestion.blade.php" />
     </list>
@@ -46,8 +51,13 @@
       <file leaf-file-name="PostsController.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/Http/Controllers/PostsController.php">
           <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
             <state vertical-scroll-proportion="0.0">
               <caret line="71" column="41" selection-start-line="67" selection-start-column="8" selection-end-line="71" selection-end-column="41" />
+=======
+            <state vertical-scroll-proportion="-51.096775">
+              <caret line="79" column="41" selection-start-line="79" selection-start-column="41" selection-end-line="79" selection-end-column="41" />
+>>>>>>> non_ajax
               <folding />
             </state>
           </provider>
@@ -98,8 +108,13 @@
       <file leaf-file-name="AnswersController.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/Http/Controllers/AnswersController.php">
           <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
             <state vertical-scroll-proportion="0.0">
               <caret line="31" column="34" selection-start-line="31" selection-start-column="34" selection-end-line="31" selection-end-column="34" />
+=======
+            <state vertical-scroll-proportion="-7.096774">
+              <caret line="19" column="18" selection-start-line="19" selection-start-column="18" selection-end-line="19" selection-end-column="18" />
+>>>>>>> non_ajax
               <folding />
             </state>
           </provider>
@@ -128,9 +143,24 @@
       <file leaf-file-name="addanswer.blade.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/resources/views/admin/addanswer.blade.php">
           <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
             <state vertical-scroll-proportion="0.0">
               <caret line="22" column="45" selection-start-line="22" selection-start-column="45" selection-end-line="22" selection-end-column="45" />
               <folding />
+=======
+            <state vertical-scroll-proportion="0.2918979">
+              <caret line="18" column="26" selection-start-line="18" selection-start-column="26" selection-end-line="18" selection-end-column="26" />
+              <folding>
+                <marker date="1449772624721" expanded="true" signature="428:492" placeholder="..." />
+                <marker date="1449772624721" expanded="true" signature="557:2044" placeholder="..." />
+                <marker date="1449772624721" expanded="true" signature="869:930" placeholder="..." />
+                <marker date="1449772624721" expanded="true" signature="932:1815" placeholder="..." />
+                <marker date="1449772624721" expanded="true" signature="1375:1459" placeholder="..." />
+                <marker date="1449772624721" expanded="true" signature="1375:1570" placeholder="..." />
+                <marker date="1449772624721" expanded="true" signature="1500:1553" placeholder="..." />
+                <marker date="1449772624721" expanded="true" signature="1763:1814" placeholder="..." />
+              </folding>
+>>>>>>> non_ajax
             </state>
           </provider>
         </entry>
@@ -228,6 +258,8 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
+      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -438,8 +470,11 @@
           </PATH>
         </subPane>
       </pane>
+<<<<<<< HEAD
       <pane id="Scope" />
       <pane id="Scratches" />
+=======
+>>>>>>> non_ajax
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -901,16 +936,53 @@
     <entry file="file://$PROJECT_DIR$/resources/views/admin/addanswer.blade.php">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
+<<<<<<< HEAD
           <caret line="22" column="45" selection-start-line="22" selection-start-column="45" selection-end-line="22" selection-end-column="45" />
+=======
+          <caret line="10" column="36" selection-start-line="10" selection-start-column="36" selection-end-line="10" selection-end-column="36" />
           <folding />
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/AnswersController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-7.096774">
+          <caret line="19" column="18" selection-start-line="19" selection-start-column="18" selection-end-line="19" selection-end-column="18" />
+>>>>>>> non_ajax
+          <folding />
+        </state>
+      </provider>
+    </entry>
+<<<<<<< HEAD
     <entry file="file://$PROJECT_DIR$/resources/views/viewquestion.blade.php">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.24417314">
           <caret line="10" column="21" selection-start-line="10" selection-start-column="21" selection-end-line="10" selection-end-column="21" />
           <folding />
+=======
+    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/PostsController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-51.096775">
+          <caret line="79" column="41" selection-start-line="79" selection-start-column="41" selection-end-line="79" selection-end-column="41" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/viewpost.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.2918979">
+          <caret line="18" column="26" selection-start-line="18" selection-start-column="26" selection-end-line="18" selection-end-column="26" />
+          <folding>
+            <marker date="1449772624721" expanded="true" signature="428:492" placeholder="..." />
+            <marker date="1449772624721" expanded="true" signature="557:2044" placeholder="..." />
+            <marker date="1449772624721" expanded="true" signature="869:930" placeholder="..." />
+            <marker date="1449772624721" expanded="true" signature="932:1815" placeholder="..." />
+            <marker date="1449772624721" expanded="true" signature="1375:1459" placeholder="..." />
+            <marker date="1449772624721" expanded="true" signature="1375:1570" placeholder="..." />
+            <marker date="1449772624721" expanded="true" signature="1500:1553" placeholder="..." />
+            <marker date="1449772624721" expanded="true" signature="1763:1814" placeholder="..." />
+          </folding>
+>>>>>>> non_ajax
         </state>
       </provider>
     </entry>

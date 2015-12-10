@@ -68,9 +68,16 @@ class PostsController extends Controller
         $post = Posts::findOrNew($postID)->toArray();
         $photo = $post['Photo'];
         $questions = Questions::where('PostID', '=', $postID)->get()->toArray();
-        $result = array('PostID' => $postID, 'Questions' => $questions, 'Photo' => $photo);
+        $bundle = array();
+        $bundleAnswer = array();
+        foreach ($questions as $q){
+            $answer = Answers::where('QuestionID', '=', $q['id'])->get()->toArray();
+            $bundle += array($q['id'] => $answer);
+            $bundleAnswer += [$q['id'] => AnswersController::getAnswer($q['id'])];
+        }
+        $result = array('PostID' => $postID, 'Questions' => $questions, 'Photo' => $photo, 'Bundle' => $bundle, 'BundleAnswers' => $bundleAnswer, 'MaxScore' => count($questions));
         return view('viewpost', $result);
-//        return var_dump($result);
+//        return var_dump($bundleAnswer);
     }
 
     public function create()

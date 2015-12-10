@@ -12,6 +12,35 @@ use App\Http\Controllers\Controller;
 class AnswersController extends Controller
 {
 
+    public function getFile($fileName){
+        return '/js/' . $fileName;
+    }
+
+    public static function getAnswer($QuestionID){
+        $answers = Answers::where('QuestionID', '=', $QuestionID)->get()->toArray();
+        foreach($answers as $a){
+            if ($a['Logical'] == 1){
+                return $a['id'];
+            }
+        }
+        return -1;
+    }
+
+    public function checkAnswer($QuestionID, $AnswerID){
+        $answer = Answers::findOrNew($AnswerID)->toArray();
+        $result = '<response><logical>' . $answer['Logical'] . '</logical><answer>';
+        $answers = Answers::where('QuestionID', '=', $QuestionID)->get()->toArray();
+        $answerid = '';
+        foreach($answers as $a){
+            if ($a['Logical'] == 1){
+                $answerid = $a['id'];
+                break;
+            }
+        }
+        $result .= $answerid . '</answer></response>';
+        return $result;
+    }
+
     public function addAnswer($QuestionID){
         $post = Posts::findOrNew($QuestionID)->toArray();
         $photo = $post['Photo'];
