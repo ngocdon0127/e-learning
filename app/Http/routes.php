@@ -26,3 +26,7 @@ Route::post('/admin/addanswer/{postid}', 'AnswersController@saveanswer');
 Route::get('/course/{courseid}', 'CoursesController@viewcourse');
 Route::get('/post/{postid}', 'PostsController@viewpost');
 Route::get('/question/{questionid}', 'QuestionsController@viewquestion');
+//Route::get('/js/{filename}', 'AnswersController@getfile');
+Route::post('/ajax/checkanswer/{questionid}/{answerid}', 'AnswersController@checkanswer');
+Route::get('/ajax/checkanswer/{questionid}/{answerid}', 'AnswersController@checkanswer');
+Route::get('/ajax/getanswer/{questionid}', 'AnswersController@getanswer');

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Answers;
 use App\Posts;
+use App\Questions;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
@@ -12,9 +13,33 @@ use App\Http\Controllers\Controller;
 class AnswersController extends Controller
 {
 
+    public function getFile($fileName){
+        return '/js/' . $fileName;
+    }
+
+    public function getAnswer($QuestionID){
+
+    }
+
+    public function checkAnswer($QuestionID, $AnswerID){
+        $answer = Answers::findOrNew($AnswerID)->toArray();
+        $result = '<response><logical>' . $answer['Logical'] . '</logical><answer>';
+        $answers = Answers::where('QuestionID', '=', $QuestionID)->get()->toArray();
+        $answerid = '';
+        foreach($answers as $a){
+            if ($a['Logical'] == 1){
+                $answerid = $a['id'];
+                break;
+            }
+
+        }
+        $result .= $answerid . '</answer></response>';
+        return $result;
+    }
+
     public function addAnswer($QuestionID){
-        $post = Posts::findOrNew($QuestionID)->toArray();
-        $photo = $post['Photo'];
+        $question = Questions::findOrNew($QuestionID)->toArray();
+        $photo = $question['Photo'];
         $answers = Answers::where('QuestionID', '=', $QuestionID)->get()->toArray();
         $result = array('QuestionID' => $QuestionID, 'Answers' => $answers, 'Photo' => $photo);
         return view('admin.addanswer')->with(["QuestionID" => $QuestionID, 'Photo' => $photo, 'Answers' => $answers]);
@@ -29,7 +54,7 @@ class AnswersController extends Controller
         $answer->Detail = $data['Detail'];
         $answer->toArray();
         $answer->save();
-        return redirect('/question/'.$answer->QuestionID);
+        return redirect('/admin/addanswer/'.$answer->QuestionID);
     }
 
     /**

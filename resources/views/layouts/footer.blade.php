@@ -8,4 +8,15 @@
 			</p>
 		</div>
 	</div>
+	<script type="text/javascript">
+		$.ajaxSetup({
+			headers: { 'X-CSRF-Token' : $('meta[name=_token]').attr('content') }
+		});
+
+//		$.ajaxSetup({
+//			headers: {
+//				'X-CSRF-TOKEN': $('input[name="_token"]').value()
+//			}
+//		});
+	</script>
 </footer>

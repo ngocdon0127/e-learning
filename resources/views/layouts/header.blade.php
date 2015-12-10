@@ -1,4 +1,6 @@
 <header>
+	<meta name="_token" content="{!! csrf_token() !!}"/>
+	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.1/jquery.min.js"></script>
 	<div class="row" style="height: 100px;">
 		<div class="col-sm-offset-2" style="color: #9400D3;"> <h1><b><a href="/" style="text-decoration: none;">TEC Club</a></h1></b></div>
 	</div>
