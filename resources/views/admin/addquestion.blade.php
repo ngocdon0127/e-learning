@@ -3,33 +3,32 @@
 ADD QUESTION
 @endsection
 @section('body.content')
-<div class="container">
-
+    <div class="container col-md-6">
+        <h1 class="col-sm-offset-3 title">Thêm bài viết mới</h1>
+    
         {!! Form::open(['name' => 'addQuestionForm', 'url' => '/admin/addquestion/' . $PostID, 'class'=>'form-horizontal', 'files' => true]) !!}
-            <div class="col-sm-offset-3">
-                <h1>Thêm bài viết mới</h1>
-            </div>
+           
 
             <div class="form-group">
                 {!! Form::label('Question','Question : ',['class' => 'col-md-3 control-label']) !!}
-                <div class="col-sm-6">
+                <div class="col-md-9">
                     {!! Form::text('Question','',['class'=>'form-control']) !!}
                 </div>
             </div>
              <div class="form-group">
                 {!! Form::label('Photo', 'Photo : ',['class' => 'col-md-3 control-label']) !!}
-                <div class="col-sm-6">
+                <div class="col-md-9">
                     {!! Form::file('Photo', ['accept' => 'image/jpeg, image/png, image/gif']) !!}
                 </div>
             </div>
             <div class="form-group">
                 {!! Form::label('Description', 'Description : ',['class' => 'col-md-3 control-label']) !!}
-                <div class="col-sm-6">
+                <div class="col-md-9">
                     {!! Form::text('Description','',['class'=>'form-control']) !!}
                 </div>
             </div>
             <div class="form-group">
-                <div class="col-sm-6">
+                <div class="col-md-9">
                     {!! Form::label('', '',['class' => 'col-md-3 control-label']) !!}
                     {!! Form::label('Error', '',['id' => 'error', 'class' => 'col-md-3 control-label', 'style' => 'display: none;']) !!}
                 </div>
@@ -65,9 +64,14 @@ ADD QUESTION
 
                     }
                 </script>
-                {!! Form::button('Thêm',['class' => 'btn btn-default', 'onClick' => 'submitForm()']) !!}
+
+                {!! Form::button('Thêm',['class' => 'btn btn-info', 'onClick' => 'submitForm()']) !!}
             </div>
+            <!-- end script -->
+
         {!! Form::close() !!}
+        <!-- end form -->
 </div>
+<!-- end container -->
 
 @endsection

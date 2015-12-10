@@ -3,17 +3,19 @@
     ADD POST
 @endsection
 @section('body.content')
-    <div class="container">
-        <img src="{{'/images/imageQuestion/' . $Photo}}" width="500px" height="500px"/>
-        <ul>
+    <div class="container col-md-6">
+        <ul class="list-group">
             @foreach($Answers as $a)
-                <li>
+                <li class="list-group-item list-group-item-info">
                     {{$a['Detail']}}
                 </li>
             @endforeach
+               <li class="list-group-item">
+               <img src="{{'/images/imageQuestion/' . $Photo}}"/>    
+           </li>
 
         </ul>
-        <a href="/admin/addanswer/{{$QuestionID}}">Thêm câu trả lời</a>
+        <a class="btn btn-info" href="/admin/addanswer/{{$QuestionID}}">Thêm câu trả lời</a>
     </div>
 
 @endsection

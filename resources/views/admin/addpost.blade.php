@@ -3,44 +3,43 @@
     ADD POST
 @endsection
 @section('body.content')
-    <div class="container">
+    <div class="container col-md-6">
+        <h1 class="title col-sm-offset-3">Thêm bài viết mới</h1>
         {!! Form::open(['name' => 'addPostForm', 'url' => '/admin/addpost', 'class'=>'form-horizontal', 'files' => true]) !!}
-        <div class="col-sm-offset-3">
-            <h1>Thêm bài viết mới</h1>
-        </div>
+            
         <div class="form-group">
             {!! Form::label('CourseID', 'Course ID : ',['class' => 'col-md-3 control-label']) !!}
-            <div class="col-sm-6">
+            <div class="col-md-9">
                 {!! Form::select('CourseID', \App\Courses::getColumn('Title'),['class'=>'selectpicker']) !!}
             </div>
         </div>
 
         <div class="form-group">
             {!! Form::label('FormatID', 'Format ID : ',['class' => 'col-md-3 control-label']) !!}
-            <div class="col-sm-6">
+            <div class="col-md-9">
                 {!! Form::text('FormatID','',['class'=>'form-control']) !!}
             </div>
         </div>
         <div class="form-group">
             {!! Form::label('Title','Title : ',['class' => 'col-md-3 control-label']) !!}
-            <div class="col-sm-6">
+            <div class="col-md-9">
                 {!! Form::text('Title','',['class'=>'form-control']) !!}
             </div>
         </div>
         <div class="form-group">
             {!! Form::label('Photo', 'Photo : ',['class' => 'col-md-3 control-label']) !!}
-            <div class="col-sm-6">
+            <div class="col-md-9">
                 {!! Form::file('Photo', ['accept' => 'image/jpeg, image/png, image/gif']) !!}
             </div>
         </div>
         <div class="form-group">
             {!! Form::label('Description', 'Description : ',['class' => 'col-md-3 control-label']) !!}
-            <div class="col-sm-6">
+            <div class="col-md-9">
                 {!! Form::text('Description','',['class'=>'form-control']) !!}
             </div>
         </div>
         <div class="form-group">
-            <div class="col-sm-6">
+            <div class="col-md-9">
                 {!! Form::label('', '',['class' => 'col-md-3 control-label']) !!}
                 {!! Form::label('Error', '',['id' => 'error', 'class' => 'col-md-3 control-label', 'style' => 'display: none;']) !!}
             </div>
@@ -76,7 +75,7 @@
 
                 }
             </script>
-            {!! Form::button('Thêm',['class' => 'btn btn-default', 'onClick' => 'submitForm()']) !!}
+            {!! Form::button('Thêm',['class' => 'btn btn-info', 'onClick' => 'submitForm()']) !!}
         </div>
         {!! Form::close() !!}
     </div>

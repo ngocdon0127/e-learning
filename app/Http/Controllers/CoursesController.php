@@ -23,6 +23,7 @@ class CoursesController extends Controller
         }
         $r = array('posts' => $result);
         $r += array('Title' => $course['Title']);
+        $r += array('CountPost' => count($result));
 //        return var_dump($r);
         return view('viewcourse', $r);
     }
