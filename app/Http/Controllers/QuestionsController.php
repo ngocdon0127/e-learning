@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Answers;
+use App\Http\Controllers\Auth\AuthController;
 use App\Questions;
 use Illuminate\Http\Request;
 
@@ -21,6 +22,9 @@ class QuestionsController extends Controller
     }
 
     public function addQuestion($PostID){
+        if (!AuthController::checkPermission()){
+            return redirect('auth/login');
+        };
         return view('admin.addquestion')->with(['PostID' => $PostID]);
     }
 

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Answers;
+use App\Http\Controllers\Auth\AuthController;
 use App\Posts;
 use App\Questions;
 use Illuminate\Http\Request;
@@ -43,6 +44,9 @@ class AnswersController extends Controller
     }
 
     public function addAnswer($QuestionID){
+        if (!AuthController::checkPermission()){
+            return redirect('auth/login');
+        };
         $post = Questions::findOrNew($QuestionID)->toArray();
         $photo = $post['Photo'];
         $answers = Answers::where('QuestionID', '=', $QuestionID)->get()->toArray();

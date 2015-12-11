@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
 	<meta charset="UTF-8">
 	<title>@yield('head.title')</title>
 	<link rel="stylesheet" type="text/css" href="/css/bootstrap.css">
-	<link rel="stylesheet" type="text/css" href="/css/style.css">
+	<!-- <link rel="stylesheet" type="text/css" href="/css/style.css"> -->
 	<link rel="stylesheet" type="text/css" href="/css/admin.css">
 	@yield('head.css')
 </head>

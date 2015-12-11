@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Answers;
 use App\Courses;
+use App\Http\Controllers\Auth\AuthController;
 use App\Posts;
 use App\Questions;
 use Illuminate\Http\Request;
@@ -33,6 +34,9 @@ class PostsController extends Controller
     public function addPost(){
 //        $courses = Courses::all();
 //        $courses->toArray();
+        if (!AuthController::checkPermission()){
+            return redirect('auth/login');
+        };
         $courses = array('1'=>1, '2'=>3);
         $t = array('hehe'=>$courses);
             return view('admin.addpost', $t);

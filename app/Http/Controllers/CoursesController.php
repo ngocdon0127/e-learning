@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Courses;
+use App\Http\Middleware\RedirectIfAuthenticated;
 use App\Posts;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Auth\AuthController;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
@@ -29,6 +31,11 @@ class CoursesController extends Controller
     }
 
     public function addCourse(){
+        if (!AuthController::checkPermission()){
+//            RedirectIfAuthenticated::$backPath = 'add/course';
+            AuthController::$redirectPath = '/admin/adcourse';
+            return redirect('auth/login');
+        };
         return view('admin.addcourse');
     }
 
