@@ -4,7 +4,10 @@
 @endsection
 @section('body.content')
     <div class="container col-md-6">
-        <img src="{{'/images/imagePost/' . $Photo}}" />
+        <h1 class="title">Ảnh của post</h1>
+        <li class="list-group-item">
+            <img src="{{'/images/imagePost/' . $Photo}}" />
+        </li>
         {{--<script src="/js/function.js"></script>--}}
         <script type="text/javascript">
             var score = 0;
@@ -31,14 +34,14 @@
 //                var xml = jQuery.parseXML(obj.responseText);
 //                        console.log(xml.getElementsByTagName('logical')[0].innerHTML);
                 if (answerID == trueAnswerID) {
-                    ob(id).style.background = 'green';
+                    ob(id).style.background = '#66ff66';
                     score++;
                 }
                 else {
-                    ob(id).style.background = 'red';
+                    ob(id).style.background = '#ff5050';
                 }
                 var idTrue = 'answer_' + questionID + '_' + trueAnswerID;
-                ob(idTrue).style.background = 'green';
+                ob(idTrue).style.background = '#66ff66';
                 fill++;
                 if (fill >= maxScore){
                     alert(score);
@@ -49,20 +52,30 @@
 
             }
         </script>
-        <ul id="form_test">
+        <h1 class="title">Các câu hỏi</h1>
+        <ul id="form_test" class="list-group">
+            <?php $count_answer=1;?>
             @foreach($Questions as $q)
+                <h2 class="title">Câu hỏi số <?php echo $count_answer++; ?>:
+                    <a class="btn" href="/question/{{$q['id']}}"> {{$q['Question']}} : {{$q['Description']}}</a>
+                </h2>
                 <li class="list-group-item list-group-item-info">
-                    <a href="/question/{{$q['id']}}"> {{$q['Question']}} : {{$q['Description']}}</a>
                     <img src="/images/imageQuestion/{{$q['Photo']}}" />
-                    <ul>
-                        @foreach($Bundle[$q['id']] as $k => $a)
-                            <li id="answer_{{$q['id']}}_{{$a['id']}}" class="lianswer"><input type="radio" name="question_{{$q['id']}}" onclick="check({{$q['id']}}, {{$a['id']}}, {{$BundleAnswers[$q['id']]}})" />{{$a['Detail']}}</li>
-                        @endforeach
-                    </ul>
                 </li>
+               <ul class="list-group">
+                    @foreach($Bundle[$q['id']] as $k => $a)
+                        <li id="answer_{{$q['id']}}_{{$a['id']}}" class="list_answer">
+                            <input type="radio" name="question_{{$q['id']}}" onclick="check({{$q['id']}}, {{$a['id']}}, {{$BundleAnswers[$q['id']]}})" />
+                            <span class="answer_content">{{$a['Detail']}}</span>
+                        </li>
+
+                        <div class="clear">   </div>
+                    @endforeach
+                </ul>
+
             @endforeach
         </ul>
-        <a class="btn btn-info" href="/admin/addquestion/{{$PostID}}">Thêm câu hỏi</a>
+        <a class ="btn btn-info" href="/admin/addquestion/{{$PostID}}">Thêm câu hỏi</a>
     </div>
 
 @endsection

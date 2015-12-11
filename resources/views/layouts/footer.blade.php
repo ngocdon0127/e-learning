@@ -1,6 +1,4 @@
 
-<footer>
-		<div class="footer">
-			<p>Copyright &copy; Phạm Tất Thành</p>
-		</div>
-</footer>
+	<div class="footer-container">
+			<p>Copyright &copy; 3 Chàng Code</p>
+	</div>

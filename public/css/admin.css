@@ -1,80 +1,56 @@
-*{
+
+/*==================SECTION===========================*/
+/**{
   margin: 0;
   padding:0;
-}
-.col-md-6{
- float: none;
- margin: 0  auto;
-}
-
-h1.title{
-  color: #660066;
-  font-weight: bold;
-}
-.btn-info{
-  background: #ccffcc;
-  color: #660066;
-  font-size: 20px;
-  font-weight: bold;;
-}
-.badge-span{
-  background: white;
-  color: blue;
-}
-.list-group-item{
-  color: #ff3300;
-  /*font-weight: bold;*/
-  font-size: 20px;
-}
-.list-group{
-  padding:5% 0;
-}
-.form-horizontal .control-label{
-  text-align: left;
-}
-h1.col-md-6 {
-  text-align: center;
-  margin: 30px auto;
-}
-
-/*.dropdown-tongle{
-  padding-right: 30px;
 }*/
-.content{
-  padding-bottom: 20px;
+html,
+body {
+   margin:0;
+   padding:0;
+   height:100%;
 }
-footer{
-  position: absolute;
-  width: 100%;
-  font-size: 30px;
+.header{
+  font-size: 50px;
   padding-top: 20px;
   font-weight: bold;
   color: green;
-  background: #ebebeb;
-  padding-left: 25%;
-  /*margin:0 auto;*/
   /*text-align: center;*/
+  /*margin:0 auto;*/
 }
-footer:after{
+.content{
+  padding-bottom: 7%;
+  padding-top: 3%;
+}
+.wrapper{
+  min-height:100%;
+  position:relative;
+  background: #fafafa;
+}
+/*footer:after{
   clear: both;
 }
 footer:before,
 footer:after{
   content: " ";
   display: table;
-}
-img {
+}*/
+.footer-container{
+  position: absolute;
   width: 100%;
-  height: 400px;
-}
-.header{
-  font-size: 60px;
-  padding-top: 20px;
+  bottom: 0;
+  padding: 10px 25%;
+  font-size: 30px;
   font-weight: bold;
   color: green;
-  /*text-align: center;*/
-  /*margin:0 auto;*/
+  background: #ebebeb;
 }
+.col-md-6{
+ float: none;
+ margin: 0  auto;
+}
+/*==================END SECTION===========================*/
+/*==================NAV===========================*/
 .nav-container {
   background: #ebebeb;
   margin: 0 auto;
@@ -115,11 +91,54 @@ background:#ebebeb;
 .a {
   padding-left: 10px;
   padding-right: 10px; 
-}.control-label{
+}
+.control-label{
   color: #ff0066;
   font-weight: bold;
   font-size: 20px;
 }
+/*==================END NAV===========================*/
 /*    .list-group,.image{
             padding: 5% 25%;
         }*/
+/*==================FROM-H1===========================*/
+h1.title{
+  color: #660066;
+  font-weight: bold;
+}
+h2.title{
+  color: #993333;
+}
+.btn-info{
+  background: #ccffcc;
+  color: #660066;
+  font-size: 20px;
+  font-weight: bold;;
+}
+.badge-span{
+  background: white;
+  color: blue;
+}
+.list-group-item{
+  color: #ff3300;
+  /*font-weight: bold;*/
+  font-size: 20px;
+}
+.list-group{
+  padding:5% 0;
+}
+.form-horizontal .control-label{
+  text-align: left;
+}
+h1.col-md-6 {
+  text-align: center;
+  margin: 30px auto;
+}
+
+img {
+  width: 100%;
+  height: 400px;
+}
+.clear{
+  height: 10px;
+}
