@@ -1,5 +1,3 @@
-<div class="footer">
-	<div class="col-xs-offset-3 col-sm-offset-3">
-			<p>Copyright &copy; 3 Chàng Code</p>
-	</div>
-</div>
+<footer class="navbar navbar-default navbar-fixed-bottom" role="navigation">
+	   <center style = "padding-top: 10px;"><b>Copyright &copy; by Team Thái Bình</b></center>
+</footer>
