@@ -52,11 +52,11 @@
         <ul id="form_test">
             @foreach($Questions as $q)
                 <li class="list-group-item list-group-item-info">
-                    <a href="/question/{{$q['id']}}"> {{$q['Question']}} </a>
+                    <a href="/question/{{$q['id']}}"> {{$q['Question']}} : {{$q['Description']}}</a>
                     <img src="/images/imageQuestion/{{$q['Photo']}}" />
                     <ul>
                         @foreach($Bundle[$q['id']] as $k => $a)
-                            <li id="answer_{{$q['id']}}_{{$a['id']}}"><input type="radio" name="question_{{$q['id']}}" onclick="check({{$q['id']}}, {{$a['id']}}, {{$BundleAnswers[$q['id']]}})" />{{$a['Detail']}}</li>
+                            <li id="answer_{{$q['id']}}_{{$a['id']}}" class="lianswer"><input type="radio" name="question_{{$q['id']}}" onclick="check({{$q['id']}}, {{$a['id']}}, {{$BundleAnswers[$q['id']]}})" />{{$a['Detail']}}</li>
                         @endforeach
                     </ul>
                 </li>

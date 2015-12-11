@@ -4,6 +4,21 @@
 @endsection
 @section('body.content')
     <div class="container col-md-6">
+        <div class="container">
+            <ul class="list-group col-md-9">
+                <li class="list-group-item">
+                    <img src = "{{'/images/imageQuestion/' . $Photo}}" />
+                </li>
+                @foreach($Answers as $answer)
+                    <li class="list-group-item list-group-item-info">{{$answer['Detail']}}
+                        @if ($answer['Logical'] != 0)
+                            <span class="badge badge-span">Đúng</span>
+                        @endif
+                    </li>
+                @endforeach
+
+            </ul>
+        </div>
        <!-- <div class="container"> -->
         <h1 class="title">Thêm câu trả lời mới</h1>
         <div class="container">{!! Form::open(['url' => '/admin/addanswer/'.'{{QuestionID}}','class'=>'form-horizontal']) !!}
@@ -28,21 +43,8 @@
                        {!! Form::submit('Thêm',['class' => 'btn btn-info']) !!}
                    </div>
             {!! Form::close() !!}
-            </div>
+        </div>
 
-    <div class="container">
-           <ul class="list-group col-md-9">
-               @foreach($Answers as $answer)
-                   <li class="list-group-item list-group-item-info">{{$answer['Detail']}}
-                       @if ($answer['Logical'] != 0)
-                           <span class="badge badge-span">Đúng</span>
-                       @endif
-                   </li>
-               @endforeach
-               <li class="list-group-item">
-                   <img src = "{{'/images/imageQuestion/' . $Photo}}" />
-               </li>
-           </ul>
-       </div>
-       </div>
+
+    </div>
 @endsection

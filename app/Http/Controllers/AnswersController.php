@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Answers;
 use App\Posts;
+use App\Questions;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
@@ -42,7 +43,7 @@ class AnswersController extends Controller
     }
 
     public function addAnswer($QuestionID){
-        $post = Posts::findOrNew($QuestionID)->toArray();
+        $post = Questions::findOrNew($QuestionID)->toArray();
         $photo = $post['Photo'];
         $answers = Answers::where('QuestionID', '=', $QuestionID)->get()->toArray();
         $result = array('QuestionID' => $QuestionID, 'Answers' => $answers, 'Photo' => $photo);

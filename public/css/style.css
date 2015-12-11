@@ -22,3 +22,17 @@ footer {
 	bottom:0;
 	left:0;
 }
+
+div.lianswer{
+	width: 570px;
+	word-wrap: break-word;
+	font-weight: 600;
+	font-size: 19px;
+	line-height: 21px;
+	color: #3d3d3d;
+	vertical-align: top;
+	list-style: none;
+	display: list-item;
+	text-align: -webkit-match-parent;
+	padding-left: 24px;
+}

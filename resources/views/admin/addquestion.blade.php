@@ -4,7 +4,7 @@ ADD QUESTION
 @endsection
 @section('body.content')
     <div class="container col-md-6">
-        <h1 class="col-sm-offset-3 title">Thêm bài viết mới</h1>
+        <h1 class="col-sm-offset-3 title">Thêm câu hỏi mới</h1>
     
         {!! Form::open(['name' => 'addQuestionForm', 'url' => '/admin/addquestion/' . $PostID, 'class'=>'form-horizontal', 'files' => true]) !!}
            
