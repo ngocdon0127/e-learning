@@ -37,7 +37,11 @@
 
 			<button type="submit" class="btn btn-default">Submit</button>
 						</div>
+			@if (auth()->user())
+			<button type="button" class="btn btn-default"><a href="auth/logout">Logout</a></button>
+			@else
 			<button type="button" class="btn btn-default"><a href="auth/login">Login</a></button>
+			@endif
 		</form>
 	</div><!-- /.navbar-collapse -->
 	<!-- </div> -->
