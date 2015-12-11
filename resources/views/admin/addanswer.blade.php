@@ -112,8 +112,8 @@
                     }
                 </script>
                        <div class="" id="div_answer">
-                           <input type="text" id="count" name="numAnswer" />
-                           <input type="text" id="result" name="resultQuestion" />
+                           <input type="text" id="count" name="numAnswer" style="display: none;"/>
+                           <input type="text" id="result" name="resultQuestion" style="display: none;" />
                            <div id="answers">
                                <script type="text/javascript">
                                    for(var i = 0; i < minAnswer; i++){
