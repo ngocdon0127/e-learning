@@ -9,7 +9,7 @@
     <div class="col-md-6">
       <ul class="nav navbar-nav">
         <li class="active"><a href="/">Home</a></li>
-        <li class="a"><a href="#" class="a">News</a></li>
+        <li class="a"><a href="/auth/login" class="a">Login</a></li>
         <li class="a"><a href="#" class="a">Buzz</a></li>
         <li class="a"><a href="#" class="a">Life</a></li>
         <li class="a"><a href="#" class="a">Quizess</a></li>

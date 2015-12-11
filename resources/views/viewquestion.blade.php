@@ -15,7 +15,9 @@
             @endforeach
 
         </ul>
+        @if ((auth()->user()) && (auth()->user()->admin == 1))
         <a class="btn btn-info" href="/admin/addanswer/{{$QuestionID}}">Thêm câu trả lời</a>
+        @endif
     </div>
 
 @endsection
