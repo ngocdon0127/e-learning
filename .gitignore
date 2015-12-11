@@ -1,3 +1,4 @@
 *.rar
 *.zip
 .idea/workspace.xml
+.idea/*
