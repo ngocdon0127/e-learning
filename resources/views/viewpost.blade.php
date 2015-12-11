@@ -75,7 +75,9 @@
 
             @endforeach
         </ul>
+        @if ((auth()->user()) && (auth()->user()->admin == 1))
         <a class ="btn btn-info" href="/admin/addquestion/{{$PostID}}">Thêm câu hỏi</a>
+        @endif
     </div>
 
 @endsection

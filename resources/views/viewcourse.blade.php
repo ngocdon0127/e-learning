@@ -13,7 +13,9 @@
                 </li>
             @endforeach
         </ul>
+        @if ((auth()->user()) && (auth()->user()->admin == 1))
         <a class="btn btn-info" href="/admin/addpost">Thêm Post</a>
+        @endif
     </div>
 
 @endsection

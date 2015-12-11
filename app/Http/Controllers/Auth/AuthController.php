@@ -22,7 +22,8 @@ class AuthController extends Controller
     */
 
     use AuthenticatesAndRegistersUsers, ThrottlesLogins;
-
+    protected $loginPath = '/';
+    public static $redirectPath = '/home';
     /**
      * Create a new authentication controller instance.
      *
@@ -61,5 +62,12 @@ class AuthController extends Controller
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
         ]);
+    }
+
+    public static function checkPermission(){
+        if ((!auth()->user()) || (auth()->user()->admin != 1)) {
+            return false;
+        }
+        return true;
     }
 }
