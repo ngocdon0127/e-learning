@@ -1,4 +1,4 @@
-<nav class="navbar navbar-default" role="navigation" style = "color: #EAEAEA; class="active"">
+<nav class="navbar navbar-default col-sm-12" role="navigation" style = "color: #EAEAEA; class="active"">
 	<!-- Brand and toggle get grouped for better mobile display -->
 	<div class="navbar-header">
 		<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
@@ -37,7 +37,7 @@
 
 			<button type="submit" class="btn btn-default">Submit</button>
 						</div>
-			<button type="button" class="btn btn-primary">Login</button>
+			<button type="button" class="btn btn-default"><a href="auth/login">Login</a></button>
 		</form>
 	</div><!-- /.navbar-collapse -->
 	<!-- </div> -->

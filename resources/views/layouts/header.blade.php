@@ -1,3 +1,3 @@
-<header>
-  <div class="col-md-6 header">Learning English Together</div>
+<header class = "col-sm-12">
+  <h1><b>Learning English Together</b></h1>
 </header>
