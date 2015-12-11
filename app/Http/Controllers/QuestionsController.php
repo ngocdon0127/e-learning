@@ -2,48 +2,51 @@
 
 namespace App\Http\Controllers;
 
-use App\Courses;
-use App\Posts;
+use App\Answers;
+use App\Questions;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
-class CoursesController extends Controller
+class QuestionsController extends Controller
 {
 
-    public function viewCourse($courseid){
-        $course = Courses::findOrNew($courseid)->toArray();
-//        $result = array('Title' => $course['Title']);
-        $posts = Posts::all()->toArray();
-        $result = array();
-        foreach ($posts as $post) {
-            if ($post['CourseID'] == $courseid)
-                $result += array($post['id'] => $post);
-        }
-        $r = array('posts' => $result);
-        $r += array('Title' => $course['Title']);
-        $r += array('CountPost' => count($result));
-//        return var_dump($r);
-        return view('viewcourse', $r);
+    public function viewQuestion($QuestionID){
+        $question = Questions::findOrNew($QuestionID)->toArray();
+        $photo = $question['Photo'];
+        $answer = Answers::where('QuestionID', '=', $QuestionID)->get()->toArray();
+        $result = array('QuestionID' => $QuestionID, 'Answers' => $answer, 'Photo' => $photo);
+        return view('viewquestion', $result);
     }
 
-    public function addCourse(){
-        return view('admin.addcourse');
+    public function addQuestion($PostID){
+        return view('admin.addquestion')->with(['PostID' => $PostID]);
     }
 
-    public function viewAllCourses(){
-        $allcourse = Courses::all()->toArray();
-        return view('index')->with("allcourse", $allcourse);
-    }
+    public function saveQuestion($PostID){
+        $data = Request::capture();
+        $question = new Questions();
+        $question->PostID = $PostID;
+        $question->Question = $data['Question'];
+        $question->Description = $data['Description'];
+        $question->save();
 
-    public function saveCourse(Request $request){
-        $data = $request->all();
-        $course = new Courses();
-        $course->Title = $data['Title'];
-        $course->Description = $data['Description'];
-        $course->save();
-        return redirect('/admin/addpost');
+
+        $question = Questions::orderBy('id', 'desc')->first();
+
+        //Photo
+        $file = Request::capture()->file('Photo');
+//        $file = Request::file('Photo');
+        $question->Photo = 'Question_' . $PostID . '_' . $question->id  . "." . $file->getClientOriginalExtension();
+        $file->move(base_path() . '/public/images/imageQuestion/', $question->Photo);
+
+
+        // (intval(Posts::orderBy('created_at', 'desc')->first()->id) + 1)
+
+
+        $question->update();
+        return redirect('/admin/addanswer/'.$question->id);
     }
 
     /**

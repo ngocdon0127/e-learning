@@ -22,3 +22,18 @@ footer {
 	bottom:0;
 	left:0;
 }
+.list_answer{
+     word-wrap: break-word; 
+    font-weight: bold;
+    background: #e0f0ff;
+    padding: 10px;
+    color: #993333;
+     vertical-align: top; 
+    list-style: none;
+    display: list-item;
+    border-radius: 10px;
+    /* text-align: -webkit-match-parent; */
+}
+.answer_content{
+	padding-left: 5%;
+}
