@@ -65,11 +65,11 @@
                             div.setAttribute('class','div_i');
                             div.children[0].setAttribute('class','col-sm-9');
                             radio.setAttribute('class','checked');
-                            radio.setAttribute('type','checkbox');
+                            radio.setAttribute('type','radio');
                             div.children[2].setAttribute('class','children btn btn-info');
 //                            radio.setAttribute('onclick', 'markAnswer("' + radio.id + '")');
-                            if (i > minAnswer - 1)
-                                div.children[2].setAttribute('onclick', 'xoa("divanswer' + i + '")');
+//                            if (i > minAnswer - 1)
+                            div.children[2].setAttribute('onclick', 'xoa("divanswer' + i + '")');
                         }
 //                        console.log(resultQuestion);
                         ob('result').value = resultQuestion;
