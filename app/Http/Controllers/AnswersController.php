@@ -52,14 +52,31 @@ class AnswersController extends Controller
 
     public function saveAnswer(Request $request){
         $data = $request->all();
-        $answer = new Answers();
-        $answer->QuestionID = $data['QuestionID'];
-        if (array_key_exists('Logical', $data))
-            $answer->Logical = $data['Logical'];
-        $answer->Detail = $data['Detail'];
-        $answer->toArray();
-        $answer->save();
+
+        $count = $data['numAnswer'];
+        $result = $data['resultQuestion'];
+        for($i = 0; $i < $count; $i++){
+            $answer = new Answers();
+            $answer->QuestionID = $data['QuestionID'];
+            $answer->Detail = $data['answer' . ($i + 1)];
+            if ($result != ($i + 1)){
+                $answer->Logical = 0;
+            }
+            else{
+                $answer->Logical = 1;
+            }
+            $answer->toArray();
+            $answer->save();
+        }
+
         return redirect('/question/'.$answer->QuestionID);
+    }
+
+    public function add_answer($QuestionID, $Logical, $Detail){
+        $answer = new Answers();
+        $answer->QuestionID = $QuestionID;
+        $answer->Logical = $Logical;
+        $answer->Detail = $Detail;
     }
 
     /**
