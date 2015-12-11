@@ -46,7 +46,7 @@ class QuestionsController extends Controller
 
 
         $question->update();
-        return redirect('/question/'.$question->id);
+        return redirect('/admin/addanswer/'.$question->id);
     }
 
     /**

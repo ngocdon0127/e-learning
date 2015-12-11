@@ -14,6 +14,7 @@
 //Route::get('/', function () {
 //    return view('welcome');
 //});
+Route::controllers(['auth' => 'Auth\AuthController', 'password' => 'Auth\PasswordController',]);
 Route::get('/', 'CoursesController@viewallcourses');
 Route::get('/admin/addquestion/{postid}', 'QuestionsController@addquestion');
 Route::post('/admin/addquestion/{postid}', 'QuestionsController@savequestion');
