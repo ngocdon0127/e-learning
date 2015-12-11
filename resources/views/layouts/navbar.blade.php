@@ -13,7 +13,7 @@
 	<!-- <div class="col-sm-offset-3"> -->
 	<div class="collapse col-sm-offset-1 navbar-collapse navbar-ex1-collapse">
 		<ul class="nav navbar-nav">
-			<li class="active"><a href="#">News</a></li>
+			<li class="active"><a href="/">Home</a></li>
 			<li class="active"><a href="#">Buzz</a></li>
 			<li class="active"><a href="#">Life</a></li>
 			<li class="active"><a href="#">Quizzes</a></li>
@@ -38,9 +38,9 @@
 			<button type="submit" class="btn btn-default">Submit</button>
 						</div>
 			@if (auth()->user())
-			<button type="button" class="btn btn-default"><a href="auth/logout">Logout</a></button>
+			<button type="button" class="btn btn-default"><a href="/auth/logout">Logout</a></button>
 			@else
-			<button type="button" class="btn btn-default"><a href="auth/login">Login</a></button>
+			<button type="button" class="btn btn-default"><a href="/auth/login">Login</a></button>
 			@endif
 		</form>
 	</div><!-- /.navbar-collapse -->
