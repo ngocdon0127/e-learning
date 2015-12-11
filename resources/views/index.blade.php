@@ -3,7 +3,7 @@
     ADD POST
 @endsection
 @section('body.content')
- <div class="container col-md-6">
+ <div class="col-sm-offset-3 col-xs-offset-3 col-sm-6 col-xs-6">
     	<h1 class="title">Các khóa học</h1>
     	<ul class="list-group">
     	@foreach (\App\Courses::all()->toArray() as $course)

@@ -3,7 +3,7 @@
     ADD POST
 @endsection
 @section('body.content')
-    <div class="container col-md-6">
+    <div class="col-sm-offset-3 col-xs-offset-3 col-sm-6 col-xs-6">
         <h1 class="title">Ảnh của post</h1>
         <li class="list-group-item">
             <img src="{{'/images/imagePost/' . $Photo}}" />
@@ -69,7 +69,7 @@
                             <span class="answer_content">{{$a['Detail']}}</span>
                         </li>
 
-                        <div class="clear">   </div>
+                        <div class="clear"></div>
                     @endforeach
                 </ul>
 

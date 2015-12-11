@@ -3,32 +3,31 @@
     ADD ANSWER
 @endsection
 @section('body.content')
-    <div class="container col-md-6">
-        <div class="container">
-            <ul class="list-group col-md-9">
-                <li class="list-group-item">
-                    <img src = "{{'/images/imageQuestion/' . $Photo}}" />
-                </li>
-                @foreach($Answers as $answer)
-                    <li class="list-group-item list-group-item-info">{{$answer['Detail']}}
-                        @if ($answer['Logical'] != 0)
-                            <span class="badge badge-span">Đúng</span>
-                        @endif
-                    </li>
-                @endforeach
-
+    <div class="col-sm-offset-3 col-xs-offset-3 col-sm-6 col-xs-6">
+        <ul class="list-group">
+            <li class="list-group-item">
+                <img src = "{{'/images/imageQuestion/' . $Photo}}" />
+            </li>
+            <ul class="list-group">
+                 @foreach($Answers as $answer)
+                   <li class="list-group-item list-group-item-info">{{$answer['Detail']}}
+                       @if ($answer['Logical'] != 0)
+                           <span class="badge badge-span">Đúng</span>
+                       @endif
+                   </li>
+                   <div class="clear"></div>
+               @endforeach
             </ul>
-        </div>
-       <!-- <div class="container"> -->
+        </ul>
         <h1 class="title">Thêm câu trả lời mới</h1>
-        <div class="container">
-            {!! Form::open(['name' => 'addAnswerForm', 'url' => '/admin/addanswer/' . $QuestionID,'class'=>'form-horizontal']) !!}
+        <!-- <div class="col-sm-9"> -->
+            {!! Form::open(['name' => 'addAnswerForm', 'url' => '/admin/addanswer/' . $QuestionID,'class'=>'control-label']) !!}
              <!--        {!! Form::label('Detail', 'Câu trả lời: ') !!}
             {!! Form::text('Detail') !!} -->
             
-            <div class="form-group col-md-9">
-                       {!! Form::label('Detail', 'Câu trả lời: ',['class'=>' control-label']) !!}
-                <script type="text/javascript">
+            <div class="form-group">
+                {!! Form::label('Detail', 'Câu trả lời: ',['class'=>'control-label']) !!}
+                    <script type="text/javascript">
                     var count = -1;
                     var minAnswer = 4;
                     var resultQuestion = -1;
@@ -63,6 +62,11 @@
                             if (radio.checked){
                                 resultQuestion = i;
                             }
+                            div.setAttribute('class','div_i');
+                            div.children[0].setAttribute('class','col-sm-9');
+                            radio.setAttribute('class','checked');
+                            radio.setAttribute('type','checkbox');
+                            div.children[2].setAttribute('class','children btn btn-info');
 //                            radio.setAttribute('onclick', 'markAnswer("' + radio.id + '")');
                             if (i > minAnswer - 1)
                                 div.children[2].setAttribute('onclick', 'xoa("divanswer' + i + '")');
@@ -85,13 +89,13 @@
                         e.type = 'text';
 //                        e.name = 'answer' + count;
 //                        e.id = e.name;
-                        e.setAttribute('class', 'form-control');
+                        e.setAttribute('class', 'col-sm-9');
                         var divElement = document.createElement('div');
                         divElement.id = "divanswer" + count;
                         ob('answers').appendChild(divElement);
                         divElement.appendChild(e);
                         var radio = document.createElement('input');
-                        radio.type = 'radio';
+                        radio.type = 'checkbox';
                         radio.name = 'radio_answer';
                         divElement.appendChild(radio);
                         var btnDel = document.createElement('input');
@@ -110,31 +114,30 @@
                             document.addAnswerForm.submit();
                         }
                     }
-                </script>
-                       <div class="" id="div_answer">
-                           <input type="text" id="count" name="numAnswer" style="display: none;"/>
-                           <input type="text" id="result" name="resultQuestion" style="display: none;" />
-                           <div id="answers">
-                               <script type="text/javascript">
-                                   for(var i = 0; i < minAnswer; i++){
-//                                       console.log(i);
-                                       add();
-                                   }
-                               </script>
-                           </div>
-                           <input type="button" value="+" onclick="add()">
-                       </div>
+//                 </script>
+                <div class="" id="div_answer">
+                    <input type="text" id="count" name="numAnswer" style="display: none;"/>
+                    <input type="text" id="result" name="resultQuestion" style="display: none;" />
+                   <div id="answers">
+                       <script type="text/javascript">
+                           for(var i = 0; i < minAnswer; i++){
+                                     // console.log(i);
+                               add();
+                           }
+                       </script>
                    </div>
+                   <input type="button" value="+" onclick="add()">
+                </div>
+            </div>
 
 
-               <div class="col-sm-10">
                    <!-- <div class="col-sm-10"> -->
-                   <input type="text" value="{{$QuestionID}}" style="display: none" readonly name="QuestionID" />
-                       {!! Form::button('Thêm',['class' => 'btn btn-info', 'onclick' => 'submitForm()']) !!}
-                   </div>
+                <input type="text" value="{{$QuestionID}}" style="display: none" readonly name="QuestionID" />
+                {!! Form::button('Thêm',['class' => 'btn btn-info', 'onclick' => 'submitForm()']) !!}
             {!! Form::close() !!}
-        </div>
+        <!-- </div> -->
 
 
     </div>
 @endsection
+//             
