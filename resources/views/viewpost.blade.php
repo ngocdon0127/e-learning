@@ -19,11 +19,20 @@
             function check(questionID, answerID, trueAnswerID){
                 console.log('start');
                 var date = new Date();
+                var id = 'radio_answer_' + questionID + '_' + answerID;
+                ob(id).checked = true;
                 var id = 'answer_' + questionID + '_' + answerID;
-                ob(id).disabled = true;
-                var set = document.getElementsByName('question_' + questionID);
-                for(i = 0; i < set.length; i++){
-                    set[i].disabled = true;
+//                ob(id).disabled = true;
+                var setOfRadio = document.getElementsByName('question_' + questionID);
+                for(i = 0; i < setOfRadio.length; i++){
+                    setOfRadio[i].disabled = true;
+                }
+
+                var setLi = document.getElementById('ul_question_' + questionID).children;
+                for(i = 0; i < setLi.length; i++){
+                    var li = setLi[i];
+                    li.setAttribute('onclick', '');
+                    li.style.cursor = 'no-drop';
                 }
 
                 console.log('receive');
@@ -62,12 +71,12 @@
                 <li class="list-group-item list-group-item-info">
                     <img src="/images/imageQuestion/{{$q['Photo']}}" />
                 </li>
-               <ul class="list-group">
+               <ul class="list-group" id="ul_question_{{$q['id']}}">
                     @foreach($Bundle[$q['id']] as $k => $a)
-                        <li id="answer_{{$q['id']}}_{{$a['id']}}" class="list_answer">
-                            <input type="radio" name="question_{{$q['id']}}" onclick="check({{$q['id']}}, {{$a['id']}}, {{$BundleAnswers[$q['id']]}})" />
-                            <span class="answer_content">{{$a['Detail']}}</span>
-                        </li>
+                       <li id="answer_{{$q['id']}}_{{$a['id']}}" class="list_answer" onclick="check({{$q['id']}}, {{$a['id']}}, {{$BundleAnswers[$q['id']]}})" style="cursor: pointer">
+                           <input type="checkbox" id="radio_answer_{{$q['id']}}_{{$a['id']}}" name="question_{{$q['id']}}"/>
+                           <label for="radio_answer_{{$q['id']}}_{{$a['id']}}" class="answer_content">{{$a['Detail']}}</label>
+                       </li>
 
                         <div class="clear"></div>
                     @endforeach
