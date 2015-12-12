@@ -10,14 +10,7 @@ body {
    padding:0;
    height:100%;
 }
-header{
-  font-size: 50px;
-  padding-top: 20px;
-  font-weight: bold;
-  color: green;
-  text-align: center;
-  margin:0 auto;
-}
+
 .content{
   padding-top: 3%;
 }
@@ -28,7 +21,7 @@ header{
   padding-bottom: 7%;
   background: #fafafa;
 }
-.footer:after{
+/*.footer:after{
   clear: both;
 }
 .footer:before,
@@ -45,7 +38,7 @@ header{
   font-weight: bold;
   color: green;
   background: #ebebeb;
-}
+}*/
 /*.col-md-6{
  float: none;
  margin: 0  auto;
@@ -125,4 +118,59 @@ img {
 }
 .div_i{
   padding: 10px 0;
+}
+/* Extra small devices (phones, less than 768px) */
+/* No media query since this is the default in Bootstrap */
+
+/* Small devices (tablets, 768px and up) */
+@media (max-width: 479px){
+      header{
+      height: 0px;
+      padding: 0px;
+      margin-bottom: 0px;
+  }
+}
+@media (min-width: 480px){
+    header{
+      font-size: 30px;
+      padding-top: 10px;
+      font-weight: bold;
+      color: green;
+      text-align: left;
+      margin:0 auto;
+  }
+}
+@media (min-width: 768px) {
+  header{
+    font-size: 40px;
+    padding-top: 20px;
+    font-weight: bold;
+    color: green;
+    text-align: left;
+    margin:0 auto;
+  }
+}
+
+/* Medium devices (desktops, 992px and up) */
+@media (min-width: 992px) {
+  header{
+    font-size: 50px;
+    padding-top: 20px;
+    font-weight: bold;
+    color: green;
+    text-align: center;
+    margin:0 auto;
+  }
+}
+
+/* Large devices (large desktops, 1200px and up) */
+@media (min-width: 1200px) {
+  header{
+    font-size: 50px;
+    padding-top: 20px;
+    font-weight: bold;
+    color: green;
+    text-align: center;
+    margin:0 auto;
+  }
 }

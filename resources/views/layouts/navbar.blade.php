@@ -11,7 +11,7 @@
 
 	<!-- Collect the nav links, forms, and other content for toggling -->
 	<!-- <div class="col-sm-offset-3"> -->
-	<div class="collapse col-sm-offset-1 navbar-collapse navbar-ex1-collapse">
+	<div class="collapse col-sm-offset-3 navbar-collapse navbar-ex1-collapse">
 		<ul class="nav navbar-nav">
 			<li class="active"><a href="/">Home</a></li>
 			<li class="active"><a href="#">Buzz</a></li>

@@ -3,10 +3,9 @@
     ADD POST
 @endsection
 @section('body.content')
-    <div class="col-sm-offset-3 col-xs-offset-3 col-sm-6 col-xs-6">
         <h1 class="title">Ảnh của post</h1>
         <li class="list-group-item">
-            <img src="{{'/images/imagePost/' . $Photo}}" />
+            <img class="img-responsive" src="{{'/images/imagePost/' . $Photo}}" />
         </li>
         {{--<script src="/js/function.js"></script>--}}
         <script type="text/javascript">
@@ -69,7 +68,7 @@
                     <a class="btn" href="/question/{{$q['id']}}"> {{$q['Question']}} : {{$q['Description']}}</a>
                 </h2>
                 <li class="list-group-item list-group-item-info">
-                    <img src="/images/imageQuestion/{{$q['Photo']}}" />
+                    <img class="img-responsive" src="/images/imageQuestion/{{$q['Photo']}}" />
                 </li>
                <ul class="list-group" id="ul_question_{{$q['id']}}">
                     @foreach($Bundle[$q['id']] as $k => $a)
@@ -87,6 +86,4 @@
         @if ((auth()->user()) && (auth()->user()->admin == 1))
         <a class ="btn btn-info" href="/admin/addquestion/{{$PostID}}">Thêm câu hỏi</a>
         @endif
-    </div>
-
 @endsection

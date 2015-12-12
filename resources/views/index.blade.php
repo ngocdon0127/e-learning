@@ -3,7 +3,6 @@
     ADD POST
 @endsection
 @section('body.content')
- <div class="col-sm-offset-3 col-xs-offset-3 col-sm-6 col-xs-6">
     	<h1 class="title">Các khóa học</h1>
     	<ul class="list-group">
     	@foreach (\App\Courses::all()->toArray() as $course)
@@ -13,7 +12,6 @@
 	 	@if ((auth()->user()) && (auth()->user()->admin == 1))
     	<a href="/admin/addcourse" class="btn btn-info">Add Course</a>
 		 @endif
-    </div>
   <!--   <div class="container">
         <ul>
         @foreach ($allcourse as $course)
