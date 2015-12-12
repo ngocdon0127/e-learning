@@ -4,7 +4,7 @@
 @endsection
 @section('body.content')
           <div class="container-fluid"> 
-           <div class="col-md-offset-3 col-md-6 ">
+           <!-- <div class="col-md-offset-3 col-md-6 "> -->
               <h1 class="title">Thêm bài viết mới</h1>
               {!! Form::open(['name' => 'addPostForm', 'url' => '/admin/addpost', 'role'=>'form', 'files' => true]) !!}
               <div class="form-group">
@@ -64,7 +64,8 @@
                  </script>
                  {!! Form::button('Thêm',['class' => 'btn btn-info', 'onClick' => 'submitForm()']) !!}
               <!-- </div> -->
-              {!! Form::close() !!}</div>
+              {!! Form::close() !!}
+              <!-- </div> -->
     </div>
 
 @endsection
