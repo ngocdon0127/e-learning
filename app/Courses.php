@@ -13,7 +13,10 @@ class Courses extends Model
         foreach ($array as $item) {
             $result += array($item['id'] => $item[$column]);
         }
-        return $result;
+        if (count($result) > 0)
+            return $result;
+        else
+            return array('-1' => 'Chưa có khóa học nào được tạo.');
 //        $array = array('ID'=>1, 'ID1'=>3, '2'=>5);
 //        return $array;
     }

@@ -9,7 +9,7 @@
               {!! Form::open(['name' => 'addPostForm', 'url' => '/admin/addpost', 'role'=>'form', 'files' => true]) !!}
               <div class="form-group">
                   {!! Form::label('CourseID', 'Course ID : ',['class' => 'control-label']) !!}
-                  {!! Form::select('CourseID', \App\Courses::getColumn('Title'),['class'=>'selectpicker']) !!}
+                  {!! Form::select('CourseID', \App\Courses::getColumn('Title'), null, ['class'=>'form-control', 'onclick' => 'this.style.background = "white"']) !!}
               </div>
               <div class="form-group">
                   {!! Form::label('Photo', 'Photo : ',['class' => 'control-label']) !!}
@@ -17,7 +17,7 @@
               </div>
               <div class="form-group">
                   {!! Form::label('FormatID', 'Format ID : ',['class' => 'control-label']) !!}
-                  {!! Form::text('FormatID','',['class'=>'form-control']) !!}
+                  {!! Form::select('FormatID',\App\Formats::getColumn('Title'), null, ['class'=>'form-control', 'onclick' => 'this.style.background = "white"']) !!}
               </div>
               <div class="form-group">
                   {!! Form::label('Title','Title : ',['class' => 'control-label']) !!}
@@ -37,6 +37,16 @@
                          return document.getElementById(x);
                      }
                      function submitForm(){
+                         var courseob = ob('CourseID');
+                         if (courseob.value <= 0){
+                             courseob.style.background = '#ff5050';
+                             return;
+                         }
+                         var formatob = ob('FormatID');
+                         if (formatob.value <= 0){
+                             formatob.style.background = '#ff5050';
+                             return;
+                         }
                          var acceptedType = ['image/jpeg', 'image/png', 'image/gif'];
              //                        console.log('clicked');
                          var photo = ob('Photo');
