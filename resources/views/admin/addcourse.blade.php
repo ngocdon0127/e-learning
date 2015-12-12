@@ -39,6 +39,7 @@
  						            {!! Form::label('Title', 'Title : ',['class' => 'control-label']) !!}
  						            <!-- <div class="col-sm-9 col-xs-9"> -->
  						                {!! Form::text('Title','',['class'=>'form-control']) !!}
+									<span id="question_title_err"></span>
  						            <!-- </div> -->
  						        </div>
  						        <div class="form-group">
