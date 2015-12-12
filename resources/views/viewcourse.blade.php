@@ -3,7 +3,8 @@
     ADD POST
 @endsection
 @section('body.content')
-    <div class="col-sm-offset-3 col-xs-offset-3 col-sm-6 col-xs-6">
+<div class="containre-fluid">
+    <div class="col-md-offset-3 col-md-6">
         <h1 class="title">Chủ đề : {{$Title}}</h1>
         <ul class="list-group">
             @foreach ($posts as $key => $value)
@@ -15,6 +16,7 @@
         </ul>
         <a class="btn btn-info" href="/admin/addpost">Thêm Post</a>
     </div>
+</div>
 
 @endsection
 

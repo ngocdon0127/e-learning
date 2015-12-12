@@ -15,17 +15,19 @@ body {
   padding-top: 20px;
   font-weight: bold;
   color: green;
+  height: 3%;
   /*text-align: center;*/
   /*margin:0 auto;*/
 }
 .content{
   padding-top: 3%;
+  padding-bottom: 90px;
 }
 .wrapper{
   min-height:100%;
   position:relative;
   overflow: hidden;
-  padding-bottom: 7%;
+  /*padding-bottom: 7%;*/
   background: #fafafa;
 }
 .footer:after{
@@ -40,17 +42,19 @@ body {
   position: absolute;
   width: 100%;
   bottom: 0;
+  height: 2%;
   padding: 10px;
-  font-size: 30px;
+  font-size: 25px;
   font-weight: bold;
   color: green;
   background: #ebebeb;
 }
-/*.col-md-6{
- float: none;
- margin: 0  auto;
-}*/
 /*==================END SECTION===========================*/
+.responsive{
+  border: 1px solid green;
+}
+
+
 /*==================NAV===========================*/
 .nav-container {
   background: #ebebeb;
@@ -99,6 +103,7 @@ background:#ebebeb;
   font-size: 20px;
 }
 /*==================END NAV===========================*/
+
 
 /*==================FROM-H1===========================*/
 h1.title{
