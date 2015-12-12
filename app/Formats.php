@@ -13,7 +13,6 @@ class Formats extends Model
         foreach ($array as $item) {
             $result += array($item['id'] => $item[$column]);
         }
-        return array('-1' => 'Chưa có Format nào được tạo. Liên hệ Admin');
         if (count($result) > 0)
             return $result;
         else

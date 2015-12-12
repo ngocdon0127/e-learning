@@ -46,11 +46,19 @@ ADD QUESTION
                        function ob(x){
                            return document.getElementById(x);
                        }
+                       function displayError(x){
+                           ob('error').style.display = 'block';
+                           ob('error').innerHTML = x;
+                       }
                        function submitForm(){
                            var acceptedType = ['image/jpeg', 'image/png', 'image/gif'];
        //                        console.log('clicked');
                            var photo = ob('Photo');
-                           var type = ob('error').innerHTML = photo.files[0].type;
+                           if (photo.files.length <= 0){
+                               displayError('Chưa chọn file');
+                               return;
+                           }
+                           var type = photo.files[0].type;
                            var check = false;
                            for(i = 0; i < acceptedType.length; i++){
                                if (type == acceptedType[i]){
@@ -60,13 +68,24 @@ ADD QUESTION
                            }
                            if (!check){
        //                            console.log('not ok');
-                               ob('error').style.display = 'block';
-                               ob('error').innerHTML = 'Chỉ chọn file ảnh.';
+                               displayError('Chỉ chọn file ảnh.');
                            }
                            else{
        //                            console.log('ok');
+                               if ('size' in photo.files[0]){
+                                   console.log(photo.files[0].size);
+                               }
+                               else{
+                                   console.log('ko co size');
+                               }
+                               if (photo.files[0].size > 2 * 1024 * 1024){
+                                   console.log('size qua lon');
+                                   ob('error').style.display = 'block';
+                                   displayError('Chỉ chọn file có kích thước tối đa 2 MB.');
+                                   return;
+                               }
                                ob('error').style.display = 'none';
-                               document.addQuestionForm.submit();
+                               document.addPostForm.submit();
                            }
        //                        ob('error').innerHTML = photo.value;
        
