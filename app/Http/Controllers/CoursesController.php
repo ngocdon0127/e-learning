@@ -53,6 +53,14 @@ class CoursesController extends Controller
         return redirect('/admin/addpost');
     }
 
+    public function checkCourseTitle($Title){
+        $course = Courses::where('Title', '=', $Title)->get()->toArray();
+        if (count($course) > 0){
+            return 'exist';
+        }
+        return 'notExist';
+    }
+
     /**
      * Display a listing of the resource.
      *
