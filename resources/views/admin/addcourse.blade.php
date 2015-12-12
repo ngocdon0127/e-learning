@@ -6,7 +6,7 @@
 
  @section('body.content')
  	<div class="container-fluid">
- 		<div class="col-md-offset-3 col-md-6">
+ 		<!-- <div class="col-md-offset-3 col-md-6"> -->
  					<!-- <div class="col-sm-offset-3 col-xs-offset-3 col-sm-6"> -->
  					<!-- <div> -->
 					<script type="text/javascript">
@@ -53,6 +53,6 @@
  						
  								 {!! Form::close() !!}
  								 <!-- </div> -->
- 			</div>
+ 			<!-- </div> -->
  	</div>
  @endsection

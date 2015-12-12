@@ -3,7 +3,8 @@
     ADD ANSWER
 @endsection
 @section('body.content')
-    <div class="col-sm-offset-3 col-xs-offset-3 col-sm-6 col-xs-6">
+    <!-- <div class="col-sm-offset-3 col-xs-offset-3 col-sm-6 col-xs-6"> -->
+    <div class="container-fluid">
         <ul class="list-group">
             <li class="list-group-item">
                 <img src = "{{'/images/imageQuestion/' . $Photo}}" />
@@ -135,7 +136,7 @@
                 <input type="text" value="{{$QuestionID}}" style="display: none" readonly name="QuestionID" />
                 {!! Form::button('Thêm',['class' => 'btn btn-info', 'onclick' => 'submitForm()']) !!}
             {!! Form::close() !!}
-        <!-- </div> -->
+        </div>
 
 
     </div>

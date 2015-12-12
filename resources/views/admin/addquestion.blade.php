@@ -2,10 +2,17 @@
 @section('head.title')
 ADD QUESTION
 @endsection
+@section('head.css')
+<style>
+  .control-label{
+    text-align: left;
+  }
+</style>
+@endsection
 @section('body.content')
    <div class="container-fluid">
-        <div class="col-md-offset-3 col-md-6">
-           <h1 class="col-sm-offset-3 title">Thêm câu hỏi mới</h1>
+        <!-- <div class="col-md-offset-3 col-md-6"> -->
+           <h1 class="col-md-offset-3 title">Thêm câu hỏi mới</h1>
        
            {!! Form::open(['name' => 'addQuestionForm', 'url' => '/admin/addquestion/' . $PostID, 'class'=>'form-horizontal', 'files' => true]) !!}
               
@@ -72,7 +79,7 @@ ADD QUESTION
        
            {!! Form::close() !!}
            <!-- end form -->
-       </div>
+       <!-- </div> -->
    </div>
 <!-- end container -->
 
