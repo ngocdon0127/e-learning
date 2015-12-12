@@ -3,6 +3,7 @@
     ADD POST
 @endsection
 @section('body.content')
+<<<<<<< HEAD
     <div class="container-fluid">
         <div class="col-md-offset-3  col-md-6">
             <h1 class="title">Ảnh của post</h1>
@@ -16,6 +17,38 @@
                 var maxScore = {{$MaxScore}};
                 function ob(x){
                     return document.getElementById(x);
+=======
+    <div class="col-sm-offset-3 col-xs-offset-3 col-sm-6 col-xs-6">
+        <h1 class="title">Ảnh của post</h1>
+        <li class="list-group-item">
+            <img src="{{'/images/imagePost/' . $Photo}}" />
+        </li>
+        {{--<script src="/js/function.js"></script>--}}
+        <script type="text/javascript">
+            var score = 0;
+            var fill = 0;
+            var maxScore = {{$MaxScore}};
+            function ob(x){
+                return document.getElementById(x);
+            }
+            function check(questionID, answerID, trueAnswerID){
+                console.log('start');
+                var date = new Date();
+                var id = 'radio_answer_' + questionID + '_' + answerID;
+                ob(id).checked = true;
+                var id = 'answer_' + questionID + '_' + answerID;
+//                ob(id).disabled = true;
+                var setOfRadio = document.getElementsByName('question_' + questionID);
+                for(i = 0; i < setOfRadio.length; i++){
+                    setOfRadio[i].disabled = true;
+                }
+
+                var setLi = document.getElementById('ul_question_' + questionID).children;
+                for(i = 0; i < setLi.length; i++){
+                    var li = setLi[i];
+                    li.setAttribute('onclick', '');
+                    li.style.cursor = 'no-drop';
+>>>>>>> master
                 }
                 function check(questionID, answerID, trueAnswerID){
                     console.log('start');
@@ -52,6 +85,7 @@
         //                obj.send();
         
                 }
+<<<<<<< HEAD
             </script>
             <h1 class="title">Các câu hỏi</h1>
             <ul id="form_test" class="list-group">
@@ -78,6 +112,40 @@
             </ul>
             <a class ="btn btn-info" href="/admin/addquestion/{{$PostID}}">Thêm câu hỏi</a>
         </div>
+=======
+//                obj.open('GET', '/ajax/checkanswer/' + questionID + '/' + answerID, true);
+//                ob.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+//                obj.send();
+
+            }
+        </script>
+        <h1 class="title">Các câu hỏi</h1>
+        <ul id="form_test" class="list-group">
+            <?php $count_answer=1;?>
+            @foreach($Questions as $q)
+                <h2 class="title">Câu hỏi số <?php echo $count_answer++; ?>:
+                    <a class="btn" href="/question/{{$q['id']}}"> {{$q['Question']}} : {{$q['Description']}}</a>
+                </h2>
+                <li class="list-group-item list-group-item-info">
+                    <img src="/images/imageQuestion/{{$q['Photo']}}" />
+                </li>
+               <ul class="list-group" id="ul_question_{{$q['id']}}">
+                    @foreach($Bundle[$q['id']] as $k => $a)
+                       <li id="answer_{{$q['id']}}_{{$a['id']}}" class="list_answer" onclick="check({{$q['id']}}, {{$a['id']}}, {{$BundleAnswers[$q['id']]}})" style="cursor: pointer">
+                           <input type="checkbox" id="radio_answer_{{$q['id']}}_{{$a['id']}}" name="question_{{$q['id']}}"/>
+                           <label for="radio_answer_{{$q['id']}}_{{$a['id']}}" class="answer_content">{{$a['Detail']}}</label>
+                       </li>
+
+                        <div class="clear"></div>
+                    @endforeach
+                </ul>
+
+            @endforeach
+        </ul>
+        @if ((auth()->user()) && (auth()->user()->admin == 1))
+        <a class ="btn btn-info" href="/admin/addquestion/{{$PostID}}">Thêm câu hỏi</a>
+        @endif
+>>>>>>> master
     </div>
 
 @endsection

@@ -27,3 +27,4 @@ Route::post('/admin/addanswer/{postid}', 'AnswersController@saveanswer');
 Route::get('/course/{courseid}', 'CoursesController@viewcourse');
 Route::get('/post/{postid}', 'PostsController@viewpost');
 Route::get('/question/{questionid}', 'QuestionsController@viewquestion');
+Route::get('/ajax/checkcoursetitle/{title}', 'CoursesController@checkcoursetitle');

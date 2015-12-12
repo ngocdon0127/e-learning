@@ -21,7 +21,9 @@
               </ul>
       
           </ul>
-          <a class="btn btn-info" href="/admin/addanswer/{{$QuestionID}}">Thêm câu trả lời</a>
+          @if ((auth()->user()) && (auth()->user()->admin == 1))
+        <a class="btn btn-info" href="/admin/addanswer/{{$QuestionID}}">Thêm câu trả lời</a>
+        @endif
       </div>
     </div>
 

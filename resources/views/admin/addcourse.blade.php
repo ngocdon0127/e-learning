@@ -9,8 +9,31 @@
  		<div class="col-md-offset-3 col-md-6">
  					<!-- <div class="col-sm-offset-3 col-xs-offset-3 col-sm-6"> -->
  					<!-- <div> -->
+					<script type="text/javascript">
+						function submitForm(){
+							var obj = new XMLHttpRequest();
+							obj.onreadystatechange = function(){
+								if ((obj.readyState == 4 ) && obj.status == 200){
+									if (obj.responseText == 'notExist'){
+										document.addCourseForm.submit();
+									}
+									else {
+										ob('question_title_err').innerHTML = 'Khóa học đã tồn tại. Vui lòng chọn tên khác.';
+									}
+								}
+							}
+							obj.open('GET', '/ajax/checkcoursetitle/' + ob('Title').value, true);
+			//                ob.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+							obj.send();
+						}
+
+						function ob(x){
+							return document.getElementById(x);
+						}
+
+		</script>
  					<h1 class="title">Thêm khóa học mới</h1>
- 							    {!! Form::open(['url' => '/admin/addcourse','role'=>'form']) !!}
+ 							    {!! Form::open(['name' => 'addCourseForm', 'url' => '/admin/addcourse','role'=>'form']) !!}
  						
  							    <div class="form-group">
  						            {!! Form::label('Title', 'Title : ',['class' => 'control-label']) !!}
@@ -25,7 +48,7 @@
  						            <!-- </div> -->
  						        </div> 
  						
- 							    	{!! Form::submit('Thêm',['class'=>'btn btn-info']) !!}
+ 							    	{!! Form::button('Thêm',['class'=>'btn btn-info', 'onClick' => 'submitForm()']) !!}
  						
  								 {!! Form::close() !!}
  								 <!-- </div> -->

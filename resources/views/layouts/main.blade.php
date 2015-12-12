@@ -12,16 +12,17 @@
 <body>
 	<div class="wrapper">
 		@include('layouts.header')
-		<div class="content">
-			<!-- <div class="col-sm-6"> -->
+		@include('layouts.navbar')
+		<div class="col-sm-10 col-sm-offset-1">
+			<div class="row">
 				@yield('body.content')
-			<!-- </div> -->
+			</div>
 		</div>
 		@include('layouts.footer')
 	</div>
-		<!-- // <script type="text/javascript" src="/js/jquery/jquery.js"></script> -->
-		<!-- // <script type="text/javascript" src="/js/bootstrap.min.js"></script> -->
-		<!-- @yield('body.js') -->
+		<script type="text/javascript" src="/js/jquery/jquery.js"></script>
+		<script type="text/javascript" src="/js/bootstrap.js"></script>
+		@yield('body.js')
 	
 </body>
 </html>
