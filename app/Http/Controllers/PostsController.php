@@ -125,7 +125,11 @@ class PostsController extends Controller
      */
     public function edit($id)
     {
-        //
+        if (!AuthController::checkPermission()){
+            return redirect('/');
+        }
+        $Post = Posts::find($id);
+        return view('admin.editpost', compact('Post'));
     }
 
     /**
@@ -137,7 +141,30 @@ class PostsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $data = $request->all();
+        $post = Posts::find($id);
+        $post->CourseID = $data['CourseID'];
+        $post->FormatID = $data['FormatID'];
+        $post->Title = $data['Title'];
+        $post->Description = $data['Description'];
+        $post->update();
+
+        // if admin upload new photo
+        if ($request->file('Photo') != null) {
+            $post = Posts::find($id);
+
+            $file = $request->file('Photo');
+            //        $file = Request::file('Photo');
+            $post->Photo = 'Post_' . $data['CourseID'] . '_' . $post->id . "." . $file->getClientOriginalExtension();
+            $file->move(base_path() . '/public/images/imagePost/', $post->Photo);
+
+
+            // (intval(Posts::orderBy('created_at', 'desc')->first()->id) + 1)
+
+
+            $post->update();
+        }
+        return redirect('/course/'.$post->CourseID);
     }
 
     /**

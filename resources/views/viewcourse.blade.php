@@ -12,7 +12,7 @@
             </li>
         @endforeach
     </ul>
-    <a class="btn btn-info" href="{{ route('course.edit', $CourseID) }}">Sửa thông tin khóa học</a>
+    <a class="btn btn-info" href="{{route('course.edit', $CourseID)}}">Sửa thông tin khóa học</a>
     @if ((auth()->user()) && (auth()->user()->admin == 1))
     <a class="btn btn-info" href="/admin/addpost">Thêm Post</a>
     <a class="btn btn-info" href="/admin/course/{{$CourseID}}/delete">Xóa khóa học này</a>
