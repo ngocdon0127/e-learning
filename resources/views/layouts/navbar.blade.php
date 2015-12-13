@@ -1,6 +1,8 @@
 <nav class="navbar navbar-default col-sm-12" role="navigation" style = "color: #EAEAEA; class="active"">
 	<!-- Brand and toggle get grouped for better mobile display -->
+	<!-- <a id="HomeSmall" style="text-decoration: none;" href="">TEC Club</a> -->
 	<div class="navbar-header">
+	<a id="HomeSmall" style="text-decoration: none;" href="">TEC Club</a>
 		<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
 			<span class="sr-only">Toggle navigation</span>
 			<span class="icon-bar"></span>
@@ -11,7 +13,7 @@
 
 	<!-- Collect the nav links, forms, and other content for toggling -->
 	<!-- <div class="col-sm-offset-3"> -->
-	<div class="collapse col-sm-offset-3 navbar-collapse navbar-ex1-collapse">
+	<div class="collapse col-sm-offset-2 navbar-collapse navbar-ex1-collapse">
 		<ul class="nav navbar-nav">
 			<li class="active"><a href="/">Home</a></li>
 			<li class="active"><a href="/admin">Admin</a></li>
@@ -38,9 +40,11 @@
 			<button type="submit" class="btn btn-default">Submit</button>
 						</div>
 			@if (auth()->user())
-			<button type="button" class="btn btn-default"><a href="/auth/logout">Logout</a></button>
+			<!-- <button type="button" class="btn btn-default"><a href="/auth/logout">Logout</a></button> -->
+			<a class="btn btn-primary" href="/auth/logout" role="button">Logout</a>
 			@else
-			<button type="button" class="btn btn-default"><a href="/auth/login">Login</a></button>
+			<!-- <button type="button" class="btn btn-default"><a href="/auth/login">Login</a></button> -->
+			<a class="btn btn-primary" href="/auth/login" role="button">Login</a>
 			@endif
 		</form>
 	</div><!-- /.navbar-collapse -->

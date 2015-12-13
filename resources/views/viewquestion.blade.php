@@ -3,6 +3,7 @@
     ADD POST
 @endsection
 @section('body.content')
+<div class="container-fluid">
     <h2 class="title">Câu hỏi</h2>
     <li class="list-group-item img-responsive">
         <img src="{{'/images/imageQuestion/' . $Photo}}"/>
@@ -17,7 +18,8 @@
         @endforeach
     </ul>
     @if ((auth()->user()) && (auth()->user()->admin == 1))
-    <a class="btn btn-info" href="/admin/addanswer/{{$QuestionID}}">Thêm câu trả lời</a>
+    <a class="btn btn-info" href="/admin/addanswer/{{$QuestionID}}">Thêm câu trả lời</a>    
     <a class="btn btn-info" href="/admin/question/{{$QuestionID}}/delete">Xóa câu hỏi này</a>
     @endif
+    </div>
 @endsection

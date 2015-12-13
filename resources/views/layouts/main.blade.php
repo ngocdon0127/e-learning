@@ -14,11 +14,13 @@
 	<div class="wrapper">
 		@include('layouts.header')
 		@include('layouts.navbar')
-			<div class="col-md-6 col-md-offset-3 col-sm-10 col-sm-offset-1 col-lg-6 col-lg-offset-3 ">
+		<!-- <div class="panel panel-default"> -->
+			<div class="content col-md-6 col-md-offset-3 col-sm-10 col-sm-offset-1 col-lg-6 col-lg-offset-3 ">
 				<div class="row">
 					@yield('body.content')
 				</div>
 			</div>
+		<!-- </div> -->
 		@include('layouts.footer')
 	</div>
 		<script type="text/javascript" src="/js/jquery/jquery.js"></script>
