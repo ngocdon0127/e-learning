@@ -41,7 +41,7 @@ class CoursesController extends Controller
 
     public function viewAllCourses(){
         $allcourse = Courses::all()->toArray();
-        return view('index')->with("allcourse", $allcourse);
+        return view('admin.index')->with("allcourse", $allcourse);
     }
 
     public function saveCourse(Request $request){

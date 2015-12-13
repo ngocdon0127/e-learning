@@ -84,6 +84,11 @@ class PostsController extends Controller
 //        return var_dump($bundleAnswer);
     }
 
+    public function viewNewestPosts(){
+        $posts = Posts::take(10)->skip(0)->get()->toArray();
+        return view('userindex')->with('Posts', $posts);
+    }
+
     public function create()
     {
         //
