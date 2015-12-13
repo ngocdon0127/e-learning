@@ -34,7 +34,7 @@ Route::get ('/ajax/checkcoursetitle/{title}', 'CoursesController@checkcoursetitl
 
 get('/admin', [
     'as' => 'admin',
-    'uses' => 'CoursesController@viewallcourses'
+    'uses' => 'AdminController@index'
 ]);
 
 delete('/question/{id}/delete', [

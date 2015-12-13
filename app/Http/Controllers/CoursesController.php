@@ -40,7 +40,7 @@ class CoursesController extends Controller
         return view('admin.addcourse');
     }
 
-    public function viewAllCourses(){
+    public static function viewAllCourses(){
         $allcourse = Courses::all()->toArray();
         return view('admin.index')->with("allcourse", $allcourse);
     }

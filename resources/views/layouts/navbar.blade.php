@@ -14,7 +14,7 @@
 	<div class="collapse col-sm-offset-3 navbar-collapse navbar-ex1-collapse">
 		<ul class="nav navbar-nav">
 			<li class="active"><a href="/">Home</a></li>
-			<li class="active"><a href="#">Buzz</a></li>
+			<li class="active"><a href="/admin">Admin</a></li>
 			<li class="active"><a href="#">Life</a></li>
 			<li class="active"><a href="#">Quizzes</a></li>
 			<li class="active"><a href="#">Video</a></li>
