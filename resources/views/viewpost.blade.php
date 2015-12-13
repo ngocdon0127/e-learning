@@ -64,9 +64,9 @@
     <ul id="form_test" class="list-group">
         <?php $count_answer=1;?>
         @foreach($Questions as $q)
-            <h2 class="title">Câu hỏi số <?php echo $count_answer++; ?>:
-                <a class="btn" href="/question/{{$q['id']}}"> {{$q['Question']}} : {{$q['Description']}}</a>
-            </h2>
+            <h2 class="title">Câu hỏi số <?php echo $count_answer++; ?>:</h2>
+                <a style="text-decoration: none;" href="/question/{{$q['id']}}"><h4>{{$q['Question']}} : {{$q['Description']}}</h4></a>
+            
             <li class="list-group-item list-group-item-info">
                 <img class="img-responsive" src="/images/imageQuestion/{{$q['Photo']}}" />
             </li>

@@ -52,14 +52,15 @@ body {
 
 
 /*==================NAV===========================*/
-
+/*
 .a:hover{
   background: white;
-}
+}*/
 .a {
   padding-left: 10px;
-  padding-right: 10px; 
+  padding-right: 10px;
 }
+
 .control-label{
   color: #ff0066;
   font-weight: bold;
@@ -122,7 +123,7 @@ img {
     /* text-align: -webkit-match-parent; */
 }
 .answer_content{
-  padding-left: 5%;
+  padding-left: 5px;
 }
 .div_i{
   padding: 10px 0;
@@ -136,26 +137,36 @@ img {
       height: 0px;
       padding: 0px;
       margin-bottom: 0px;
+      display: none;
+  }
+  .col-sm-10{
+    margin: 0 5%;
   }
 }
 @media (min-width: 480px){
     header{
       font-size: 30px;
-      padding-top: 10px;
+      /*padding-top: 10px;*/
       font-weight: bold;
       color: green;
       text-align: left;
       margin:0 auto;
   }
+  #HomeSmall{
+    display: none;
+  }
 }
 @media (min-width: 768px) {
   header{
     font-size: 40px;
-    padding-top: 20px;
+    /*padding-top: 20px;*/
     font-weight: bold;
     color: green;
     text-align: left;
     margin:0 auto;
+  }
+  #HomeSmall{
+    display: none;
   }
 }
 
@@ -163,11 +174,14 @@ img {
 @media (min-width: 992px) {
   header{
     font-size: 50px;
-    padding-top: 20px;
+    /*padding-top: 20px;*/
     font-weight: bold;
     color: green;
     text-align: center;
     margin:0 auto;
+  }
+  #HomeSmall{
+    display: none;
   }
 }
 
@@ -175,10 +189,13 @@ img {
 @media (min-width: 1200px) {
   header{
     font-size: 50px;
-    padding-top: 20px;
+    /*padding-top: 20px;*/
     font-weight: bold;
     color: green;
     text-align: center;
     margin:0 auto;
+  }
+  #HomeSmall{
+    display: none;
   }
 }

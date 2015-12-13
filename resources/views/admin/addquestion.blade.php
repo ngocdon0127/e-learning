@@ -85,7 +85,7 @@ ADD QUESTION
                                    return;
                                }
                                ob('error').style.display = 'none';
-                               document.addPostForm.submit();
+                               document.addQuestionForm.submit();
                            }
        //                        ob('error').innerHTML = photo.value;
        
