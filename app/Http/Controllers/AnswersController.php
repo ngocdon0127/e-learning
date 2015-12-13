@@ -156,6 +156,10 @@ class AnswersController extends Controller
      */
     public function destroy($id)
     {
-        //
+        if (!AuthController::checkPermission()){
+            return redirect('/');
+        }
+        $answer = Answers::find($id);
+        $answer->delete();
     }
 }

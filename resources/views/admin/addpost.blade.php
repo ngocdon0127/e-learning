@@ -9,7 +9,7 @@
               {!! Form::open(['name' => 'addPostForm', 'url' => '/admin/addpost', 'role'=>'form', 'files' => true]) !!}
               <div class="form-group">
                   {!! Form::label('CourseID', 'Course ID : ',['class' => 'control-label']) !!}
-                  {!! Form::select('CourseID', \App\Courses::getColumn('Title'), null, ['class'=>'form-control', 'onclick' => 'this.style.background = "white"']) !!}
+                  {!! Form::select('CourseID', \App\Courses::getColumn('Title'), ['class'=>'form-control', 'onclick' => 'this.style.background = "white"']) !!}
               </div>
               <div class="form-group">
                   {!! Form::label('Photo', 'Photo : ',['class' => 'control-label']) !!}
@@ -17,7 +17,7 @@
               </div>
               <div class="form-group">
                   {!! Form::label('FormatID', 'Format ID : ',['class' => 'control-label']) !!}
-                  {!! Form::select('FormatID',\App\Formats::getColumn('Title'), null, ['class'=>'form-control', 'onclick' => 'this.style.background = "white"']) !!}
+                  {!! Form::select('FormatID',\App\Formats::getColumn('Title'), ['class'=>'form-control', 'onclick' => 'this.style.background = "white"']) !!}
               </div>
               <div class="form-group">
                   {!! Form::label('Title','Title : ',['class' => 'control-label']) !!}

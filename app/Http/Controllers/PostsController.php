@@ -84,6 +84,12 @@ class PostsController extends Controller
 //        return var_dump($bundleAnswer);
     }
 
+    public function viewNewestPosts(){
+//        $posts = Posts::take(5)->skip(0)->get()->toArray();
+        $posts = Posts::paginate(5);
+        return view('userindex')->with('Posts', $posts);
+    }
+
     public function create()
     {
         //
@@ -142,6 +148,16 @@ class PostsController extends Controller
      */
     public function destroy($id)
     {
-        //
+        if (!AuthController::checkPermission()){
+            return redirect('/');
+        }
+        $post = Posts::find($id);
+        $questions = Questions::where('PostID', '=', $id)->get()->toArray();
+        foreach ($questions as $question) {
+            Questions::destroy($question['id']);
+        }
+        $courseid = $post['CourseID'];
+        $post->delete();
+        return redirect('/course/' . $courseid);
     }
 }

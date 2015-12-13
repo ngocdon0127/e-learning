@@ -26,6 +26,7 @@ class CoursesController extends Controller
         $r = array('posts' => $result);
         $r += array('Title' => $course['Title']);
         $r += array('CountPost' => count($result));
+        $r += array('CourseID' => $courseid);
 //        return var_dump($r);
         return view('viewcourse', $r);
     }
@@ -41,7 +42,7 @@ class CoursesController extends Controller
 
     public function viewAllCourses(){
         $allcourse = Courses::all()->toArray();
-        return view('index')->with("allcourse", $allcourse);
+        return view('admin.index')->with("allcourse", $allcourse);
     }
 
     public function saveCourse(Request $request){
@@ -134,6 +135,15 @@ class CoursesController extends Controller
      */
     public function destroy($id)
     {
-        //
+        if (!AuthController::checkPermission()){
+            return redirect('/');
+        }
+        $course = Courses::find($id);
+        $posts = Posts::where('CourseID', '=', $id)->get()->toArray();
+        foreach ($posts as $post) {
+            Posts::destroy($post['id']);
+        }
+        $course->delete();
+        return redirect('/admin');
     }
 }
