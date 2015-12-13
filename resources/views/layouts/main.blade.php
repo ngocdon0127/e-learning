@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>@yield('head.title')</title>
 	<link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="/css/bootstrap.css">
 	<link rel="stylesheet" type="text/css" href="/css/style.css">
 	<link rel="stylesheet" type="text/css" href="/css/admin.css">
 	@yield('head.css')
@@ -15,7 +16,9 @@
 		@include('layouts.header')
 		@include('layouts.navbar')
 		<!-- <div class="panel panel-default"> -->
-			<div class=" col-md-6 col-md-offset-3 col-sm-10 col-sm-offset-1 col-lg-6 col-lg-offset-3 ">
+
+			<!-- <div class="content col-md-6 col-md-offset-3 col-sm-10 col-sm-offset-1 col-lg-6 col-lg-offset-3 "> -->
+			<div class="content col-lg-6 col-lg-offset-3">
 				<div class="row">
 					@yield('body.content')
 				</div>

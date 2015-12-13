@@ -132,6 +132,11 @@ img {
 .div_i{
   padding: 10px 0;
 }
+
+/*==================END FORM-H1===========================*/
+
+/*==================RESPONSIVE===========================*/
+
 /* Extra small devices (phones, less than 768px) */
 /* No media query since this is the default in Bootstrap */
 
@@ -143,10 +148,11 @@ img {
       margin-bottom: 0px;
       display: none;
   }
-  .col-sm-10{
+  .content{
     margin: 0 5%;
   }
 }
+
 @media (min-width: 480px){
     header{
       font-size: 30px;
@@ -155,6 +161,10 @@ img {
       color: green;
       text-align: left;
       margin:0 auto;
+  }
+  .content{
+    margin-left: 10%;
+    margin-right: 10%;
   }
   #HomeSmall{
     display: none;
@@ -169,25 +179,36 @@ img {
     text-align: left;
     margin:0 auto;
   }
+ 
   #HomeSmall{
     display: none;
+  }
+  .content{
+    margin-left: 10%;
+    margin-right: 10%;
   }
 }
 
 /* Medium devices (desktops, 992px and up) */
-@media (min-width: 992px) {
+
+/*@media (min-width: 992px) {
   header{
+    display: none;
     font-size: 50px;
-    /*padding-top: 20px;*/
+    padding-top: 20px;
     font-weight: bold;
-    color: green;
+    color: yellow;
     text-align: center;
     margin:0 auto;
   }
   #HomeSmall{
     display: none;
   }
-}
+  .content{
+    margin-left: 25%;
+    margin-right: 15%;
+  }
+}*/
 
 /* Large devices (large desktops, 1200px and up) */
 @media (min-width: 1200px) {
@@ -201,5 +222,9 @@ img {
   }
   #HomeSmall{
     display: none;
+  }
+    .content{
+    margin-left: 25%;
+    margin-right: 25%;
   }
 }

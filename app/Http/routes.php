@@ -34,7 +34,17 @@ Route::get ('/ajax/checkcoursetitle/{title}', 'CoursesController@checkcoursetitl
 
 get('/admin', [
     'as' => 'admin',
-    'uses' => 'CoursesController@viewallcourses'
+    'uses' => 'AdminController@index'
+]);
+
+get('/course/{id}/edit', [
+    'as' => 'course.edit',
+    'uses' => 'CoursesController@edit'
+]);
+
+put('/admin/editcourse/{id}', [
+    'as' => 'course.update',
+    'uses' => 'CoursesController@update'
 ]);
 
 delete('/question/{id}/delete', [
