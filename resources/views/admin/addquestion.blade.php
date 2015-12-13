@@ -38,7 +38,7 @@ ADD QUESTION
                <div class="form-group">
                    <div class="col-md-9">
                        {!! Form::label('', '',['class' => 'col-md-3 control-label']) !!}
-                       {!! Form::label('Error', '',['id' => 'error', 'class' => 'col-md-3 control-label', 'style' => 'display: none;']) !!}
+                       {!! Form::label('Error', '',['id' => 'error', 'class' => 'control-label', 'style' => 'display: none;']) !!}
                    </div>
                </div>
                <div class="col-sm-offset-3 col-sm-10">
@@ -85,7 +85,7 @@ ADD QUESTION
                                    return;
                                }
                                ob('error').style.display = 'none';
-                               document.addPostForm.submit();
+                               document.addQuestionForm.submit();
                            }
        //                        ob('error').innerHTML = photo.value;
        
