@@ -3,9 +3,9 @@
     ADD POST
 @endsection
 @section('body.content')
-<ul>
+<ul class="list-group">
     @foreach($Posts as $p)
-        <li>
+        <li class="list-group-item">
             <a href="/post/{{$p['id']}}">
                 <img class='img-responsive' src="/images/imagePost/{{$p['Photo']}}" />
                 <p>
@@ -18,5 +18,6 @@
         </li>
     @endforeach
 </ul>
+<div class="row">{!! $Posts->render() !!}</div>
 
 @endsection

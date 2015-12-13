@@ -126,6 +126,15 @@ class QuestionsController extends Controller
      */
     public function destroy($id)
     {
-        //
+        if (!AuthController::checkPermission()){
+            return redirect('/');
+        }
+        $question = Questions::find($id);
+        $answers = Answers::where('QuestionID', '=', $id)->get()->toArray();
+        foreach ($answers as $answer) {
+            Answers::destroy($answer['id']);
+        }
+        $question->delete();
+        return redirect('/admin');
     }
 }

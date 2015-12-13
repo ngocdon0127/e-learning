@@ -14,6 +14,7 @@
     </ul>
     @if ((auth()->user()) && (auth()->user()->admin == 1))
     <a class="btn btn-info" href="/admin/addpost">Thêm Post</a>
+    <a class="btn btn-info" href="/admin/course/{{$CourseID}}/delete">Xóa khóa học này</a>
     @endif
 @endsection
 
