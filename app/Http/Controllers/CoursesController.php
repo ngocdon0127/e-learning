@@ -112,7 +112,11 @@ class CoursesController extends Controller
      */
     public function edit($id)
     {
-        //
+        if (!AuthController::checkPermission()){
+            return redirect('/');
+        }
+        $course = Courses::find($id);
+        return view('admin.editcourse', compact('course'));
     }
 
     /**
@@ -122,9 +126,19 @@ class CoursesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update($id, Request $request)
     {
-        //
+        if (!AuthController::checkPermission()){
+            return redirect('/');
+        }
+        $data = $request->all();
+        $course = Courses::find($id);
+
+        $course->Title = $data['Title'];
+        $course->Description = $data['Description'];
+        $course->update();
+
+        return redirect('/course/' . $course->id);
     }
 
     /**
