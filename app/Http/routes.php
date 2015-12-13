@@ -37,6 +37,7 @@ get('/admin', [
     'uses' => 'AdminController@index'
 ]);
 
+// edit course {id}
 get('/course/{id}/edit', [
     'as' => 'course.edit',
     'uses' => 'CoursesController@edit'
@@ -47,6 +48,7 @@ put('/admin/editcourse/{id}', [
     'uses' => 'CoursesController@update'
 ]);
 
+// edit post {id}
 get('/post/{id}/edit', [
     'as' => 'post.edit',
     'uses' => 'PostsController@edit'
@@ -57,6 +59,7 @@ put('/admin/editpost/{id}', [
     'uses' => 'PostsController@update'
 ]);
 
+// edit question {id} (Question + Description)
 get('question/{id}/edit', [
     'as' => 'question.edit',
     'uses' => 'QuestionsController@edit'
@@ -67,6 +70,18 @@ put('/admin/editquestion/{id}', [
     'uses' => 'QuestionsController@update'
 ]);
 
+// edit question {id} (Answers) // Will merge with 2 above routes later.
+get('/answer/{questionid}/edit', [
+    'as' => 'answer.edit',
+    'uses' => 'AnswersController@edit'
+]);
+
+put('/admin/editanswer/{questionid}', [
+    'as' => 'answer.update',
+    'uses' => 'AnswersController@update'
+]);
+
+// delete question {id}
 delete('/question/{id}/delete', [
     'as' => 'question.destroy',
     'uses' => 'QuestionsController@destroy'

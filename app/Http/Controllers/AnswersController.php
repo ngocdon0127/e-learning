@@ -47,8 +47,8 @@ class AnswersController extends Controller
         if (!AuthController::checkPermission()){
             return redirect('auth/login');
         };
-        $post = Questions::findOrNew($QuestionID)->toArray();
-        $photo = $post['Photo'];
+        $question = Questions::findOrNew($QuestionID)->toArray();
+        $photo = $question['Photo'];
         $answers = Answers::where('QuestionID', '=', $QuestionID)->get()->toArray();
         $result = array('QuestionID' => $QuestionID, 'Answers' => $answers, 'Photo' => $photo);
         return view('admin.addanswer')->with(["QuestionID" => $QuestionID, 'Photo' => $photo, 'Answers' => $answers]);
@@ -69,7 +69,7 @@ class AnswersController extends Controller
             else{
                 $answer->Logical = 1;
             }
-            $answer->toArray();
+//            $answer->toArray();
             $answer->save();
         }
 
@@ -77,10 +77,14 @@ class AnswersController extends Controller
     }
 
     public function add_answer($QuestionID, $Logical, $Detail){
+        if (!AuthController::checkPermission()) {
+            return redirect('/');
+        }
         $answer = new Answers();
         $answer->QuestionID = $QuestionID;
         $answer->Logical = $Logical;
         $answer->Detail = $Detail;
+        $answer->save();
     }
 
     /**
@@ -131,11 +135,15 @@ class AnswersController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($QuestionID)
     {
-        //
+        if (!AuthController::checkPermission()) {
+            return redirect('/');
+        }
+        $Answers = Answers::where('QuestionID', '=', $QuestionID)->get();
+        $photo = Questions::find($QuestionID)->toArray()['Photo'];
+        return view('admin.editanswer')->with(["QuestionID" => $QuestionID, 'Answers' => $Answers, 'Photo' => $photo]);
     }
-
     /**
      * Update the specified resource in storage.
      *
@@ -145,7 +153,50 @@ class AnswersController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        if (!AuthController::checkPermission()) {
+            return redirect('/');
+        }
+//        dd($request->all());
+
+        $data = $request->all();
+        $newCount = $data['numAnswer'];
+        $setOfOldAnswers = Answers::where('QuestionID', '=', $id)->get()->toArray();
+        $oldCount = count($setOfOldAnswers);
+//        dd($setOfOldAnswers);
+        $result = $data['resultQuestion'];
+
+        // update answers
+
+        // overwrite min($newCount, $oldCount) record
+        $needToOverwrite = ($newCount < $oldCount) ? $newCount : $oldCount;
+        for($i = 0; $i < $needToOverwrite; $i++){
+            $answer = Answers::find($setOfOldAnswers[$i]['id']);
+//            dd($answer);
+//            $answer->QuestionID = $data['QuestionID'];
+            $answer->Detail = $data['answer' . ($i + 1)];
+            if ($result != ($i + 1)){
+                $answer->Logical = 0;
+            }
+            else{
+                $answer->Logical = 1;
+            }
+
+//            dd($answer);
+            $answer->update();
+        }
+
+        // if $newCount < $oldCount => delete redudant record
+        for($i = $newCount; $i < $oldCount; $i++){
+            $answer = Answers::find($setOfOldAnswers[$i]['id']);
+            $answer->delete();
+        }
+
+        // if $newCount > $oldCount => insert new record
+        for($i = $oldCount; $i < $newCount; $i++){
+            $this->add_answer($id, $result != ($i + 1) ? 0 : 1, $data['answer' . ($i + 1)]);
+        }
+
+        return redirect('answer/' . $id . '/edit');
     }
 
     /**

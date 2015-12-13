@@ -1,6 +1,6 @@
 @extends('layouts.main')
 @section('head.title')
-    ADD ANSWER
+    Cập nhật đáp án
 @endsection
 @section('body.content')
     <!-- <div class="col-sm-offset-3 col-xs-offset-3 col-sm-6 col-xs-6"> -->
@@ -9,28 +9,19 @@
             <li class="list-group-item">
                 <img src = "{{'/images/imageQuestion/' . $Photo}}" />
             </li>
-            <ul class="list-group">
-                 @foreach($Answers as $answer)
-                   <li class="list-group-item list-group-item-info">{{$answer['Detail']}}
-                       @if ($answer['Logical'] != 0)
-                           <span class="badge badge-span">Đúng</span>
-                       @endif
-                   </li>
-                   <div class="clear"></div>
-               @endforeach
-            </ul>
+
         </ul>
         <h1 class="title">Thêm câu trả lời mới</h1>
         <!-- <div class="col-sm-9"> -->
-            {!! Form::open(['name' => 'addAnswerForm', 'url' => '/admin/addanswer/' . $QuestionID,'class'=>'control-label']) !!}
+            {!! Form::open(['method' => 'PUT', 'name' => 'editAnswerForm', 'url' => '/admin/editanswer/' . $QuestionID,'class'=>'control-label']) !!}
              <!--        {!! Form::label('Detail', 'Câu trả lời: ') !!}
-            {!! Form::text('Detail') !!} -->
+            {!! Form::text('Detail', null) !!} -->
             
             <div class="form-group">
                 {!! Form::label('Detail', 'Câu trả lời: ',['class'=>'control-label']) !!}
                     <script type="text/javascript">
                     var count = -1;
-                    var minAnswer = 4;
+                    var minAnswer = {{count($Answers)}};
                     var resultQuestion = -1;
 
                     function ob(x){
@@ -112,7 +103,7 @@
 //                        console.log(count);
 //                        console.log(resultQuestion);
                         if (resultQuestion > -1){
-                            document.addAnswerForm.submit();
+                            document.editAnswerForm.submit();
                         }
                     }
 //                 </script>
@@ -125,6 +116,15 @@
                                      // console.log(i);
                                add();
                            }
+                           //{!! $index = 1 !!}
+                           var index = 1;
+                            @foreach($Answers as $a)
+                                ob('answer{{$index}}').value = "{{$a['Detail']}}";
+                                @if ($a['Logical'] == 1)
+                                    ob('radio{{$index}}').checked = true;
+                                @endif
+                                //{!! $index++ !!}
+                            @endforeach
                        </script>
                    </div>
                    <input type="button" value="+" onclick="add()">
@@ -134,7 +134,7 @@
 
                    <!-- <div class="col-sm-10"> -->
                 <input type="text" value="{{$QuestionID}}" style="display: none" readonly name="QuestionID" />
-                {!! Form::button('Thêm',['class' => 'btn btn-info', 'onclick' => 'submitForm()']) !!}
+                {!! Form::button('Cập nhật',['class' => 'btn btn-info', 'onclick' => 'submitForm()']) !!}
             {!! Form::close() !!}
         </div>
 
