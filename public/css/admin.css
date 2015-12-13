@@ -60,7 +60,11 @@ body {
   padding-left: 10px;
   padding-right: 10px;
 }
-
+.affix {
+  top: 0;
+  width: 100%;
+  z-index: 1000;
+}
 .control-label{
   color: #ff0066;
   font-weight: bold;

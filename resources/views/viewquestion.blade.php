@@ -3,10 +3,9 @@
     ADD POST
 @endsection
 @section('body.content')
-<div class="container-fluid">
     <h2 class="title">Câu hỏi</h2>
-    <li class="list-group-item img-responsive">
-        <img src="{{'/images/imageQuestion/' . $Photo}}"/>
+    <li class="list-group-item ">
+        <img class= "img-responsive" src="{{'/images/imageQuestion/' . $Photo}}"/>
     </li>
     <h2 class="title">Đáp án</h2>
     <ul class="list-group">
@@ -21,5 +20,4 @@
     <a class="btn btn-info" href="/admin/addanswer/{{$QuestionID}}">Thêm câu trả lời</a>    
     <a class="btn btn-info" href="/admin/question/{{$QuestionID}}/delete">Xóa câu hỏi này</a>
     @endif
-    </div>
 @endsection

@@ -1,4 +1,4 @@
-<nav class="navbar navbar-default col-sm-12" role="navigation" style = "color: #EAEAEA; class="active"">
+<nav class="navbar navbar-default col-sm-12" data-spy="affix" data-offset-top="197" role="navigation" style = "color: #EAEAEA; class="active"">
 	<!-- Brand and toggle get grouped for better mobile display -->
 	<!-- <a id="HomeSmall" style="text-decoration: none;" href="">TEC Club</a> -->
 	<div class="navbar-header">
@@ -37,7 +37,10 @@
 			<div class="form-group">
 				<input type="text" class="form-control" placeholder="Search">
 
-			<button type="submit" class="btn btn-default">Submit</button>
+			<!-- <button type="submit" class="btn btn-default">Submit</button> -->
+			        <button type="button" class="btn btn-default btn-sm">
+          				<span class="glyphicon glyphicon-search"></span> Submit 
+        			</button>
 						</div>
 			@if (auth()->user())
 			<!-- <button type="button" class="btn btn-default"><a href="/auth/logout">Logout</a></button> -->
