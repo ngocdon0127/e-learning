@@ -103,7 +103,11 @@ class QuestionsController extends Controller
      */
     public function edit($id)
     {
-        //
+        if (!AuthController::checkPermission()){
+            return redirect('/');
+        }
+        $Question = Questions::find($id);
+        return view('admin.editquestion', compact('Question'));
     }
 
     /**
@@ -115,7 +119,28 @@ class QuestionsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $data = $request->all();
+        $question = Questions::find($id);
+        $question->Question = $data['Question'];
+        $question->Description = $data['Description'];
+        $question->update();
+
+        // if admin upload new photo
+        if ($request->file('Photo') != null) {
+            $question = Questions::find($id);
+
+            $file = $request->file('Photo');
+            //        $file = Request::file('Photo');
+            $question->Photo = 'Question_' . $question['PostID'] . '_' . $question->id . "." . $file->getClientOriginalExtension();
+            $file->move(base_path() . '/public/images/imageQuestion/', $question->Photo);
+
+
+            // (intval(Posts::orderBy('created_at', 'desc')->first()->id) + 1)
+
+
+            $question->update();
+        }
+        return redirect('/question/'.$question->id);
     }
 
     /**

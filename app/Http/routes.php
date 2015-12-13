@@ -57,6 +57,16 @@ put('/admin/editpost/{id}', [
     'uses' => 'PostsController@update'
 ]);
 
+get('question/{id}/edit', [
+    'as' => 'question.edit',
+    'uses' => 'QuestionsController@edit'
+]);
+
+put('/admin/editquestion/{id}', [
+    'as' => 'question.update',
+    'uses' => 'QuestionsController@update'
+]);
+
 delete('/question/{id}/delete', [
     'as' => 'question.destroy',
     'uses' => 'QuestionsController@destroy'

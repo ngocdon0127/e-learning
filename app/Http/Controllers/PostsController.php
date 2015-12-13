@@ -86,7 +86,7 @@ class PostsController extends Controller
 
     public function viewNewestPosts(){
 //        $posts = Posts::take(5)->skip(0)->get()->toArray();
-        $posts = Posts::paginate(5);
+        $posts = Posts::orderBy('id', 'desc')->paginate(5);
         return view('userindex')->with('Posts', $posts);
     }
 
@@ -141,6 +141,9 @@ class PostsController extends Controller
      */
     public function update(Request $request, $id)
     {
+        if (!AuthController::checkPermission()){
+            return redirect('/');
+        }
         $data = $request->all();
         $post = Posts::find($id);
         $post->CourseID = $data['CourseID'];
