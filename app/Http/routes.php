@@ -14,7 +14,12 @@
 //Route::get('/', function () {
 //    return view('welcome');
 //});
-Route::controllers(['auth' => 'Auth\AuthController', 'password' => 'Auth\PasswordController',]);
+get('/auth/facebook', [
+    'as' => 'login.facebook',
+    'uses' => 'Auth\AuthController@redirectToProvider'
+]);
+
+Route::controllers(['/auth' => 'Auth\AuthController', 'password' => 'Auth\PasswordController',]);
 Route::get ('/', 'PostsController@viewnewestposts');
 
 
@@ -92,3 +97,8 @@ Route::get ('/admin/post/{postid}/edit', 'PostsController@edit');
 Route::get ('/admin/post/{postid}/delete', 'PostsController@destroy');
 Route::get ('/admin/question/{id}/delete', 'QuestionsController@destroy');
 Route::get ('/admin/course/{id}/delete', 'CoursesController@destroy');
+
+get('/fbcallback', [
+    'as' => 'callback.facebook',
+    'uses' => 'Auth\AuthController@handleProviderCallback'
+]);
