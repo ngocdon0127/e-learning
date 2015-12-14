@@ -55,6 +55,7 @@
 						<div class="form-group">
 							<div class="col-md-6 col-md offset-4">
 								<a class="btn btn-primary" href="/auth/facebook">Facebook login</a>
+								<a class="btn btn-primary" href="/auth/google">Google login</a>
 							</div>
 						</div>
 					</form>

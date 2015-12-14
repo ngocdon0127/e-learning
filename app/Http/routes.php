@@ -19,6 +19,11 @@ get('/auth/facebook', [
     'uses' => 'Auth\AuthController@redirectToProvider'
 ]);
 
+get('/auth/google', [
+    'as' => 'login.google',
+    'uses' => 'Auth\AuthController@googleRedirectToProvider'
+]);
+
 Route::controllers(['/auth' => 'Auth\AuthController', 'password' => 'Auth\PasswordController',]);
 Route::get ('/', 'PostsController@viewnewestposts');
 
@@ -101,4 +106,9 @@ Route::get ('/admin/course/{id}/delete', 'CoursesController@destroy');
 get('/fbcallback', [
     'as' => 'callback.facebook',
     'uses' => 'Auth\AuthController@handleProviderCallback'
+]);
+
+get('/ggcallback', [
+    'as' => 'callback.google',
+    'uses' => 'Auth\AuthController@googleHandleProviderCallback'
 ]);
