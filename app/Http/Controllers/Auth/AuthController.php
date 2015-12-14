@@ -46,6 +46,7 @@ class AuthController extends Controller
             'name' => 'required|max:255',
             'email' => 'required|email|max:255|unique:users',
             'password' => 'required|confirmed|min:6',
+            'Type' => 'max:255',
         ]);
     }
 
@@ -61,6 +62,7 @@ class AuthController extends Controller
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
+            'Type' => $data['Type'],
         ]);
     }
 
@@ -77,7 +79,7 @@ class AuthController extends Controller
 
     public function handleProviderCallback(){
         $user = Socialite::driver('facebook')->user();
-        $data = ['name' => $user->name, 'email' => $user->email, 'password' => $user->token, 'Type' => '2'];
+        $data = ['name' => $user->name, 'email' => $user->email, 'password' => $user->token, 'Type' => 2];
 //        dd($data);
         $userDB = User::where('email', $user->email)->first();
         if (!is_null($userDB)){
