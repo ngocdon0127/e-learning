@@ -38,13 +38,13 @@ return [
     'facebook' => [
         'client_id' => '1657402167852948',
         'client_secret' => 'bd47d385be03b110b5a57ee249517c21',
-        'redirect' => 'http://localhost:8000/fbcallback',
+        'redirect' => 'http://beta.evangelsenglish.com/fbcallback',
     ],
 
     'google' => [
         'client_id' => '872662012321-2a300brmje1lhj09chjpcjn29pb6h2mt.apps.googleusercontent.com',
         'client_secret' => 'LhTaJCFeSStRO0-ykzyLjYBA',
-        'redirect' => 'http://localhost:8000/ggcallback',
+        'redirect' => 'http://beta.evangelsenglish.com/ggcallback',
     ]
 
 ];
