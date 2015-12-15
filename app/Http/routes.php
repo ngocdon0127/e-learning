@@ -112,3 +112,9 @@ get('/ggcallback', [
     'as' => 'callback.google',
     'uses' => 'Auth\AuthController@googleHandleProviderCallback'
 ]);
+
+//// Try to delete some file
+//get('/dondelete', [
+//    'as' => 'file.delete',
+//    'uses' => 'AdminController@dondelete',
+//]);

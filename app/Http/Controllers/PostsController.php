@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Answers;
+use App\Comments;
 use App\Courses;
 use App\Http\Controllers\Auth\AuthController;
 use App\Posts;
@@ -82,7 +83,9 @@ class PostsController extends Controller
             $bundle += array($q['id'] => $answer);
             $bundleAnswer += [$q['id'] => AnswersController::getAnswer($q['id'])];
         }
-        $result = array('Title' => $post['Title'], 'PostID' => $postID, 'Questions' => $questions, 'Photo' => $photo, 'Bundle' => $bundle, 'BundleAnswers' => $bundleAnswer, 'MaxScore' => count($questions));
+        $Comments = Comments::all()->toArray();
+        $result = array('Comments' => json_encode($Comments), 'Title' => $post['Title'], 'PostID' => $postID, 'Questions' => $questions, 'Photo' => $photo, 'Bundle' => $bundle, 'BundleAnswers' => $bundleAnswer, 'MaxScore' => count($questions));
+//        dd($result);
         return view('viewpost', $result);
 //        return var_dump($bundleAnswer);
     }
@@ -179,15 +182,16 @@ class PostsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public static function destroy($id)
     {
         if (!AuthController::checkPermission()){
             return redirect('/');
         }
         $post = Posts::find($id);
+        @unlink(public_path('images/imagePost/' . $post['Photo']));
         $questions = Questions::where('PostID', '=', $id)->get()->toArray();
         foreach ($questions as $question) {
-            Questions::destroy($question['id']);
+            QuestionsController::destroy($question['id']);
         }
         $courseid = $post['CourseID'];
         $post->delete();

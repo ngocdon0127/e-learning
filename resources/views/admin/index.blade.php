@@ -1,6 +1,6 @@
 @extends('layouts.main')
 @section('head.title')
-    ADD POST
+    Admin
 @endsection
 @section('body.content')
 	<h1 class="title">Các khóa học</h1>

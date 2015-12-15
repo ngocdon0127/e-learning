@@ -28,6 +28,7 @@
 	</div>
 		<script type="text/javascript" src="/js/jquery/jquery.js"></script>
 		<script type="text/javascript" src="/js/bootstrap.min.js"></script>
+		<script type="text/javascript" src="/js/style.js"></script>
 		@yield('body.js')
 	
 </body>

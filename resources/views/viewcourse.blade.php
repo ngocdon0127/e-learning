@@ -8,7 +8,7 @@
         @foreach ($posts as $key => $value)
             <li class="list-group-item list-group-item-success">
                 <a href="/post/{{$value['id']}}">{{$value['Title']}}</a>
-                <span class="badge badge-span">Hiện có {{$CountPost}} bài đăng</span>
+                <span class="badge badge-span">Hiện có {{$NumQuestions[$value['id']]}} câu hỏi</span>
             </li>
         @endforeach
     </ul>
