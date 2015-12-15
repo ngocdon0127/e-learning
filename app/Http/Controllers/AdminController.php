@@ -7,6 +7,9 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Storage;
+use League\Flysystem\File;
+use PhpSpec\Exception\Exception;
 
 class AdminController extends Controller
 {
@@ -17,4 +20,5 @@ class AdminController extends Controller
         }
         return CoursesController::viewAllCourses();
     }
+
 }

@@ -65,7 +65,7 @@
             fill++;
             if (fill >= maxScore){
 
-                var resultText = 'Bạn trả lời đúng ' + score + '/' + maxScore + ' câu.\n';
+                var resultText = 'Đúng ' + score + '/' + maxScore + ' câu.\n';
                 var x = {!! $Comments !!};
                 console.log("start chấmming");
                 for(var i = x.length - 1; i >= 0; i--) {
@@ -76,7 +76,7 @@
                         break;
                     }
                 }
-                ob('resultText').innerHTML = resultText;
+                ob('writeResult').innerHTML = resultText;
                 ob('resultText').style.display = 'block';
                 $('html, body').animate({
                     scrollTop: $("#resultText").offset().top
@@ -111,5 +111,7 @@
 
         @endforeach
     </ul>
-    <div class="form-control" id="resultText" style="display: none;"></div>
+    <div class="form-control" id="resultText" style="display: none; height: 200px;">
+        <b class="title" id="writeResult"></b>
+    </div>
 @endsection

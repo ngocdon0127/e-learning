@@ -4,3 +4,5 @@
 .idea/*
 .htacess
 .env
+public/images/imagePost/*
+public/images/imageQuestion/*

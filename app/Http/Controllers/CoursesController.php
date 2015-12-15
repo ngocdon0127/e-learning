@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Courses;
 use App\Http\Middleware\RedirectIfAuthenticated;
 use App\Posts;
+use App\Questions;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Auth\AuthController;
 
@@ -17,17 +18,17 @@ class CoursesController extends Controller
     public function viewCourse($courseid){
         $course = Courses::findOrNew($courseid)->toArray();
 //        $result = array('Title' => $course['Title']);
-        $posts = Posts::all()->toArray();
-        $result = array();
-        foreach ($posts as $post) {
-            if ($post['CourseID'] == $courseid)
-                $result += array($post['id'] => $post);
+        $posts = Posts::where('CourseID', '=', $courseid)->get()->toArray();
+        $numQuestions = [];
+        foreach($posts as $p){
+            $numQuestions += [($p['id']) => count(Questions::where('PostID', '=', $p['id'])->get()->toArray())];
         }
-        $r = array('posts' => $result);
+        $r = array('posts' => $posts);
         $r += array('Title' => $course['Title']);
-        $r += array('CountPost' => count($result));
+        $r += array('NumQuestions' => $numQuestions);
         $r += array('CourseID' => $courseid);
 //        return var_dump($r);
+//        dd($r);
         return view('viewcourse', $r);
     }
 
@@ -150,15 +151,17 @@ class CoursesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public static function destroy($id)
     {
         if (!AuthController::checkPermission()){
             return redirect('/');
         }
         $course = Courses::find($id);
         $posts = Posts::where('CourseID', '=', $id)->get()->toArray();
+//        dd($posts);
         foreach ($posts as $post) {
-            Posts::destroy($post['id']);
+            PostsController::destroy($post['id']);
+//            dd($post['id']);
         }
         $course->delete();
         return redirect('/admin');

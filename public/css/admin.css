@@ -86,6 +86,10 @@ h1.title{
 h2.title{
   color: #993333;
 }
+
+img:hover{
+  opacity: 0.85;
+}
 .btn-info:hover{
   background: #ccffcc;
   color: #660066;
@@ -119,6 +123,10 @@ img {
 .clear{
   height: 10px;
 }
+
+li.list_answer:hover{
+  background: #f3d681;
+}
 .list_answer{
      word-wrap: break-word; 
     font-weight: bold;
@@ -132,7 +140,7 @@ img {
     /* text-align: -webkit-match-parent; */
 }
 ul#form_test img:hover{
-  opacity: 0.98;
+  opacity: 0.85;
   cursor: pointer;
 }
 .answer_content{
@@ -151,28 +159,33 @@ ul#form_test img:hover{
 
 /* Small devices (tablets, 768px and up) */
 @media (max-width: 479px){
-      header{
-      height: 0px;
-      padding: 0px;
-      margin-bottom: 0px;
-      display: none;
+  header{
+    height: 0px;
+    padding: 0px;
+    margin-bottom: 0px;
+    display: none;
   }
 	footer{
-		height: 100px;
+		height: 50px;
 	}
+
   .content{
     margin: 0 5%;
   }
 }
 
 @media (min-width: 480px){
-    header{
-      font-size: 30px;
-      /*padding-top: 10px;*/
-      font-weight: bold;
-      color: green;
-      text-align: left;
-      margin:0 auto;
+  header{
+    font-size: 30px;
+    /*padding-top: 10px;*/
+    font-weight: bold;
+    color: green;
+    text-align: left;
+    margin:0 auto;
+  }
+
+  footer{
+    height: 50px;
   }
   .content{
     margin-left: 10%;
@@ -183,15 +196,23 @@ ul#form_test img:hover{
   }
 }
 @media (min-width: 768px) {
-  header{
-    font-size: 40px;
+  h1.header{
+    font-size: 35px;
     /*padding-top: 20px;*/
     font-weight: bold;
     color: green;
     text-align: left;
     margin:0 auto;
   }
- 
+  p.header{
+    font-size: 25px;
+    text-align: left;
+    color: green;
+    margin: 0 auto;
+  }
+  footer{
+    height: 40px;
+  }
   #HomeSmall{
     display: none;
   }
@@ -224,14 +245,24 @@ ul#form_test img:hover{
 
 /* Large devices (large desktops, 1200px and up) */
 @media (min-width: 1200px) {
-  header{
-    font-size: 50px;
+  h1.header{
+    font-size: 38px;
     /*padding-top: 20px;*/
     font-weight: bold;
     color: green;
     text-align: center;
     margin:0 auto;
   }
+  p.header{
+    font-size: 28px;
+    text-align: center;
+    color: green;
+    margin: 0 auto;
+  }
+  footer{
+    height: 40px;
+  }
+
   #HomeSmall{
     display: none;
   }
