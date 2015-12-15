@@ -20,7 +20,7 @@
         <a class ="btn btn-info" href="/admin/addquestion/{{$PostID}}">Thêm câu hỏi</a>
     @endif
     
-    <script type="text/javascript">
+    <script type="text/javascript" charset="UTF-8">
         var score = 0;
         var fill = 0;
         var maxScore = {{$MaxScore}};
@@ -64,7 +64,19 @@
             ob(idTrue).style.background = '#66ff66';
             fill++;
             if (fill >= maxScore){
-                alert(score);
+
+                var resultText = 'Bạn trả lời đúng ' + score + '/' + maxScore + ' câu.\n';
+                var x = {!! $Comments !!};
+                console.log("start chấmming");
+                for(var i = x.length - 1; i >= 0; i--) {
+//                    console.log(Math.floor(score / maxScore * 100));
+//                    console.log(min[i]);
+                    if (Math.floor(score / maxScore * 100) >= x[i]['min']){
+                        resultText += x[i]['comment'];
+                        break;
+                    }
+                }
+                alert(resultText);
             }
 //                obj.open('GET', '/ajax/checkanswer/' + questionID + '/' + answerID, true);
 //                ob.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
