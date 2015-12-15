@@ -14,7 +14,17 @@
 //Route::get('/', function () {
 //    return view('welcome');
 //});
-Route::controllers(['auth' => 'Auth\AuthController', 'password' => 'Auth\PasswordController',]);
+get('/auth/facebook', [
+    'as' => 'login.facebook',
+    'uses' => 'Auth\AuthController@redirectToProvider'
+]);
+
+get('/auth/google', [
+    'as' => 'login.google',
+    'uses' => 'Auth\AuthController@googleRedirectToProvider'
+]);
+
+Route::controllers(['/auth' => 'Auth\AuthController', 'password' => 'Auth\PasswordController',]);
 Route::get ('/', 'PostsController@viewnewestposts');
 
 
@@ -37,6 +47,7 @@ get('/admin', [
     'uses' => 'AdminController@index'
 ]);
 
+// edit course {id}
 get('/course/{id}/edit', [
     'as' => 'course.edit',
     'uses' => 'CoursesController@edit'
@@ -47,6 +58,40 @@ put('/admin/editcourse/{id}', [
     'uses' => 'CoursesController@update'
 ]);
 
+// edit post {id}
+get('/post/{id}/edit', [
+    'as' => 'post.edit',
+    'uses' => 'PostsController@edit'
+]);
+
+put('/admin/editpost/{id}', [
+    'as' => 'post.update',
+    'uses' => 'PostsController@update'
+]);
+
+// edit question {id} (Question + Description)
+get('question/{id}/edit', [
+    'as' => 'question.edit',
+    'uses' => 'QuestionsController@edit'
+]);
+
+put('/admin/editquestion/{id}', [
+    'as' => 'question.update',
+    'uses' => 'QuestionsController@update'
+]);
+
+// edit question {id} (Answers) // Will merge with 2 above routes later.
+get('/answer/{questionid}/edit', [
+    'as' => 'answer.edit',
+    'uses' => 'AnswersController@edit'
+]);
+
+put('/admin/editanswer/{questionid}', [
+    'as' => 'answer.update',
+    'uses' => 'AnswersController@update'
+]);
+
+// delete question {id}
 delete('/question/{id}/delete', [
     'as' => 'question.destroy',
     'uses' => 'QuestionsController@destroy'
@@ -57,3 +102,13 @@ Route::get ('/admin/post/{postid}/edit', 'PostsController@edit');
 Route::get ('/admin/post/{postid}/delete', 'PostsController@destroy');
 Route::get ('/admin/question/{id}/delete', 'QuestionsController@destroy');
 Route::get ('/admin/course/{id}/delete', 'CoursesController@destroy');
+
+get('/fbcallback', [
+    'as' => 'callback.facebook',
+    'uses' => 'Auth\AuthController@handleProviderCallback'
+]);
+
+get('/ggcallback', [
+    'as' => 'callback.google',
+    'uses' => 'Auth\AuthController@googleHandleProviderCallback'
+]);

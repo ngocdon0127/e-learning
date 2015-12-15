@@ -7,6 +7,8 @@ use Validator;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\ThrottlesLogins;
 use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
+use Socialite;
+use Auth;
 
 class AuthController extends Controller
 {
@@ -44,6 +46,7 @@ class AuthController extends Controller
             'name' => 'required|max:255',
             'email' => 'required|email|max:255|unique:users',
             'password' => 'required|confirmed|min:6',
+            'Type' => 'max:255',
         ]);
     }
 
@@ -55,10 +58,14 @@ class AuthController extends Controller
      */
     protected function create(array $data)
     {
+		$Type = 1;
+		if (array_key_exists('Type', $data))
+			$Type = $data['Type'];
         return User::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
+			'Type' =>  $Type,
         ]);
     }
 
@@ -67,5 +74,50 @@ class AuthController extends Controller
             return false;
         }
         return true;
+    }
+
+    public function redirectToProvider(){
+        return Socialite::driver('facebook')->redirect();
+    }
+
+    public function googleRedirectToProvider(){
+        return Socialite::driver('google')->redirect();
+    }
+
+    public function handleProviderCallback(){
+        $user = Socialite::driver('facebook')->user();
+        $data = ['name' => $user->name, 'email' => $user->email, 'password' => $user->token, 'Type' => 2];
+//        dd($data);
+        if ($user->email == null){
+            $data['email'] = $user->id . "@facebook.com";
+        }
+//        dd($data);
+        $userDB = User::where('email', $user->email)->first();
+        if (!is_null($userDB)){
+            Auth::login($userDB);
+        }
+        else{
+            Auth::login($this->create($data));
+        }
+        return redirect('/');
+    }
+
+    public function googleHandleProviderCallback(){
+        $user = Socialite::driver('google')->user();
+//        dd($user);
+        $data = ['name' => $user->name, 'email' => $user->email, 'password' => $user->token, 'Type' => 3];
+//        dd($data);
+        if ($user->email == null){
+            $data['email'] = $user->id . "@gmail.com";
+        }
+//        dd($data);
+        $userDB = User::where('email', $user->email)->first();
+        if (!is_null($userDB)){
+            Auth::login($userDB);
+        }
+        else{
+            Auth::login($this->create($data));
+        }
+        return redirect('/');
     }
 }

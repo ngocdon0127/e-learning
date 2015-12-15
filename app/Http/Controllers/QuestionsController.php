@@ -9,15 +9,18 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Storage;
 
 class QuestionsController extends Controller
 {
+    protected static $imageQuestionPath = '/public/images/imageQuestion/';
 
     public function viewQuestion($QuestionID){
         $question = Questions::findOrNew($QuestionID)->toArray();
         $photo = $question['Photo'];
         $answer = Answers::where('QuestionID', '=', $QuestionID)->get()->toArray();
-        $result = array('QuestionID' => $QuestionID, 'Answers' => $answer, 'Photo' => $photo);
+        $result = array('Question' => $question['Question'], 'Description' => $question['Description'], 'QuestionID' => $QuestionID, 'Answers' => $answer, 'Photo' => $photo);
         return view('viewquestion', $result);
     }
 
@@ -29,6 +32,9 @@ class QuestionsController extends Controller
     }
 
     public function saveQuestion($PostID){
+        if (!AuthController::checkPermission()){
+            return redirect('/');
+        }
         $data = Request::capture();
         $question = new Questions();
         $question->PostID = $PostID;
@@ -50,7 +56,7 @@ class QuestionsController extends Controller
 
 
         $question->update();
-        return redirect('/admin/addanswer/'.$question->id);
+        return redirect('/answer/' . $question->id . '/edit');
     }
 
     /**
@@ -103,7 +109,11 @@ class QuestionsController extends Controller
      */
     public function edit($id)
     {
-        //
+        if (!AuthController::checkPermission()){
+            return redirect('/');
+        }
+        $Question = Questions::find($id);
+        return view('admin.editquestion', compact('Question'));
     }
 
     /**
@@ -115,7 +125,31 @@ class QuestionsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        if (!AuthController::checkPermission()){
+            return redirect('/');
+        }
+        $data = $request->all();
+        $question = Questions::find($id);
+        $question->Question = $data['Question'];
+        $question->Description = $data['Description'];
+        $question->update();
+
+        // if admin upload new photo
+        if ($request->file('Photo') != null) {
+            $question = Questions::find($id);
+
+            $file = $request->file('Photo');
+            //        $file = Request::file('Photo');
+            $question->Photo = 'Question_' . $question['PostID'] . '_' . $question->id . "." . $file->getClientOriginalExtension();
+            $file->move(base_path() . '/public/images/imageQuestion/', $question->Photo);
+
+
+            // (intval(Posts::orderBy('created_at', 'desc')->first()->id) + 1)
+
+
+            $question->update();
+        }
+        return redirect('/question/'.$question->id);
     }
 
     /**
@@ -134,7 +168,11 @@ class QuestionsController extends Controller
         foreach ($answers as $answer) {
             Answers::destroy($answer['id']);
         }
+        $postid = $question['PostID'];
+//        $file = QuestionsController::$imageQuestionPath . $question['Photo'];
+//        dd(\File::delete('Question_19_35.jpg'));
+//        unlink("'" . $file . "'");
         $question->delete();
-        return redirect('/admin');
+        return redirect('/post/' . $postid);
     }
 }

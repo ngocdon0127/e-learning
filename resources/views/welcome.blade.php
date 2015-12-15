@@ -1,6 +1,6 @@
 @extends('layouts.main')
 @section('head.title')
-    ADD POST
+    TEC Club
 @endsection
 @section('body.content')
     <div class="container">

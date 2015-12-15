@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Answers;
+use App\Comments;
 use App\Courses;
 use App\Http\Controllers\Auth\AuthController;
 use App\Posts;
@@ -43,6 +44,9 @@ class PostsController extends Controller
     }
 
     public function savePost(Request $request){
+        if (!AuthController::checkPermission()){
+            return redirect('/');
+        }
         $data = $request->all();
         $post = new Posts();
         $post->CourseID = $data['CourseID'];
@@ -79,14 +83,16 @@ class PostsController extends Controller
             $bundle += array($q['id'] => $answer);
             $bundleAnswer += [$q['id'] => AnswersController::getAnswer($q['id'])];
         }
-        $result = array('PostID' => $postID, 'Questions' => $questions, 'Photo' => $photo, 'Bundle' => $bundle, 'BundleAnswers' => $bundleAnswer, 'MaxScore' => count($questions));
+        $Comments = Comments::all()->toArray();
+        $result = array('Comments' => json_encode($Comments), 'Title' => $post['Title'], 'PostID' => $postID, 'Questions' => $questions, 'Photo' => $photo, 'Bundle' => $bundle, 'BundleAnswers' => $bundleAnswer, 'MaxScore' => count($questions));
+//        dd($result);
         return view('viewpost', $result);
 //        return var_dump($bundleAnswer);
     }
 
     public function viewNewestPosts(){
 //        $posts = Posts::take(5)->skip(0)->get()->toArray();
-        $posts = Posts::paginate(5);
+        $posts = Posts::orderBy('id', 'desc')->paginate(5);
         return view('userindex')->with('Posts', $posts);
     }
 
@@ -125,7 +131,11 @@ class PostsController extends Controller
      */
     public function edit($id)
     {
-        //
+        if (!AuthController::checkPermission()){
+            return redirect('/');
+        }
+        $Post = Posts::find($id);
+        return view('admin.editpost', compact('Post'));
     }
 
     /**
@@ -137,7 +147,33 @@ class PostsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        if (!AuthController::checkPermission()){
+            return redirect('/');
+        }
+        $data = $request->all();
+        $post = Posts::find($id);
+        $post->CourseID = $data['CourseID'];
+        $post->FormatID = $data['FormatID'];
+        $post->Title = $data['Title'];
+        $post->Description = $data['Description'];
+        $post->update();
+
+        // if admin upload new photo
+        if ($request->file('Photo') != null) {
+            $post = Posts::find($id);
+
+            $file = $request->file('Photo');
+            //        $file = Request::file('Photo');
+            $post->Photo = 'Post_' . $data['CourseID'] . '_' . $post->id . "." . $file->getClientOriginalExtension();
+            $file->move(base_path() . '/public/images/imagePost/', $post->Photo);
+
+
+            // (intval(Posts::orderBy('created_at', 'desc')->first()->id) + 1)
+
+
+            $post->update();
+        }
+        return redirect('/course/'.$post->CourseID);
     }
 
     /**

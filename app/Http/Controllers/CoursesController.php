@@ -34,7 +34,7 @@ class CoursesController extends Controller
     public function addCourse(){
         if (!AuthController::checkPermission()){
 //            RedirectIfAuthenticated::$backPath = 'add/course';
-            AuthController::$redirectPath = '/admin/adcourse';
+//            AuthController::$redirectPath = '/admin/adcourse';
             return redirect('auth/login');
         };
         return view('admin.addcourse');
@@ -46,6 +46,9 @@ class CoursesController extends Controller
     }
 
     public function saveCourse(Request $request){
+        if (!AuthController::checkPermission()){
+            return redirect('/');
+        }
         $data = $request->all();
         $course = new Courses();
         $course->Title = $data['Title'];
@@ -126,7 +129,7 @@ class CoursesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update($id, Request $request)
+    public function update(Request $request, $id)
     {
         if (!AuthController::checkPermission()){
             return redirect('/');
