@@ -151,6 +151,9 @@ img {
   .content{
     margin: 0 5%;
   }
+    .img-responsive{
+    height: 300px;
+  }
 }
 
 @media (min-width: 480px){
@@ -186,6 +189,9 @@ img {
   .content{
     margin-left: 10%;
     margin-right: 10%;
+  }
+  .img-responsive{
+    height: 450px;
   }
 }
 
@@ -226,5 +232,8 @@ img {
     .content{
     margin-left: 25%;
     margin-right: 25%;
+  }
+    .img-responsive{
+    height: 550px;
   }
 }
