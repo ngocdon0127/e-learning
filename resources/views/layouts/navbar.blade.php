@@ -16,13 +16,15 @@
 	<div class="collapse col-sm-offset-4 navbar-collapse navbar-ex1-collapse">
 		<ul class="nav navbar-nav">
 			<li><a class="navbar-button" href="/">Home</a></li>
+			@if ((auth()->user()) && (auth()->user()->admin == 1))
 			<li><a class="navbar-button" href="/admin">Admin</a></li>
+			@endif
 			<li><a class="navbar-button" href="#">Life</a></li>
 			<li><a class="navbar-button" href="#">Quizzes</a></li>
 			<li><a class="navbar-button" href="#">Video</a></li>
 			<li class="dropdown">
 				<a id= "dropDown" href="#" class="dropdown-toggle navbar-button" data-toggle="dropdown">More<b class="caret"></b></a>
-				<ul class="dropdown-menu">
+				<ul id="dropdown-menu" class="dropdown-menu">
 					<li><a href="#">Grammar</a></li>
 					<li><a href="#">Another action</a></li>
 					<li><a href="#">Something else here</a></li>
@@ -42,10 +44,14 @@
         			</button>
 			</div>-->
 			@if (auth()->user())
-			<!-- <button type="button" class="btn btn-default"><a href="/auth/logout">Logout</a></button> -->
-			<a class="btn btn-primary" href="/auth/logout" role="button">Logout</a>
+				<li class="dropdown">
+					<a href="#" style="text-decoration: none;" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">{{ auth()->user()->name }} <span class="caret"></span></a>
+					<ul class="dropdown-menu" role="menu">
+						<li><a href="{{ url('/auth/logout') }}">Logout</a></li>
+					</ul>
+				</li>
+			<!--<a class="btn btn-primary" href="/auth/logout" role="button">Logout</a>-->
 			@else
-			<!-- <button type="button" class="btn btn-default"><a href="/auth/login">Login</a></button> -->
 			<a class="btn btn-primary" href="/auth/login" role="button">Login</a>
 			@endif
 		</form>

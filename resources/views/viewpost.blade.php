@@ -76,7 +76,11 @@
                         break;
                     }
                 }
-                alert(resultText);
+                ob('resultText').innerHTML = resultText;
+                ob('resultText').style.display = 'block';
+                $('html, body').animate({
+                    scrollTop: $("#resultText").offset().top
+                }, 1000);
             }
 //                obj.open('GET', '/ajax/checkanswer/' + questionID + '/' + answerID, true);
 //                ob.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
@@ -107,4 +111,5 @@
 
         @endforeach
     </ul>
+    <div class="form-control" id="resultText" style="display: none;"></div>
 @endsection
