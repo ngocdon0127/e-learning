@@ -52,19 +52,30 @@ body {
 
 
 /*==================NAV===========================*/
-/*
-.a:hover{
-  background: white;
-}*/
+
+a:hover{
+  color: red;
+  cursor: url("/images/cursor/hol514.png"),auto;
+
+}
+
+li:hover{
+  background: #255241149;
+}
 .a {
   padding-left: 10px;
   padding-right: 10px;
 }
-.affix {
+/*.affix {
   top: 0;
   width: 100%;
-  z-index: 1000;
+  z-index: 10;
+}*/
+li#navbar-button{
+  color: #406feb;
+  font-size: 20px;
 }
+
 .control-label{
   color: #ff0066;
   font-weight: bold;
