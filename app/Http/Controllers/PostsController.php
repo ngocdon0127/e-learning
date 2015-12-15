@@ -43,6 +43,9 @@ class PostsController extends Controller
     }
 
     public function savePost(Request $request){
+        if (!AuthController::checkPermission()){
+            return redirect('/');
+        }
         $data = $request->all();
         $post = new Posts();
         $post->CourseID = $data['CourseID'];
@@ -79,7 +82,7 @@ class PostsController extends Controller
             $bundle += array($q['id'] => $answer);
             $bundleAnswer += [$q['id'] => AnswersController::getAnswer($q['id'])];
         }
-        $result = array('PostID' => $postID, 'Questions' => $questions, 'Photo' => $photo, 'Bundle' => $bundle, 'BundleAnswers' => $bundleAnswer, 'MaxScore' => count($questions));
+        $result = array('Title' => $post['Title'], 'PostID' => $postID, 'Questions' => $questions, 'Photo' => $photo, 'Bundle' => $bundle, 'BundleAnswers' => $bundleAnswer, 'MaxScore' => count($questions));
         return view('viewpost', $result);
 //        return var_dump($bundleAnswer);
     }

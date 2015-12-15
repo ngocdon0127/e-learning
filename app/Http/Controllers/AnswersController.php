@@ -55,6 +55,9 @@ class AnswersController extends Controller
     }
 
     public function saveAnswer(Request $request){
+        if (!AuthController::checkPermission()){
+            return redirect('/');
+        }
         $data = $request->all();
 
         $count = $data['numAnswer'];
@@ -141,8 +144,10 @@ class AnswersController extends Controller
             return redirect('/');
         }
         $Answers = Answers::where('QuestionID', '=', $QuestionID)->get();
-        $photo = Questions::find($QuestionID)->toArray()['Photo'];
-        return view('admin.editanswer')->with(["QuestionID" => $QuestionID, 'Answers' => $Answers, 'Photo' => $photo]);
+        $question = Questions::find($QuestionID)->toArray();
+
+        $photo = $question['Photo'];
+        return view('admin.editanswer')->with(['PostID' => $question['PostID'], "QuestionID" => $QuestionID, 'Answers' => $Answers, 'Photo' => $photo]);
     }
     /**
      * Update the specified resource in storage.

@@ -92,7 +92,7 @@
              
                      }
                  </script>
-                 {!! Form::button('Thêm',['class' => 'btn btn-info', 'onClick' => 'submitForm()']) !!}
+                 {!! Form::button('Cập nhật',['class' => 'btn btn-info', 'onClick' => 'submitForm()']) !!}
               <!-- </div> -->
               {!! Form::close() !!}
               <!-- </div> -->

@@ -1,6 +1,6 @@
 @extends('layouts.main')
 @section('head.title')
-    ADD POST
+    Tec Club
 @endsection
 @section('body.content')
 <ul class="list-group">

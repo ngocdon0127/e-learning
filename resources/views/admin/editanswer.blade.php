@@ -22,6 +22,9 @@
                     <script type="text/javascript">
                     var count = -1;
                     var minAnswer = {{count($Answers)}};
+                    if (minAnswer == 0){
+                        minAnswer = 4;
+                    }
                     var resultQuestion = -1;
 
                     function ob(x){
@@ -136,6 +139,7 @@
                 <input type="text" value="{{$QuestionID}}" style="display: none" readonly name="QuestionID" />
                 {!! Form::button('Cập nhật',['class' => 'btn btn-info', 'onclick' => 'submitForm()']) !!}
             {!! Form::close() !!}
+        <a href="/post/{{$PostID}}" class="btn btn-info">Quay lại bài đăng</a>
         </div>
 
 

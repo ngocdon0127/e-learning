@@ -1,12 +1,24 @@
 @extends('layouts.main')
 @section('head.title')
-    ADD POST
+    Post {{$Title}}
 @endsection
 @section('body.content')
     <h1 class="title">Ảnh của post</h1>
     <li class="list-group-item">
         <img class="img-responsive" src="{{'/images/imagePost/' . $Photo}}" />
     </li>
+    @if ((auth()->user()) && (auth()->user()->admin == 1))
+        <a class ="btn btn-info" href="{{route('post.edit', $PostID)}}">Sửa thông tin bài đăng</a>
+        <button class ="btn btn-info" onclick="del()">Xóa bài đăng này</button>
+        <script type="text/javascript">
+            function del(){
+                if (confirm('Xác nhận xóa?') == true){
+                    window.location = '/admin/post/{{$PostID}}/delete';
+                }
+            }
+        </script>
+        <a class ="btn btn-info" href="/admin/addquestion/{{$PostID}}">Thêm câu hỏi</a>
+    @endif
     
     <script type="text/javascript">
         var score = 0;
@@ -83,9 +95,4 @@
 
         @endforeach
     </ul>
-    @if ((auth()->user()) && (auth()->user()->admin == 1))
-    <a class ="btn btn-info" href="/admin/addquestion/{{$PostID}}">Thêm câu hỏi</a>
-    <a class ="btn btn-info" href="{{route('post.edit', $PostID)}}">Sửa thông tin bài đăng</a>
-    <a class ="btn btn-info" href="/admin/post/{{$PostID}}/delete">Xóa bài đăng này</a>
-    @endif
 @endsection

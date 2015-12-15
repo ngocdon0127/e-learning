@@ -1,6 +1,6 @@
 @extends('layouts.main')
 @section('head.title')
-    ADD POST
+    Course {{$Title}}
 @endsection
 @section('body.content')
     <h1 class="title">Chủ đề : {{$Title}}</h1>
@@ -12,10 +12,17 @@
             </li>
         @endforeach
     </ul>
-    <a class="btn btn-info" href="{{route('course.edit', $CourseID)}}">Sửa thông tin khóa học</a>
     @if ((auth()->user()) && (auth()->user()->admin == 1))
-    <a class="btn btn-info" href="/admin/addpost">Thêm Post</a>
-    <a class="btn btn-info" href="/admin/course/{{$CourseID}}/delete">Xóa khóa học này</a>
+        <a class="btn btn-info" href="{{route('course.edit', $CourseID)}}">Sửa thông tin khóa học</a>
+        <button class="btn btn-info" href="" onclick="del()">Xóa khóa học này</button>
+        <script type="text/javascript">
+            function del(){
+                if (confirm('Xác nhận xóa?') == true){
+                    window.location = '/admin/course/{{$CourseID}}/delete';
+                }
+            }
+        </script>
+        <a class="btn btn-info" href="/admin/addpost">Thêm bài đăng mới</a>
     @endif
 @endsection
 
