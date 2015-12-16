@@ -48,9 +48,10 @@ class QuestionsController extends Controller
         //Photo
         $file = Request::capture()->file('Photo');
 //        $file = Request::file('Photo');
-        $question->Photo = 'Question_' . $PostID . '_' . $question->id  . "." . $file->getClientOriginalExtension();
-        $file->move(base_path() . '/public/images/imageQuestion/', $question->Photo);
-
+        if ($file != null){
+            $question->Photo = 'Question_' . $PostID . '_' . $question->id  . "." . $file->getClientOriginalExtension();
+            $file->move(base_path() . '/public/images/imageQuestion/', $question->Photo);
+        }
 
         // (intval(Posts::orderBy('created_at', 'desc')->first()->id) + 1)
 

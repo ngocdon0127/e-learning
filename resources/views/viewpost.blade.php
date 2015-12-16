@@ -94,10 +94,11 @@
         @foreach($Questions as $q)
             <h2 class="title">Câu hỏi số <?php echo $count_answer++; ?>:</h2>
                 <a style="text-decoration: none;" href="/question/{{$q['id']}}"><h4>{{$q['Question']}} : {{$q['Description']}}</h4></a>
-            
+            @if ($q['Photo'] != null)
             <li class="list-group-item list-group-item-info">
                 <img class="img-responsive" src="/images/imageQuestion/{{$q['Photo']}}" />
             </li>
+            @endif
            <ul class="list-group" id="ul_question_{{$q['id']}}">
                 @foreach($Bundle[$q['id']] as $k => $a)
                     <li id="answer_{{$q['id']}}_{{$a['id']}}" class="list_answer"  onclick="check({{$q['id']}}, {{$a['id']}}, {{$BundleAnswers[$q['id']]}})" style="cursor: pointer">

@@ -55,7 +55,7 @@ ADD QUESTION
        //                        console.log('clicked');
                            var photo = ob('Photo');
                            if (photo.files.length <= 0){
-                               displayError('Chưa chọn file');
+                               document.addQuestionForm.submit();
                                return;
                            }
                            var type = photo.files[0].type;
