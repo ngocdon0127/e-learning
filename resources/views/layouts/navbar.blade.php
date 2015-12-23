@@ -2,7 +2,7 @@
 	<!-- Brand and toggle get grouped for better mobile display -->
 	<!-- <a id="HomeSmall" style="text-decoration: none;" href="">TEC Club</a> -->
 	<div class="navbar-header">
-	<a id="HomeSmall" style="text-decoration: none;" href="">Evangels English</a>
+	<a id="HomeSmall" style="text-decoration: none;" href="/">Evangels English</a>
 		<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
 			<span class="sr-only">Toggle navigation</span>
 			<span class="icon-bar"></span>
