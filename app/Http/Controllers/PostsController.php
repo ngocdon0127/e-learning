@@ -68,6 +68,9 @@ class PostsController extends Controller
 
 
         $post->update();
+        $course = Courses::find($post->CourseID);
+        $course->NoOfPosts++;
+        $course->update();
         return redirect('/course/'.$post->CourseID);
 //        return $post;
     }
@@ -197,6 +200,9 @@ class PostsController extends Controller
         }
         $courseid = $post['CourseID'];
         $post->delete();
+        $course = Courses::find($post->CourseID);
+        $course->NoOfPosts--;
+        $course->update();
         return redirect('/course/' . $courseid);
     }
 }
