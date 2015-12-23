@@ -13,6 +13,7 @@
 
 	<!-- Collect the nav links, forms, and other content for toggling -->
 	<!-- <div class="col-sm-offset-3"> -->
+
 	<div class="collapse col-sm-offset-4 navbar-collapse navbar-ex1-collapse">
 		<ul class="nav navbar-nav">
 			<li><a class="navbar-button" href="/">Home</a></li>
@@ -33,7 +34,14 @@
 			</li>
 		</ul>
 		<form class="navbar-form navbar-right" role="search">
-		
+		<!-- 	<div class="form-group">
+					<input type="text" class="form-control" placeholder="Search">
+
+					<button type="submit" class="btn btn-default">Submit</button>
+			        <button type="button" class="btn btn-default btn-sm">
+          				<span class="glyphicon glyphicon-search"></span> Submit 
+        			</button>
+				</div> -->
 			<!-- search button-->
 			<!--<div class="form-group">
 				<input type="text" class="form-control" placeholder="Search">
