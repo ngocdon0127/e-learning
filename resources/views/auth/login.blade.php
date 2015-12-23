@@ -53,9 +53,11 @@
 							</div>
 						</div>
 						<div class="form-group">
-							<div class="col-md-6 col-md offset-4">
-								<a class="btn btn-primary" href="/auth/facebook">Facebook login</a>
-								<a class="btn btn-primary" href="/auth/google">Google login</a>
+							<div class="col-md-6 col-md-offset-4">
+								<a class="btn btn-primary" style="width: 250px;" href="/auth/facebook">Sign in witn Facebook</a>	
+							</div>
+							<div class="col-md-6 col-md-offset-4">
+								<a class="btn btn-danger" style="width: 250px;" href="/auth/google">Sign in with Google</a>
 							</div>
 						</div>
 					</form>

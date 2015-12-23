@@ -4,9 +4,11 @@
 @endsection
 @section('body.content')
     <h2 class="title">Câu hỏi: {{$Question}}</h2>
+    @if ($Photo != null)
     <li class="list-group-item ">
         <img class= "img-responsive" src="{{'/images/imageQuestion/' . $Photo}}"/>
     </li>
+    @endif
     <h2 class="title">{{$Description}}</h2>
     <h2 class="title">Đáp án</h2>
     <ul class="list-group">

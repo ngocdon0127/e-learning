@@ -65,7 +65,7 @@
             fill++;
             if (fill >= maxScore){
 
-                var resultText = 'Bạn trả lời đúng ' + score + '/' + maxScore + ' câu.\n';
+                var resultText = 'Đúng ' + score + '/' + maxScore + ' câu.\n';
                 var x = {!! $Comments !!};
                 console.log("start chấmming");
                 for(var i = x.length - 1; i >= 0; i--) {
@@ -76,7 +76,11 @@
                         break;
                     }
                 }
-                alert(resultText);
+                ob('writeResult').innerHTML = resultText;
+                ob('resultText').style.display = 'block';
+                $('html, body').animate({
+                    scrollTop: $("#resultText").offset().top
+                }, 1000);
             }
 //                obj.open('GET', '/ajax/checkanswer/' + questionID + '/' + answerID, true);
 //                ob.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
@@ -90,10 +94,11 @@
         @foreach($Questions as $q)
             <h2 class="title">Câu hỏi số <?php echo $count_answer++; ?>:</h2>
                 <a style="text-decoration: none;" href="/question/{{$q['id']}}"><h4>{{$q['Question']}} : {{$q['Description']}}</h4></a>
-            
+            @if ($q['Photo'] != null)
             <li class="list-group-item list-group-item-info">
                 <img class="img-responsive" src="/images/imageQuestion/{{$q['Photo']}}" />
             </li>
+            @endif
            <ul class="list-group" id="ul_question_{{$q['id']}}">
                 @foreach($Bundle[$q['id']] as $k => $a)
                     <li id="answer_{{$q['id']}}_{{$a['id']}}" class="list_answer"  onclick="check({{$q['id']}}, {{$a['id']}}, {{$BundleAnswers[$q['id']]}})" style="cursor: pointer">
@@ -107,4 +112,7 @@
 
         @endforeach
     </ul>
+    <div class="form-control" id="resultText" style="display: none; height: 200px;">
+        <b class="title" id="writeResult"></b>
+    </div>
 @endsection

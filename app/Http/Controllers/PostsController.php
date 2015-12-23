@@ -78,13 +78,15 @@ class PostsController extends Controller
         $questions = Questions::where('PostID', '=', $postID)->get()->toArray();
         $bundle = array();
         $bundleAnswer = array();
+		$maxscore = 0;
         foreach ($questions as $q){
             $answer = Answers::where('QuestionID', '=', $q['id'])->get()->toArray();
             $bundle += array($q['id'] => $answer);
             $bundleAnswer += [$q['id'] => AnswersController::getAnswer($q['id'])];
+			if (count($answer) > 0) $maxscore++;
         }
         $Comments = Comments::all()->toArray();
-        $result = array('Comments' => json_encode($Comments), 'Title' => $post['Title'], 'PostID' => $postID, 'Questions' => $questions, 'Photo' => $photo, 'Bundle' => $bundle, 'BundleAnswers' => $bundleAnswer, 'MaxScore' => count($questions));
+        $result = array('Comments' => json_encode($Comments), 'Title' => $post['Title'], 'PostID' => $postID, 'Questions' => $questions, 'Photo' => $photo, 'Bundle' => $bundle, 'BundleAnswers' => $bundleAnswer, 'MaxScore' => $maxscore);
 //        dd($result);
         return view('viewpost', $result);
 //        return var_dump($bundleAnswer);
@@ -182,15 +184,16 @@ class PostsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public static function destroy($id)
     {
         if (!AuthController::checkPermission()){
             return redirect('/');
         }
         $post = Posts::find($id);
+        @unlink(public_path('images/imagePost/' . $post['Photo']));
         $questions = Questions::where('PostID', '=', $id)->get()->toArray();
         foreach ($questions as $question) {
-            Questions::destroy($question['id']);
+            QuestionsController::destroy($question['id']);
         }
         $courseid = $post['CourseID'];
         $post->delete();

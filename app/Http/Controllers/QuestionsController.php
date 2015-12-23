@@ -48,9 +48,10 @@ class QuestionsController extends Controller
         //Photo
         $file = Request::capture()->file('Photo');
 //        $file = Request::file('Photo');
-        $question->Photo = 'Question_' . $PostID . '_' . $question->id  . "." . $file->getClientOriginalExtension();
-        $file->move(base_path() . '/public/images/imageQuestion/', $question->Photo);
-
+        if ($file != null){
+            $question->Photo = 'Question_' . $PostID . '_' . $question->id  . "." . $file->getClientOriginalExtension();
+            $file->move(base_path() . '/public/images/imageQuestion/', $question->Photo);
+        }
 
         // (intval(Posts::orderBy('created_at', 'desc')->first()->id) + 1)
 
@@ -158,20 +159,18 @@ class QuestionsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public static function destroy($id)
     {
         if (!AuthController::checkPermission()){
             return redirect('/');
         }
         $question = Questions::find($id);
+        @unlink(public_path('images/imageQuestion/' . $question['Photo']));
         $answers = Answers::where('QuestionID', '=', $id)->get()->toArray();
         foreach ($answers as $answer) {
             Answers::destroy($answer['id']);
         }
         $postid = $question['PostID'];
-//        $file = QuestionsController::$imageQuestionPath . $question['Photo'];
-//        dd(\File::delete('Question_19_35.jpg'));
-//        unlink("'" . $file . "'");
         $question->delete();
         return redirect('/post/' . $postid);
     }
