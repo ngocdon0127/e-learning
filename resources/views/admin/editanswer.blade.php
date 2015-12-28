@@ -1,16 +1,17 @@
 @extends('layouts.main')
 @section('head.title')
-    Cập nhật đáp án
+Cập nhật đáp án
 @endsection
 @section('body.content')
     <!-- <div class="col-sm-offset-3 col-xs-offset-3 col-sm-6 col-xs-6"> -->
     <div class="container-fluid">
         <ul class="list-group">
-            @if ($Photo != null)
+			@if ($Photo != null)
             <li class="list-group-item">
                 <img src = "{{'/images/imageQuestion/' . $Photo}}" />
             </li>
-            @endif
+			@endif
+
         </ul>
         <h1 class="title">Thêm câu trả lời mới</h1>
         <!-- <div class="col-sm-9"> -->
@@ -146,4 +147,3 @@
 
     </div>
 @endsection
-//             
