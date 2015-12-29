@@ -2,13 +2,20 @@
 	<!-- Brand and toggle get grouped for better mobile display -->
 	<!-- <a id="HomeSmall" style="text-decoration: none;" href="">TEC Club</a> -->
 	<div class="navbar-header">
-	<a id="HomeSmall" style="text-decoration: none;" href="/">Evangels English</a>
+	<div class="col-xs-9 col-sm-9 col-md-9 col-lg-9" style="padding-top: 9px;">
+		<!-- <button style="padding-top: px; height: 50px;background-color: #e7e7e7"> -->
+			<a id="HomeSmall" style="text-decoration: none; font-size: 20px; color: red;" href="/"><b><b style="font-size: 25px">E</b>vangels<b style="font-size: 25px">E</b>nglish</b></a>
+		<!-- </button> -->
+	</div>
+	<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
 		<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
 			<span class="sr-only">Toggle navigation</span>
 			<span class="icon-bar"></span>
 			<span class="icon-bar"></span>
 			<span class="icon-bar"></span>
 		</button>
+	</div>
+
 	</div>
 
 	<!-- Collect the nav links, forms, and other content for toggling -->
