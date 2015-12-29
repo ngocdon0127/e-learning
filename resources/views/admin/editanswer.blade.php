@@ -15,9 +15,8 @@ Cập nhật đáp án
         </ul>
         <h1 class="title">Thêm câu trả lời mới</h1>
         <!-- <div class="col-sm-9"> -->
+        <h2>Câu hỏi trọng âm => Bôi đen + Click Gạch chân</h2>
             {!! Form::open(['method' => 'PUT', 'name' => 'editAnswerForm', 'url' => '/admin/editanswer/' . $QuestionID,'class'=>'control-label']) !!}
-             <!--        {!! Form::label('Detail', 'Câu trả lời: ') !!}
-            {!! Form::text('Detail', null) !!} -->
             
             <div class="form-group">
                 {!! Form::label('Detail', 'Câu trả lời: ',['class'=>'control-label']) !!}
@@ -98,6 +97,9 @@ Cập nhật đáp án
 //                        console.log('start ' + start);
                         var end = textarea.selectionEnd;
 //                        console.log('end' + end);
+                        if (start == end){
+                            return;
+                        }
                         var before = oldText.substring(0, start);
                         var after = oldText.substring(end, oldText.length);
                         var content = oldText.substring(start, end);
@@ -144,7 +146,7 @@ Cập nhật đáp án
                         radio.name = 'radio_answer';
                         divElement.appendChild(radio);
                         var btnDel = document.createElement('input');
-                        btnDel.value = 'Xoa';
+                        btnDel.value = 'Xóa';
                         btnDel.type = 'button';
                         btnDel.setAttribute('onClick','xoa("' + divElement.id + '")');
                         divElement.appendChild(btnDel);
@@ -153,7 +155,7 @@ Cập nhật đáp án
                         divElement.appendChild(hiddenTextarea);
                         var uButton = document.createElement('input');
                         uButton.type = 'button';
-                        uButton.setAttribute('value', 'U');
+                        uButton.setAttribute('value', 'Gạch chân');
                         divElement.appendChild(uButton);
 //                        bkLib.onDomLoaded(function() {
 ////                            console.log('bklig ');
