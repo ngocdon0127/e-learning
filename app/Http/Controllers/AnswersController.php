@@ -144,11 +144,32 @@ class AnswersController extends Controller
             return redirect('/');
         }
         $Answers = Answers::where('QuestionID', '=', $QuestionID)->get();
+        foreach ($Answers as $answer){
+            $answer['Detail'] = $this->s2c_convert($answer['Detail']);
+        }
         $question = Questions::find($QuestionID)->toArray();
 
         $photo = $question['Photo'];
         return view('admin.editanswer')->with(['PostID' => $question['PostID'], "QuestionID" => $QuestionID, 'Answers' => $Answers, 'Photo' => $photo]);
     }
+
+    private static $clientTag = ['[u]', '[/u]'];
+    public static $serverTag = ['<u>', '</u>'];
+
+    public function c2s_convert($s){
+        for($i = 0; $i < count(AnswersController::$clientTag); $i++){
+            $s = str_replace(AnswersController::$clientTag[$i], AnswersController::$serverTag[$i], $s);
+        }
+        return $s;
+    }
+
+    public function s2c_convert($s){
+        for($i = 0; $i < count(AnswersController::$clientTag); $i++){
+            $s = str_replace(AnswersController::$serverTag[$i], AnswersController::$clientTag[$i], $s);
+        }
+        return $s;
+    }
+
     /**
      * Update the specified resource in storage.
      *
@@ -178,7 +199,9 @@ class AnswersController extends Controller
             $answer = Answers::find($setOfOldAnswers[$i]['id']);
 //            dd($answer);
 //            $answer->QuestionID = $data['QuestionID'];
-            $answer->Detail = $data['answer' . ($i + 1)];
+            $detail = $data['answer' . ($i + 1)];
+
+            $answer->Detail = $this->c2s_convert($detail);
             if ($result != ($i + 1)){
                 $answer->Logical = 0;
             }
@@ -201,7 +224,8 @@ class AnswersController extends Controller
             $this->add_answer($id, $result != ($i + 1) ? 0 : 1, $data['answer' . ($i + 1)]);
         }
 
-        return redirect('answer/' . $id . '/edit');
+//        return redirect('answer/' . $id . '/edit');
+        return redirect('question/' . $id);
     }
 
     /**

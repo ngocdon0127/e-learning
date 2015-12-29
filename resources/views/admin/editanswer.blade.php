@@ -1,22 +1,22 @@
 @extends('layouts.main')
 @section('head.title')
-    Cập nhật đáp án
+Cập nhật đáp án
 @endsection
 @section('body.content')
     <!-- <div class="col-sm-offset-3 col-xs-offset-3 col-sm-6 col-xs-6"> -->
     <div class="container-fluid">
         <ul class="list-group">
-            @if ($Photo != null)
+			@if ($Photo != null)
             <li class="list-group-item">
                 <img src = "{{'/images/imageQuestion/' . $Photo}}" />
             </li>
-            @endif
+			@endif
+
         </ul>
         <h1 class="title">Thêm câu trả lời mới</h1>
         <!-- <div class="col-sm-9"> -->
+        <h2>Câu hỏi trọng âm => Bôi đen + Click Gạch chân</h2>
             {!! Form::open(['method' => 'PUT', 'name' => 'editAnswerForm', 'url' => '/admin/editanswer/' . $QuestionID,'class'=>'control-label']) !!}
-             <!--        {!! Form::label('Detail', 'Câu trả lời: ') !!}
-            {!! Form::text('Detail', null) !!} -->
             
             <div class="form-group">
                 {!! Form::label('Detail', 'Câu trả lời: ',['class'=>'control-label']) !!}
@@ -49,10 +49,21 @@
                         }
                         ob('count').value = count = childrens.length - 1;
                         resultQuestion = -1;
+                        // childrens[0] is <script> element
+                        // childrens[1->n] are <div> element
                         for(var i = 1; i < childrens.length; i++){
                             var div = childrens[i];
                             div.id = 'divanswer' + i;
-                            div.children[0].id = div.children[0].name = 'answer' + i;
+
+                            // children[0] is textarea hold answer detail
+                            div.children[0].id = 'answer' + i;
+                            div.children[0].setAttribute('name', div.children[0].id);
+
+                            // children[3] is a reserved textarea
+                            div.children[3].id = 'ta_answer' + i;
+//                            div.children[3].setAttribute('name', div.children[0].id);
+
+                            // children[1] is a radio button
                             var radio = div.children[1];
                             radio.id = 'radio' + i;
                             if (radio.checked){
@@ -65,10 +76,48 @@
                             div.children[2].setAttribute('class','children btn btn-info');
 //                            radio.setAttribute('onclick', 'markAnswer("' + radio.id + '")');
 //                            if (i > minAnswer - 1)
+
+                            // children[2] is a button which allow to delete answer i.
                             div.children[2].setAttribute('onclick', 'xoa("divanswer' + i + '")');
+                            div.children[4].setAttribute('onclick', 'addTag("u", "' + i + '")');
+                            console.log('finish update ' + i);
                         }
 //                        console.log(resultQuestion);
                         ob('result').value = resultQuestion;
+
+                    }
+
+                    function addTag(tag, id){
+                        var tagOpen = "[u]";
+                        var tagClose = "[/u]";
+                        var textarea = ob('answer' + id);
+                        var oldText = textarea.innerHTML;
+//                        console.log(oldText);
+                        var start = textarea.selectionStart;
+//                        console.log('start ' + start);
+                        var end = textarea.selectionEnd;
+//                        console.log('end' + end);
+                        if (start == end){
+                            return;
+                        }
+                        var before = oldText.substring(0, start);
+                        var after = oldText.substring(end, oldText.length);
+                        var content = oldText.substring(start, end);
+//                        console.log(content);
+                        if ((content.indexOf(tagOpen) != -1) && (content.indexOf(tagClose) != -1)){
+                            console.log('giet no');
+                            content = content.replace(tagOpen, "");
+                            content = content.replace(tagClose, "");
+                            textarea.innerHTML = before + content + after;
+                            textarea.setSelectionRange(start, start + content.length);
+                            textarea.focus();
+                        }
+                        else {
+                            var newText = before + tagOpen + oldText.substring(start, end) + tagClose + after;
+                            textarea.innerHTML = newText;
+                            textarea.setSelectionRange(start, end + tagClose.length + tagClose.length);
+                            textarea.focus();
+                        }
                     }
 
                     function markAnswer(x){
@@ -81,10 +130,12 @@
 //                        console.log('add ');
 //                        count++;
 //                        ob('count').value = count;
-                        var e = document.createElement('input');
-                        e.type = 'text';
+                        var e = document.createElement('textarea');
+//                        e.type = 'text';
 //                        e.name = 'answer' + count;
-//                        e.id = e.name;
+                        e.id = 'specialID';
+//                        e.setAttribute('contenteditable', 'true');
+//                        e.innerHTML = 'preText';
                         e.setAttribute('class', 'col-sm-9');
                         var divElement = document.createElement('div');
                         divElement.id = "divanswer" + count;
@@ -95,15 +146,29 @@
                         radio.name = 'radio_answer';
                         divElement.appendChild(radio);
                         var btnDel = document.createElement('input');
-                        btnDel.value = 'Xoa';
+                        btnDel.value = 'Xóa';
                         btnDel.type = 'button';
                         btnDel.setAttribute('onClick','xoa("' + divElement.id + '")');
                         divElement.appendChild(btnDel);
-                        updateID();
+                        var hiddenTextarea = document.createElement('textarea');
+                        hiddenTextarea.style.display = 'none';
+                        divElement.appendChild(hiddenTextarea);
+                        var uButton = document.createElement('input');
+                        uButton.type = 'button';
+                        uButton.setAttribute('value', 'Gạch chân');
+                        divElement.appendChild(uButton);
+//                        bkLib.onDomLoaded(function() {
+////                            console.log('bklig ');
+//                            var nicInstancs = new nicEditor().panelInstance('specialID');
+//                        }); // convert text area with id area1 to rich text editor.
+//                        updateID();
                     }
 
                     function submitForm(){
                         updateID();
+                        for(var i = 1; i <= count; i++){
+                            ob('ta_answer' + i).innerHTML = ob('answer' + i).innerHTML;
+                        }
 //                        console.log(count);
 //                        console.log(resultQuestion);
                         if (resultQuestion > -1){
@@ -120,10 +185,13 @@
                                      // console.log(i);
                                add();
                            }
+                           updateID();
                            //{!! $index = 1 !!}
                            var index = 1;
                             @foreach($Answers as $a)
-                                ob('answer{{$index}}').value = "{{$a['Detail']}}";
+                                var xx = "{!! $a['Detail'] !!}";
+                                var inner = ob('answer{{ $index }}').innerHTML = xx;
+                                ob('answer{{ $index }}').innerHTML = inner;
                                 @if ($a['Logical'] == 1)
                                     ob('radio{{$index}}').checked = true;
                                 @endif
@@ -131,7 +199,7 @@
                             @endforeach
                        </script>
                    </div>
-                   <input type="button" value="+" onclick="add()">
+                   <input type="button" value="+" onclick="add(); updateID()">
                 </div>
             </div>
 
@@ -146,4 +214,3 @@
 
     </div>
 @endsection
-//             

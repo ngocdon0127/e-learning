@@ -1,6 +1,6 @@
 @extends('layouts.main')
 @section('head.title')
-ADD QUESTION
+EDIT QUESTION
 @endsection
 @section('head.css')
 <style>

@@ -11,9 +11,9 @@
 			<meta http-equiv="refresh" content="1, url='/'" />
 		@endif
 	@endif
-	<title>Laravel</title>
+	<title>Login Evangels English</title>
 
-	<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
+	<link href="/css/bootstrap.min.css" rel="stylesheet">
 	
 	<!-- Fonts -->
 	<link href='//fonts.googleapis.com/css?family=Roboto:400,300' rel='stylesheet' type='text/css'>
@@ -66,7 +66,7 @@
 	@yield('content')
 
 	<!-- Scripts -->
-	<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-	<script src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.5/js/bootstrap.min.js"></script>
+	<script src="/js/jquery/jquery.js"></script>
+	<script src="/js/bootstrap.min.js"></script>
 </body>
 </html>

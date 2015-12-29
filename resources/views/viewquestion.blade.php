@@ -14,7 +14,7 @@
     <ul class="list-group">
         @foreach($Answers as $a)
           <li class="list-group-item list-group-item-info">
-              {{$a['Detail']}}
+              {!! $a['Detail'] !!}
           </li>
           <div class="clear"></div>
         @endforeach

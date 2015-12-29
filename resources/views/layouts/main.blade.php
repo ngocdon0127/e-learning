@@ -9,6 +9,7 @@
 	<link rel="stylesheet" type="text/css" href="/css/bootstrap.css">
 	<link rel="stylesheet" type="text/css" href="/css/style.css">
 	<link rel="stylesheet" type="text/css" href="/css/admin.css">
+	<script type="text/javascript" src="http://js.nicedit.com/nicEdit-latest.js"></script>
 	@yield('head.css')
 </head>
 <body>
