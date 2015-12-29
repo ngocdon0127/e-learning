@@ -124,7 +124,7 @@ Cập nhật đáp án
                            //{!! $index = 1 !!}
                            var index = 1;
                             @foreach($Answers as $a)
-                                ob('answer{{$index}}').value = "{{$a['Detail']}}";
+                                ob('answer{{$index}}').value = "{!! $a['Detail'] !!}";
                                 @if ($a['Logical'] == 1)
                                     ob('radio{{$index}}').checked = true;
                                 @endif

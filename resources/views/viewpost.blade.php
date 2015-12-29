@@ -103,7 +103,7 @@
                 @foreach($Bundle[$q['id']] as $k => $a)
                     <li id="answer_{{$q['id']}}_{{$a['id']}}" class="list_answer"  onclick="check({{$q['id']}}, {{$a['id']}}, {{$BundleAnswers[$q['id']]}})" style="cursor: pointer">
                         <input type="checkbox" id="radio_answer_{{$q['id']}}_{{$a['id']}}" name="question_{{$q['id']}}"/>
-                       <label for="radio_answer_{{$q['id']}}_{{$a['id']}}" class="answer_content">{{$a['Detail']}}</label>
+                       <span class="answer_content">{!! $a['Detail'] !!}</span>
                     </li>
 
                     <div class="clear"></div>
