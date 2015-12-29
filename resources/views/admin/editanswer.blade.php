@@ -8,7 +8,7 @@ Cập nhật đáp án
         <ul class="list-group">
 			@if ($Photo != null)
             <li class="list-group-item">
-                <img src = "{{'/images/imageQuestion/' . $Photo}}" />
+                <img class='img-responsive' src="{{'/images/imageQuestion/' . $Photo}}" />
             </li>
 			@endif
 
