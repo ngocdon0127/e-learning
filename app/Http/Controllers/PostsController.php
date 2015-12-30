@@ -6,6 +6,7 @@ use App\Answers;
 use App\Comments;
 use App\Courses;
 use App\Http\Controllers\Auth\AuthController;
+use App\Learning;
 use App\Posts;
 use App\Questions;
 use Illuminate\Http\Request;
@@ -76,10 +77,22 @@ class PostsController extends Controller
     }
 
     public function viewPost($postID){
+        if (!auth() || !(auth()->user())){
+            return redirect('/auth/login');
+        }
+        $userID = auth()->user()->getAuthIdentifier();
         $post = Posts::findOrNew($postID);
         $post->visited++;
         $post->update();
         $post = $post->toArray();
+        $courseID = $post['CourseID'];
+        $tmp = Learning::where('UserID', '=', $userID)->where('CourseID', '=', $courseID)->get()->toArray();
+        if (count($tmp) < 1){
+            $learning = new Learning();
+            $learning->UserID = $userID;
+            $learning->CourseID = $courseID;
+            $learning->save();
+        }
         $photo = $post['Photo'];
         $questions = Questions::where('PostID', '=', $postID)->get()->toArray();
         $bundle = array();
