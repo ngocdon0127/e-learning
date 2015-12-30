@@ -113,8 +113,7 @@ get('/ggcallback', [
     'uses' => 'Auth\AuthController@googleHandleProviderCallback'
 ]);
 
-//// Try to delete some file
-//get('/dondelete', [
-//    'as' => 'file.delete',
-//    'uses' => 'AdminController@dondelete',
-//]);
+post('/timeonline', [
+    'as' => 'count.timeonline',
+    'uses' => 'TimesController@incTimeOnline'
+]);

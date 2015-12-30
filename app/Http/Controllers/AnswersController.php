@@ -224,8 +224,8 @@ class AnswersController extends Controller
             $this->add_answer($id, $result != ($i + 1) ? 0 : 1, $this->c2s_convert($data['answer' . ($i + 1)]));
         }
 
-//        return redirect('answer/' . $id . '/edit');
-        return redirect('question/' . $id);
+        return redirect('answer/' . $id . '/edit');
+//        return redirect('question/' . $id);
     }
 
     /**

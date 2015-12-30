@@ -115,4 +115,28 @@
     <div class="form-control" id="resultText" style="display: none; height: 200px;">
         <b class="title" id="writeResult"></b>
     </div>
+    <script type="text/javascript">
+            console.log("start sending");
+//            console.log($('meta[name=_token]').attr('content'));
+            setInterval(
+                function() {
+                    $.ajax({
+                        url: "/timeonline",
+                        type:"POST",
+                        beforeSend: function (xhr) {
+                            var token = $('meta[name="_token"]').attr('content');
+
+                            if (token) {
+                                return xhr.setRequestHeader('X-CSRF-TOKEN', token);
+                            }
+                        },
+                        data: { UserID : {!! auth()->user()->getAuthIdentifier() !!} },
+                        success:function(data){
+                            console.log(data);
+                        },error:function(){
+                            console.log("error!!!!");
+                        }
+                    }); //end of ajax
+                }, 2000);
+    </script>
 @endsection
