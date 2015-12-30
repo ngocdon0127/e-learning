@@ -17,7 +17,7 @@ class CreateCoursesTable extends Migration
             $table->timestamps();
             $table->string('Title')->unique();
             $table->string('Description');
-            $table->integer('TotalHours')->default(0);
+            $table->float('TotalHours')->default(0);
             $table->integer('NoOfUsers')->default(0);
             $table->integer('NoOfPosts')->default(0);
         });
