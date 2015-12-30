@@ -92,6 +92,9 @@ class PostsController extends Controller
             $learning->UserID = $userID;
             $learning->CourseID = $courseID;
             $learning->save();
+            $course = Courses::find($courseID);
+            $course->NoOfUsers++;
+            $course->update();
         }
         $photo = $post['Photo'];
         $questions = Questions::where('PostID', '=', $postID)->get()->toArray();
