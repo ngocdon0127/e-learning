@@ -91,7 +91,7 @@ Cập nhật đáp án
                         var tagOpen = "[u]";
                         var tagClose = "[/u]";
                         var textarea = ob('answer' + id);
-                        var oldText = textarea.innerHTML;
+                        var oldText = textarea.value;
 //                        console.log(oldText);
                         var start = textarea.selectionStart;
 //                        console.log('start ' + start);
@@ -103,19 +103,19 @@ Cập nhật đáp án
                         var before = oldText.substring(0, start);
                         var after = oldText.substring(end, oldText.length);
                         var content = oldText.substring(start, end);
-//                        console.log(content);
+                        console.log(content);
                         if ((content.indexOf(tagOpen) != -1) && (content.indexOf(tagClose) != -1)){
                             console.log('giet no');
                             content = content.replace(tagOpen, "");
                             content = content.replace(tagClose, "");
-                            textarea.innerHTML = before + content + after;
+                            textarea.value = before + content + after;
                             textarea.setSelectionRange(start, start + content.length);
                             textarea.focus();
                         }
                         else {
-                            var newText = before + tagOpen + oldText.substring(start, end) + tagClose + after;
-                            textarea.innerHTML = newText;
-                            textarea.setSelectionRange(start, end + tagClose.length + tagClose.length);
+                            var newText = before + tagOpen + content + tagClose + after;
+                            textarea.value = newText;
+                            textarea.setSelectionRange(start, end + tagClose.length + tagClose.length - 1);
                             textarea.focus();
                         }
                     }
@@ -167,7 +167,7 @@ Cập nhật đáp án
                     function submitForm(){
                         updateID();
                         for(var i = 1; i <= count; i++){
-                            ob('ta_answer' + i).innerHTML = ob('answer' + i).innerHTML;
+                            ob('ta_answer' + i).innerHTML = ob('answer' + i).innerHTML = ob('answer' + i).value;
                         }
 //                        console.log(count);
 //                        console.log(resultQuestion);

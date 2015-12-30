@@ -20,6 +20,7 @@ class CreatePostsTable extends Migration
             $table->string('Title');
             $table->string('Photo')->default('');
             $table->string('Description')->default('');
+            $table->integer('visited')->default(0);
         });
     }
 

@@ -55,6 +55,7 @@ class AnswersController extends Controller
     }
 
     public function saveAnswer(Request $request){
+//        dd($request);
         if (!AuthController::checkPermission()){
             return redirect('/');
         }
@@ -65,7 +66,7 @@ class AnswersController extends Controller
         for($i = 0; $i < $count; $i++){
             $answer = new Answers();
             $answer->QuestionID = $data['QuestionID'];
-            $answer->Detail = $data['answer' . ($i + 1)];
+            $answer->Detail = $this->c2s_convert($data['answer' . ($i + 1)]);
             if ($result != ($i + 1)){
                 $answer->Logical = 0;
             }
@@ -156,14 +157,14 @@ class AnswersController extends Controller
     private static $clientTag = ['[u]', '[/u]'];
     public static $serverTag = ['<u>', '</u>'];
 
-    public function c2s_convert($s){
+    public static function c2s_convert($s){
         for($i = 0; $i < count(AnswersController::$clientTag); $i++){
             $s = str_replace(AnswersController::$clientTag[$i], AnswersController::$serverTag[$i], $s);
         }
         return $s;
     }
 
-    public function s2c_convert($s){
+    public static function s2c_convert($s){
         for($i = 0; $i < count(AnswersController::$clientTag); $i++){
             $s = str_replace(AnswersController::$serverTag[$i], AnswersController::$clientTag[$i], $s);
         }
@@ -182,7 +183,6 @@ class AnswersController extends Controller
         if (!AuthController::checkPermission()) {
             return redirect('/');
         }
-//        dd($request->all());
 
         $data = $request->all();
         $newCount = $data['numAnswer'];
@@ -221,7 +221,7 @@ class AnswersController extends Controller
 
         // if $newCount > $oldCount => insert new record
         for($i = $oldCount; $i < $newCount; $i++){
-            $this->add_answer($id, $result != ($i + 1) ? 0 : 1, $data['answer' . ($i + 1)]);
+            $this->add_answer($id, $result != ($i + 1) ? 0 : 1, $this->c2s_convert($data['answer' . ($i + 1)]));
         }
 
 //        return redirect('answer/' . $id . '/edit');

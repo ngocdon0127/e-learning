@@ -76,7 +76,10 @@ class PostsController extends Controller
     }
 
     public function viewPost($postID){
-        $post = Posts::findOrNew($postID)->toArray();
+        $post = Posts::findOrNew($postID);
+        $post->visited++;
+        $post->update();
+        $post = $post->toArray();
         $photo = $post['Photo'];
         $questions = Questions::where('PostID', '=', $postID)->get()->toArray();
         $bundle = array();
