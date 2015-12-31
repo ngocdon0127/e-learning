@@ -4,6 +4,7 @@
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="_token" content="{!! csrf_token() !!}"/>
 	@if (auth()->user())
 		@if (auth()->user()->admin == '1')
 			<meta http-equiv="refresh" content="1, url='/admin'" />
@@ -24,8 +25,36 @@
 		<script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
 		<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 	<![endif]-->
+	@if (auth() && (auth()->user()))
+	<script type="text/javascript">
+		function saveIP() {
+			console.log('start ajax');
+			$.ajax({
+				url: "/trackip",
+				type: "POST",
+				beforeSend: function (xhr) {
+					var token = $('meta[name="_token"]').attr('content');
+
+					if (token) {
+						return xhr.setRequestHeader('X-CSRF-TOKEN', token);
+					}
+				},
+				data: {UserID: {!! auth()->user()->getAuthIdentifier() !!} },
+				success: function (data) {
+					console.log(data);
+				}, error: function () {
+					console.log("error!!!!");
+				}
+			}); //end of ajax
+		}
+	</script>
+	@endif
 </head>
+@if (auth() && (auth()->user()))
+<body onload="saveIP()">
+@else
 <body>
+@endif
 	<nav class="navbar navbar-default">
 		<div class="container-fluid">
 			<div class="navbar-header">

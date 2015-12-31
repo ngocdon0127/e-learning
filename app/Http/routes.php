@@ -117,3 +117,8 @@ post('/timeonline', [
     'as' => 'count.timeonline',
     'uses' => 'TimesController@incTimeOnline'
 ]);
+
+post('/trackip', [
+    'as' => 'count.ip',
+    'uses' => 'TimesController@trackip'
+]);

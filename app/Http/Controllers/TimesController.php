@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Courses;
+use App\Logins;
 use App\Posts;
 use App\User;
 use App\Useronlines;
@@ -62,31 +63,34 @@ class TimesController extends Controller
         $record->delete();
         return;
 
+    }
 
+    public function getUserIP(){
+        if(!empty($_SERVER['HTTP_CLIENT_IP'])){
+            //check ip from share internet
+            $ip = $_SERVER['HTTP_CLIENT_IP'];
+        }else if(!empty($_SERVER['HTTP_X_FORWARDED_FOR'])){
+            //to check ip is pass from proxy
+            $ip = $_SERVER['HTTP_X_FORWARDED_FOR'];
+        }else{
+            $ip = $_SERVER['REMOTE_ADDR'];
+        }
+        return $ip;
+    }
 
-
-//        $record = Useronlines::where('UserID', '=', $UserID)->get();
-//        if (count($record->toArray()) < 1){
-//            // The first time this user log in.
-//            $useronline = new Useronlines();
-//            $useronline->UserID = $UserID;
-//            $useronline->save();
-//            return;
-//        }
-//
-//        // If user is already logged in.
-//        $record = $record->first();
-//        $record->TotalPage++;
-//        $oldDateTime = $record->updated_at->getTimestamp();
-//        $record->update();
-//        $newDateTime = $record->updated_at->getTimestamp();
-//        $diff = $newDateTime - $oldDateTime;
-//        if ($diff < TimesController::$timeToExit ){
-//            $user = User::find($UserID);
-//            $user->TotalHoursOnline += $diff / 3600.0;
-//            $user->update();
-//        }
-//        return;
+    public function trackIP(Request $request){
+        echo 'start saving ip';
+        $data = $request->all();
+        $UserID = $data['UserID'];
+        $ip = $this->getUserIP();
+        $record = Logins::where('UserID', '=', $UserID)->where('ip', 'LIKE', $ip)->get();
+        if (count($record->toArray()) < 1){
+            $login = new Logins();
+            $login->UserID = $UserID;
+            $login->ip = $ip;
+            $login->save();
+            echo "\n ip saved";
+        }
     }
 
     public function incTimePlay(Request $request){
