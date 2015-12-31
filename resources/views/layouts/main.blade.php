@@ -12,7 +12,7 @@
 	<meta name="_token" content="{!! csrf_token() !!}"/>
 	@if (auth() && (auth()->user()))
 	<script type="text/javascript">
-		function markTimeOnline() {
+		function markTimeOnline(isUnload) {
 			$.ajax({
 				url: "/timeonline",
 				type: "POST",
@@ -23,7 +23,7 @@
 						return xhr.setRequestHeader('X-CSRF-TOKEN', token);
 					}
 				},
-				data: {UserID: {!! auth()->user()->getAuthIdentifier() !!} },
+				data: {UserID: {!! auth()->user()->getAuthIdentifier() !!}, unload: isUnload },
 				success: function (data) {
 					console.log(data);
 				}, error: function () {
@@ -31,13 +31,18 @@
 				}
 			}); //end of ajax
 		}
+		window.onbeforeunload = closingCode;
+		function closingCode(){
+			markTimeOnline(1);
+			return null;
+		}
 	</script>
 	@endif
 	<script type="text/javascript" src="http://js.nicedit.com/nicEdit-latest.js"></script>
 	@yield('head.css')
 </head>
 @if (auth() && (auth()->user()))
-<body onload="markTimeOnline()">
+<body onload="markTimeOnline(0)">
 @else
 <body>
 @endif

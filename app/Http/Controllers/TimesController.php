@@ -21,16 +21,31 @@ class TimesController extends Controller
 //        echo 'data';
         $data = $request->all();
         $UserID = $data['UserID'];
-        $record = Useronlines::where('UserID', '=', $UserID)->get();
-        if (count($record->toArray()) < 1){
-            // The first time this user log in.
+        $unload = $data['unload'];
+
+        // If the page is loaded
+        if ($unload == 0){
+            Useronlines::where('UserID', '=', $UserID)->delete();
             $useronline = new Useronlines();
             $useronline->UserID = $UserID;
             $useronline->save();
+            $user = User::find($UserID);
+            if (count($user->toArray()) < 1)
+                return;
+            $user->TotalPages++;
+            $user->update();
             return;
         }
 
-        // If user is already logged in.
+        // If the page is about to be unloaded
+        // <=>
+        // User is navigating to another page or another site or exit.
+        $record = Useronlines::where('UserID', '=', $UserID)->get();
+        if (count($record->toArray()) < 1){
+            // something wrong
+            return;
+        }
+        // Increase Time Online of User
         $record = $record->first();
         $record->TotalPage++;
         $oldDateTime = $record->updated_at->getTimestamp();
@@ -42,7 +57,36 @@ class TimesController extends Controller
             $user->TotalHoursOnline += $diff / 3600.0;
             $user->update();
         }
+
+        // And delete the record
+        $record->delete();
         return;
+
+
+
+
+//        $record = Useronlines::where('UserID', '=', $UserID)->get();
+//        if (count($record->toArray()) < 1){
+//            // The first time this user log in.
+//            $useronline = new Useronlines();
+//            $useronline->UserID = $UserID;
+//            $useronline->save();
+//            return;
+//        }
+//
+//        // If user is already logged in.
+//        $record = $record->first();
+//        $record->TotalPage++;
+//        $oldDateTime = $record->updated_at->getTimestamp();
+//        $record->update();
+//        $newDateTime = $record->updated_at->getTimestamp();
+//        $diff = $newDateTime - $oldDateTime;
+//        if ($diff < TimesController::$timeToExit ){
+//            $user = User::find($UserID);
+//            $user->TotalHoursOnline += $diff / 3600.0;
+//            $user->update();
+//        }
+//        return;
     }
 
     public function incTimePlay(Request $request){
