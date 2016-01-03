@@ -36,13 +36,33 @@
 			markTimeOnline(1);
 			return null;
 		}
+		function saveIP() {
+			console.log('start ajax');
+			$.ajax({
+				url: "/trackip",
+				type: "POST",
+				beforeSend: function (xhr) {
+					var token = $('meta[name="_token"]').attr('content');
+
+					if (token) {
+						return xhr.setRequestHeader('X-CSRF-TOKEN', token);
+					}
+				},
+				data: {UserID: {!! auth()->user()->getAuthIdentifier() !!} },
+				success: function (data) {
+					console.log(data);
+				}, error: function () {
+					console.log("error!!!!");
+				}
+			}); //end of ajax
+		}
 	</script>
 	@endif
 	<script type="text/javascript" src="http://js.nicedit.com/nicEdit-latest.js"></script>
 	@yield('head.css')
 </head>
 @if (auth() && (auth()->user()))
-<body onload="markTimeOnline(0)">
+<body onload="markTimeOnline(0); saveIP()">
 @else
 <body>
 @endif

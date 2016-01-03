@@ -15,7 +15,7 @@ Cập nhật đáp án
         </ul>
         <h1 class="title">Thêm câu trả lời mới</h1>
         <!-- <div class="col-sm-9"> -->
-        <h2>Câu hỏi trọng âm => Bôi đen + Click Gạch chân</h2>
+        <h2>Câu hỏi phát âm => Bôi đen + Click Gạch chân</h2>
             {!! Form::open(['method' => 'PUT', 'name' => 'editAnswerForm', 'url' => '/admin/editanswer/' . $QuestionID,'class'=>'control-label']) !!}
             
             <div class="form-group">

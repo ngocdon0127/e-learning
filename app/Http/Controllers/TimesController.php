@@ -83,11 +83,18 @@ class TimesController extends Controller
         $data = $request->all();
         $UserID = $data['UserID'];
         $ip = $this->getUserIP();
-        $record = Logins::where('UserID', '=', $UserID)->where('ip', 'LIKE', $ip)->get();
+        $browser = get_browser(null, true);
+        $record = Logins::where('UserID', '=', $UserID)->where('ip', 'LIKE', $ip)->where('Browser', 'LIKE', $browser['parent'])->get();
         if (count($record->toArray()) < 1){
             $login = new Logins();
             $login->UserID = $UserID;
             $login->ip = $ip;
+            $login->Browser = $browser['parent'];
+            $login->BrowserFullName = $browser['browser_name_pattern'];
+            $login->Platform = $browser['platform'];
+            $login->UserAgent = $_SERVER['HTTP_USER_AGENT'];
+            $login->Device = $browser['device_type'];
+            $login->Pointing = $browser['device_pointing_method'];
             $login->save();
             echo "\n ip saved";
         }
@@ -98,5 +105,12 @@ class TimesController extends Controller
         $UserID = $data['UserID'];
         $PostID = $data['PostID'];
         
+    }
+
+    public function br(){
+//        echo $_SERVER['HTTP_USER_AGENT'] . "\n\n";
+
+        $browser = get_browser(null, true);
+        dd($browser);
     }
 }
