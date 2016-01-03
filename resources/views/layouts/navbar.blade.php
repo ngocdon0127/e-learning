@@ -53,7 +53,7 @@
 				<li class="dropdown">
 					<a href="#" style="text-decoration: none;" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">{{ auth()->user()->name }} <span class="caret"></span></a>
 					<ul class="dropdown-menu" role="menu">
-						<li><a href="{{ url('/auth/logout') }}">Logout</a></li>
+						<li><a href="{{ url('/auth/logout') }}" onclick='logout = 1;'>Logout</a></li>
 					</ul>
 				</li>
 			<!--<a class="btn btn-primary" href="/auth/logout" role="button">Logout</a>-->

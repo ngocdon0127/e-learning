@@ -12,6 +12,7 @@
 	<meta name="_token" content="{!! csrf_token() !!}"/>
 	@if (auth() && (auth()->user()))
 	<script type="text/javascript">
+		var logout = 0;
 		function markTimeOnline(isUnload) {
 			$.ajax({
 				url: "/timeonline",
@@ -33,7 +34,8 @@
 		}
 		window.onbeforeunload = closingCode;
 		function closingCode(){
-			markTimeOnline(1);
+			if (logout == 0)
+				markTimeOnline(1);
 			return null;
 		}
 		function saveIP() {
@@ -62,7 +64,7 @@
 	@yield('head.css')
 </head>
 @if (auth() && (auth()->user()))
-<body onload="markTimeOnline(0); saveIP()">
+<body onload="markTimeOnline(0);">
 @else
 <body>
 @endif
