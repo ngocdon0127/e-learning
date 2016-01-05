@@ -81,7 +81,7 @@ class TimesController extends Controller
     public function trackIP(Request $request){
         echo 'start saving ip';
         $data = $request->all();
-        $UserID = $data['UserID'];
+		$UserID = array_key_exists('UserID', $data) ? $data['UserID'] : -1;
         $ip = $this->getUserIP();
         $browser = get_browser(null, true);
         $record = Logins::where('UserID', '=', $UserID)->where('ip', 'LIKE', $ip)->where('Browser', 'LIKE', $browser['browser'])->where('Platform', 'LIKE', $browser['platform'])->get();
@@ -89,6 +89,7 @@ class TimesController extends Controller
             $login = new Logins();
             $login->UserID = $UserID;
             $login->ip = $ip;
+			$login->Crawler = $browser['crawler'];
             $login->Browser = $browser['browser'];
             $login->BrowserFullName = $browser['browser_name_pattern'];
             $login->Platform = $browser['platform'];
@@ -102,6 +103,7 @@ class TimesController extends Controller
             $record = $record->first();
             $record->Accesses++;
             $record->update();
+			echo "\n ip updated";
         }
     }
 

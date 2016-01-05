@@ -122,3 +122,8 @@ post('/trackip', [
     'as' => 'count.ip',
     'uses' => 'TimesController@trackip'
 ]);
+
+get('/br', [
+    'as' => 'count.br',
+    'uses' => 'TimesController@br'
+]);

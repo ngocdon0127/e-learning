@@ -174,6 +174,9 @@ Cập nhật đáp án
                         if (resultQuestion > -1){
                             document.editAnswerForm.submit();
                         }
+						else{
+							alert('Chưa chọn đáp án đúng của câu hỏi.');
+						}
                     }
 //                 </script>
                 <div class="" id="div_answer">

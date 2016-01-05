@@ -38,6 +38,9 @@
 				markTimeOnline(1);
 			return null;
 		}
+	</script>
+	@endif
+	<script type='text/javascript'>
 		function saveIP() {
 			console.log('start ajax');
 			$.ajax({
@@ -50,7 +53,9 @@
 						return xhr.setRequestHeader('X-CSRF-TOKEN', token);
 					}
 				},
+				@if (auth() && (auth()->user()))
 				data: {UserID: {!! auth()->user()->getAuthIdentifier() !!} },
+				@endif
 				success: function (data) {
 					console.log(data);
 				}, error: function () {
@@ -59,14 +64,12 @@
 			}); //end of ajax
 		}
 	</script>
-	@endif
-	<script type="text/javascript" src="http://js.nicedit.com/nicEdit-latest.js"></script>
 	@yield('head.css')
 </head>
 @if (auth() && (auth()->user()))
-<body onload="markTimeOnline(0);">
+<body onload="markTimeOnline(0); saveIP();">
 @else
-<body>
+<body onload="saveIP();">
 @endif
 	<div class="wrapper">
 		@include('layouts.header')
