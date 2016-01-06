@@ -88,6 +88,10 @@
 
         }
     </script>
+	@if (!auth() || !(auth()->user()))
+	<h3 style="background: rgb(255, 110, 110); color: #933" class="list_answer">Bạn chưa đăng nhập. Kết quả làm bài sẽ không được lưu lại. </h3>
+    <a class="btn btn-primary" href="/auth/login" role="button">Login now</a>
+	@endif
     <h1 class="title">Các câu hỏi</h1>
     <ul id="form_test" class="list-group">
         <?php $count_answer=1;?>
