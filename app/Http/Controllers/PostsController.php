@@ -77,12 +77,15 @@ class PostsController extends Controller
     }
 
     public function viewPost($postID){
+		if (!auth() || !(auth()->user())){
+			return redirect('/auth/login');
+		}
         $post = Posts::findOrNew($postID);
         $post->visited++;
         $post->update();
         $post = $post->toArray();
         $courseID = $post['CourseID'];
-		if (auth() && (auth()->user())){
+		// if (auth() && (auth()->user())){
 			$userID = auth()->user()->getAuthIdentifier();
 			$tmp = Learning::where('UserID', '=', $userID)->where('CourseID', '=', $courseID)->get()->toArray();
 			if (count($tmp) < 1){
@@ -94,7 +97,7 @@ class PostsController extends Controller
 				$course->NoOfUsers++;
 				$course->update();
 			}
-		}
+		// }
         $photo = $post['Photo'];
         $questions = Questions::where('PostID', '=', $postID)->get()->toArray();
         $bundle = array();

@@ -97,7 +97,11 @@
         <?php $count_answer=1;?>
         @foreach($Questions as $q)
             <h2 class="title">Câu hỏi số <?php echo $count_answer++; ?>:</h2>
-                <a style="text-decoration: none;" href="/question/{{$q['id']}}"><h4>{{$q['Question']}} : {{$q['Description']}}</h4></a>
+				@if ((auth()->user()) && (auth()->user()->admin == 1))
+					<a style="text-decoration: none;" href="/question/{{$q['id']}}"><h4>{{$q['Question']}} : {{$q['Description']}}</h4></a>
+				@else
+					<h4>{{$q['Question']}} : {{$q['Description']}}</h4>
+				@endif
             @if ($q['Photo'] != null)
             <li class="list-group-item list-group-item-info">
                 <img class="img-responsive" src="/images/imageQuestion/{{$q['Photo']}}" />

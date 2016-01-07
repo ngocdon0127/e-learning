@@ -53,7 +53,7 @@ class TimesController extends Controller
         $record->update();
         $newDateTime = $record->updated_at->getTimestamp();
         $diff = $newDateTime - $oldDateTime;
-        if ($diff < TimesController::$timeToExit ){
+        if (($diff < TimesController::$timeToExit ) && ($diff > 0)){
             $user = User::find($UserID);
             $user->TotalHoursOnline += $diff / 3600.0;
             $user->update();
