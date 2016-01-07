@@ -18,6 +18,9 @@ class QuestionsController extends Controller
 
     public function viewQuestion($QuestionID){
         $question = Questions::findOrNew($QuestionID)->toArray();
+        if (count($question) < 1){
+            return view('errors.404');
+        }
         $photo = $question['Photo'];
         $answer = Answers::where('QuestionID', '=', $QuestionID)->get()->toArray();
         $result = array('Question' => $question['Question'], 'Description' => $question['Description'], 'QuestionID' => $QuestionID, 'Answers' => $answer, 'Photo' => $photo);

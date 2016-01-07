@@ -80,6 +80,10 @@ class PostsController extends Controller
 		if (!auth() || !(auth()->user())){
 			return redirect('/auth/login');
 		}
+        $post = Posts::findOrNew($postID)->toArray();
+        if (count($post) < 1){
+            return view('errors.404');
+        }
         $post = Posts::findOrNew($postID);
         $post->visited++;
         $post->update();
