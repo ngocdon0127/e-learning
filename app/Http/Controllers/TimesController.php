@@ -22,6 +22,9 @@ class TimesController extends Controller
 //        echo 'data';
         $data = $request->all();
         $UserID = $data['UserID'];
+		if (!auth() || (auth()->user()->id != $UserID)){
+			return;
+		}
         $unload = $data['unload'];
 
         // If the page is loaded
@@ -82,6 +85,11 @@ class TimesController extends Controller
         echo 'start saving ip';
         $data = $request->all();
 		$UserID = array_key_exists('UserID', $data) ? $data['UserID'] : -1;
+		if ($UserID != -1){
+			if (!auth() || (auth()->user()->id != $UserID)){
+				return;
+			}
+		}
         $ip = $this->getUserIP();
         $browser = get_browser(null, true);
         $record = Logins::where('UserID', '=', $UserID)->where('ip', 'LIKE', $ip)->where('Browser', 'LIKE', $browser['browser'])->where('Platform', 'LIKE', $browser['platform'])->get();

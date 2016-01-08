@@ -123,4 +123,5 @@
     <div class="form-control" id="resultText" style="display: none; height: 200px;">
         <b class="title" id="writeResult"></b>
     </div>
+	<a class="btn btn-primary" href="#">Back to top</a>
 @endsection

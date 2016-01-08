@@ -54,9 +54,9 @@
 						</div>
 						<div class="form-group">
 							<div class="col-md-6 col-md-offset-4">
-								<a class="btn btn-primary" style="width: 250px;" href="/auth/facebook">Sign in witn Facebook</a>	
+								<a class="btn btn-primary" style="width: 250px;" href="/auth/facebook">Sign in with Facebook</a>	
 							</div>
-							<div class="col-md-6 col-md-offset-4">
+							<div style="padding-top: 5px;" class="col-md-6 col-md-offset-4">
 								<a class="btn btn-danger" style="width: 250px;" href="/auth/google">Sign in with Google</a>
 							</div>
 						</div>
