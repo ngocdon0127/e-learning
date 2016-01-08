@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Answers;
 use App\Comments;
 use App\Courses;
+use App\Doexams;
 use App\Http\Controllers\Auth\AuthController;
 use App\Learning;
 use App\Posts;
@@ -90,18 +91,27 @@ class PostsController extends Controller
         $post = $post->toArray();
         $courseID = $post['CourseID'];
 		// if (auth() && (auth()->user())){
-			$userID = auth()->user()->getAuthIdentifier();
-			$tmp = Learning::where('UserID', '=', $userID)->where('CourseID', '=', $courseID)->get()->toArray();
-			if (count($tmp) < 1){
-				$learning = new Learning();
-				$learning->UserID = $userID;
-				$learning->CourseID = $courseID;
-				$learning->save();
-				$course = Courses::find($courseID);
-				$course->NoOfUsers++;
-				$course->update();
-			}
+        $userID = auth()->user()->getAuthIdentifier();
+        $tmp = Learning::where('UserID', '=', $userID)->where('CourseID', '=', $courseID)->get()->toArray();
+        if (count($tmp) < 1){
+            $learning = new Learning();
+            $learning->UserID = $userID;
+            $learning->CourseID = $courseID;
+            $learning->save();
+            $course = Courses::find($courseID);
+            $course->NoOfUsers++;
+            $course->update();
+        }
+
+        // Insert a new record into DoExams Table to mark the time user start answering questions in post.
+        $exam = new Doexams();
+        $exam->UserID = $userID;
+        $exam->PostID = $postID;
+        $token = md5($userID . rand(), false) . md5($postID . rand(), false);
+        $exam->token = $token;
+        $exam->save();
 		// }
+
         $photo = $post['Photo'];
         $questions = Questions::where('PostID', '=', $postID)->get()->toArray();
         $bundle = array();
@@ -114,7 +124,17 @@ class PostsController extends Controller
 			if (count($answer) > 0) $maxscore++;
         }
         $Comments = Comments::all()->toArray();
-        $result = array('Comments' => json_encode($Comments), 'Title' => $post['Title'], 'PostID' => $postID, 'Questions' => $questions, 'Photo' => $photo, 'Bundle' => $bundle, 'BundleAnswers' => $bundleAnswer, 'MaxScore' => $maxscore);
+        $result = array(
+            'Comments' => json_encode($Comments),
+            'Title' => $post['Title'],
+            'PostID' => $postID,
+            'Questions' => $questions,
+            'Photo' => $photo,
+            'Bundle' => $bundle,
+            'BundleAnswers' => $bundleAnswer,
+            'MaxScore' => $maxscore,
+            'Token' => $token
+        );
 //        dd($result);
         return view('viewpost', $result);
 //        return var_dump($bundleAnswer);

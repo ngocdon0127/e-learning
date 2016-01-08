@@ -81,6 +81,27 @@
                 $('html, body').animate({
                     scrollTop: $("#resultText").offset().top
                 }, 1000);
+
+                console.log('diem: ' + score);
+                // save result using AJAX
+                $.ajax({
+                    url: "/finishexam",
+                    type: "POST",
+                    beforeSend: function (xhr) {
+                        var token = $('meta[name="_token"]').attr('content');
+
+                        if (token) {
+                            return xhr.setRequestHeader('X-CSRF-TOKEN', token);
+                        }
+                    },
+                    data: {Score:  score, token: ob('token').value},
+                    success: function (data) {
+                        ob('saveResult').innerHTML = data;
+                    }, error: function (data) {
+                        ob('saveResult').innerHTML = data;
+                    }
+                }); //end of ajax
+
             }
 //                obj.open('GET', '/ajax/checkanswer/' + questionID + '/' + answerID, true);
 //                ob.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
@@ -94,6 +115,7 @@
 	@endif
     <h1 class="title">Các câu hỏi</h1>
     <ul id="form_test" class="list-group">
+        <input id='token' type="text" value="{{$Token}}" style="display: none;" readonly />
         <?php $count_answer=1;?>
         @foreach($Questions as $q)
             <h2 class="title">Câu hỏi số <?php echo $count_answer++; ?>:</h2>
@@ -121,7 +143,8 @@
         @endforeach
     </ul>
     <div class="form-control" id="resultText" style="display: none; height: 200px;">
-        <b class="title" id="writeResult"></b>
+        <b class="title" id="writeResult"></b> <br />
+        <b class="title" id="saveResult"></b>
     </div>
 	<a class="btn btn-primary" href="#">Back to top</a>
 @endsection

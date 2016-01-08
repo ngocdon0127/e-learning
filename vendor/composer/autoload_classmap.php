@@ -9,6 +9,7 @@ return array(
     'CreateAnswersTable' => $baseDir . '/database/migrations/2015_12_06_105338_create_answers_table.php',
     'CreateCommentsTable' => $baseDir . '/database/migrations/2015_12_15_092136_create_comments_table.php',
     'CreateCoursesTable' => $baseDir . '/database/migrations/2015_12_06_105320_create_courses_table.php',
+    'CreateDoexamsTable' => $baseDir . '/database/migrations/2016_01_09_001559_create_doexams_table.php',
     'CreateFormatsTable' => $baseDir . '/database/migrations/2015_12_06_105354_create_formats_table.php',
     'CreateLearningTable' => $baseDir . '/database/migrations/2015_12_06_105409_create_learning_table.php',
     'CreateLoginsTable' => $baseDir . '/database/migrations/2015_12_31_114945_create_logins_table.php',

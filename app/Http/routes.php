@@ -127,3 +127,8 @@ get('/br', [
     'as' => 'count.br',
     'uses' => 'TimesController@br'
 ]);
+
+post('/finishexam', [
+    'as' => 'count.score',
+    'uses' => 'DoexamsController@savescore'
+]);
