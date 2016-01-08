@@ -94,7 +94,11 @@
                             return xhr.setRequestHeader('X-CSRF-TOKEN', token);
                         }
                     },
-                    data: {Score:  score, token: ob('token').value},
+                    data: {
+                        Score:  score,
+                        MaxScore: maxScore,
+                        token: ob('token').value
+                    },
                     success: function (data) {
                         ob('saveResult').innerHTML = data;
                     }, error: function (data) {

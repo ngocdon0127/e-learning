@@ -30,7 +30,7 @@ class DoexamsController extends Controller
             echo 'Kết quả chưa được lưu.';
             return;
         }
-        $record->Score = $request['Score'];
+        $record->Score = $request['Score'] . '/' . $request['MaxScore'];
         $record->update();
         $oldDateTime = $record->created_at->getTimestamp();
         $newDateTime = $record->updated_at->getTimestamp();
