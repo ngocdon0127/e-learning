@@ -4,7 +4,7 @@
   		<h1 class="header">Evangels English</h1>
   		<p class="header">Know English. Know the World</p>
   		<p class="header">
-  			<a class="btn btn-primary btn-lg">Learn more && more</a>
+  			<a class="btn btn-primary btn-lg">Learn more &&& more</a>
   		</p>
   	</div>
   </div>
