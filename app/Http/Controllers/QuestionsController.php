@@ -23,7 +23,14 @@ class QuestionsController extends Controller
         }
         $photo = $question['Photo'];
         $answer = Answers::where('QuestionID', '=', $QuestionID)->get()->toArray();
-        $result = array('Question' => $question['Question'], 'Description' => $question['Description'], 'QuestionID' => $QuestionID, 'Answers' => $answer, 'Photo' => $photo);
+        $result = array(
+            'PostID' => $question['PostID'], 
+            'Question' => $question['Question'], 
+            'Description' => $question['Description'], 
+            'QuestionID' => $QuestionID, 
+            'Answers' => $answer, 
+            'Photo' => $photo
+        );
         return view('viewquestion', $result);
     }
 

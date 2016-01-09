@@ -23,6 +23,7 @@
     <a class="btn btn-info" href="{{route('question.edit', $QuestionID)}}">Sửa câu hỏi</a>
     <a class="btn btn-info" href="{{route('answer.edit', $QuestionID)}}">Sửa đáp án</a>
     <button class="btn btn-info" href="" onclick="del()">Xóa câu hỏi này</button>
+    <a class="btn btn-info" href="/post/{{$PostID}}">Quay lại bài đăng</a>
     <script type="text/javascript">
         function del(){
             if (confirm('Xác nhận xóa?') == true){
