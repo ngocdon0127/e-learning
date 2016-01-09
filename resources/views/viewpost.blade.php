@@ -100,9 +100,9 @@
                         token: ob('token').value
                     },
                     success: function (data) {
-                        ob('saveResult').innerHTML = data;
+                        console.log(data);
                     }, error: function (data) {
-                        ob('saveResult').innerHTML = data;
+                        console.log(data);
                     }
                 }); //end of ajax
 
@@ -148,7 +148,6 @@
     </ul>
     <div class="form-control" id="resultText" style="display: none; height: 200px;">
         <b class="title" id="writeResult"></b> <br />
-        <b class="title" id="saveResult"></b>
     </div>
 	<a class="btn btn-primary" href="#">Back to top</a>
 @endsection

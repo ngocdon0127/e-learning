@@ -4,5 +4,6 @@
 .idea/*
 .htacess
 .env
+.DS_Store
 public/images/imagePost/*
 public/images/imageQuestion/*
