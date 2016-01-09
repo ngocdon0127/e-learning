@@ -135,7 +135,7 @@ class PostsController extends Controller
             'MaxScore' => $maxscore,
             'Token' => $token
         );
-//        dd($result);
+       // dd($result);
         return view('viewpost', $result);
 //        return var_dump($bundleAnswer);
     }
