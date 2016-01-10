@@ -1,14 +1,14 @@
 
 /*==================SECTION===========================*/
-/**{
-  margin: 0;
-  padding:0;
-}*/
 html,
 body {
    margin:0;
    padding:0;
    height:100%;
+}
+
+body{
+  background: #337ab7;
 }
 .content{
   padding-top: 3%;
@@ -18,44 +18,44 @@ body {
   min-height:100%;
   position:relative;
   overflow: hidden;
-  /*padding-bottom: 7%;*/
   background: #fafafa;
 }
 
-/*.footer:after{
-  clear: both;
-}
-.footer:before,
-.footer:after{
-  content: " ";
-  display: table;
-}
-.footer{
-  position: absolute;
-  width: 100%;
-  bottom: 0;
-  height: 2%;
-  padding: 10px;
-  font-size: 25px;
-  font-weight: bold;
-  color: green;
-  background: #ebebeb;
-}*/
-/*.col-md-6{
- float: none;
- margin: 0  auto;
-}*/
-/*==================END SECTION===========================*/
 .responsive{
   border: 1px solid green;
 }
 
+header > .jumbotron > .container > .header{
+  font-family: font-family: 'Droid Sans', sans-serif;
+}
 
 /*==================NAV===========================*/
 
 a:hover{
-  color: red;
+  color: #fdc20e;
 }
+
+a#homesmall{
+  font-family: 'Oswald', sans-serif;
+  text-decoration: none;
+  font-size: 20px; 
+  color: #89a1d4; 
+}
+
+nav{
+  background-color: #4aa3df;
+}
+
+li#navbar-button:hover{
+  background-color: #f3cf1b;
+}
+a#dropDown:hover{
+  background-color: #f3cf1b;
+}
+a#dropDown:visited{
+  background-color: #f3cf1b;
+}
+
 .a {
   padding-left: 10px;
   padding-right: 10px;
@@ -70,11 +70,37 @@ a:hover{
   font-weight: bold;
   font-size: 20px;
 }
+
+.navbar-default .navbar-text{
+  color: #fff;
+}
 .navbar-button{
-  color: #406feb;
+  color: #f3cf1b;
   font-size: 16px;
 }
 /*==================END NAV===========================*/
+
+/*==================FROM HEADER===========================*/
+div#head{
+  padding-bottom: 0px;
+}
+
+ul#head li{
+  display: inline;
+}
+
+header{
+  background-color: #ffffff;
+}
+
+p.header{
+  color: #66c0cf;
+}
+
+h1.header{
+  color: #66c0cf;
+}
+/*==================END HEADER===========================*/
 
 
 /*==================FROM-H1===========================*/
@@ -105,15 +131,11 @@ img:hover{
 }
 .list-group-item{
   color: #ff3300;
-  /*font-weight: bold;*/
   font-size: 20px;
 }
 .list-group{
   padding:2% 0;
 }
-/*.form-horizontal .control-label{
-  text-align: left;
-}*/
 
 img {
   width: 100%;
@@ -136,7 +158,6 @@ li.list_answer:hover{
     list-style: none;
     display: list-item;
     border-radius: 10px;
-    /* text-align: -webkit-match-parent; */
 }
 ul#form_test img:hover{
   opacity: 0.85;
@@ -159,9 +180,9 @@ ul#form_test img:hover{
 /* Small devices (tablets, 768px and up) */
 @media (max-width: 479px){
   header{
-    height: 0px;
-    padding: 0px;
-    margin-bottom: 0px;
+    /*height: 0px;*/
+    /*padding: 0px;*/
+    /*margin-bottom: 0px;*/
     display: none;
   }
   footer{
@@ -176,11 +197,25 @@ ul#form_test img:hover{
 @media (min-width: 480px){
   header{
     font-size: 30px;
-    /*padding-top: 10px;*/
+    height: 136px;
     font-weight: bold;
-    color: green;
     text-align: left;
     margin:0 auto;
+  }
+
+  div.header{
+
+  }
+
+   h1.header{
+    font-size: 30px;
+    font-weight: bold;
+    text-align: left;
+    margin:0 auto;
+  }
+  p.header{
+    font-size: 20px;
+    margin: 0 auto;
   }
 
   footer{
@@ -190,29 +225,24 @@ ul#form_test img:hover{
     margin-left: 10%;
     margin-right: 10%;
   }
-  #HomeSmall{
+  #homesmall{
     display: none;
   }
 }
 @media (min-width: 768px) {
   h1.header{
-    font-size: 35px;
-    /*padding-top: 20px;*/
+    font-size: 30px;
     font-weight: bold;
-    color: green;
-    text-align: left;
     margin:0 auto;
   }
   p.header{
-    font-size: 25px;
-    text-align: left;
-    color: green;
+    font-size: 20px;
     margin: 0 auto;
   }
   footer{
     height: 40px;
   }
-  #HomeSmall{
+  #homesmall{
     display: none;
   }
   .content{
@@ -221,48 +251,22 @@ ul#form_test img:hover{
   }
 }
 
-/* Medium devices (desktops, 992px and up) */
-
-/*@media (min-width: 992px) {
-  header{
-    display: none;
-    font-size: 50px;
-    padding-top: 20px;
-    font-weight: bold;
-    color: yellow;
-    text-align: center;
-    margin:0 auto;
-  }
-  #HomeSmall{
-    display: none;
-  }
-  .content{
-    margin-left: 25%;
-    margin-right: 15%;
-  }
-}*/
-
 /* Large devices (large desktops, 1200px and up) */
 @media (min-width: 1200px) {
   h1.header{
-    font-size: 38px;
-    /*padding-top: 20px;*/
+    font-size: 30px;
     font-weight: bold;
-    color: green;
-    text-align: center;
     margin:0 auto;
   }
   p.header{
-    font-size: 28px;
-    text-align: center;
-    color: green;
+    font-size: 20px;
     margin: 0 auto;
   }
   footer{
     height: 40px;
   }
 
-  #HomeSmall{
+  #homesmall{
     display: none;
   }
     .content{

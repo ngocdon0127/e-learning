@@ -27,21 +27,24 @@ get('/auth/google', [
 Route::controllers(['/auth' => 'Auth\AuthController', 'password' => 'Auth\PasswordController',]);
 Route::get ('/', 'PostsController@viewnewestposts');
 
-
-Route::get ('/admin/addquestion/{postid}', 'QuestionsController@addquestion');
-Route::post('/admin/addquestion/{postid}', 'QuestionsController@savequestion');
-Route::get ('/admin/addpost', 'PostsController@addpost');
-Route::post('/admin/addpost', 'PostsController@savepost');
-Route::get ('/admin/addcourse', 'CoursesController@addcourse');
-Route::post('/admin/addcourse', 'CoursesController@savecourse');
-Route::get ('/admin/addanswer/{postid}', 'AnswersController@addanswer');
-Route::post('/admin/addanswer/{postid}', 'AnswersController@saveanswer');
-Route::get ('/course/{courseid}', 'CoursesController@viewcourse');
-Route::get ('/post/{postid}', 'PostsController@viewpost');
-Route::get ('/question/{questionid}', 'QuestionsController@viewquestion');
-Route::get ('/ajax/checkcoursetitle/{title}', 'CoursesController@checkcoursetitle');
-
-
+Route::group(['prefix' => '/admin'], function(){
+    Route::get ('/addquestion/{postid}', 'QuestionsController@addquestion');
+    Route::post('/addquestion/{postid}', 'QuestionsController@savequestion');
+    Route::get ('/addpost', 'PostsController@addpost');
+    Route::post('/addpost', 'PostsController@savepost');
+    Route::get ('/admin/addcourse', 'CoursesController@addcourse');
+    Route::post('/addcourse', 'CoursesController@savecourse');
+    Route::get ('/addanswer/{postid}', 'AnswersController@addanswer');
+    Route::post('/addanswer/{postid}', 'AnswersController@saveanswer');
+    put('/editcourse/{id}', [
+        'as' => 'course.update',
+        'uses' => 'CoursesController@update'
+    ]);
+});
+    Route::get ('/course/{courseid}', 'CoursesController@viewcourse');
+    Route::get ('/post/{postid}', 'PostsController@viewpost');
+    Route::get ('/question/{questionid}', 'QuestionsController@viewquestion');
+    Route::get ('/ajax/checkcoursetitle/{title}', 'CoursesController@checkcoursetitle');
 get('/admin', [
     'as' => 'admin',
     'uses' => 'AdminController@index'
@@ -51,11 +54,6 @@ get('/admin', [
 get('/course/{id}/edit', [
     'as' => 'course.edit',
     'uses' => 'CoursesController@edit'
-]);
-
-put('/admin/editcourse/{id}', [
-    'as' => 'course.update',
-    'uses' => 'CoursesController@update'
 ]);
 
 // edit post {id}
