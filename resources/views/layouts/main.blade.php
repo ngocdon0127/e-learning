@@ -8,6 +8,8 @@
 	<link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css">
 	<link rel="stylesheet" type="text/css" href="/css/bootstrap.css">
 	<link rel="stylesheet" type="text/css" href="/css/style.css">
+	<!-- <link href='https://fonts.googleapis.com/css?family=Droid+Sans:400,700' rel='stylesheet' type='text/css'> -->
+	<link href='https://fonts.googleapis.com/css?family=Oswald:700' rel='stylesheet' type='text/css'>
 	<link rel="stylesheet" type="text/css" href="/css/admin.css">
 	<meta name="_token" content="{!! csrf_token() !!}"/>
 	<meta name="description" content="Evangels English. Know English. Know the World" />
@@ -85,15 +87,20 @@
 	<div class="wrapper">
 		@include('layouts.header')
 		@include('layouts.navbar')
-		<!-- <div class="panel panel-default"> -->
+		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+		<div class="container">
+			<div class=" row">
+				<div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
 
-			<!-- <div class="content col-md-6 col-md-offset-3 col-sm-10 col-sm-offset-1 col-lg-6 col-lg-offset-3 "> -->
-			<div class="content col-lg-6 col-lg-offset-3">
-				<div class="row">
+				</div>
+				<div class=" col-lg-6 col-sm-12 col-md-6 col-xs-1">					
 					@yield('body.content')
 				</div>
+				<div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
+				</div>
 			</div>
-		<!-- </div> -->
+		</div>
+		</div>
 		@include('layouts.footer')
 	</div>
 		<script type="text/javascript" src="/js/jquery/jquery.js"></script>
