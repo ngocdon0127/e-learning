@@ -111,7 +111,7 @@
             else{
                 $('html, body').animate({
                     scrollTop: $("#title_question_" + nextQuestionID).offset().top
-                }, 1000);
+                }, 300);
             }
 //                obj.open('GET', '/ajax/checkanswer/' + questionID + '/' + answerID, true);
 //                ob.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');

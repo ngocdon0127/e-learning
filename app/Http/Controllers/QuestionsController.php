@@ -67,7 +67,8 @@ class QuestionsController extends Controller
 
 
         $question->update();
-        return redirect('/answer/' . $question->id . '/edit');
+        echo $question->id;
+        return;
     }
 
     /**
