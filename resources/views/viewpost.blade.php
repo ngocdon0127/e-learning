@@ -3,6 +3,14 @@
     Post {{$Title}}
 @endsection
 @section('body.content')
+    <div id="fb-root"></div>
+    <script>(function(d, s, id) {
+      var js, fjs = d.getElementsByTagName(s)[0];
+      if (d.getElementById(id)) return;
+      js = d.createElement(s); js.id = id;
+      js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.5&appId=1657402167852948";
+      fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));</script>
     <h1 class="title">Ảnh của post</h1>
     <li class="list-group-item">
         <img class="img-responsive" src="{{'/images/imagePost/' . $Photo}}" />
@@ -156,4 +164,5 @@
         <b class="title" id="writeResult"></b> <br />
     </div>
 	<a class="btn btn-primary" href="#">Back to top</a>
+    <div class="fb-comments" data-href="http://www.evangelsenglish.com" data-width="500" data-numposts="5"></div>
 @endsection
