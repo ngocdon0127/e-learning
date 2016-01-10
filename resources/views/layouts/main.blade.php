@@ -82,7 +82,7 @@
 				<div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
 
 				</div>
-				<div class=" col-lg-6 col-sm-12 col-md-6 col-xs-1">					
+				<div class=" col-lg-6 col-sm-12 col-md-6 col-xs-12">					
 					@yield('body.content')
 				</div>
 				<div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">

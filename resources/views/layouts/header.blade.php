@@ -9,8 +9,8 @@
 	  		<div style="padding-left: 15px;">
 			  	<ul id="head" style="list-style-type: none;">
 			  		<a href=""><li><img src="/images/headimages/facebook.png" class="img-circle" style="width: 35px; height: 35px;"></li></a>
-			  		<li><img src="/images/headimages/google.png" class="img-circle" style="width: 35px; height: 35px;"></li>
-			  		<li><img src="/images/headimages/Twitter.png" class="img-circle" style="width: 35px; height: 35px;"></li>
+			  		<a href=""><li><img src="/images/headimages/google.png" class="img-circle" style="width: 35px; height: 35px;"></li></a>
+			  		<a href=""><li><img src="/images/headimages/Twitter.png" class="img-circle" style="width: 35px; height: 35px;"></li></a>
 			  	</ul>
 			</div>
   		</div>
