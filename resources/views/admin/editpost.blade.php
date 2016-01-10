@@ -26,7 +26,11 @@
                <div class="form-group">
                   {!! Form::label('Description', 'Description : ',['class' => 'control-label']) !!}
                   {!! Form::text('Description', null,['class'=>'form-control']) !!}
-              </div>    
+              </div>
+              <div class="form-group">
+                  {!! Form::label('Hashtag', 'Hashtag : (mỗi tag cách nhau 1 dấu cách.) (ex: #grammar #PresentSimple)',['class' => 'control-label']) !!}
+                  {!! Form::text('Hashtag','',['class'=>'form-control']) !!}
+              </div>
               <div class="form-group">
                   {!! Form::label('', '',['class' => 'control-label']) !!}
                   {!! Form::label('Error', '',['id' => 'error', 'class' => 'control-label', 'style' => 'display: none;']) !!}
@@ -37,6 +41,7 @@
                          return document.getElementById(x);
                      }
                      ob('CourseID').value = {{$Post['CourseID']}};
+                     ob('Hashtag').value = '{!! $Hashtag !!}';
                      function displayError(x){
                          ob('error').style.display = 'block';
                          ob('error').innerHTML = x;
