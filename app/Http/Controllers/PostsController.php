@@ -8,6 +8,7 @@ use App\Courses;
 use App\Doexams;
 use App\Http\Controllers\Auth\AuthController;
 use App\Learning;
+use App\Logins;
 use App\Posts;
 use App\Questions;
 use Illuminate\Http\Request;
@@ -78,14 +79,21 @@ class PostsController extends Controller
     }
 
     public function viewPost($postID){
+
 		if (!auth() || !(auth()->user())){
             $browser = get_browser(null, true);
 
             // Allow crawler && Facebook Bot view post without logging in.
-            if (($browser['crawler'] != 1) && (stripos($browser['browser'], 'facebook') === false))
+            if (
+                ($browser['crawler'] != 1) &&
+                (stripos($_SERVER["HTTP_USER_AGENT"], 'facebook') === false) &&
+                (stripos($_SERVER["HTTP_USER_AGENT"], 'face') === false) &&
+                (stripos($_SERVER["HTTP_USER_AGENT"], 'google') === false)
+            )
 			    return redirect('/auth/login');
             $token = md5(rand(), false);
 		}
+
         $post = Posts::findOrNew($postID)->toArray();
         if (count($post) < 1){
             return view('errors.404');
