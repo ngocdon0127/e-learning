@@ -163,7 +163,9 @@
     <div class="form-control" id="resultText" style="display: none; height: 200px;">
         <b class="title" id="writeResult"></b> <br />
     </div>
-	<a class="btn btn-primary" href="#">Back to top</a>
+	<div>
+        <a class="btn btn-primary" href="#">Back to top</a>
+    </div>
     <div class="fb-comments" data-href="{!! 'http://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI']!!}" data-width="500" data-numposts="5"></div>
     <div class="fb-like" data-href="{!! 'http://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI']!!}" data-width="450" data-layout="standard" data-action="like" data-show-faces="true" data-share="true"></div>
 @endsection
