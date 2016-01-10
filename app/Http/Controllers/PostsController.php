@@ -193,7 +193,7 @@ class PostsController extends Controller
                 unset($rank[$key]);
             }
         }
-        asort($rank);
+        arsort($rank);
         $result = array();
         $posts = Posts::all();
         foreach ($rank as $key => $value) {
