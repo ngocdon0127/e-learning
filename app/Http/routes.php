@@ -130,3 +130,8 @@ post('/finishexam', [
     'as' => 'count.score',
     'uses' => 'DoexamsController@savescore'
 ]);
+
+get('/search', [
+    'as' => 'search',
+    'uses' => 'PostsController@searchpostsbyhashtag'
+]);

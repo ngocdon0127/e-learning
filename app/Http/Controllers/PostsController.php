@@ -167,6 +167,49 @@ class PostsController extends Controller
         return view('userindex')->with('Posts', $posts);
     }
 
+    public function searchPostsByHashtag(Request $request){
+        $data = $request->all();
+        preg_match_all('/\b([a-zA-Z0-9]+)\b/', strtoupper($data['HashtagSearch']), $matches, PREG_PATTERN_ORDER);
+        $hashtags = $matches[1];
+        $posts = Posts::all()->toArray();
+        $rank = array();
+        foreach ($hashtags as $ht){
+            foreach ($posts as $key => $post){
+                if (!array_key_exists($key, $rank)){
+                    $rank += array($key => 0);
+                }
+                $postHashtag = Tags::where('PostID', '=', $post['id'])->get()->toArray();
+                foreach ($postHashtag as $pht){
+                    if (stripos(Hashtags::find($pht['HashtagID'])->Hashtag, $ht) !== false){
+                        $rank[$key]++;
+                    }
+                }
+
+            }
+        }
+
+        foreach ($rank as $key => $value){
+            if ($value < 1){
+                unset($rank[$key]);
+            }
+        }
+        asort($rank);
+        $result = array();
+        $posts = Posts::all();
+        foreach ($rank as $key => $value) {
+            $result += array($key => $posts[$key]);
+        }
+        preg_match_all('/\b([a-zA-Z0-9]+)\b/', $data['HashtagSearch'], $matches, PREG_PATTERN_ORDER);
+        $hashtags = $matches[1];
+        $Hashtags = '';
+        foreach ($hashtags as $ht){
+            $Hashtags .= $ht . ' ';
+        }
+        return view('search')->with(['Posts' => $result, 'Hashtags' => $Hashtags]);
+    }
+
+
+
     public function create()
     {
         //

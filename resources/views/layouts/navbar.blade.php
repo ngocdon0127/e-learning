@@ -45,27 +45,28 @@
 				</ul>
 			</li>
 		</ul>
-		<form class="navbar-form navbar-right" role="search">
-		
+			{!! Form::open(['method' => 'GET', 'name' => 'searchForm', 'url' => '/search', 'role'=>'search', 'class' => 'navbar-form navbar-right']) !!}
+			<div class="form-group">
+				@if (auth()->user())
+					<li style= "list-style: none;" class="dropdown">
+						<a href="#" style="text-decoration: none;" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">{{ auth()->user()->name }} <span class="caret"></span></a>
+						<ul class="dropdown-menu" role="menu">
+							<li><a href="{{ url('/auth/logout') }}" onclick='logout = 1;'>Logout</a></li>
+						</ul>
+					</li>
+				@else
+					<a class="btn btn-primary" href="/auth/login" role="button">Login</a>
+				@endif
+			</div>
 			<!-- search button-->
-			<!--<div class="form-group">
-				<input type="text" class="form-control" placeholder="Search">
+			<div class="form-group">
+				<input type="text" class="form-control" placeholder="Search" name="HashtagSearch" id="HashtagSearch">
 
-			
-			        <button type="button" class="btn btn-default btn-sm">
-          				<span class="glyphicon glyphicon-search"></span> Submit 
+
+			        <button type="button" class="btn btn-default btn-sm" onclick="document.searchForm.submit()">
+          				<span class="glyphicon glyphicon-search"></span> Submit
         			</button>
-			</div>-->
-			@if (auth()->user())
-				<li style= "list-style: none;" class="dropdown">
-					<a href="#" style="text-decoration: none;" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">{{ auth()->user()->name }} <span class="caret"></span></a>
-					<ul class="dropdown-menu" role="menu">
-						<li><a href="{{ url('/auth/logout') }}" onclick='logout = 1;'>Logout</a></li>
-					</ul>
-				</li>
-			@else
-			<a class="btn btn-primary" href="/auth/login" role="button">Login</a>
-			@endif
-		</form>
+			</div>
+		{!! Form::close() !!}
 	</div>
 </nav>
