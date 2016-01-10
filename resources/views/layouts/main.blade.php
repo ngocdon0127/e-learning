@@ -9,6 +9,7 @@
 	<link rel="stylesheet" type="text/css" href="/css/bootstrap.css">
 	<link rel="stylesheet" type="text/css" href="/css/style.css">
 	<link rel="stylesheet" type="text/css" href="/css/admin.css">
+	<meta property="fb:app_id" content="1657402167852948" />
 	<meta name="_token" content="{!! csrf_token() !!}"/>
 	@if (auth() && (auth()->user()))
 	<script type="text/javascript">
