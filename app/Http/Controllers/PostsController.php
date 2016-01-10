@@ -6,11 +6,13 @@ use App\Answers;
 use App\Comments;
 use App\Courses;
 use App\Doexams;
+use App\Hashtags;
 use App\Http\Controllers\Auth\AuthController;
 use App\Learning;
 use App\Logins;
 use App\Posts;
 use App\Questions;
+use App\Tags;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
@@ -51,6 +53,7 @@ class PostsController extends Controller
             return redirect('/');
         }
         $data = $request->all();
+
         $post = new Posts();
         $post->CourseID = $data['CourseID'];
         $post->FormatID = $data['FormatID'];
@@ -74,6 +77,11 @@ class PostsController extends Controller
         $course = Courses::find($post->CourseID);
         $course->NoOfPosts++;
         $course->update();
+
+        // Save Hashtag
+        $rawHT = $data['Hashtag'];
+        TagsController::tag($rawHT, $post->id);
+
         return redirect('/course/'.$post->CourseID);
 //        return $post;
     }
@@ -198,7 +206,14 @@ class PostsController extends Controller
             return redirect('/');
         }
         $Post = Posts::find($id);
-        return view('admin.editpost', compact('Post'));
+        $ahtk = Tags::where('PostID', '=', $id)->get()->toArray();
+        $Hashtag = '';
+        foreach ($ahtk as $k){
+            $ht = Hashtags::find($k['HashtagID'])['Hashtag'];
+            if (strlen($ht) > 0)
+            $Hashtag .= '#' . $ht . ' ';
+        }
+        return view('admin.editpost', compact('Post') + array('Hashtag' => $Hashtag));
     }
 
     /**
@@ -236,6 +251,11 @@ class PostsController extends Controller
 
             $post->update();
         }
+
+        // Update tags
+        TagsController::removeTag($post->id);
+        TagsController::tag($data['Hashtag'], $post->id);
+
         return redirect('/course/'.$post->CourseID);
     }
 
