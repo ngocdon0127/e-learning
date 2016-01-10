@@ -8,6 +8,7 @@ use App\Courses;
 use App\Doexams;
 use App\Http\Controllers\Auth\AuthController;
 use App\Learning;
+use App\Logins;
 use App\Posts;
 use App\Questions;
 use Illuminate\Http\Request;
@@ -78,9 +79,21 @@ class PostsController extends Controller
     }
 
     public function viewPost($postID){
+
 		if (!auth() || !(auth()->user())){
-			return redirect('/auth/login');
+            $browser = get_browser(null, true);
+
+            // Allow crawler && Facebook Bot view post without logging in.
+            if (
+                ($browser['crawler'] != 1) &&
+                (stripos($_SERVER["HTTP_USER_AGENT"], 'facebook') === false) &&
+                (stripos($_SERVER["HTTP_USER_AGENT"], 'face') === false) &&
+                (stripos($_SERVER["HTTP_USER_AGENT"], 'google') === false)
+            )
+			    return redirect('/auth/login');
+            $token = md5(rand(), false);
 		}
+
         $post = Posts::findOrNew($postID)->toArray();
         if (count($post) < 1){
             return view('errors.404');
@@ -90,27 +103,27 @@ class PostsController extends Controller
         $post->update();
         $post = $post->toArray();
         $courseID = $post['CourseID'];
-		// if (auth() && (auth()->user())){
-        $userID = auth()->user()->getAuthIdentifier();
-        $tmp = Learning::where('UserID', '=', $userID)->where('CourseID', '=', $courseID)->get()->toArray();
-        if (count($tmp) < 1){
-            $learning = new Learning();
-            $learning->UserID = $userID;
-            $learning->CourseID = $courseID;
-            $learning->save();
-            $course = Courses::find($courseID);
-            $course->NoOfUsers++;
-            $course->update();
-        }
+		 if (auth() && (auth()->user())){
+            $userID = auth()->user()->getAuthIdentifier();
+            $tmp = Learning::where('UserID', '=', $userID)->where('CourseID', '=', $courseID)->get()->toArray();
+            if (count($tmp) < 1){
+                $learning = new Learning();
+                $learning->UserID = $userID;
+                $learning->CourseID = $courseID;
+                $learning->save();
+                $course = Courses::find($courseID);
+                $course->NoOfUsers++;
+                $course->update();
+            }
 
-        // Insert a new record into DoExams Table to mark the time user start answering questions in post.
-        $exam = new Doexams();
-        $exam->UserID = $userID;
-        $exam->PostID = $postID;
-        $token = md5($userID . rand(), false) . md5($postID . rand(), false);
-        $exam->token = $token;
-        $exam->save();
-		// }
+            // Insert a new record into DoExams Table to mark the time user start answering questions in post.
+            $exam = new Doexams();
+            $exam->UserID = $userID;
+            $exam->PostID = $postID;
+            $token = md5($userID . rand(), false) . md5($postID . rand(), false);
+            $exam->token = $token;
+            $exam->save();
+		 }
 
         $photo = $post['Photo'];
         $questions = Questions::where('PostID', '=', $postID)->get()->toArray();
@@ -135,7 +148,7 @@ class PostsController extends Controller
             'MaxScore' => $maxscore,
             'Token' => $token
         );
-//        dd($result);
+       // dd($result);
         return view('viewpost', $result);
 //        return var_dump($bundleAnswer);
     }

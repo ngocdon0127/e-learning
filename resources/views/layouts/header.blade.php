@@ -8,9 +8,9 @@
   		<div class="col-xs-6 col-sm-5 col-md-4 col-lg-4">
 	  		<div style="padding-left: 15px;">
 			  	<ul id="head" style="list-style-type: none;">
-			  		<a href=""><li><img src="/images/headimages/facebook.png" class="img-circle" style="width: 35px; height: 35px;"></li></a>
-			  		<a href=""><li><img src="/images/headimages/google.png" class="img-circle" style="width: 35px; height: 35px;"></li></a>
-			  		<a href=""><li><img src="/images/headimages/Twitter.png" class="img-circle" style="width: 35px; height: 35px;"></li></a>
+					<li><a href="https://www.facebook.com/evangelsenglish"><img src="/images/headimages/facebook.png" class="img-circle" style="width: 35px; height: 35px;"></a></li>
+			  		<li><a href="mailto:evangelsenglish@gmail.com"><img src="/images/headimages/google.png" class="img-circle" style="width: 35px; height: 35px;"></a></li>
+			  		<li><img src="/images/headimages/Twitter.png" class="img-circle" style="width: 35px; height: 35px;"></li>
 			  	</ul>
 			</div>
   		</div>

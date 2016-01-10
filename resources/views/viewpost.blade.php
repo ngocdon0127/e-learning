@@ -3,6 +3,14 @@
     Post {{$Title}}
 @endsection
 @section('body.content')
+    <div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.5&appId=1657402167852948";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
     <h1 class="title">Ảnh của post</h1>
     <li class="list-group-item">
         <img class="img-responsive" src="{{'/images/imagePost/' . $Photo}}" />
@@ -27,7 +35,8 @@
         function ob(x){
             return document.getElementById(x);
         }
-        function check(questionID, answerID, trueAnswerID){
+        var numQuestion = {!! count($Questions) !!};
+        function check(questionID, answerID, trueAnswerID, nextQuestionID){
             console.log('start');
             var date = new Date();
             var id = 'radio_answer_' + questionID + '_' + answerID;
@@ -107,6 +116,11 @@
                 }); //end of ajax
 
             }
+            else{
+                $('html, body').animate({
+                    scrollTop: $("#title_question_" + nextQuestionID).offset().top
+                }, 300);
+            }
 //                obj.open('GET', '/ajax/checkanswer/' + questionID + '/' + answerID, true);
 //                ob.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
 //                obj.send();
@@ -121,8 +135,8 @@
     <ul id="form_test" class="list-group">
         <input id='token' type="text" value="{{$Token}}" style="display: none;" readonly />
         <?php $count_answer=1;?>
-        @foreach($Questions as $q)
-            <h2 class="title">Câu hỏi số <?php echo $count_answer++; ?>:</h2>
+        @foreach($Questions as $key => $q)
+            <h2 class="title" id="title_question_{!! $key + 1 !!}">Câu hỏi số <?php echo $count_answer++; ?>:</h2>
 				@if ((auth()->user()) && (auth()->user()->admin == 1))
 					<a style="text-decoration: none;" href="/question/{{$q['id']}}"><h4>{{$q['Question']}} : {{$q['Description']}}</h4></a>
 				@else
@@ -135,7 +149,7 @@
             @endif
            <ul class="list-group" id="ul_question_{{$q['id']}}">
                 @foreach($Bundle[$q['id']] as $k => $a)
-                    <li id="answer_{{$q['id']}}_{{$a['id']}}" class="list_answer"  onclick="check({{$q['id']}}, {{$a['id']}}, {{$BundleAnswers[$q['id']]}})" style="cursor: pointer">
+                    <li id="answer_{{$q['id']}}_{{$a['id']}}" class="list_answer"  onclick="check({{$q['id']}}, {{$a['id']}}, {{$BundleAnswers[$q['id']]}}, {!! $key + 2 !!})" style="cursor: pointer">
                         <input type="checkbox" id="radio_answer_{{$q['id']}}_{{$a['id']}}" name="question_{{$q['id']}}"/>
                        <span class="answer_content">{!! $a['Detail'] !!}</span>
                     </li>
@@ -150,4 +164,6 @@
         <b class="title" id="writeResult"></b> <br />
     </div>
 	<a class="btn btn-primary" href="#">Back to top</a>
+    <div class="fb-comments" data-href="{!! 'http://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI']!!}" data-width="500" data-numposts="5"></div>
+    <div class="fb-like" data-href="{!! 'http://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI']!!}" data-width="450" data-layout="standard" data-action="like" data-show-faces="true" data-share="true"></div>
 @endsection
