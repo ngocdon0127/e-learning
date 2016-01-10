@@ -101,6 +101,7 @@ ADD QUESTION
                               alert('Chưa chọn đáp án đúng kìa Mai ê :v.');
                           return;
                           }
+                          ob('btnAddQuestion').disabled = true;
                           var fd = new FormData();
                           fd.append('Question', ob('Question').value);
                           fd.append('Description', ob('Description').value);
@@ -332,7 +333,7 @@ ADD QUESTION
             {!! Form::close() !!}
         </div>
 
-        <button class="btn btn-info" onclick="submitForm()" type="button">Thêm</button>
+        <button class="btn btn-info" onclick="submitForm()" type="button" id="btnAddQuestion">Thêm</button>
     </div>
 <!-- end container -->
 
