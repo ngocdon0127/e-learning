@@ -14,7 +14,7 @@
 	<meta name="keywords" content="learn english online, learning online, english, online, learning" />
 	<meta name="author" content="TEC" />
 	<meta name="copyright" content="TEC" />
-	<meta property="fb:admins" content="100002061418693" />
+	<meta property="fb:app_id" content="1657402167852948">
 	<meta property="og:site_name" content="Evangels English" />
 	<meta property="og:type" content="website" />
 	<meta property="og:locale" content="vi_VN" />
