@@ -141,7 +141,6 @@ ADD QUESTION
        <!-- </div> -->
    </div>
    <div class="container-fluid">
-        <h1 class="title">Thêm câu trả lời mới</h1>
         <!-- <div class="col-sm-9"> -->
             {!! Form::open(['name' => 'addAnswerForm', 'url' => '/admin/addanswer/','class'=>'control-label']) !!}
              <!--        {!! Form::label('Detail', 'Câu trả lời: ') !!}
