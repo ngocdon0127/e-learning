@@ -9,8 +9,18 @@
 	<link rel="stylesheet" type="text/css" href="/css/bootstrap.css">
 	<link rel="stylesheet" type="text/css" href="/css/style.css">
 	<link rel="stylesheet" type="text/css" href="/css/admin.css">
-	<meta property="fb:app_id" content="1657402167852948" />
 	<meta name="_token" content="{!! csrf_token() !!}"/>
+	<meta name="description" content="Evangels English. Know English. Know the World" />
+	<meta name="keywords" content="learn english online, learning online, english, online, learning" />
+	<meta name="author" content="TEC" />
+	<meta name="copyright" content="TEC" />
+	<meta property="fb:admins" content="100002061418693" />
+	<meta property="og:site_name" content="Evangels English" />
+	<meta property="og:type" content="website" />
+	<meta property="og:locale" content="vi_VN" />
+	<meta property="og:url" content="http://www.evangelsenglish.com/" />
+	<meta property="og:description" content="Evangels English. Know English. Know the World" />
+	<meta property="og:title" content="Evangels English. Know English. Know the World" />
 	@if (auth() && (auth()->user()))
 	<script type="text/javascript">
 		var logout = 0;
