@@ -196,11 +196,11 @@
     </div>
 	<div>
         @if ($PreviousPost != null)
-            <a class="btn btn-primary" href="{{route('user.viewpost', $PreviousPost)}}">Previous Post</a>
+            <a class="btn btn-primary movePost" href="{{route('user.viewpost', $PreviousPost)}}">Previous Post</a>
         @endif
-            <a class="btn btn-primary" href="#">Back to top</a>
+            <a class="btn btn-primary movePost" href="#" style="float:right">Back to top</a>
         @if ($NextPost != null)
-            <a class="btn btn-primary" href="{{route('user.viewpost', $NextPost)}}">Next Post</a>
+            <a class="btn btn-primary movePost" href="{{route('user.viewpost', $NextPost)}}">Next Post</a>
         @endif
     </div>
     <div class="fb-comments" data-href="{!! 'http://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI']!!}" data-width="500" data-numposts="5"></div>

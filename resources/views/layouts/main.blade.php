@@ -87,15 +87,6 @@
 	<div class="wrapper side">
 		@include('layouts.header')
 		@include('layouts.navbar')
-<!-- 		<div class="container-fluid" style="background:blue">
-		<div class="row col-md-offset-2 col-xs-offset-1">
-			<div class="col-md-6 col-xs-8" style="background:#fff; border:2px solid orange">
-				@yield('body.content')
-			</div>
-			<div class="col-md-2 col-xs-2" style="background:#fff; border:2px solid yellow">xxx</div>
-		</div>
-	</div> -->
-		<!-- <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12"> -->
 <div class="container sidebar">
 	<div class="row">
 		<div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
