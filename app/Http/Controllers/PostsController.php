@@ -88,7 +88,7 @@ class PostsController extends Controller
 
     public function viewPost($postID){
 
-		if (!auth() || !(auth()->user())){
+        if (!auth() || !(auth()->user())){
             $browser = get_browser(null, true);
 
             // Allow crawler && Facebook Bot view post without logging in.
@@ -98,9 +98,9 @@ class PostsController extends Controller
                 (stripos($_SERVER["HTTP_USER_AGENT"], 'face') === false) &&
                 (stripos($_SERVER["HTTP_USER_AGENT"], 'google') === false)
             )
-			    return redirect('/auth/login');
+                return redirect('/auth/login');
             $token = md5(rand(), false);
-		}
+        }
 
         $post = Posts::findOrNew($postID)->toArray();
         if (count($post) < 1){
@@ -111,7 +111,7 @@ class PostsController extends Controller
         $post->update();
         $post = $post->toArray();
         $courseID = $post['CourseID'];
-		 if (auth() && (auth()->user())){
+         if (auth() && (auth()->user())){
             $userID = auth()->user()->getAuthIdentifier();
             $tmp = Learning::where('UserID', '=', $userID)->where('CourseID', '=', $courseID)->get()->toArray();
             if (count($tmp) < 1){
@@ -131,16 +131,16 @@ class PostsController extends Controller
             $token = md5($userID . rand(), false) . md5($postID . rand(), false);
             $exam->token = $token;
             $exam->save();
-		 }
+         }
 
         $photo = $post['Photo'];
         $questions = Questions::where('PostID', '=', $postID)->get()->toArray();
         $bundle = array();
-		$maxscore = 0;
+        $maxscore = 0;
         foreach ($questions as $q){
             $answer = Answers::where('QuestionID', '=', $q['id'])->get()->toArray();
             $bundle += array($q['id'] => $answer);
-			if (count($answer) > 0) $maxscore++;
+            if (count($answer) > 0) $maxscore++;
         }
         $Comments = Comments::all()->toArray();
         $result = array(
@@ -157,14 +157,19 @@ class PostsController extends Controller
         $result += ['NextPost' => (count($nextPost) > 0) ? $nextPost[0]['id'] : ''];
         $previousPost = Posts::where('CourseID', '=', $post['CourseID'])->where('id', '<', $post['id'])->get()->toArray();
         $result += ['PreviousPost' => (count($previousPost) > 0) ? $previousPost[count($previousPost) - 1]['id'] : ''];
-
+        $newpost = Posts::orderBy('id', 'dsc')->take(5)->get()->toArray();
+        $result += ['newpost' => $newpost];
+        // dd($newpost);
+        // return view('viewpost')->with(compact(['result', 'newpost']));
         return view('viewpost', $result);
     }
 
     public function viewNewestPosts(){
 //        $posts = Posts::take(5)->skip(0)->get()->toArray();
-        $posts = Posts::orderBy('id', 'desc')->paginate(5);
-        return view('userindex')->with('Posts', $posts);
+        $Posts = Posts::orderBy('id', 'desc')->paginate(5);
+        $newpost = Posts::orderBy('id', 'dsc')->take(5)->get();
+        // dd($newpost);
+        return view('userindex')->with(compact(['Posts', 'newpost']));
     }
 
     public function searchPostsByHashtag(Request $request){

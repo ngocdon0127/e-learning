@@ -23,3 +23,20 @@
 <div class="row">{!! $Posts->render() !!}</div>
 
 @endsection
+@section('body.navright')
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            Các post gần đây
+        </div>
+        <div class="panel-body">
+        @foreach($newpost as $np)
+        <a style="text-decoration: none;" href="/post/{{$np['id']}}">
+           <blockquote>
+                <h4>{{$np->Title}}</h4>
+                <h6>{{$np->Description}}</h6>
+           </blockquote>
+        </a>
+        @endforeach
+        </div>
+    </div>
+@endsection
