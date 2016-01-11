@@ -65,5 +65,7 @@
 		x.setAttribute(
 			'onclick', 
 			'document.getElementById("HashtagSearch").style.display = "inline"; document.getElementById("btnHashtagSearch").style.display = "inline";x.style.display="none";');
+
+		// x.setAttribute("onclick",'alert(1)');
 	</script>
 </div>

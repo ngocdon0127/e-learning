@@ -11,7 +11,7 @@
   js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.5&appId=1657402167852948";
   fjs.parentNode.insertBefore(js, fjs);
 }(document, 'script', 'facebook-jssdk'));</script>
-    <h1 class="title">Ảnh của post</h1>
+    <h1 class="title">{{$Title . ' : ' . $Description}}</h1>
     <li class="list-group-item">
         <img class="img-responsive" src="{{'/images/imagePost/' . $Photo}}" />
     </li>
@@ -36,7 +36,7 @@
             return document.getElementById(x);
         }
         var numQuestion = {!! count($Questions) !!};
-        function check(questionID, answerID,  nextQuestionID){
+        function check(questionID, answerID, trueAnswerID, nextQuestionID){
             console.log('start');
             var date = new Date();
             var id = 'radio_answer_' + questionID + '_' + answerID;
@@ -54,107 +54,80 @@
                 li.setAttribute('onclick', '');
                 li.style.cursor = 'no-drop';
             }
-//            if (answerID == trueAnswerID) {
-//                ob(id).style.background = '#66ff66';
-//                score++;
-//            }
-//            else {
-//                ob(id).style.background = '#ff5050';
-//            }
-//            var idTrue = 'answer_' + questionID + '_' + trueAnswerID;
-//            ob(idTrue).style.background = '#66ff66';
-            $.ajax({
-                url: '/checkanswer',
-                type: 'POST',
-                beforeSend: function(xhr){
-                    var token = $('meta[name="_token"]').attr('content');
 
-                    if (token){
-                        return xhr.setRequestHeader('X-CSRF-TOKEN', token);
-                    }
-                },
-                data: {
-                    AnswerID: answerID,
-                    QuestionID: questionID
-                },
-                success: function(data){
-                    console.log('receive');
-                    var date1 = new Date();
-                    console.log(date1.getTime() - date.getTime())
-                    var xml = jQuery.parseXML(data);
-                    switch (xml.getElementsByTagName('logical')[0].innerHTML) {
-                        case '1':
-                            ob(id).style.background = '#66ff66';
-                            score++;
-                            break;
-                        case '0':
-                            ob(id).style.background = '#ff5050';
-                            break;
-                        default:
-                            ob(id).style.background = 'yellow';
-                            break;
-                    }
-                    var idTrue = 'answer_' + questionID + '_' + xml.getElementsByTagName('answer')[0].innerHTML;
-                    ob(idTrue).style.background = '#66ff66';
-                    fill++;
-                    if (fill >= maxScore){
+            console.log('receive');
+            var date1 = new Date();
+            console.log(date1.getTime() - date.getTime())
+//                        ob('answer_' + questionID + '_' + answerID).innerHTML = obj.responseText;
 
-                        var resultText = 'Đúng ' + score + '/' + maxScore + ' câu.\n';
-                        var x = {!! $Comments !!};
-//                        console.log("start chấmming");
-                        for(var i = x.length - 1; i >= 0; i--) {
+//                var xml = jQuery.parseXML(obj.responseText);
+//                        console.log(xml.getElementsByTagName('logical')[0].innerHTML);
+            if (answerID == trueAnswerID) {
+                ob(id).style.background = '#66ff66';
+                score++;
+            }
+            else {
+                ob(id).style.background = '#ff5050';
+            }
+            var idTrue = 'answer_' + questionID + '_' + trueAnswerID;
+            ob(idTrue).style.background = '#66ff66';
+            fill++;
+            if (fill >= maxScore){
+
+                var resultText = 'Đúng ' + score + '/' + maxScore + ' câu.\n';
+                var x = {!! $Comments !!};
+                console.log("start chấmming");
+                for(var i = x.length - 1; i >= 0; i--) {
 //                    console.log(Math.floor(score / maxScore * 100));
 //                    console.log(min[i]);
-                            if (Math.floor(score / maxScore * 100) >= x[i]['min']){
-                                resultText += x[i]['comment'];
-                                break;
-                            }
-                        }
-                        ob('writeResult').innerHTML = resultText;
-                        ob('resultText').style.display = 'block';
-                        $('html, body').animate({
-                            scrollTop: $("#resultText").offset().top
-                        }, 1000);
-
-//                        console.log('diem: ' + score);
-                        // save result using AJAX
-                        $.ajax({
-                            url: "/finishexam",
-                            type: "POST",
-                            beforeSend: function (xhr) {
-                                var token = $('meta[name="_token"]').attr('content');
-
-                                if (token) {
-                                    return xhr.setRequestHeader('X-CSRF-TOKEN', token);
-                                }
-                            },
-                            data: {
-                                Score:  score,
-                                MaxScore: maxScore,
-                                token: ob('token').value
-                            },
-                            success: function (data) {
-                                console.log(data);
-                            }, error: function (data) {
-                                console.log(data);
-                            }
-                        }); //end of ajax
-
+                    if (Math.floor(score / maxScore * 100) >= x[i]['min']){
+                        resultText += x[i]['comment'];
+                        break;
                     }
-                    else{
-                        var delayToNextQuestion = 500;          // Time for user review current question.
-                        var timeScrollToNextQuestion = 300;
-                        setTimeout(function(){
-                            $('html, body').animate({
-                                scrollTop: $("#title_question_" + nextQuestionID).offset().top
-                            }, timeScrollToNextQuestion);
-                        }, delayToNextQuestion);
-                    }
-                },
-                error: function(data){
-                    console.log('error');
                 }
-            });
+                ob('writeResult').innerHTML = resultText;
+                ob('resultText').style.display = 'block';
+                $('html, body').animate({
+                    scrollTop: $("#resultText").offset().top
+                }, 1000);
+
+                console.log('diem: ' + score);
+                // save result using AJAX
+                $.ajax({
+                    url: "/finishexam",
+                    type: "POST",
+                    beforeSend: function (xhr) {
+                        var token = $('meta[name="_token"]').attr('content');
+
+                        if (token) {
+                            return xhr.setRequestHeader('X-CSRF-TOKEN', token);
+                        }
+                    },
+                    data: {
+                        Score:  score,
+                        MaxScore: maxScore,
+                        token: ob('token').value
+                    },
+                    success: function (data) {
+                        console.log(data);
+                    }, error: function (data) {
+                        console.log(data);
+                    }
+                }); //end of ajax
+
+            }
+            else{
+                var delayToNextQuestion = 500;      // Time for user review current question.
+                var timeScrollToNextQuestion = 300;
+                setTimeout(function() {
+                    $('html, body').animate({
+                        scrollTop: $("#title_question_" + nextQuestionID).offset().top
+                    }, timeScrollToNextQuestion);
+                }, delayToNextQuestion);
+            }
+//                obj.open('GET', '/ajax/checkanswer/' + questionID + '/' + answerID, true);
+//                ob.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+//                obj.send();
 
         }
     </script>
@@ -180,7 +153,7 @@
             @endif
            <ul class="list-group" id="ul_question_{{$q['id']}}">
                 @foreach($Bundle[$q['id']] as $k => $a)
-                    <li id="answer_{{$q['id']}}_{{$a['id']}}" class="list_answer"  onclick="check({{$q['id']}}, {{$a['id']}}, {!! $key + 2 !!})" style="cursor: pointer">
+                    <li id="answer_{{$q['id']}}_{{$a['id']}}" class="list_answer"  onclick="check({{$q['id']}}, {{$a['id']}}, {{$BundleAnswers[$q['id']]}}, {!! $key + 2 !!})" style="cursor: pointer">
                         <input type="checkbox" id="radio_answer_{{$q['id']}}_{{$a['id']}}" name="question_{{$q['id']}}"/>
                        <span class="answer_content">{!! $a['Detail'] !!}</span>
                     </li>
@@ -194,7 +167,7 @@
     <div class="form-control" id="resultText" style="display: none; height: 200px;">
         <b class="title" id="writeResult"></b> <br />
     </div>
-	<div>
+	<div style="margin-top: 10px">
         @if ($PreviousPost != null)
             <a class="btn btn-primary movePost" href="{{route('user.viewpost', $PreviousPost)}}">Previous Post</a>
         @endif
@@ -205,4 +178,22 @@
     </div>
     <div class="fb-comments" data-href="{!! 'http://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI']!!}" data-width="500" data-numposts="5"></div>
     <div class="fb-like" data-href="{!! 'http://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI']!!}" data-width="450" data-layout="standard" data-action="like" data-show-faces="true" data-share="true"></div>
+@endsection
+@section('body.navright')
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            Các post gần đây
+        </div>
+        <div class="panel-body">
+        @foreach($newpost as $np)
+        <a style="text-decoration: none;" href="/post/{{$np['id']}}">
+           <blockquote>
+               <img class="img-responsive" src="/images/imagePost/{{$np['Photo']}}" />
+                <h4>{{$np['Title']}}</h4>
+                <h6>{{$np['Description']}}</h6>
+           </blockquote>
+        </a>
+        @endforeach
+        </div>
+    </div>
 @endsection
