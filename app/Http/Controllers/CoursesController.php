@@ -37,7 +37,8 @@ class CoursesController extends Controller
 
     public function viewCourse($courseID){
         $posts = Posts::where('CourseID', '=', $courseID)->orderBy('id', 'asc')->paginate(5);
-        return view('userindex')->with('Posts', $posts);
+        $newpost = Posts::orderBy('id', 'dsc')->take(5)->get()->toArray();
+        return view('userindex')->with(['Posts' => $posts, 'newpost' => $newpost]);
     }
 
     public function addCourse(){

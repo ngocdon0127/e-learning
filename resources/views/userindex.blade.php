@@ -32,8 +32,8 @@
         @foreach($newpost as $np)
         <a style="text-decoration: none;" href="/post/{{$np['id']}}">
            <blockquote>
-                <h4>{{$np->Title}}</h4>
-                <h6>{{$np->Description}}</h6>
+                <h4>{{$np['Title']}}</h4>
+                <h6>{{$np['Description']}}</h6>
            </blockquote>
         </a>
         @endforeach
