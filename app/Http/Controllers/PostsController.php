@@ -233,6 +233,10 @@ class PostsController extends Controller
         return view('search')->with(['Posts' => $result, 'Hashtags' => $Hashtags]);
     }
 
+    public function uploadAudio(){
+        return view('soundcloud');
+    }
+
 
 
     public function create()
