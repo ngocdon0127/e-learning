@@ -1,5 +1,5 @@
 <header>
- 	<div style="padding-top: 40px;" class="container">
+ 	<div style="padding:35px 0" class="container">
  	<div class="row">
   		<div id="head" class="col-xs-6 col-md-4 col-sm-5">
   			<h1 class="header" style="font-family: 'Oswald', sans-serif;">Evangels English</h1>

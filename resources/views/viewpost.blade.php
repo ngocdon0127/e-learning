@@ -11,7 +11,7 @@
   js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.5&appId=1657402167852948";
   fjs.parentNode.insertBefore(js, fjs);
 }(document, 'script', 'facebook-jssdk'));</script>
-    <h1 class="title">{{$Title . ' : ' . $Description}}</h1>
+    <h2 class="title">{{$Title . ' : ' . $Description}}</h2>
     <li class="list-group-item">
         <img class="img-responsive" src="{{'/images/imagePost/' . $Photo}}" />
     </li>
@@ -135,16 +135,16 @@
 	<h3 style="background: rgb(255, 110, 110); color: #933" class="list_answer">Bạn chưa đăng nhập. Kết quả làm bài sẽ không được lưu lại. </h3>
     <a class="btn btn-primary" href="/auth/login" role="button">Login now</a>
 	@endif
-    <h1 class="title">Các câu hỏi</h1>
+    <h2 class="title">Các câu hỏi</h2>
     <ul id="form_test" class="list-group">
         <input id='token' type="text" value="{{$Token}}" style="display: none;" readonly />
         <?php $count_answer=1;?>
         @foreach($Questions as $key => $q)
-            <h2 class="title" id="title_question_{!! $key + 1 !!}">Câu hỏi số <?php echo $count_answer++; ?>:</h2>
+            <h3 class="title" id="title_question_{!! $key + 1 !!}">Câu hỏi số <?php echo $count_answer++; ?>:</h3>
 				@if ((auth()->user()) && (auth()->user()->admin == 1))
-					<a style="text-decoration: none;" href="/question/{{$q['id']}}"><h4>{{$q['Question']}} : {{$q['Description']}}</h4></a>
+					<a style="text-decoration: none;" href="/question/{{$q['id']}}"><h4 class="title">{{$q['Question']}} : {{$q['Description']}}</h4></a>
 				@else
-					<h4>{{$q['Question']}} : {{$q['Description']}}</h4>
+					<h4 class="title">{{$q['Question']}} : {{$q['Description']}}</h4>
 				@endif
             @if ($q['Photo'] != null)
             <li class="list-group-item list-group-item-info">
