@@ -135,3 +135,8 @@ get('/search', [
     'as' => 'search',
     'uses' => 'PostsController@searchpostsbyhashtag'
 ]);
+
+post('/checkanswer', [
+    'as' => 'checkanswer',
+    'uses' => 'AnswersController@checkanswer'
+]);

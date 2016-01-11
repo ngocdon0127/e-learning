@@ -28,7 +28,10 @@ class AnswersController extends Controller
         return -1;
     }
 
-    public function checkAnswer($QuestionID, $AnswerID){
+    public function checkAnswer(Request $request){
+        $data = $request->all();
+        $AnswerID = $data['AnswerID'];
+        $QuestionID = $data['QuestionID'];
         $answer = Answers::findOrNew($AnswerID)->toArray();
         $result = '<response><logical>' . $answer['Logical'] . '</logical><answer>';
         $answers = Answers::where('QuestionID', '=', $QuestionID)->get()->toArray();

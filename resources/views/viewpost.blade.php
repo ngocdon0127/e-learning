@@ -36,7 +36,7 @@
             return document.getElementById(x);
         }
         var numQuestion = {!! count($Questions) !!};
-        function check(questionID, answerID, trueAnswerID, nextQuestionID){
+        function check(questionID, answerID,  nextQuestionID){
             console.log('start');
             var date = new Date();
             var id = 'radio_answer_' + questionID + '_' + answerID;
@@ -54,76 +54,103 @@
                 li.setAttribute('onclick', '');
                 li.style.cursor = 'no-drop';
             }
+//            if (answerID == trueAnswerID) {
+//                ob(id).style.background = '#66ff66';
+//                score++;
+//            }
+//            else {
+//                ob(id).style.background = '#ff5050';
+//            }
+//            var idTrue = 'answer_' + questionID + '_' + trueAnswerID;
+//            ob(idTrue).style.background = '#66ff66';
+            $.ajax({
+                url: '/checkanswer',
+                type: 'POST',
+                beforeSend: function(xhr){
+                    var token = $('meta[name="_token"]').attr('content');
 
-            console.log('receive');
-            var date1 = new Date();
-            console.log(date1.getTime() - date.getTime())
-//                        ob('answer_' + questionID + '_' + answerID).innerHTML = obj.responseText;
+                    if (token){
+                        return xhr.setRequestHeader('X-CSRF-TOKEN', token);
+                    }
+                },
+                data: {
+                    AnswerID: answerID,
+                    QuestionID: questionID
+                },
+                success: function(data){
+                    console.log('receive');
+                    var date1 = new Date();
+                    console.log(date1.getTime() - date.getTime())
+                    var xml = jQuery.parseXML(data);
+                    switch (xml.getElementsByTagName('logical')[0].innerHTML) {
+                        case '1':
+                            ob(id).style.background = '#66ff66';
+                            score++;
+                            break;
+                        case '0':
+                            ob(id).style.background = '#ff5050';
+                            break;
+                        default:
+                            ob(id).style.background = 'yellow';
+                            break;
+                    }
+                    var idTrue = 'answer_' + questionID + '_' + xml.getElementsByTagName('answer')[0].innerHTML;
+                    ob(idTrue).style.background = '#66ff66';
+                    fill++;
+                    if (fill >= maxScore){
 
-//                var xml = jQuery.parseXML(obj.responseText);
-//                        console.log(xml.getElementsByTagName('logical')[0].innerHTML);
-            if (answerID == trueAnswerID) {
-                ob(id).style.background = '#66ff66';
-                score++;
-            }
-            else {
-                ob(id).style.background = '#ff5050';
-            }
-            var idTrue = 'answer_' + questionID + '_' + trueAnswerID;
-            ob(idTrue).style.background = '#66ff66';
-            fill++;
-            if (fill >= maxScore){
-
-                var resultText = 'Đúng ' + score + '/' + maxScore + ' câu.\n';
-                var x = {!! $Comments !!};
-                console.log("start chấmming");
-                for(var i = x.length - 1; i >= 0; i--) {
+                        var resultText = 'Đúng ' + score + '/' + maxScore + ' câu.\n';
+                        var x = {!! $Comments !!};
+//                        console.log("start chấmming");
+                        for(var i = x.length - 1; i >= 0; i--) {
 //                    console.log(Math.floor(score / maxScore * 100));
 //                    console.log(min[i]);
-                    if (Math.floor(score / maxScore * 100) >= x[i]['min']){
-                        resultText += x[i]['comment'];
-                        break;
-                    }
-                }
-                ob('writeResult').innerHTML = resultText;
-                ob('resultText').style.display = 'block';
-                $('html, body').animate({
-                    scrollTop: $("#resultText").offset().top
-                }, 1000);
-
-                console.log('diem: ' + score);
-                // save result using AJAX
-                $.ajax({
-                    url: "/finishexam",
-                    type: "POST",
-                    beforeSend: function (xhr) {
-                        var token = $('meta[name="_token"]').attr('content');
-
-                        if (token) {
-                            return xhr.setRequestHeader('X-CSRF-TOKEN', token);
+                            if (Math.floor(score / maxScore * 100) >= x[i]['min']){
+                                resultText += x[i]['comment'];
+                                break;
+                            }
                         }
-                    },
-                    data: {
-                        Score:  score,
-                        MaxScore: maxScore,
-                        token: ob('token').value
-                    },
-                    success: function (data) {
-                        console.log(data);
-                    }, error: function (data) {
-                        console.log(data);
-                    }
-                }); //end of ajax
+                        ob('writeResult').innerHTML = resultText;
+                        ob('resultText').style.display = 'block';
+                        $('html, body').animate({
+                            scrollTop: $("#resultText").offset().top
+                        }, 1000);
 
-            }
-            else{
-                $('html, body').animate({
-                    scrollTop: $("#title_question_" + nextQuestionID).offset().top
-                }, 300);
-            }
-//                obj.open('GET', '/ajax/checkanswer/' + questionID + '/' + answerID, true);
-//                ob.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-//                obj.send();
+//                        console.log('diem: ' + score);
+                        // save result using AJAX
+                        $.ajax({
+                            url: "/finishexam",
+                            type: "POST",
+                            beforeSend: function (xhr) {
+                                var token = $('meta[name="_token"]').attr('content');
+
+                                if (token) {
+                                    return xhr.setRequestHeader('X-CSRF-TOKEN', token);
+                                }
+                            },
+                            data: {
+                                Score:  score,
+                                MaxScore: maxScore,
+                                token: ob('token').value
+                            },
+                            success: function (data) {
+                                console.log(data);
+                            }, error: function (data) {
+                                console.log(data);
+                            }
+                        }); //end of ajax
+
+                    }
+                    else{
+                        $('html, body').animate({
+                            scrollTop: $("#title_question_" + nextQuestionID).offset().top
+                        }, 300);
+                    }
+                },
+                error: function(data){
+                    console.log('error');
+                }
+            });
 
         }
     </script>
@@ -149,7 +176,7 @@
             @endif
            <ul class="list-group" id="ul_question_{{$q['id']}}">
                 @foreach($Bundle[$q['id']] as $k => $a)
-                    <li id="answer_{{$q['id']}}_{{$a['id']}}" class="list_answer"  onclick="check({{$q['id']}}, {{$a['id']}}, {{$BundleAnswers[$q['id']]}}, {!! $key + 2 !!})" style="cursor: pointer">
+                    <li id="answer_{{$q['id']}}_{{$a['id']}}" class="list_answer"  onclick="check({{$q['id']}}, {{$a['id']}}, {!! $key + 2 !!})" style="cursor: pointer">
                         <input type="checkbox" id="radio_answer_{{$q['id']}}_{{$a['id']}}" name="question_{{$q['id']}}"/>
                        <span class="answer_content">{!! $a['Detail'] !!}</span>
                     </li>
