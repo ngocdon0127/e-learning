@@ -22,20 +22,19 @@
 			@if ((auth()->user()) && (auth()->user()->admin == 1))
 			<li id="navbar-button"><a class="navbar-button" href="/admin">Admin</a></li>
 			@endif
-			<li id="navbar-button"><a class="navbar-button" href="#">Giới thiệu</a></li>
+			<!--<li id="navbar-button"><a class="navbar-button" href="#">Giới thiệu</a></li>-->
 			<!-- <li><a class="navbar-button" href="#">Quizzes</a></li> -->
 			<li class="dropdown">
 				<a id= "dropDown" href="#" class="dropdown-toggle navbar-button" data-toggle="dropdown">Khóa học<b class="caret"></b></a>
 				<ul id="dropdown-course" class="dropdown-menu">
-					<li id="navbar-button"><a href="#">Grammar</a></li>
-					<li id="navbar-button"><a href="#">Another action</a></li>
-					<li id="navbar-button"><a href="#">Something else here</a></li>
-					<li id="navbar-button"><a href="#">Separated link</a></li>
+					@foreach(\App\Courses::all() as $c)
+						<li id="navbar-button"><a href="/course/{{$c->id}}">{{$c->Title}}</a></li>
+					@endforeach
 				</ul>
 			</li>
 
-			<li id="navbar-button"><a class="navbar-button" href="#">Hướng dẫn</a></li>
-			<li class="dropdown">
+			<!--<li id="navbar-button"><a class="navbar-button" href="#">Hướng dẫn</a></li>-->
+			<!--<li class="dropdown">
 				<a id= "dropDown" href="#" class="dropdown-toggle navbar-button" data-toggle="dropdown">Liên hệ<b class="caret"></b></a>
 				<ul id="dropdown-lienhe" class="dropdown-menu">
 					<li id="navbar-button"><a href="#">Grammar</a></li>
@@ -43,7 +42,7 @@
 					<li id="navbar-button"><a href="#">Something else here</a></li>
 					<li id="navbar-button"><a href="#">Separated link</a></li>
 				</ul>
-			</li>
+			</li>-->
 		</ul>
 			{!! Form::open(['method' => 'GET', 'name' => 'searchForm', 'url' => '/search', 'role'=>'search', 'class' => 'navbar-form navbar-right']) !!}
 			<div class="form-group">

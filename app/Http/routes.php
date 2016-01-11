@@ -40,8 +40,8 @@ Route::group(['prefix' => '/admin'], function(){
         'as' => 'course.update',
         'uses' => 'CoursesController@update'
     ]);
+    Route::get ('/course/{courseid}', 'CoursesController@adminviewcourse');
 });
-    Route::get ('/course/{courseid}', 'CoursesController@viewcourse');
     Route::get ('/post/{postid}', 'PostsController@viewpost');
     Route::get ('/question/{questionid}', 'QuestionsController@viewquestion');
     Route::get ('/ajax/checkcoursetitle/{title}', 'CoursesController@checkcoursetitle');
@@ -139,4 +139,9 @@ get('/search', [
 post('/checkanswer', [
     'as' => 'checkanswer',
     'uses' => 'AnswersController@checkanswer'
+]);
+
+get('/course/{courseid}', [
+    'as' => 'user.viewcourse',
+    'uses' => 'CoursesController@viewcourse'
 ]);
