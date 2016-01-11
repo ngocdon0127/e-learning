@@ -6,11 +6,13 @@ use App\Answers;
 use App\Comments;
 use App\Courses;
 use App\Doexams;
+use App\Hashtags;
 use App\Http\Controllers\Auth\AuthController;
 use App\Learning;
 use App\Logins;
 use App\Posts;
 use App\Questions;
+use App\Tags;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
@@ -51,6 +53,7 @@ class PostsController extends Controller
             return redirect('/');
         }
         $data = $request->all();
+
         $post = new Posts();
         $post->CourseID = $data['CourseID'];
         $post->FormatID = $data['FormatID'];
@@ -74,6 +77,11 @@ class PostsController extends Controller
         $course = Courses::find($post->CourseID);
         $course->NoOfPosts++;
         $course->update();
+
+        // Save Hashtag
+        $rawHT = $data['Hashtag'];
+        TagsController::tag($rawHT, $post->id);
+
         return redirect('/course/'.$post->CourseID);
 //        return $post;
     }
@@ -128,12 +136,10 @@ class PostsController extends Controller
         $photo = $post['Photo'];
         $questions = Questions::where('PostID', '=', $postID)->get()->toArray();
         $bundle = array();
-        $bundleAnswer = array();
 		$maxscore = 0;
         foreach ($questions as $q){
             $answer = Answers::where('QuestionID', '=', $q['id'])->get()->toArray();
             $bundle += array($q['id'] => $answer);
-            $bundleAnswer += [$q['id'] => AnswersController::getAnswer($q['id'])];
 			if (count($answer) > 0) $maxscore++;
         }
         $Comments = Comments::all()->toArray();
@@ -144,13 +150,15 @@ class PostsController extends Controller
             'Questions' => $questions,
             'Photo' => $photo,
             'Bundle' => $bundle,
-            'BundleAnswers' => $bundleAnswer,
             'MaxScore' => $maxscore,
             'Token' => $token
         );
-       // dd($result);
+        $nextPost = Posts::where('CourseID', '=', $post['CourseID'])->where('id', '>', $post['id'])->get()->toArray();
+        $result += ['NextPost' => (count($nextPost) > 0) ? $nextPost[0]['id'] : ''];
+        $previousPost = Posts::where('CourseID', '=', $post['CourseID'])->where('id', '<', $post['id'])->get()->toArray();
+        $result += ['PreviousPost' => (count($previousPost) > 0) ? $previousPost[count($previousPost) - 1]['id'] : ''];
+
         return view('viewpost', $result);
-//        return var_dump($bundleAnswer);
     }
 
     public function viewNewestPosts(){
@@ -158,6 +166,49 @@ class PostsController extends Controller
         $posts = Posts::orderBy('id', 'desc')->paginate(5);
         return view('userindex')->with('Posts', $posts);
     }
+
+    public function searchPostsByHashtag(Request $request){
+        $data = $request->all();
+        preg_match_all('/\b([a-zA-Z0-9]+)\b/', strtoupper($data['HashtagSearch']), $matches, PREG_PATTERN_ORDER);
+        $hashtags = $matches[1];
+        $posts = Posts::all()->toArray();
+        $rank = array();
+        foreach ($hashtags as $ht){
+            foreach ($posts as $key => $post){
+                if (!array_key_exists($key, $rank)){
+                    $rank += array($key => 0);
+                }
+                $postHashtag = Tags::where('PostID', '=', $post['id'])->get()->toArray();
+                foreach ($postHashtag as $pht){
+                    if (stripos(Hashtags::find($pht['HashtagID'])->Hashtag, $ht) !== false){
+                        $rank[$key]++;
+                    }
+                }
+
+            }
+        }
+
+        foreach ($rank as $key => $value){
+            if ($value < 1){
+                unset($rank[$key]);
+            }
+        }
+        arsort($rank);
+        $result = array();
+        $posts = Posts::all();
+        foreach ($rank as $key => $value) {
+            $result += array($key => $posts[$key]);
+        }
+        preg_match_all('/\b([a-zA-Z0-9]+)\b/', $data['HashtagSearch'], $matches, PREG_PATTERN_ORDER);
+        $hashtags = $matches[1];
+        $Hashtags = '';
+        foreach ($hashtags as $ht){
+            $Hashtags .= $ht . ' ';
+        }
+        return view('search')->with(['Posts' => $result, 'Hashtags' => $Hashtags]);
+    }
+
+
 
     public function create()
     {
@@ -198,7 +249,14 @@ class PostsController extends Controller
             return redirect('/');
         }
         $Post = Posts::find($id);
-        return view('admin.editpost', compact('Post'));
+        $ahtk = Tags::where('PostID', '=', $id)->get()->toArray();
+        $Hashtag = '';
+        foreach ($ahtk as $k){
+            $ht = Hashtags::find($k['HashtagID'])['Hashtag'];
+            if (strlen($ht) > 0)
+            $Hashtag .= '#' . $ht . ' ';
+        }
+        return view('admin.editpost', compact('Post') + array('Hashtag' => $Hashtag));
     }
 
     /**
@@ -236,6 +294,11 @@ class PostsController extends Controller
 
             $post->update();
         }
+
+        // Update tags
+        TagsController::removeTag($post->id);
+        TagsController::tag($data['Hashtag'], $post->id);
+
         return redirect('/course/'.$post->CourseID);
     }
 

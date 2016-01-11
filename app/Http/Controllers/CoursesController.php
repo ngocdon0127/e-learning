@@ -15,7 +15,7 @@ use App\Http\Controllers\Controller;
 class CoursesController extends Controller
 {
 
-    public function viewCourse($courseid){
+    public function adminViewCourse($courseid){
         $course = Courses::findOrNew($courseid)->toArray();
         if (count($course) < 1){
             return view('errors.404');
@@ -33,6 +33,11 @@ class CoursesController extends Controller
 //        return var_dump($r);
 //        dd($r);
         return view('viewcourse', $r);
+    }
+
+    public function viewCourse($courseID){
+        $posts = Posts::where('CourseID', '=', $courseID)->orderBy('id', 'asc')->paginate(5);
+        return view('userindex')->with('Posts', $posts);
     }
 
     public function addCourse(){
