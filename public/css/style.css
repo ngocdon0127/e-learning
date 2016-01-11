@@ -8,7 +8,7 @@ header {
 	padding:0px;
 }
 div.content {
-	padding-bottom:100px; /* Height of the footer element */
+	padding-bottom:50px; /* Height of the footer element */
 }
 div.wrapper {
 	min-height:100%;
