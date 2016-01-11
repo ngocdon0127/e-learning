@@ -13,7 +13,11 @@
 }(document, 'script', 'facebook-jssdk'));</script>
     <h2 class="title">{{$Title . ' : ' . $Description}}</h2>
     <li class="list-group-item">
-        <img class="img-responsive" src="{{'/images/imagePost/' . $Photo}}" />
+        @if ($Format == 1)
+            <img class="img-responsive" src="{{'/images/imagePost/' . $Photo}}" />
+        @elseif ($Format == 2)
+            <iframe class="img-responsive" src="https://www.youtube.com/embed/{{$Video}}" frameborder="0" allowfullscreen></iframe>
+        @endif
     </li>
     @if ((auth()->user()) && (auth()->user()->admin == 1))
         <a class ="btn btn-info" href="{{route('post.edit', $PostID)}}">Sửa thông tin bài đăng</a>
@@ -182,16 +186,20 @@
 @section('body.navright')
     <div class="panel panel-default">
         <div class="panel-heading">
-            Các post gần đây
+            Các post được xem nhiều nhất
         </div>
         <div class="panel-body">
         @foreach($newpost as $np)
         <a style="text-decoration: none;" href="/post/{{$np['id']}}">
-           <blockquote>
-               <img class="img-responsive" src="/images/imagePost/{{$np['Photo']}}" />
+            <blockquote>
+                @if($np['FormatID'] == '1')
+                    <img class="img-responsive" src="/images/imagePost/{{$np['Photo']}}" />
+                @elseif($np['FormatID'] == '2')
+                    <iframe class="img-responsive" src="https://www.youtube.com/embed/{{$np['Video']}}" frameborder="0" allowfullscreen></iframe>
+                @endif
                 <h4>{{$np['Title']}}</h4>
                 <h6>{{$np['Description']}}</h6>
-           </blockquote>
+            </blockquote>
         </a>
         @endforeach
         </div>

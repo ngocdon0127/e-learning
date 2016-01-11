@@ -3,7 +3,7 @@
  	<div class="row">
   		<div id="head" class="col-xs-6 col-md-4 col-sm-5">
   			<h1 class="header" style="font-family: 'Oswald', sans-serif;">Evangels English</h1>
-  			<p class="header" style="font-family: 'Oswald', sans-serif;">Know English. Know the World</p>
+            <a href="/" style="text-decoration: none"><p class="header" style="font-family: 'Oswald', sans-serif;">Know English. Know the World</p></a>
   		</div>
       <div class="col-xs-6 col-sm-5 col-md-3" style="float:right">
          <div style="padding-left: 15px;">

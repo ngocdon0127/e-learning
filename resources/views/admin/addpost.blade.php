@@ -11,13 +11,17 @@
                   {!! Form::label('CourseID', 'Course ID : ',['class' => 'control-label']) !!}
                   {!! Form::select('CourseID', \App\Courses::getColumn('Title'), ['class'=>'form-control', 'onclick' => 'this.style.background = "white"']) !!}
               </div>
-              <div class="form-group">
+              <div class="form-group" id="divPhoto">
                   {!! Form::label('Photo', 'Photo : ',['class' => 'control-label']) !!}
                   {!! Form::file('Photo', ['accept' => 'image/jpeg, image/png, image/gif','type'=>'file','class'=>'file']) !!}
               </div>
+              <div class="form-group" id="divVideo">
+                  {!! Form::label('Video', 'Link Youtube : ',['class' => 'control-label']) !!}
+                  {!! Form::text('Video', '', ['class'=>'form-control']) !!}
+              </div>
               <div class="form-group">
                   {!! Form::label('FormatID', 'Format ID : ',['class' => 'control-label']) !!}
-                  {!! Form::select('FormatID',\App\Formats::getColumn('Title'), ['class'=>'form-control', 'onclick' => 'this.style.background = "white"']) !!}
+                  {!! Form::select('FormatID',\App\Formats::getColumn('Title'), '', ['class'=>'form-control', 'onclick' => 'this.style.background = "white";', 'onchange' => 'configForm()']) !!}
               </div>
               <div class="form-group">
                   {!! Form::label('Title','Title : ',['class' => 'control-label']) !!}
@@ -40,6 +44,24 @@
                      function ob(x){
                          return document.getElementById(x);
                      }
+
+                     function configForm(){
+                         switch (ob('FormatID').value){
+                             case '1':
+                                 ob('divPhoto').style.display = 'block';
+                                 ob('divVideo').style.display = 'none';
+                                 break;
+                             case '2':
+                                 ob('divPhoto').style.display = 'none';
+                                 ob('divVideo').style.display = 'block';
+                                 break;
+                             default:
+                                 console.log('dmm');
+                         }
+                     }
+
+                     configForm();
+
                      function displayError(x){
                          ob('error').style.display = 'block';
                          ob('error').innerHTML = x;
@@ -55,41 +77,61 @@
                              formatob.style.background = '#ff5050';
                              return;
                          }
-                         var acceptedType = ['image/jpeg', 'image/png', 'image/gif'];
-             //                        console.log('clicked');
-                         var photo = ob('Photo');
-                         if (photo.files.length <= 0){
-                             displayError('Chưa chọn file');
-                             return;
+                         if (formatob.value == '1'){ // Plain Text
+
                          }
-                         var type = photo.files[0].type;
-                         var check = false;
-                         for(i = 0; i < acceptedType.length; i++){
-                             if (type == acceptedType[i]){
-                                 check = true;
+
+                         switch (formatob.value){
+                             case '1': // Plain Text
+                                 var acceptedType = ['image/jpeg', 'image/png', 'image/gif'];
+                                 //                        console.log('clicked');
+                                 var photo = ob('Photo');
+                                 if (photo.files.length <= 0){
+                                     displayError('Chưa chọn file');
+                                     return;
+                                 }
+                                 var type = photo.files[0].type;
+                                 var check = false;
+                                 for(i = 0; i < acceptedType.length; i++){
+                                     if (type == acceptedType[i]){
+                                         check = true;
+                                         break;
+                                     }
+                                 }
+                                 if (!check){
+                                     //                            console.log('not ok');
+                                     displayError('Chỉ chọn file ảnh.');
+                                 }
+                                 else{
+                                     //                            console.log('ok');
+                                     if ('size' in photo.files[0]){
+                                         console.log(photo.files[0].size);
+                                     }
+                                     else{
+                                         console.log('ko co size');
+                                     }
+                                     if (photo.files[0].size > 2 * 1024 * 1024){
+                                         console.log('size qua lon');
+                                         ob('error').style.display = 'block';
+                                         displayError('Chỉ chọn file có kích thước tối đa 2 MB.');
+                                         return;
+                                     }
+                                     ob('error').style.display = 'none';
+                                     document.addPostForm.submit();
+                                 }
                                  break;
-                             }
-                         }
-                         if (!check){
-             //                            console.log('not ok');
-                             displayError('Chỉ chọn file ảnh.');
-                         }
-                         else{
-             //                            console.log('ok');
-                             if ('size' in photo.files[0]){
-                                 console.log(photo.files[0].size);
-                             }
-                             else{
-                                 console.log('ko co size');
-                             }
-                             if (photo.files[0].size > 2 * 1024 * 1024){
-                                 console.log('size qua lon');
-                                 ob('error').style.display = 'block';
-                                 displayError('Chỉ chọn file có kích thước tối đa 2 MB.');
-                                 return;
-                             }
-                             ob('error').style.display = 'none';
-                             document.addPostForm.submit();
+                             case '2': // Video
+                                 if (ob('Video').value.length < 1){
+                                     displayError('Chưa nhập link video.');
+                                     return;
+                                 }
+                                 else{
+                                     ob('error').style.display = 'none';
+                                     document.addPostForm.submit();
+                                 }
+                                 break;
+                             default:
+                                 console.log('dmm');
                          }
              //                        ob('error').innerHTML = photo.value;
              

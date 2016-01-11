@@ -19,6 +19,7 @@ class CreatePostsTable extends Migration
             $table->integer('CourseID');
             $table->string('Title');
             $table->string('Photo')->default('');
+            $table->string('Video')->default('');
             $table->string('Description')->default('');
             $table->integer('visited')->default(0);
         });

@@ -59,21 +59,29 @@ class PostsController extends Controller
         $post->FormatID = $data['FormatID'];
         $post->Title = $data['Title'];
         $post->Description = $data['Description'];
-        $post->save();
 
-        $post = Posts::orderBy('id', 'desc')->first();
-
-        //Photo
-        $file = $request->file('Photo');
-//        $file = Request::file('Photo');
-        $post->Photo = 'Post_' . $data['CourseID'] . '_' . $post->id  . "." . $file->getClientOriginalExtension();
-        $file->move(base_path() . '/public/images/imagePost/', $post->Photo);
-
-
-        // (intval(Posts::orderBy('created_at', 'desc')->first()->id) + 1)
+        switch ($data['FormatID']){
+            case '1': // Plain Text
+                $post->save();
+                $post = Posts::orderBy('id', 'desc')->first();
+                //Photo
+                $file = $request->file('Photo');
+//              $file = Request::file('Photo');
+                $post->Photo = 'Post_' . $data['CourseID'] . '_' . $post->id  . "." . $file->getClientOriginalExtension();
+                $file->move(base_path() . '/public/images/imagePost/', $post->Photo);
 
 
-        $post->update();
+                // (intval(Posts::orderBy('created_at', 'desc')->first()->id) + 1)
+
+
+                $post->update();
+                break;
+            case '2': // Video
+                $linkVideo = $data['Video'];
+                $post->Video = PostsController::getYoutubeVideoID($linkVideo);
+                $post->save();
+                break;
+        }
         $course = Courses::find($post->CourseID);
         $course->NoOfPosts++;
         $course->update();
@@ -82,8 +90,13 @@ class PostsController extends Controller
         $rawHT = $data['Hashtag'];
         TagsController::tag($rawHT, $post->id);
 
-        return redirect('/course/'.$post->CourseID);
+        return redirect('/admin/course/'.$post->CourseID);
 //        return $post;
+    }
+
+    public static function getYoutubeVideoID($rawLink){
+        preg_match_all('/watch[?]v=([^&]+)/', $rawLink, $matches, PREG_PATTERN_ORDER);
+        return $matches[1][0];
     }
 
     public function viewPost($postID){
@@ -151,8 +164,10 @@ class PostsController extends Controller
             'Title' => $post['Title'],
             'Description' => $post['Description'],
             'PostID' => $postID,
+            'Format' => $post['FormatID'],
             'Questions' => $questions,
             'Photo' => $photo,
+            'Video' => $post['Video'],
             'Bundle' => $bundle,
             'BundleAnswers' => $bundleAnswer,
             'MaxScore' => $maxscore,
@@ -162,7 +177,7 @@ class PostsController extends Controller
         $result += ['NextPost' => (count($nextPost) > 0) ? $nextPost[0]['id'] : Posts::where('CourseID', '=', $post['CourseID'])->first()->toArray()['id']];
         $previousPost = Posts::where('CourseID', '=', $post['CourseID'])->where('id', '<', $post['id'])->get()->toArray();
         $result += ['PreviousPost' => (count($previousPost) > 0) ? $previousPost[count($previousPost) - 1]['id'] : Posts::where('CourseID', '=', $post['CourseID'])->orderBy('created_at', 'desc')->first()->toArray()['id']];
-        $newpost = Posts::orderBy('id', 'dsc')->take(5)->get()->toArray();
+        $newpost = Posts::orderBy('visited', 'dsc')->take(5)->get()->toArray();
         $result += ['newpost' => $newpost];
         // dd($newpost);
         // return view('viewpost')->with(compact(['result', 'newpost']));
@@ -172,7 +187,7 @@ class PostsController extends Controller
     public function viewNewestPosts(){
 //        $posts = Posts::take(5)->skip(0)->get()->toArray();
         $Posts = Posts::orderBy('id', 'desc')->paginate(5);
-        $newpost = Posts::orderBy('id', 'dsc')->take(5)->get();
+        $newpost = Posts::orderBy('visited', 'dsc')->take(5)->get();
         // dd($newpost);
         return view('userindex')->with(compact(['Posts', 'newpost']));
     }
@@ -286,30 +301,35 @@ class PostsController extends Controller
         $post->CourseID = $data['CourseID'];
         $post->FormatID = $data['FormatID'];
         $post->Title = $data['Title'];
+        if ($post->FormatID == '2'){ // Format Quizz Video
+            $post->Video = PostsController::getYoutubeVideoID($data['Video']);
+        }
         $post->Description = $data['Description'];
         $post->update();
 
-        // if admin upload new photo
-        if ($request->file('Photo') != null) {
-            $post = Posts::find($id);
+        if ($post->FormatID == '1'){ // Format Quizz Plain Text
+            // if admin upload new photo
+            if ($request->file('Photo') != null) {
+                $post = Posts::find($id);
 
-            $file = $request->file('Photo');
-            //        $file = Request::file('Photo');
-            $post->Photo = 'Post_' . $data['CourseID'] . '_' . $post->id . "." . $file->getClientOriginalExtension();
-            $file->move(base_path() . '/public/images/imagePost/', $post->Photo);
-
-
-            // (intval(Posts::orderBy('created_at', 'desc')->first()->id) + 1)
+                $file = $request->file('Photo');
+                //        $file = Request::file('Photo');
+                $post->Photo = 'Post_' . $data['CourseID'] . '_' . $post->id . "." . $file->getClientOriginalExtension();
+                $file->move(base_path() . '/public/images/imagePost/', $post->Photo);
 
 
-            $post->update();
+                // (intval(Posts::orderBy('created_at', 'desc')->first()->id) + 1)
+
+
+                $post->update();
+            }
         }
 
         // Update tags
         TagsController::removeTag($post->id);
         TagsController::tag($data['Hashtag'], $post->id);
 
-        return redirect('/course/'.$post->CourseID);
+        return redirect(route('user.viewpost', $post->id));
     }
 
     /**
