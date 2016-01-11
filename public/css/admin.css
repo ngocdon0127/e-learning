@@ -24,13 +24,8 @@ body{
 .sidebar{
   background:#fff;
 }
-.responsive{
-  border: 1px solid green;
-}
-
 /*==================NAV===========================*/
-
-a:hover{
+:hover{
   color: #fdc20e;
 }
 
@@ -103,14 +98,16 @@ h1.header{
 
 
 /*==================FROM-H1===========================*/
-h1.title{
+h2.title{
   color: #660066;
   font-weight: bold;
 }
-h2.title{
+h3.title{
   color: #993333;
 }
-
+h4.title{
+  color: #3366ff;
+}
 img:hover{
   opacity: 0.85;
 }
@@ -218,10 +215,6 @@ ul#form_test img:hover{
   p.header{
     font-size: 20px;
     margin: 0 auto;
-  }
-
-  footer{
-    /*height: 50px;*/
   }
   .content{
     margin-left: 10%;
