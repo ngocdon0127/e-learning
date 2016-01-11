@@ -32,7 +32,7 @@ Route::group(['prefix' => '/admin'], function(){
     Route::post('/addquestion/{postid}', 'QuestionsController@savequestion');
     Route::get ('/addpost', 'PostsController@addpost');
     Route::post('/addpost', 'PostsController@savepost');
-    Route::get ('/admin/addcourse', 'CoursesController@addcourse');
+    Route::get ('/addcourse', 'CoursesController@addcourse');
     Route::post('/addcourse', 'CoursesController@savecourse');
     Route::get ('/addanswer/{postid}', 'AnswersController@addanswer');
     Route::post('/addanswer/{postid}', 'AnswersController@saveanswer');

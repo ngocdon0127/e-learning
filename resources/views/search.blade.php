@@ -4,7 +4,7 @@
 @endsection
 @section('body.content')
 
-    <h2>Các Post phù hợp với từ khóa: {{$Hashtags}}</h2>
+<h2>Các Post phù hợp với từ khóa: {{$Hashtags}}</h2>
 <ul class="list-group">
     @foreach($Posts as $p)
         <li class="active" style="list-style-type:none; padding-top: 10px">
