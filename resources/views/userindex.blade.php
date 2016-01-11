@@ -32,6 +32,7 @@
         @foreach($newpost as $np)
         <a style="text-decoration: none;" href="/post/{{$np['id']}}">
            <blockquote>
+               <img class="img-responsive" src="/images/imagePost/{{$np['Photo']}}" />
                 <h4>{{$np['Title']}}</h4>
                 <h6>{{$np['Description']}}</h6>
            </blockquote>
