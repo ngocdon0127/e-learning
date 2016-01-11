@@ -179,3 +179,20 @@
     <div class="fb-comments" data-href="{!! 'http://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI']!!}" data-width="500" data-numposts="5"></div>
     <div class="fb-like" data-href="{!! 'http://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI']!!}" data-width="450" data-layout="standard" data-action="like" data-show-faces="true" data-share="true"></div>
 @endsection
+@section('body.navright')
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            Các post gần đây
+        </div>
+        <div class="panel-body">
+        @foreach($newpost as $np)
+        <a style="text-decoration: none;" href="/post/{{$np['id']}}">
+           <blockquote>
+                <h4>{{$np['Title']}}</h4>
+                <h6>{{$np['Description']}}</h6>
+           </blockquote>
+        </a>
+        @endforeach
+        </div>
+    </div>
+@endsection
