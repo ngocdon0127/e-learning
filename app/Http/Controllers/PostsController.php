@@ -177,7 +177,7 @@ class PostsController extends Controller
         $result += ['NextPost' => (count($nextPost) > 0) ? $nextPost[0]['id'] : Posts::where('CourseID', '=', $post['CourseID'])->first()->toArray()['id']];
         $previousPost = Posts::where('CourseID', '=', $post['CourseID'])->where('id', '<', $post['id'])->get()->toArray();
         $result += ['PreviousPost' => (count($previousPost) > 0) ? $previousPost[count($previousPost) - 1]['id'] : Posts::where('CourseID', '=', $post['CourseID'])->orderBy('created_at', 'desc')->first()->toArray()['id']];
-        $newpost = Posts::orderBy('id', 'dsc')->take(5)->get()->toArray();
+        $newpost = Posts::orderBy('visited', 'dsc')->take(5)->get()->toArray();
         $result += ['newpost' => $newpost];
         // dd($newpost);
         // return view('viewpost')->with(compact(['result', 'newpost']));
@@ -187,7 +187,7 @@ class PostsController extends Controller
     public function viewNewestPosts(){
 //        $posts = Posts::take(5)->skip(0)->get()->toArray();
         $Posts = Posts::orderBy('id', 'desc')->paginate(5);
-        $newpost = Posts::orderBy('id', 'dsc')->take(5)->get();
+        $newpost = Posts::orderBy('visited', 'dsc')->take(5)->get();
         // dd($newpost);
         return view('userindex')->with(compact(['Posts', 'newpost']));
     }

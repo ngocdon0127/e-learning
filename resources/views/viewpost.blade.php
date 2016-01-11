@@ -186,14 +186,14 @@
 @section('body.navright')
     <div class="panel panel-default">
         <div class="panel-heading">
-            Các post gần đây
+            Các post được xem nhiều nhất
         </div>
         <div class="panel-body">
         @foreach($newpost as $np)
         <a style="text-decoration: none;" href="/post/{{$np['id']}}">
             <blockquote>
                 @if($np['FormatID'] == '1')
-                    <img class="img-responsive" src="/images/imagePost/{{$np['Photo']}}" /> {{$np['FormatID']}}
+                    <img class="img-responsive" src="/images/imagePost/{{$np['Photo']}}" />
                 @elseif($np['FormatID'] == '2')
                     <iframe class="img-responsive" src="https://www.youtube.com/embed/{{$np['Video']}}" frameborder="0" allowfullscreen></iframe>
                 @endif
