@@ -11,7 +11,7 @@
   js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.5&appId=1657402167852948";
   fjs.parentNode.insertBefore(js, fjs);
 }(document, 'script', 'facebook-jssdk'));</script>
-    <h1 class="title">Ảnh của post</h1>
+    <h1 class="title">{{$Title . ' : ' . $Description}}</h1>
     <li class="list-group-item">
         <img class="img-responsive" src="{{'/images/imagePost/' . $Photo}}" />
     </li>
@@ -167,7 +167,7 @@
     <div class="form-control" id="resultText" style="display: none; height: 200px;">
         <b class="title" id="writeResult"></b> <br />
     </div>
-	<div>
+	<div style="margin-top: 10px">
         @if ($PreviousPost != null)
             <a class="btn btn-primary" href="{{route('user.viewpost', $PreviousPost)}}">Previous Post</a>
         @endif

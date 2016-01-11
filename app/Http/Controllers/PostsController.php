@@ -148,6 +148,7 @@ class PostsController extends Controller
         $result = array(
             'Comments' => json_encode($Comments),
             'Title' => $post['Title'],
+            'Description' => $post['Description'],
             'PostID' => $postID,
             'Questions' => $questions,
             'Photo' => $photo,
