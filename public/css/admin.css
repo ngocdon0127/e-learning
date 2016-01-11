@@ -6,21 +6,27 @@ body {
    padding:0;
    height:100%;
 }
-
 body{
-  background: #337ab7;
+  background: #fff;
 }
 .content{
   padding-top: 3%;
-  padding-bottom: 90px;
+  /*padding-bottom: 50px;*/
 }
 .wrapper{
   min-height:100%;
   position:relative;
   overflow: hidden;
-  background: #fafafa;
+  /*padding-bottom: 50px;*/
+  /*background: #fafafa;*/
+  /*background: red;*/
 }
-
+.side{
+  background: #f0f0f5;
+}
+.sidebar{
+  background:#fff;
+}
 .responsive{
   border: 1px solid green;
 }
@@ -219,7 +225,7 @@ ul#form_test img:hover{
   }
 
   footer{
-    height: 50px;
+    /*height: 50px;*/
   }
   .content{
     margin-left: 10%;

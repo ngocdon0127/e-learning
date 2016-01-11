@@ -84,23 +84,30 @@
 @else
 <body onload="saveIP();">
 @endif
-	<div class="wrapper">
+	<div class="wrapper side">
 		@include('layouts.header')
 		@include('layouts.navbar')
-		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-		<div class="container">
-			<div class=" row">
-				<div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
-
-				</div>
-				<div class="col-lg-6 col-sm-12 col-md-6 col-xs-12">
-					@yield('body.content')
-				</div>
-				<div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
-				</div>
+<!-- 		<div class="container-fluid" style="background:blue">
+		<div class="row col-md-offset-2 col-xs-offset-1">
+			<div class="col-md-6 col-xs-8" style="background:#fff; border:2px solid orange">
+				@yield('body.content')
 			</div>
+			<div class="col-md-2 col-xs-2" style="background:#fff; border:2px solid yellow">xxx</div>
 		</div>
+	</div> -->
+		<!-- <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12"> -->
+<div class="container sidebar">
+	<div class="row">
+		<div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
 		</div>
+		<div class="col-lg-6 col-sm-12 col-md-6 col-xs-12 ">
+			@yield('body.content')
+		</div>
+		<div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
+		</div>
+	</div>
+</div>
+</div>
 		@include('layouts.footer')
 	</div>
 		<script type="text/javascript" src="/js/jquery/jquery.js"></script>
