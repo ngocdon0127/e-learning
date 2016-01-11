@@ -42,7 +42,10 @@ Route::group(['prefix' => '/admin'], function(){
     ]);
     Route::get ('/course/{courseid}', 'CoursesController@adminviewcourse');
 });
-    Route::get ('/post/{postid}', 'PostsController@viewpost');
+get('/post/{postid}', [
+    'as' => 'user.viewpost',
+    'uses' => 'PostsController@viewpost'
+]);
     Route::get ('/question/{questionid}', 'QuestionsController@viewquestion');
     Route::get ('/ajax/checkcoursetitle/{title}', 'CoursesController@checkcoursetitle');
 get('/admin', [

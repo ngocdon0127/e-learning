@@ -195,7 +195,13 @@
         <b class="title" id="writeResult"></b> <br />
     </div>
 	<div>
-        <a class="btn btn-primary" href="#">Back to top</a>
+        @if ($PreviousPost != null)
+            <a class="btn btn-primary" href="{{route('user.viewpost', $PreviousPost)}}">Previous Post</a>
+        @endif
+            <a class="btn btn-primary" href="#">Back to top</a>
+        @if ($NextPost != null)
+            <a class="btn btn-primary" href="{{route('user.viewpost', $NextPost)}}">Next Post</a>
+        @endif
     </div>
     <div class="fb-comments" data-href="{!! 'http://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI']!!}" data-width="500" data-numposts="5"></div>
     <div class="fb-like" data-href="{!! 'http://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI']!!}" data-width="450" data-layout="standard" data-action="like" data-show-faces="true" data-share="true"></div>

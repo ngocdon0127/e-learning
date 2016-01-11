@@ -153,6 +153,11 @@ class PostsController extends Controller
             'MaxScore' => $maxscore,
             'Token' => $token
         );
+        $nextPost = Posts::where('CourseID', '=', $post['CourseID'])->where('id', '>', $post['id'])->get()->toArray();
+        $result += ['NextPost' => (count($nextPost) > 0) ? $nextPost[0]['id'] : ''];
+        $previousPost = Posts::where('CourseID', '=', $post['CourseID'])->where('id', '<', $post['id'])->get()->toArray();
+        $result += ['PreviousPost' => (count($previousPost) > 0) ? $previousPost[count($previousPost) - 1]['id'] : ''];
+
         return view('viewpost', $result);
     }
 

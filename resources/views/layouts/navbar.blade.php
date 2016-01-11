@@ -22,7 +22,9 @@
 			@if ((auth()->user()) && (auth()->user()->admin == 1))
 			<li id="navbar-button"><a class="navbar-button" href="/admin">Admin</a></li>
 			@endif
-			<!--<li id="navbar-button"><a class="navbar-button" href="#">Giới thiệu</a></li>-->
+			<li id="navbar-button"><a class="navbar-button" href="#">Tiếng Anh Tiểu học</a></li>
+			<li id="navbar-button"><a class="navbar-button" href="#">Tiếng Anh THCS</a></li>
+			<li id="navbar-button"><a class="navbar-button" href="#">TOEIC đột phá</a></li>
 			<!-- <li><a class="navbar-button" href="#">Quizzes</a></li> -->
 			<li class="dropdown">
 				<a id= "dropDown" href="#" class="dropdown-toggle navbar-button" data-toggle="dropdown">Khóa học<b class="caret"></b></a>
