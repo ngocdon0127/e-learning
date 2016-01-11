@@ -191,11 +191,15 @@
         <div class="panel-body">
         @foreach($newpost as $np)
         <a style="text-decoration: none;" href="/post/{{$np['id']}}">
-           <blockquote>
-               <img class="img-responsive" src="/images/imagePost/{{$np['Photo']}}" />
+            <blockquote>
+                @if($np['FormatID'] == '1')
+                    <img class="img-responsive" src="/images/imagePost/{{$np['Photo']}}" /> {{$np['FomatID']}}
+                @elseif($np['FormatID'] == '2')
+                    <iframe class="img-responsive" src="https://www.youtube.com/embed/{{$np['Video']}}" frameborder="0" allowfullscreen></iframe>
+                @endif
                 <h4>{{$np['Title']}}</h4>
                 <h6>{{$np['Description']}}</h6>
-           </blockquote>
+            </blockquote>
         </a>
         @endforeach
         </div>

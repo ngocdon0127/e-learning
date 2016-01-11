@@ -36,7 +36,7 @@
         @foreach($newpost as $np)
         <a style="text-decoration: none;" href="/post/{{$np['id']}}">
            <blockquote>
-               @if($np['FomatID'] == '1')
+               @if($np['FormatID'] == '1')
                    <img class="img-responsive" src="/images/imagePost/{{$np['Photo']}}" /> {{$np['FomatID']}}
                @elseif($np['FormatID'] == '2')
                    <iframe class="img-responsive" src="https://www.youtube.com/embed/{{$np['Video']}}" frameborder="0" allowfullscreen></iframe>
