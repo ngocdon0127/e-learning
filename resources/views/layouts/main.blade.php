@@ -88,15 +88,19 @@
 		@include('layouts.header')
 		@include('layouts.navbar')
 		<div class="container sidebar">
-			<div class=" row">
-				<div class="col-sm-3 col-md-3 col-lg-3">
-					@yield('body.navleft')
-				</div>
-				<div class="col-xs-12 col-sm-6 col-md-6">					
-					@yield('body.content')
-				</div>
-				<div class="col-xs-12 col-sm-3 col-md-3">
-				@yield('body.navright')
+			<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+				<div class="container">
+					<div class=" row">
+						<div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
+							@yield('body.navleft')
+						</div>
+						<div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">					
+							@yield('body.content')
+						</div>
+						<div class="col-xs-12 col-sm-12 col-md-3 col-lg-3" style="padding-right:28px">
+						@yield('body.navright')
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>
