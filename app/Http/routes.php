@@ -40,7 +40,10 @@ Route::group(['prefix' => '/admin'], function(){
         'as' => 'course.update',
         'uses' => 'CoursesController@update'
     ]);
-    Route::get ('/course/{courseid}', 'CoursesController@adminviewcourse');
+    Route::get ('/course/{courseid}', [
+        'as' => 'admin.viewcourse',
+        'uses' => 'CoursesController@adminviewcourse'
+    ]);
 });
 get('/post/{postid}', [
     'as' => 'user.viewpost',

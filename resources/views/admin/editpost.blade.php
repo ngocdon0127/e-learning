@@ -11,13 +11,17 @@
                   {!! Form::label('CourseID', 'Course ID : ',['class' => 'control-label']) !!}
                   {!! Form::select('CourseID', \App\Courses::getColumn('Title'), ['class'=>'form-control', 'onclick' => 'this.style.background = "white"']) !!}
               </div>
-              <div class="form-group">
+              <div class="form-group" id="divVideo">
+                  {!! Form::label('Video', 'Link Youtube : ',['class' => 'control-label']) !!}
+                  {!! Form::text('Video', '', ['class'=>'form-control']) !!}
+              </div>
+              <div class="form-group" id="divPhoto">
                   {!! Form::label('Photo', 'New Photo : ',['class' => 'control-label']) !!}
                   {!! Form::file('Photo', ['accept' => 'image/jpeg, image/png, image/gif','type'=>'file','class'=>'file']) !!}
               </div>
               <div class="form-group">
                   {!! Form::label('FormatID', 'Format ID : ',['class' => 'control-label']) !!}
-                  {!! Form::select('FormatID',\App\Formats::getColumn('Title'), ['class'=>'form-control', 'onclick' => 'this.style.background = "white"']) !!}
+                  {!! Form::select('FormatID',\App\Formats::getColumn('Title'), '', ['class'=>'form-control', 'onclick' => 'this.style.background = "white"', 'onchange' => 'configForm()']) !!}
               </div>
               <div class="form-group">
                   {!! Form::label('Title','Title : ',['class' => 'control-label']) !!}
@@ -40,6 +44,29 @@
                      function ob(x){
                          return document.getElementById(x);
                      }
+
+                     ob('FormatID').value = {{$Post['FormatID']}};
+
+                     function configForm(){
+                         switch (ob('FormatID').value){
+                             case '1':
+                                 ob('divPhoto').style.display = 'block';
+                                 ob('divVideo').style.display = 'none';
+                                 break;
+                             case '2':
+                                 ob('divPhoto').style.display = 'none';
+                                 ob('divVideo').style.display = 'block';
+                                 break;
+                             default:
+                                 console.log('dmm');
+                         }
+                     }
+
+                     configForm();
+                     if (ob('FormatID').value == '2'){
+                         ob('Video').value = "https://www.youtube.com/watch?v=" + "{{ $Post['Video'] }}";
+                     }
+
                      ob('CourseID').value = {{$Post['CourseID']}};
                      ob('Hashtag').value = '{!! $Hashtag !!}';
                      function displayError(x){

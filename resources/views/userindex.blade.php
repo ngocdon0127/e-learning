@@ -8,7 +8,11 @@
     @foreach($Posts as $p)
         <li class="active" style="list-style-type:none; padding-top: 10px">
             <a style="text-decoration: none; font-size: 20px;" href="/post/{{$p['id']}}">
+                @if($p['FormatID'] == '1')
                 <img class='img-responsive' src="/images/imagePost/{{$p['Photo']}}" />
+                @elseif($p['FormatID'] == '2')
+                    <iframe class="img-responsive" src="https://www.youtube.com/embed/{{$p['Video']}}" frameborder="0" allowfullscreen></iframe>
+                @endif
                 <p>
                     {{$p['Title']}}
                 </p>
@@ -32,7 +36,11 @@
         @foreach($newpost as $np)
         <a style="text-decoration: none;" href="/post/{{$np['id']}}">
            <blockquote>
-               <img class="img-responsive" src="/images/imagePost/{{$np['Photo']}}" />
+               @if($np['FomatID'] == '1')
+                   <img class="img-responsive" src="/images/imagePost/{{$np['Photo']}}" /> {{$np['FomatID']}}
+               @elseif($np['FormatID'] == '2')
+                   <iframe class="img-responsive" src="https://www.youtube.com/embed/{{$np['Video']}}" frameborder="0" allowfullscreen></iframe>
+               @endif
                 <h4>{{$np['Title']}}</h4>
                 <h6>{{$np['Description']}}</h6>
            </blockquote>
