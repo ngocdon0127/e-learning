@@ -179,7 +179,7 @@ ul#form_test img:hover{
 /* Small devices (tablets, 768px and up) */
 @media (max-width: 479px){
   .movePost{
-  font-size: 12px;
+  font-size: 8px;
 }
   header{
     /*height: 0px;*/
