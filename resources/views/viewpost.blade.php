@@ -142,9 +142,13 @@
 
                     }
                     else{
-                        $('html, body').animate({
-                            scrollTop: $("#title_question_" + nextQuestionID).offset().top
-                        }, 300);
+                        var delayToNextQuestion = 500;          // Time for user review current question.
+                        var timeScrollToNextQuestion = 300;
+                        setTimeout(function(){
+                            $('html, body').animate({
+                                scrollTop: $("#title_question_" + nextQuestionID).offset().top
+                            }, timeScrollToNextQuestion);
+                        }, delayToNextQuestion);
                     }
                 },
                 error: function(data){
