@@ -136,20 +136,25 @@ class PostsController extends Controller
         $photo = $post['Photo'];
         $questions = Questions::where('PostID', '=', $postID)->get()->toArray();
         $bundle = array();
-        $maxscore = 0;
+        
+        $bundleAnswer = array();
+		$maxscore = 0;
         foreach ($questions as $q){
             $answer = Answers::where('QuestionID', '=', $q['id'])->get()->toArray();
             $bundle += array($q['id'] => $answer);
-            if (count($answer) > 0) $maxscore++;
+            $bundleAnswer += [$q['id'] => AnswersController::getAnswer($q['id'])];
+			if (count($answer) > 0) $maxscore++;
         }
         $Comments = Comments::all()->toArray();
         $result = array(
             'Comments' => json_encode($Comments),
             'Title' => $post['Title'],
+            'Description' => $post['Description'],
             'PostID' => $postID,
             'Questions' => $questions,
             'Photo' => $photo,
             'Bundle' => $bundle,
+            'BundleAnswers' => $bundleAnswer,
             'MaxScore' => $maxscore,
             'Token' => $token
         );
