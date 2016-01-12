@@ -17,76 +17,110 @@ ADD QUESTION
            {!! Form::open(['name' => 'addQuestionForm', 'url' => '/admin/addquestion/' . $PostID, 'class'=>'form-horizontal', 'files' => true]) !!}
               
        
-               <div class="form-group">
-                   {!! Form::label('Question','Question : ',['class' => 'col-md-3 control-label']) !!}
-                   <div class="col-md-9">
-                       {!! Form::text('Question','',['class'=>'form-control']) !!}
-                   </div>
-               </div>
                 <div class="form-group">
-                   {!! Form::label('Photo', 'Photo : ',['class' => 'col-md-3 control-label']) !!}
-                   <div class="col-md-9">
-                       {!! Form::file('Photo', ['accept' => 'image/jpeg, image/png, image/gif']) !!}
-                   </div>
-               </div>
-               <div class="form-group">
-                   {!! Form::label('Description', 'Description : ',['class' => 'col-md-3 control-label']) !!}
-                   <div class="col-md-9">
-                       {!! Form::text('Description','',['class'=>'form-control']) !!}
-                   </div>
-               </div>
-               <div class="form-group">
-                   <div class="col-md-9">
-                       {!! Form::label('', '',['class' => 'col-md-3 control-label']) !!}
-                       {!! Form::label('Error', '',['id' => 'error', 'class' => 'control-label', 'style' => 'display: none;']) !!}
-                   </div>
+                   {!! Form::label('Question','Question : ',['class' => 'control-label']) !!}
+                   {!! Form::text('Question','',['class'=>'form-control']) !!}
+                </div>
+                <div class="form-group">
+                   {!! Form::label('FormatID', 'Format ID : ',['class' => 'control-label']) !!}
+                   {!! Form::select('FormatID',\App\Formats::getColumn('Title'), '', ['class'=>'form-control', 'onclick' => 'this.style.background = "white";', 'onchange' => 'configForm()']) !!}
+                </div>
+                <div class="form-group" id="divPhoto">
+                   {!! Form::label('Photo', 'Photo : ',['class' => 'control-label']) !!}
+                    {!! Form::file('Photo', ['accept' => 'image/jpeg, image/png, image/gif']) !!}
+                </div>
+                <div class="form-group" id="divVideo">
+                   {!! Form::label('Video', 'Link Youtube : ',['class' => 'control-label']) !!}
+                   {!! Form::text('Video', '', ['class'=>'form-control']) !!}
+                </div>
+                <div class="form-group">
+                   {!! Form::label('Description', 'Description : ',['class' => 'control-label']) !!}
+                   {!! Form::text('Description','',['class'=>'form-control']) !!}
+                </div>
+                <div class="form-group">
+                   {!! Form::label('', '',['class' => 'control-label']) !!}
+                   {!! Form::label('Error', '',['id' => 'error', 'class' => 'control-label', 'style' => 'display: none;']) !!}
                </div>
                <div class="col-sm-offset-3 col-sm-10">
                    <script type="text/javascript">
                        function ob(x){
                            return document.getElementById(x);
                        }
+
+                       function configForm(){
+                           switch (ob('FormatID').value){
+                               case '1':
+                                   ob('divPhoto').style.display = 'block';
+                                   ob('divVideo').style.display = 'none';
+                                   break;
+                               case '2':
+                                   ob('divPhoto').style.display = 'none';
+                                   ob('divVideo').style.display = 'block';
+                                   break;
+                               default:
+                                   console.log('dmm');
+                           }
+                       }
+
+                       configForm();
+
                        function displayError(x){
                            ob('error').style.display = 'block';
                            ob('error').innerHTML = x;
                        }
                        function submitForm(){
-                           var acceptedType = ['image/jpeg', 'image/png', 'image/gif'];
-                    //                        console.log('clicked');
-                           var photo = ob('Photo');
-                           if (photo.files.length <= 0){
-                               submitViaAJAX(null);
-                               return;
-                           }
-                           var type = photo.files[0].type;
-                           var check = false;
-                           for(i = 0; i < acceptedType.length; i++){
-                               if (type == acceptedType[i]){
-                                   check = true;
+                           switch (ob('FormatID').value){
+                               case '1':
+                                   var acceptedType = ['image/jpeg', 'image/png', 'image/gif'];
+                                   //                        console.log('clicked');
+                                   var photo = ob('Photo');
+                                   if (photo.files.length <= 0){
+                                       submitViaAJAX(null);
+                                       return;
+                                   }
+                                   var type = photo.files[0].type;
+                                   var check = false;
+                                   for(i = 0; i < acceptedType.length; i++){
+                                       if (type == acceptedType[i]){
+                                           check = true;
+                                           break;
+                                       }
+                                   }
+                                   if (!check){
+                                       //                            console.log('not ok');
+                                       displayError('Chỉ chọn file ảnh.');
+                                   }
+                                   else{
+                                       //                            console.log('ok');
+                                       if ('size' in photo.files[0]){
+                                           console.log(photo.files[0].size);
+                                       }
+                                       else{
+                                           console.log('ko co size');
+                                       }
+                                       if (photo.files[0].size > 10 * 1024 * 1024){
+                                           console.log('size qua lon');
+                                           ob('error').style.display = 'block';
+                                           displayError('Chỉ chọn file có kích thước tối đa 10 MB.');
+                                           return;
+                                       }
+                                       ob('error').style.display = 'none';
+                                       submitViaAJAX(photo.files[0]);
+
+                                   }
                                    break;
-                               }
-                           }
-                           if (!check){
-                    //                            console.log('not ok');
-                               displayError('Chỉ chọn file ảnh.');
-                           }
-                           else{
-                    //                            console.log('ok');
-                               if ('size' in photo.files[0]){
-                                   console.log(photo.files[0].size);
-                               }
-                               else{
-                                   console.log('ko co size');
-                               }
-                               if (photo.files[0].size > 10 * 1024 * 1024){
-                                   console.log('size qua lon');
-                                   ob('error').style.display = 'block';
-                                   displayError('Chỉ chọn file có kích thước tối đa 10 MB.');
-                                   return;
-                               }
-                               ob('error').style.display = 'none';
-                               submitViaAJAX(photo.files[0]);
-                               
+                               case '2': // Video
+//                                   if (ob('Video').value.length < 1){
+//                                       displayError('Chưa nhập link video.');
+//                                       return;
+//                                   }
+//                                   else{
+//                                       ob('error').style.display = 'none';
+//                                       document.addPostForm.submit();
+//                                   }
+
+                                   submitViaAJAX(null);
+                                   break;
                            }
                     //                        ob('error').innerHTML = photo.value;
                        }
@@ -105,7 +139,9 @@ ADD QUESTION
                           ob('btnAddQuestion').disabled = true;
                           var fd = new FormData();
                           fd.append('Question', ob('Question').value);
+                          fd.append('FormatID', ob('FormatID').value);
                           fd.append('Description', ob('Description').value);
+                          fd.append('Video', ob('Video').value);
                           fd.append('Photo', p);
                           $.ajax({
                               url: '/admin/addquestion/' + {!! $PostID !!},

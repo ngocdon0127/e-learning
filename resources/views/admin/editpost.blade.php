@@ -63,9 +63,7 @@
                      }
 
                      configForm();
-                     if (ob('FormatID').value == '2'){
-                         ob('Video').value = "https://www.youtube.com/watch?v=" + "{{ $Post['Video'] }}";
-                     }
+                     ob('Video').value = "https://www.youtube.com/watch?v=" + "{{ $Post['Video'] }}";
 
                      ob('CourseID').value = {{$Post['CourseID']}};
                      ob('Hashtag').value = '{!! $Hashtag !!}';
