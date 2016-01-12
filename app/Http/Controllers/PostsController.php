@@ -233,6 +233,18 @@ class PostsController extends Controller
         return view('search')->with(['Posts' => $result, 'Hashtags' => $Hashtags]);
     }
 
+    public function uploadAudio(){
+//        return view('soundcloud');
+        $sc_client_id = "a44837441b00a082d5674ed6457f91a5";
+        $sc_secret = "5c3305ecb0320334718eb70f5bc13a3c";
+        $sc_user = "48408491";
+        $sc_pass = "donscngoc271";
+//      create client object and set access token
+        $client = new Services_Soundcloud($sc_client_id, $sc_secret);
+//      login
+        $client->credentialsFlow($sc_user, $sc_pass);
+    }
+
 
 
     public function create()

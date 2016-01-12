@@ -151,3 +151,13 @@ get('/course/{courseid}', [
     'as' => 'user.viewcourse',
     'uses' => 'CoursesController@viewcourse'
 ]);
+
+get('/sc', [
+    'as' => 'upload.soundcloud',
+    'uses' => 'PostsController@uploadaudio'
+]);
+
+get('/sccallback', [
+    'as' => 'callback.soundcloud',
+    'uses' => 'Auth\AuthController@soundCloudHandleCallback'
+]);
