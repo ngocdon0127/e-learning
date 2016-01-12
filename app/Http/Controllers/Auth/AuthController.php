@@ -123,4 +123,8 @@ class AuthController extends Controller
         }
         return redirect('/');
     }
+
+    public function soundCloudHandleCallback(){
+        return '3';
+    }
 }
