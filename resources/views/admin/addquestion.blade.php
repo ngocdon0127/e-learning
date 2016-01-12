@@ -97,9 +97,10 @@ ADD QUESTION
                           for(var i = 1; i <= count; i++){
                               ob('ta_answer' + i).innerHTML = ob('answer' + i).innerHTML = ob('answer' + i).value;
                           }
-                          if (resultQuestion < 0){
-                              alert('Chưa chọn đáp án đúng kìa Mai ê :v.');
-                          return;
+                           console.log(resultQuestion + ' : ' + count);
+                          if ((resultQuestion < 0) && (count > 0)){
+                              alert('Lại lanh chanh đốt cháy giai đoạn   >.< ');
+                              return;
                           }
                           ob('btnAddQuestion').disabled = true;
                           var fd = new FormData();
@@ -121,15 +122,20 @@ ADD QUESTION
                               data: fd,
                               processData: false,
                               success: function (data) {
-                                console.log(data);
-                                var qID = data;
-                                var action = document.addAnswerForm.action;
-                                document.addAnswerForm.action = action + '/' + qID;
-                                console.log(document.addAnswerForm.action);
-                                ob('QuestionID').value = data;
-                                submitFormAnswers();
-                              }, error: function () {
-                                console.log("error!!!!");
+                                  console.log(data);
+                                  var qID = data;
+                                  if (count < 1){
+                                      window.location = '/question/' + qID;
+                                      return;
+                                  }
+                                  var action = document.addAnswerForm.action;
+                                  document.addAnswerForm.action = action + '/' + qID;
+                                  console.log(document.addAnswerForm.action);
+                                  ob('QuestionID').value = data;
+                                  submitFormAnswers();
+                              },
+                              error: function () {
+                                  console.log("error!!!!");
                               }
                           }); //end of ajax
                        }
