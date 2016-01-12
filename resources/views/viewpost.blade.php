@@ -186,7 +186,7 @@
 @section('body.navright')
     <div class="panel panel-default">
         <div class="panel-heading">
-            Các post được xem nhiều nhất
+            Xem nhiều nhất
         </div>
         <div class="panel-body">
         @foreach($newpost as $np)
