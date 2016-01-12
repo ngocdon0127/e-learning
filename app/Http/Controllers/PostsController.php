@@ -173,11 +173,11 @@ class PostsController extends Controller
             'MaxScore' => $maxscore,
             'Token' => $token
         );
-        $nextPost = Posts::where('CourseID', '=', $post['CourseID'])->where('id', '>', $post['id'])->get()->toArray();
-        $result += ['NextPost' => (count($nextPost) > 0) ? $nextPost[0]['id'] : Posts::where('CourseID', '=', $post['CourseID'])->first()->toArray()['id']];
+        $nextPost = Posts::where('CourseID', '=', $post['CourseID'])->where('id', '>=', $post['id'])->get()->toArray();
+        $result += ['NextPost' => (count($nextPost) > 1) ? $nextPost[1]['id'] : Posts::where('CourseID', '=', $post['CourseID'])->first()->toArray()['id']];
         $previousPost = Posts::where('CourseID', '=', $post['CourseID'])->where('id', '<', $post['id'])->get()->toArray();
         $result += ['PreviousPost' => (count($previousPost) > 0) ? $previousPost[count($previousPost) - 1]['id'] : Posts::where('CourseID', '=', $post['CourseID'])->orderBy('created_at', 'desc')->first()->toArray()['id']];
-        $newpost = Posts::orderBy('visited', 'dsc')->take(5)->get()->toArray();
+        $newpost = array_merge($nextPost, $previousPost);
         $result += ['newpost' => $newpost];
         // dd($newpost);
         // return view('viewpost')->with(compact(['result', 'newpost']));

@@ -186,11 +186,15 @@
 @section('body.navright')
     <div class="panel panel-default">
         <div class="panel-heading">
-            Xem nhiều nhất
+            Bài đăng cùng khóa
         </div>
-        <div class="panel-body">
+        <div class="panel-body" style="max-height: 1000px; overflow: auto" id="div_right_bar">
         @foreach($newpost as $np)
-        <a style="text-decoration: none;" href="/post/{{$np['id']}}">
+            @if ($np['id'] == $PostID)
+        <a id="a_smallLink_{{$np['id']}}" style="text-decoration: none; background: green;" href="/post/{{$np['id']}}">
+            @else
+         <a id="a_smallLink_{{$np['id']}}" style="text-decoration: none;" href="/post/{{$np['id']}}">
+             @endif
             <blockquote>
                 @if($np['FormatID'] == '1')
                     <img class="img-responsive" src="/images/imagePost/{{$np['Photo']}}" />
