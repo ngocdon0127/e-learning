@@ -82,41 +82,61 @@
                              formatob.style.background = '#ff5050';
                              return;
                          }
-                         var acceptedType = ['image/jpeg', 'image/png', 'image/gif'];
-             //                        console.log('clicked');
-                         var photo = ob('Photo');
-                         if (photo.files.length <= 0){
-                             document.editPostForm.submit();
-                             return;
-                         }
-                         var type = photo.files[0].type;
-                         var check = false;
-                         for (i = 0; i < acceptedType.length; i++) {
-                             if (type == acceptedType[i]) {
-                                 check = true;
+                         switch (formatob.value){
+                            case '1':   // Photo
+                                var acceptedType = ['image/jpeg', 'image/png', 'image/gif'];
+                     //                        console.log('clicked');
+                                 var photo = ob('Photo');
+                                 if (photo.files.length <= 0){
+                                     document.editPostForm.submit();
+                                     return;
+                                 }
+                                 var type = photo.files[0].type;
+                                 var check = false;
+                                 for (i = 0; i < acceptedType.length; i++) {
+                                     if (type == acceptedType[i]) {
+                                         check = true;
+                                         break;
+                                     }
+                                 }
+                                 if (!check) {
+                                     //                            console.log('not ok');
+                                     displayError('Chỉ chọn file ảnh.');
+                                 }
+                                 else {
+                                     //                            console.log('ok');
+                                     if ('size' in photo.files[0]) {
+                                         console.log(photo.files[0].size);
+                                     }
+                                     else {
+                                         console.log('ko co size');
+                                     }
+                                     if (photo.files[0].size > 2 * 1024 * 1024) {
+                                         console.log('size qua lon');
+                                         ob('error').style.display = 'block';
+                                         displayError('Chỉ chọn file có kích thước tối đa 2 MB.');
+                                         return;
+                                     }
+                                     ob('error').style.display = 'none';
+                                     document.editPostForm.submit();
+                                 }
                                  break;
-                             }
-                         }
-                         if (!check) {
-                             //                            console.log('not ok');
-                             displayError('Chỉ chọn file ảnh.');
-                         }
-                         else {
-                             //                            console.log('ok');
-                             if ('size' in photo.files[0]) {
-                                 console.log(photo.files[0].size);
-                             }
-                             else {
-                                 console.log('ko co size');
-                             }
-                             if (photo.files[0].size > 2 * 1024 * 1024) {
-                                 console.log('size qua lon');
-                                 ob('error').style.display = 'block';
-                                 displayError('Chỉ chọn file có kích thước tối đa 2 MB.');
-                                 return;
-                             }
-                             ob('error').style.display = 'none';
-                             document.editPostForm.submit();
+                              case '2': // Video
+                                 if (ob('Video').value.length < 1){
+                                     displayError('Chưa nhập link video.');
+                                     return;
+                                 }
+                                 else{
+                                     ob('error').style.display = 'none';
+                                    var linkVideo = ob('Video').value;
+                                    if ((linkVideo.indexOf('watch?v=') < 0) && (linkVideo.indexOf('youtu.be/') < 0)){
+                                      displayError('Link video Youtube không đúng.');
+                                      return;
+                                    }
+                                    $('#error').fadeOut();
+                                    document.editPostForm.submit();
+                                 }
+                                 break;
                          }
              //                        ob('error').innerHTML = photo.value;
              

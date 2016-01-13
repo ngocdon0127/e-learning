@@ -65,26 +65,26 @@ ADD QUESTION
                        configForm();
 
                        function displayError(x){
-                           ob('error').style.display = 'block';
+                           $('#error').fadeIn();
                            ob('error').innerHTML = x;
                        }
                        function submitForm(){
                            switch (ob('FormatID').value){
-                               case '1':
+                               case '1':  // Photo
                                    var acceptedType = ['image/jpeg', 'image/png', 'image/gif'];
                                    //                        console.log('clicked');
                                    var photo = ob('Photo');
                                    if (photo.files.length <= 0){
-                                       submitViaAJAX(null);
-                                       return;
+                                      submitViaAJAX(null);
+                                      return;
                                    }
                                    var type = photo.files[0].type;
                                    var check = false;
                                    for(i = 0; i < acceptedType.length; i++){
-                                       if (type == acceptedType[i]){
-                                           check = true;
-                                           break;
-                                       }
+                                      if (type == acceptedType[i]){
+                                        check = true;
+                                        break;
+                                      }
                                    }
                                    if (!check){
                                        //                            console.log('not ok');
@@ -110,17 +110,20 @@ ADD QUESTION
                                    }
                                    break;
                                case '2': // Video
-//                                   if (ob('Video').value.length < 1){
-//                                       displayError('Chưa nhập link video.');
-//                                       return;
-//                                   }
-//                                   else{
-//                                       ob('error').style.display = 'none';
-//                                       document.addPostForm.submit();
-//                                   }
-
-                                   submitViaAJAX(null);
-                                   break;
+                                  if (ob('Video').value.length > 0){
+                                    var linkVideo = ob('Video').value;
+                                    if ((linkVideo.indexOf('watch?v=') < 0) && (linkVideo.indexOf('youtu.be/') < 0)){
+                                      displayError('Link video Youtube không đúng.');
+                                      return;
+                                    }
+                                    $('#error').fadeOut();
+                                    submitViaAJAX(null);
+                                  }
+                                  else{
+                                      $('#error').fadeOut();
+                                      submitViaAJAX(null);
+                                  }
+                                  break;
                            }
                     //                        ob('error').innerHTML = photo.value;
                        }

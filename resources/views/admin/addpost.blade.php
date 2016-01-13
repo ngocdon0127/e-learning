@@ -77,9 +77,6 @@
                              formatob.style.background = '#ff5050';
                              return;
                          }
-                         if (formatob.value == '1'){ // Plain Text
-
-                         }
 
                          switch (formatob.value){
                              case '1': // Plain Text
@@ -127,7 +124,14 @@
                                  }
                                  else{
                                      ob('error').style.display = 'none';
-                                     document.addPostForm.submit();
+                                    var linkVideo = ob('Video').value;
+                                    if ((linkVideo.indexOf('watch?v=') < 0) && (linkVideo.indexOf('youtu.be/') < 0)){
+                                      displayError('Link video Youtube không đúng.');
+                                      return;
+                                    }
+                                    $('#error').fadeIn();
+                                    document.addPostForm.submit();
+
                                  }
                                  break;
                              default:

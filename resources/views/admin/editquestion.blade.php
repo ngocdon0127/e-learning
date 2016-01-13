@@ -113,7 +113,21 @@ EDIT QUESTION
                                    }
                                    break;
                                case '2':
-                                   document.editQuestionForm.submit();
+                                    if (ob('Video').value.length > 0){
+                                    var linkVideo = ob('Video').value;
+                                    if ((linkVideo.indexOf('watch?v=') < 0) && (linkVideo.indexOf('youtu.be/') < 0)){
+                                      displayError('Link video Youtube không đúng.');
+                                      return;
+                                    }
+                                    $('#error').fadeOut();
+                                    document.editQuestionForm.submit();
+                                    }
+                                    else{
+                                        $('#error').fadeOut();
+                                        document.editQuestionForm.submit();
+                                    }
+                                    break;
+                                   
                            }
        //                        ob('error').innerHTML = photo.value;
        

@@ -96,7 +96,14 @@ class PostsController extends Controller
 
     public static function getYoutubeVideoID($rawLink){
         preg_match_all('/watch[?]v=([^&]+)/', $rawLink, $matches, PREG_PATTERN_ORDER);
-        return $matches[1][0];
+        if ((count($matches) > 1) && (count($matches[1]) > 0)){
+            return $matches[1][0];
+        }
+        preg_match_all('/youtu.be\/([^?&]+)/', $rawLink, $matches, PREG_PATTERN_ORDER);
+        if ((count($matches) > 1) && (count($matches[1]) > 0)){
+            return $matches[1][0];
+        }
+        return null;
     }
 
     public function viewPost($postID){
