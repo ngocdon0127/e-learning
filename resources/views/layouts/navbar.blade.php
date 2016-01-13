@@ -69,20 +69,20 @@
 			'onMouseOver', 
 			'displaySearch()');
 		x.setAttribute('onclick', 'displaySearch()');
-
-		// x.setAttribute("onclick",'alert(1)');
 		function displaySearch(){
-			ob("HashtagSearch").style.display = "inline"; 
-			ob("btnHashtagSearch").style.display = "inline";
+			$("#HashtagSearch").fadeIn();
+			$('#btnHashtagSearch').fadeIn();
 			ob('spanSearch').style.display="none";
 			ob('HashtagSearch').focus();
 			ob('HashtagSearch').setAttribute('onBlur', 'hideSearch()');
 		}
 
 		function hideSearch(){
-			ob("HashtagSearch").style.display = "none"; 
-			ob("btnHashtagSearch").style.display = "none";
-			ob('spanSearch').style.display="inline";
+				$("#HashtagSearch").fadeOut();
+				$('#btnHashtagSearch').fadeOut();
+				$('#spanSearch').fadeIn(2000);
 		}
+
+		
 	</script>
 </div>
