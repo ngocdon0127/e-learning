@@ -18,10 +18,11 @@ class QuestionsController extends Controller
     protected static $imageQuestionPath = '/public/images/imageQuestion/';
 
     public function viewQuestion($QuestionID){
-        $Question = Questions::find($QuestionID)->toArray();
+        $Question = Questions::find($QuestionID);
         if (count($Question) < 1){
             return view('errors.404');
         }
+        $Question = $Question->toArray()
         $Answers = Answers::where('QuestionID', '=', $QuestionID)->get()->toArray();
         return view('viewquestion')->with(compact('Question', 'Answers'));
     }

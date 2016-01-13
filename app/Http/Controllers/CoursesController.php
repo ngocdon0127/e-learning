@@ -16,11 +16,12 @@ class CoursesController extends Controller
 {
 
     public function adminViewCourse($courseid){
-        $course = Courses::findOrNew($courseid)->toArray();
+        $course = Courses::find($courseid);
         if (count($course) < 1){
             return view('errors.404');
         }
 //        $result = array('Title' => $course['Title']);
+        $course = $course->toArray();
         $posts = Posts::where('CourseID', '=', $courseid)->get()->toArray();
         $numQuestions = [];
         foreach($posts as $p){

@@ -122,11 +122,10 @@ class PostsController extends Controller
 			$token = md5(rand(), false);
 		}
 
-		$post = Posts::findOrNew($postID)->toArray();
+		$post = Posts::find($postID);
 		if (count($post) < 1){
 			return view('errors.404');
 		}
-		$post = Posts::findOrNew($postID);
 		$post->visited++;
 		$post->update();
 		$post = $post->toArray();
