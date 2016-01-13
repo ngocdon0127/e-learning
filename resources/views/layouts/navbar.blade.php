@@ -78,9 +78,11 @@
 		}
 
 		function hideSearch(){
+			setTimeout(function(){
 				$("#HashtagSearch").fadeOut();
 				$('#btnHashtagSearch').fadeOut();
 				$('#spanSearch').fadeIn(2000);
+			}, 200);
 		}
 
 		
