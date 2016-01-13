@@ -49,8 +49,17 @@ get('/post/{postid}', [
     'as' => 'user.viewpost',
     'uses' => 'PostsController@viewpost'
 ]);
-    Route::get ('/question/{questionid}', 'QuestionsController@viewquestion');
-    Route::get ('/ajax/checkcoursetitle/{title}', 'CoursesController@checkcoursetitle');
+
+get ('/question/{questionid}', [
+    'as' => 'user.viewquestion',
+    'uses' => 'QuestionsController@viewquestion'
+]);
+
+get ('/ajax/checkcoursetitle/{title}', [
+    'as' => 'ajax.checkcoursetitle',
+    'uses' => 'CoursesController@checkcoursetitle'
+]);
+
 get('/admin', [
     'as' => 'admin',
     'uses' => 'AdminController@index'
