@@ -22,7 +22,7 @@ class QuestionsController extends Controller
         if (count($Question) < 1){
             return view('errors.404');
         }
-        $Question = $Question->toArray()
+        $Question = $Question->toArray();
         $Answers = Answers::where('QuestionID', '=', $QuestionID)->get()->toArray();
         return view('viewquestion')->with(compact('Question', 'Answers'));
     }
