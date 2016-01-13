@@ -5,13 +5,15 @@
 @section('body.content')
     <h2 class="title">Câu hỏi: {{$Question['Question']}}</h2>
     @if ($Question['FormatID'] == 1)
-        @if ($Question['FormatID'] != null)
+        @if ($Question['Photo'] != null)
             <li class="list-group-item ">
                 <img class= "img-responsive" src="{{'/images/imageQuestion/' . $Question['Photo']}}"/>
             </li>
         @endif
     @elseif($Question['FormatID'] == 2)
+        @if ($Question['Video'] != null)
         <iframe class="img-responsive" src="https://www.youtube.com/embed/{{$Question['Video']}}" frameborder="0" allowfullscreen></iframe>
+        @endif
     @endif
 
     <h2 class="title">{{$Question['Description']}}</h2>

@@ -150,11 +150,20 @@
 				@else
 					<h4 class="title">{{$q['Question']}} : {{$q['Description']}}</h4>
 				@endif
-            @if ($q['Photo'] != null)
-            <li class="list-group-item list-group-item-info">
-                <img class="img-responsive" src="/images/imageQuestion/{{$q['Photo']}}" />
-            </li>
-            @endif
+                @if ($q['FormatID'] == 1)
+                    @if ($q['Photo'] != null)
+                        <li class="list-group-item list-group-item-info">
+                        <img class="img-responsive" src="/images/imageQuestion/{{$q['Photo']}}" />
+                        </li>
+                    @endif
+                @elseif ($q['FormatID'] == 2)
+                    @if ($q['Video'] != null)
+                        <!-- <li class="list-group-item list-group-item-info"> -->
+                        <iframe class="img-responsive" src="https://www.youtube.com/embed/{{$q['Video']}}" frameborder="0" allowfullscreen></iframe>
+                        <!-- </li> -->
+                    @endif
+                @endif
+            
            <ul class="list-group" id="ul_question_{{$q['id']}}">
                 @foreach($Bundle[$q['id']] as $k => $a)
                     <li id="answer_{{$q['id']}}_{{$a['id']}}" class="list_answer"  onclick="check({{$q['id']}}, {{$a['id']}}, {{$BundleAnswers[$q['id']]}}, {!! $key + 2 !!})" style="cursor: pointer">
