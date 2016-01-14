@@ -70,10 +70,10 @@ Cập nhật đáp án
                                 resultQuestion = i;
                             }
                             div.setAttribute('class','div_i');
-                            div.children[0].setAttribute('class','col-sm-9');
+                            div.children[0].setAttribute('class','col-sm-12');
                             radio.setAttribute('class','checked');
                             radio.setAttribute('type','radio');
-                            div.children[2].setAttribute('class','children btn btn-info');
+                            div.children[2].setAttribute('class','btn btn-danger');
 //                            radio.setAttribute('onclick', 'markAnswer("' + radio.id + '")');
 //                            if (i > minAnswer - 1)
 
@@ -136,7 +136,7 @@ Cập nhật đáp án
                         e.id = 'specialID';
 //                        e.setAttribute('contenteditable', 'true');
 //                        e.innerHTML = 'preText';
-                        e.setAttribute('class', 'col-sm-9');
+                        e.setAttribute('class', 'col-sm-12');
                         var divElement = document.createElement('div');
                         divElement.id = "divanswer" + count;
                         ob('answers').appendChild(divElement);
@@ -156,6 +156,7 @@ Cập nhật đáp án
                         var uButton = document.createElement('input');
                         uButton.type = 'button';
                         uButton.setAttribute('value', 'Gạch chân');
+                        uButton.setAttribute('class','btn btn-primary');
                         divElement.appendChild(uButton);
 //                        bkLib.onDomLoaded(function() {
 ////                            console.log('bklig ');
@@ -209,9 +210,9 @@ Cập nhật đáp án
 
                    <!-- <div class="col-sm-10"> -->
                 <input type="text" value="{{$QuestionID}}" style="display: none" readonly name="QuestionID" />
-                {!! Form::button('Cập nhật',['class' => 'btn btn-info', 'onclick' => 'submitForm()']) !!}
+                {!! Form::button('Cập nhật',['class' => 'btn btn-primary', 'onclick' => 'submitForm()']) !!}
             {!! Form::close() !!}
-        <a href="/post/{{$PostID}}" class="btn btn-info">Quay lại bài đăng</a>
+        <a href="/post/{{$PostID}}" class="btn btn-primary">Quay lại bài đăng</a>
         </div>
 
 

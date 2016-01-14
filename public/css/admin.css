@@ -93,6 +93,8 @@ h1.header{
 
 
 /*==================FROM-H1===========================*/
+
+h1.title,
 h2.title{
   color: #660066;
   font-weight: bold;
@@ -106,10 +108,13 @@ h4.title{
 img:hover{
   opacity: 0.85;
 }
-.btn-info{
-  font-size: 20px;
+
+.btn-primary,
+.btn-danger{
+  font-size: 15px;
   font-weight: bold;
   margin-bottom: 10px;
+  margin-right: 10px;
 }
 .badge-span{
   background: white;

@@ -49,7 +49,7 @@
  						            <!-- </div> -->
  						        </div> 
  						
- 							    	{!! Form::button('Thêm',['class'=>'btn btn-info', 'onClick' => 'submitForm()']) !!}
+ 							    	{!! Form::button('Thêm',['class'=>'btn btn-primary', 'onClick' => 'submitForm()']) !!}
  						
  								 {!! Form::close() !!}
  								 <!-- </div> -->

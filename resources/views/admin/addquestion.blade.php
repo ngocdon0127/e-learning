@@ -300,10 +300,10 @@ ADD QUESTION
 																resultQuestion = i;
 														}
 														div.setAttribute('class','div_i');
-														div.children[0].setAttribute('class','col-sm-9');
+														div.children[0].setAttribute('class','col-sm-12');
 														radio.setAttribute('class','checked');
 														radio.setAttribute('type','radio');
-														div.children[2].setAttribute('class','children btn btn-info');
+														div.children[2].setAttribute('class','children btn btn-danger');
 //                            radio.setAttribute('onclick', 'markAnswer("' + radio.id + '")');
 //                            if (i > minAnswer - 1)
 
@@ -366,7 +366,7 @@ ADD QUESTION
 												e.id = 'specialID';
 //                        e.setAttribute('contenteditable', 'true');
 //                        e.innerHTML = 'preText';
-												e.setAttribute('class', 'col-sm-9');
+												e.setAttribute('class', 'col-sm-12');
 												var divElement = document.createElement('div');
 												divElement.id = "divanswer" + count;
 												ob('answers').appendChild(divElement);
@@ -386,6 +386,7 @@ ADD QUESTION
 												var uButton = document.createElement('input');
 												uButton.type = 'button';
 												uButton.setAttribute('value', 'Gạch chân');
+												uButton.setAttribute('class','btn btn-primary');
 												divElement.appendChild(uButton);
 //                        bkLib.onDomLoaded(function() {
 ////                            console.log('bklig ');
@@ -434,7 +435,7 @@ ADD QUESTION
 						{!! Form::close() !!}
 				</div>
 
-				<button class="btn btn-info" onclick="submitForm()" type="button" id="btnAddQuestion">Thêm</button>
+				<button class="btn btn-primary" onclick="submitForm()" type="button" id="btnAddQuestion">Thêm</button>
 		</div>
 <!-- end container -->
 

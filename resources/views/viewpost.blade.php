@@ -20,8 +20,9 @@
         @endif
     </li>
     @if ((auth()->user()) && (auth()->user()->admin == 1))
-        <a class ="col-md-12 btn btn-info" href="{{route('post.edit', $PostID)}}">Sửa thông tin bài đăng</a>
-        <button class ="col-md-12 btn btn-info" onclick="del()">Xóa bài đăng này</button>
+        <a class ="col-xs-12 btn btn-primary" href="{{route('post.edit', $PostID)}}">Sửa thông tin bài đăng</a>
+        <a class ="col-xs-12 btn btn-primary" href="/admin/addquestion/{{$PostID}}">Thêm câu hỏi</a>
+        <button class ="col-xs-12 btn btn-danger" onclick="del()">Xóa bài đăng này</button>
         <script type="text/javascript">
             function del(){
                 if (confirm('Xác nhận xóa?') == true){
@@ -29,7 +30,6 @@
                 }
             }
         </script>
-        <a class ="col-md-12 btn btn-info" href="/admin/addquestion/{{$PostID}}">Thêm câu hỏi</a>
     @endif
     
     <script type="text/javascript" charset="UTF-8">
