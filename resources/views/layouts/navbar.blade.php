@@ -23,12 +23,25 @@
 				@if ((auth()->user()) && (auth()->user()->admin == 1))
 				<li id="navbar-button"><a class="navbar-button" href="/admin">Admin</a></li>
 				@endif
-				<li id="navbar-button"><a class="navbar-button" href="#">Tiếng Anh Tiểu học</a></li>
-				<li id="navbar-button"><a class="navbar-button" href="#">Tiếng Anh THCS</a></li>
-				<li id="navbar-button"><a class="navbar-button" href="#">TOEIC đột phá</a></li>
-				<!-- <li><a class="navbar-button" href="#">Quizzes</a></li> -->
 				<li class="dropdown">
-					<a id= "dropDown" href="#" class="dropdown-toggle navbar-button" data-toggle="dropdown">Khóa học<b class="caret"></b></a>
+					<a id= "dropDown" href="#" class="dropdown-toggle navbar-button" data-toggle="dropdown">Primary English<b class="caret"></b></a>
+					<ul id="dropdown-course" class="dropdown-menu">
+					</ul>
+				</li>
+				<li class="dropdown">
+					<a id= "dropDown" href="#" class="dropdown-toggle navbar-button" data-toggle="dropdown">Junior English<b class="caret"></b></a>
+					<ul id="dropdown-course" class="dropdown-menu">
+
+					</ul>
+				</li>
+				<li class="dropdown">
+					<a id= "dropDown" href="#" class="dropdown-toggle navbar-button" data-toggle="dropdown">TOEIC đột phá<b class="caret"></b></a>
+					<ul id="dropdown-course" class="dropdown-menu">
+
+					</ul>
+				</li>
+				<li class="dropdown">
+					<a id= "dropDown" href="#" class="dropdown-toggle navbar-button" data-toggle="dropdown">Moore<b class="caret"></b></a>
 					<ul id="dropdown-course" class="dropdown-menu">
 						@foreach(\App\Courses::all() as $c)
 							<li id="navbar-button"><a href="/course/{{$c->id}}">{{$c->Title}}</a></li>

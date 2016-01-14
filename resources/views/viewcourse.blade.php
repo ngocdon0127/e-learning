@@ -13,8 +13,8 @@
         @endforeach
     </ul>
     @if ((auth()->user()) && (auth()->user()->admin == 1))
-        <a class="btn btn-info" href="{{route('course.edit', $CourseID)}}">Sửa thông tin khóa học</a>
-        <button class="btn btn-info" href="" onclick="del()">Xóa khóa học này</button>
+        <a class="col-md-12 btn btn-info" href="{{route('course.edit', $CourseID)}}">Sửa thông tin khóa học</a>
+        <button class="col-md-12 btn btn-info" href="" onclick="del()">Xóa khóa học này</button>
         <script type="text/javascript">
             function del(){
                 if (confirm('Xác nhận xóa?') == true){
@@ -22,7 +22,7 @@
                 }
             }
         </script>
-        <a class="btn btn-info" href="/admin/addpost">Thêm bài đăng mới</a>
+        <a class="col-md-12 btn btn-info" href="/admin/addpost">Thêm bài đăng mới</a>
     @endif
 @endsection
 
