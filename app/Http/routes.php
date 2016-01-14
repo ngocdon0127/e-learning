@@ -28,7 +28,10 @@ Route::controllers(['/auth' => 'Auth\AuthController', 'password' => 'Auth\Passwo
 Route::get ('/', 'PostsController@viewnewestposts');
 
 Route::group(['prefix' => '/admin'], function(){
-    Route::get ('/addquestion/{postid}', 'QuestionsController@addquestion');
+    Route::get ('/addquestion/{postid}',[
+        'as'    => 'admin.addquestion',
+        'uses'  => 'QuestionsController@addquestion'
+    ]);
     Route::post('/addquestion/{postid}', 'QuestionsController@savequestion');
     Route::get ('/addpost', 'PostsController@addpost');
     Route::post('/addpost', 'PostsController@savepost');

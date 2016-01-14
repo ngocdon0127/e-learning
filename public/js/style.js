@@ -5,4 +5,17 @@ $(document).ready(function(){
 	$("img").mouseover(function(){
 		opacity: 0.8;
 	});
+
+	$(window).scroll(function() {
+    if ($(this).scrollTop()) {
+        $('#toTop').fadeIn();
+    } else {
+        $('#toTop').fadeOut();
+    }
+	});
+
+	$("#toTop").click(function() {
+    	$("html, body").animate({scrollTop: 0}, 500);
+ 	});
+
 });
