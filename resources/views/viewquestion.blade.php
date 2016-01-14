@@ -29,14 +29,25 @@
     @if ((auth()->user()) && (auth()->user()->admin == 1))
     <a class="btn btn-primary col-xs-12" href="{{route('question.edit', $Question['id'])}}">Sửa câu hỏi</a>
     <a class="btn btn-primary col-xs-12" href="{{route('answer.edit', $Question['id'])}}">Sửa đáp án</a>
-    <a class="btn btn-primary col-xs-12" href="/post/{{$Question['PostID']}}">Quay lại bài đăng</a>
-    <button class="btn btn-danger col-xs-12" href="" onclick="del()">Xóa câu hỏi này</button>
-    <script type="text/javascript">
-        function del(){
-            if (confirm('Xác nhận xóa?') == true){
-                window.location = '/admin/question/{{$Question['id']}}/delete';
-            }
-        }
-    </script>
+    <a class="btn btn-primary col-xs-12" href="{{route('user.viewpost',$Question['PostID'])}}">Quay lại bài đăng</a>
+
+    <a class="col-xs-12 btn btn-danger" data-toggle="modal" href='#modal-id'>Xóa câu hỏi này</a>
+        <div class="modal fade" id="modal-id">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h4 class="modal-title">Cảnh báo:</h4>
+                    </div>
+                    <div class="modal-body">
+                        <h6>Xác nhận xóa?</h6>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <a class ="btn btn-primary" href="{{route('admin.destroyquestion',$Question['id'])}}">Xóa</a>
+                    </div>
+                </div>
+            </div>
+        </div>
     @endif
 @endsection

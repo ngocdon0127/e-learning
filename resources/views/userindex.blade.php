@@ -34,7 +34,7 @@
         </div>
         <div class="panel-body">
         @foreach($newpost as $np)
-        <a style="text-decoration: none;" href="/post/{{$np['id']}}">
+        <a style="text-decoration: none;" href="{{route('user.viewpost',$np['id'])}}">
            <blockquote>
                @if($np['FormatID'] == '1')
                    <img class="img-responsive" src="/images/imagePost/{{$np['Photo']}}" />
