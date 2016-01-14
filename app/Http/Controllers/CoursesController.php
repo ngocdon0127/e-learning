@@ -153,7 +153,7 @@ class CoursesController extends Controller
         $course->Description = $data['Description'];
         $course->update();
 
-        return redirect('/course/' . $course->id);
+        return redirect(route('admin.viewcourse', $course->id));
     }
 
     /**
