@@ -12,9 +12,10 @@ class CreateCoursesTable extends Migration
      */
     public function up()
     {
-        Schema::create('Courses', function (Blueprint $table) {
+        Schema::create('courses', function (Blueprint $table) {
             $table->increments('id');
             $table->timestamps();
+            $table->integer('CategoryID')->default(1);
             $table->string('Title')->unique();
             $table->string('Description');
             $table->float('TotalHours')->default(0);
@@ -30,6 +31,6 @@ class CreateCoursesTable extends Migration
      */
     public function down()
     {
-        Schema::drop('Courses');
+        Schema::drop('courses');
     }
 }

@@ -23,31 +23,18 @@
 				@if ((auth()->user()) && (auth()->user()->admin == 1))
 				<li id="navbar-button"><a class="navbar-button" href="/admin">Admin</a></li>
 				@endif
+				@foreach(\App\Categories::all() as $cate)
 				<li class="dropdown">
-					<a id= "dropDown" href="#" class="dropdown-toggle navbar-button" data-toggle="dropdown">Primary English<b class="caret"></b></a>
-					<ul id="dropdown-course" class="dropdown-menu">
-					</ul>
+					<a id= "dropDown{{$cate->id}}" href="#" class="dropdown-toggle navbar-button" data-toggle="dropdown">{{$cate->Category}}<b class="caret"></b></a>
+					@if (count($courses = \App\Courses::where('CategoryID', '=', $cate->id)->get()) > 0)
+						<ul id="dropdown-course-{{$cate->id}}" class="dropdown-menu">
+							@foreach($courses as $c)
+								<li id="navbar-button-{{$c->id}}"><a href="/course/{{$c->id}}">{{$c->Title}}</a></li>
+							@endforeach
+						</ul>
+					@endif
 				</li>
-				<li class="dropdown">
-					<a id= "dropDown" href="#" class="dropdown-toggle navbar-button" data-toggle="dropdown">Junior English<b class="caret"></b></a>
-					<ul id="dropdown-course" class="dropdown-menu">
-
-					</ul>
-				</li>
-				<li class="dropdown">
-					<a id= "dropDown" href="#" class="dropdown-toggle navbar-button" data-toggle="dropdown">TOEIC đột phá<b class="caret"></b></a>
-					<ul id="dropdown-course" class="dropdown-menu">
-
-					</ul>
-				</li>
-				<li class="dropdown">
-					<a id= "dropDown" href="#" class="dropdown-toggle navbar-button" data-toggle="dropdown">More<b class="caret"></b></a>
-					<ul id="dropdown-course" class="dropdown-menu">
-						@foreach(\App\Courses::all() as $c)
-							<li id="navbar-button"><a href="/course/{{$c->id}}">{{$c->Title}}</a></li>
-						@endforeach
-					</ul>
-				</li>
+				@endforeach
 			</ul>
 			{!! Form::open(['method' => 'GET', 'name' => 'searchForm', 'url' => '/search', 'role'=>'search', 'class' => 'navbar-form navbar-right']) !!}
 				

@@ -12,7 +12,7 @@ class CreateLearningTable extends Migration
      */
     public function up()
     {
-        Schema::create('Learnings', function (Blueprint $table) {
+        Schema::create('learnings', function (Blueprint $table) {
             $table->increments('id');
             $table->timestamps();
             $table->integer('UserID');
@@ -27,6 +27,6 @@ class CreateLearningTable extends Migration
      */
     public function down()
     {
-        Schema::drop('Learning');
+        Schema::drop('learning');
     }
 }
