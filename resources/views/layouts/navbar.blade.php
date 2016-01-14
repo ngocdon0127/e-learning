@@ -41,7 +41,7 @@
 					</ul>
 				</li>
 				<li class="dropdown">
-					<a id= "dropDown" href="#" class="dropdown-toggle navbar-button" data-toggle="dropdown">Moore<b class="caret"></b></a>
+					<a id= "dropDown" href="#" class="dropdown-toggle navbar-button" data-toggle="dropdown">More<b class="caret"></b></a>
 					<ul id="dropdown-course" class="dropdown-menu">
 						@foreach(\App\Courses::all() as $c)
 							<li id="navbar-button"><a href="/course/{{$c->id}}">{{$c->Title}}</a></li>

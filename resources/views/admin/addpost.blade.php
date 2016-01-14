@@ -11,17 +11,73 @@
 					{!! Form::label('CourseID', 'Course ID : ',['class' => 'control-label']) !!}
 					{!! Form::select('CourseID', \App\Courses::getColumn('Title'), ['class'=>'form-control', 'onclick' => 'this.style.background = "white"']) !!}
 				</div>
+				<div class="form-group">
+					{!! Form::label('FormatID', 'Format ID : ',['class' => 'control-label']) !!}
+					{!! Form::select('FormatID',\App\Formats::getColumn('Title'), '', ['class'=>'form-control', 'onclick' => 'this.style.background = "white";', 'onchange' => 'configForm()']) !!}
+				</div>
 				<div class="form-group" id="divPhoto">
 					{!! Form::label('Photo', 'Photo : ',['class' => 'control-label']) !!}
 					{!! Form::file('Photo', ['accept' => 'image/jpeg, image/png, image/gif','type'=>'file','class'=>'file']) !!}
 				</div>
-				<div class="form-group" id="divVideo">
+				<div id="divVideo">
 					{!! Form::label('Video', 'Link Youtube : ',['class' => 'control-label']) !!}
-					{!! Form::text('Video', '', ['class'=>'form-control']) !!}
-				</div>
-				<div class="form-group">
-					{!! Form::label('FormatID', 'Format ID : ',['class' => 'control-label']) !!}
-					{!! Form::select('FormatID',\App\Formats::getColumn('Title'), '', ['class'=>'form-control', 'onclick' => 'this.style.background = "white";', 'onchange' => 'configForm()']) !!}
+					{!! Form::text('Video', '', ['class'=>'form-control', 'placeholder'=>'Paste link youtube hoặc Đăng nhập để upload video mới.']) !!}
+					<span id="signinButton" class="pre-sign-in">
+						<!-- IMPORTANT: Replace the value of the <code>data-clientid</code>
+								 attribute in the following tag with your project's client ID. -->
+						<span
+							class="g-signin"
+							data-callback="signinCallback"
+							data-clientid="872662012321-2a300brmje1lhj09chjpcjn29pb6h2mt.apps.googleusercontent.com"
+							data-cookiepolicy="single_host_origin"
+							data-scope="https://www.googleapis.com/auth/youtube.upload https://www.googleapis.com/auth/youtube">
+						</span>
+					</span>
+
+					<div class="post-sign-in">
+						<div>
+							<img id="channel-thumbnail" style="display: none;">
+							<label for="channel-name" class="control-label">Channel: </label>
+							<span id="channel-name" class="form-control"></span>
+						</div>
+
+						<div>
+							<label for="titleOfVideo" class="control-label">Title for this video:</label>
+							<input id="titleOfVideo" class="form-control" type="text" placeholder="Nhập tiêu đề video">
+						</div>
+						<div>
+							<label for="descriptionOfVideo" class="control-label">Description for this video:</label>
+							<textarea id="descriptionOfVideo" class="form-control"></textarea>
+						</div>
+						<div style="display: none;">
+							<label for="privacy-status">Privacy Status:</label>
+							<select id="privacy-status">
+								<option>public</option>
+								<option>unlisted</option>
+								<option>private</option>
+							</select>
+						</div>
+
+						<div>
+							<input input type="file" id="file" class="button" accept="video/*">
+							<button id="button">Upload Video</button>
+						</div>
+						<div class="during-upload">
+							<p><span id="percent-transferred"></span>% done <br />(<span id="bytes-transferred"></span>/<span id="total-bytes"></span> MB)</p>
+							<progress id="upload-progress" max="1" value="0"></progress>
+						</div>
+
+						<div class="post-upload">
+							<p>Uploaded video with id <span id="video-id"></span>. Polling for status...</p>
+							<ul id="post-upload-status"></ul>
+							<div id="player"></div>
+						</div>
+					</div>
+
+					<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+					<script src="//apis.google.com/js/client:plusone.js"></script>
+					<script src="/js/cors_upload.js"></script>
+					<script src="/js/upload_video.js"></script>
 				</div>
 				<div class="form-group">
 					{!! Form::label('Title','Title : ',['class' => 'control-label']) !!}
@@ -140,7 +196,7 @@
 			 //                        ob('error').innerHTML = photo.value;
 			 
 					}
-				 </script>
+				</script>
 				 {!! Form::button('Thêm',['class' => 'btn btn-info', 'onClick' => 'submitForm()']) !!}
 				<!-- </div> -->
 				{!! Form::close() !!}
