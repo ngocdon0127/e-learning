@@ -184,7 +184,7 @@
 		@if ($PreviousPost != null)
 			<a class="btn btn-primary movePost" href="{{route('user.viewpost', $PreviousPost)}}">Previous Post</a>
 		@endif
-			<a class="btn btn-primary movePost" href="#" style="float:right">Back to top</a>
+			<a id="toTop" href="#" style="float:right"></a>
 		@if ($NextPost != null)
 			<a class="btn btn-primary movePost" href="{{route('user.viewpost', $NextPost)}}">Next Post</a>
 		@endif
