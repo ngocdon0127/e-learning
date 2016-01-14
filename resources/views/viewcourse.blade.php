@@ -13,16 +13,16 @@
         @endforeach
     </ul>
     @if ((auth()->user()) && (auth()->user()->admin == 1))
-        <a class="col-md-12 btn btn-info" href="{{route('course.edit', $CourseID)}}">Sửa thông tin khóa học</a>
-        <button class="col-md-12 btn btn-info" href="" onclick="del()">Xóa khóa học này</button>
-        <script type="text/javascript">
+        <a class="col-xs-12 btn btn-primary" href="{{route('course.edit', $CourseID)}}">Sửa thông tin khóa học</a>
+        <a class="col-xs-12 btn btn-primary" href="/admin/addpost">Thêm bài đăng mới</a>
+        <button class="col-xs-12 btn btn-danger" href="" onclick="del()">Xóa khóa học này</button>
+        <script type="text/javascript">           
             function del(){
                 if (confirm('Xác nhận xóa?') == true){
                     window.location = '/admin/course/{{$CourseID}}/delete';
                 }
             }
         </script>
-        <a class="col-md-12 btn btn-info" href="/admin/addpost">Thêm bài đăng mới</a>
     @endif
 @endsection
 

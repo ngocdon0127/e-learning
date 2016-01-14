@@ -10,6 +10,6 @@
 	@endforeach
 	</ul>
  	@if ((auth()->user()) && (auth()->user()->admin == 1))
-	<a href="/admin/addcourse" class="btn btn-info">Add Course</a>
+	<a href="/admin/addcourse" class="btn btn-primary">Add Course</a>
 	 @endif
 @endsection
