@@ -32,13 +32,34 @@ Route::group(['prefix' => '/admin'], function(){
         'as'    => 'admin.addquestion',
         'uses'  => 'QuestionsController@addquestion'
     ]);
-    Route::post('/addquestion/{postid}', 'QuestionsController@savequestion');
-    Route::get ('/addpost', 'PostsController@addpost');
-    Route::post('/addpost', 'PostsController@savepost');
-    Route::get ('/addcourse', 'CoursesController@addcourse');
-    Route::post('/addcourse', 'CoursesController@savecourse');
-    Route::get ('/addanswer/{postid}', 'AnswersController@addanswer');
-    Route::post('/addanswer/{postid}', 'AnswersController@saveanswer');
+    Route::post('/addquestion/{postid}',[
+        'as'    => 'admin.savequestion',
+        'uses'  => 'QuestionsController@savequestion'
+    ]);
+    Route::get ('/addpost',[
+        'as'    => 'admin.addpost',
+        'uses'  => 'PostsController@addpost'
+    ]);
+    Route::post('/addpost',[
+        'as'    => 'admin.savepost',
+        'uses'  => 'PostsController@savepost'
+    ]);
+    Route::get ('/addcourse',[
+        'as'    => 'admin.addcourse',
+        'uses'  => 'CoursesController@addcourse'
+    ]);
+    Route::post('/addcourse',[
+        'as'    => 'admin.savecourse',
+        'uses'  => 'CoursesController@savecourse'
+    ]);
+    Route::get ('/addanswer/{postid}',[
+        'as'    => 'admin.addanswer',
+        'uses'  => 'AnswersController@addanswer'
+    ]);
+    Route::post('/addanswer/{postid}',[
+    'as'    => 'admin.saveanswer',
+    'uses'  => 'AnswersController@saveanswer'
+    ]);
     put('/editcourse/{id}', [
         'as' => 'course.update',
         'uses' => 'CoursesController@update'
@@ -46,6 +67,22 @@ Route::group(['prefix' => '/admin'], function(){
     Route::get ('/course/{courseid}', [
         'as' => 'admin.viewcourse',
         'uses' => 'CoursesController@adminviewcourse'
+    ]);
+    Route::get ('post/{postid}/edit',[
+        'as'    => 'admin.editpost',
+        'uses'  => 'PostsController@edit'
+    ]);
+    Route::get ('/post/{postid}/delete',[
+        'as'    => 'admin.destroypost',
+        'uses'  => 'PostsController@destroy'
+    ]);
+    Route::get ('/question/{id}/delete',[
+        'as'    => 'admin.destroyquestion',
+        'uses'  => 'QuestionsController@destroy'
+    ]);
+    Route::get ('/course/{id}/delete',[
+        'as'    => 'admin.destroycourse',
+        'uses'  => 'CoursesController@destroy'
     ]);
 });
 get('/post/{postid}', [
@@ -113,11 +150,6 @@ delete('/question/{id}/delete', [
     'uses' => 'QuestionsController@destroy'
 ]);
 
-//temporary route
-Route::get ('/admin/post/{postid}/edit', 'PostsController@edit');
-Route::get ('/admin/post/{postid}/delete', 'PostsController@destroy');
-Route::get ('/admin/question/{id}/delete', 'QuestionsController@destroy');
-Route::get ('/admin/course/{id}/delete', 'CoursesController@destroy');
 
 get('/fbcallback', [
     'as' => 'callback.facebook',
