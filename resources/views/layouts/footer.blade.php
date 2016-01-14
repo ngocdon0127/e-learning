@@ -1,4 +1,4 @@
-<footer class="form-control navbar navbar-default navbar-fixed-bottom" role="navigation" style="height: 50px">
+<footer class="form-control navbar navbar-default navbar-fixed-bottom" role="navigation" style="height: 40px">
 	   <center style = "padding-top: center;">&copy; EvangelsEnglish 2015. All rights reserved. Powered by TEC.</center>
 	<script src="http://uhchat.net/code.php?f=eb807e"></script>
 </footer>

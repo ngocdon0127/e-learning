@@ -8,7 +8,6 @@
 	<link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css">
 	<link rel="stylesheet" type="text/css" href="/css/bootstrap.css">
 	<link rel="stylesheet" type="text/css" href="/css/style.css">
-	<!-- <link href='https://fonts.googleapis.com/css?family=Droid+Sans:400,700' rel='stylesheet' type='text/css'> -->
 	<link href='https://fonts.googleapis.com/css?family=Oswald:700' rel='stylesheet' type='text/css'>
 	<link rel="stylesheet" type="text/css" href="/css/admin.css">
 	<meta name="_token" content="{!! csrf_token() !!}"/>
@@ -107,6 +106,5 @@
 		<script type="text/javascript" src="/js/bootstrap.min.js"></script>
 		<script type="text/javascript" src="/js/style.js"></script>
 		@yield('body.js')
-	
 </body>
 </html>
