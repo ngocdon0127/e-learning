@@ -173,3 +173,4 @@ get('/sccallback', [
     'as' => 'callback.soundcloud',
     'uses' => 'Auth\AuthController@soundCloudHandleCallback'
 ]);
+

@@ -40,14 +40,9 @@ nav{
   background-color: #4aa3df;
 }
 
-li#navbar-button:hover{
-  background-color: #f3cf1b;
-}
-a#dropDown:hover{
-  background-color: #f3cf1b;
-}
+li#navbar-button:hover,
 a#dropDown:visited{
-  background-color: #f3cf1b;
+  background-color: #f0f0f5;
 }
 
 .a {
@@ -111,15 +106,10 @@ h4.title{
 img:hover{
   opacity: 0.85;
 }
-.btn-info:hover{
-  background: #ccffcc;
-  color: #660066;
-}
 .btn-info{
-  background: #ccffcc;
-  color: #660066;
   font-size: 20px;
   font-weight: bold;
+  margin-bottom: 10px;
 }
 .badge-span{
   background: white;

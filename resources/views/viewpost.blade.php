@@ -11,41 +11,42 @@
   js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.5&appId=1657402167852948";
   fjs.parentNode.insertBefore(js, fjs);
 }(document, 'script', 'facebook-jssdk'));</script>
-	<h2 class="title">{{$Title . ' : ' . $Description}}</h2>
-	<li class="list-group-item">
-		@if ($Format == 1)
-			<img class="img-responsive" src="{{'/images/imagePost/' . $Photo}}" />
-		@elseif ($Format == 2)
-			<iframe class="img-responsive" src="https://www.youtube.com/embed/{{$Video}}" frameborder="0" allowfullscreen></iframe>
-		@endif
-	</li>
-	@if ((auth()->user()) && (auth()->user()->admin == 1))
-		<a class ="btn btn-info" href="{{route('post.edit', $PostID)}}">Sửa thông tin bài đăng</a>
-		<button class ="btn btn-info" onclick="del()">Xóa bài đăng này</button>
-		<script type="text/javascript">
-			function del(){
-				if (confirm('Xác nhận xóa?') == true){
-					window.location = '/admin/post/{{$PostID}}/delete';
-				}
-			}
-		</script>
-		<a class ="btn btn-info" href="/admin/addquestion/{{$PostID}}">Thêm câu hỏi</a>
-	@endif
-	
-	<script type="text/javascript" charset="UTF-8">
-		var score = 0;
-		var fill = 0;
-		var maxScore = {{$MaxScore}};
-		function ob(x){
-			return document.getElementById(x);
-		}
-		var numQuestion = {!! count($Questions) !!};
-		function check(questionID, answerID, trueAnswerID, nextQuestionID){
-			console.log('start');
-			var date = new Date();
-			var id = 'radio_answer_' + questionID + '_' + answerID;
-			ob(id).checked = true;
-			var id = 'answer_' + questionID + '_' + answerID;
+    <h2 class="title">{{$Title . ' : ' . $Description}}</h2>
+    <li class="list-group-item">
+        @if ($Format == 1)
+            <img class="img-responsive" src="{{'/images/imagePost/' . $Photo}}" />
+        @elseif ($Format == 2)
+            <iframe class="img-responsive" src="https://www.youtube.com/embed/{{$Video}}" frameborder="0" allowfullscreen></iframe>
+        @endif
+    </li>
+    @if ((auth()->user()) && (auth()->user()->admin == 1))
+        <a class ="col-md-12 btn btn-info" href="{{route('post.edit', $PostID)}}">Sửa thông tin bài đăng</a>
+        <button class ="col-md-12 btn btn-info" onclick="del()">Xóa bài đăng này</button>
+        <script type="text/javascript">
+            function del(){
+                if (confirm('Xác nhận xóa?') == true){
+                    window.location = '/admin/post/{{$PostID}}/delete';
+                }
+            }
+        </script>
+        <a class ="col-md-12 btn btn-info" href="/admin/addquestion/{{$PostID}}">Thêm câu hỏi</a>
+    @endif
+    
+    <script type="text/javascript" charset="UTF-8">
+        var score = 0;
+        var fill = 0;
+        var maxScore = {{$MaxScore}};
+        function ob(x){
+            return document.getElementById(x);
+        }
+        var numQuestion = {!! count($Questions) !!};
+        function check(questionID, answerID, trueAnswerID, nextQuestionID){
+            console.log('start');
+            var date = new Date();
+            var id = 'radio_answer_' + questionID + '_' + answerID;
+            ob(id).checked = true;
+            var id = 'answer_' + questionID + '_' + answerID;
+
 //                ob(id).disabled = true;
 			var setOfRadio = document.getElementsByName('question_' + questionID);
 			for(i = 0; i < setOfRadio.length; i++){
