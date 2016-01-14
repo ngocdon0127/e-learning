@@ -2,6 +2,13 @@
 @section('head.title')
 Cập nhật đáp án
 @endsection
+@section('head.css')
+<style>
+    textarea{
+        height: 3em;
+    }
+</style>
+@endsection
 @section('body.content')
     <!-- <div class="col-sm-offset-3 col-xs-offset-3 col-sm-6 col-xs-6"> -->
     <div class="container-fluid">

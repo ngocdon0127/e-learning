@@ -7,6 +7,9 @@ ADD QUESTION
 	.control-label{
 		text-align: left !important;
 	}
+	textarea{
+        height: 3em;
+    }
 </style>
 @endsection
 @section('body.content')
