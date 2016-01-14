@@ -92,7 +92,7 @@ class AuthController extends Controller
             $data['email'] = $user->id . "@facebook.com";
         }
 //        dd($data);
-        $userDB = User::where('email', 'LIKE', $user->email)->first();
+        $userDB = User::where('email', 'LIKE', $data['email'])->first();
         if (!is_null($userDB)){
             Auth::login($userDB);
         }
@@ -114,7 +114,7 @@ class AuthController extends Controller
 			$data['name'] = $data['email'];
 		}
 //        dd($data);
-        $userDB = User::where('email', 'LIKE', $user->email)->first();
+        $userDB = User::where('email', 'LIKE', $data['email'])->first();
         if (!is_null($userDB)){
             Auth::login($userDB);
         }

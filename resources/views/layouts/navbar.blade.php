@@ -74,11 +74,30 @@
 		</div>
 	</nav>
 	<script>
-		var x = document.getElementById("spanSearch");
+		function ob(x){
+			return document.getElementById(x);
+		}
+		var x = ob("spanSearch");
 		x.setAttribute(
-			'onclick', 
-			'document.getElementById("HashtagSearch").style.display = "inline"; document.getElementById("btnHashtagSearch").style.display = "inline";x.style.display="none";');
+			'onMouseOver', 
+			'displaySearch()');
+		x.setAttribute('onclick', 'displaySearch()');
+		function displaySearch(){
+			$("#HashtagSearch").fadeIn();
+			$('#btnHashtagSearch').fadeIn();
+			ob('spanSearch').style.display="none";
+			ob('HashtagSearch').focus();
+			ob('HashtagSearch').setAttribute('onBlur', 'hideSearch()');
+		}
 
-		// x.setAttribute("onclick",'alert(1)');
+		function hideSearch(){
+			setTimeout(function(){
+				$("#HashtagSearch").fadeOut();
+				$('#btnHashtagSearch').fadeOut();
+				$('#spanSearch').fadeIn(2000);
+			}, 200);
+		}
+
+		
 	</script>
 </div>
