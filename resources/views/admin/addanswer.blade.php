@@ -135,7 +135,7 @@
 
                    <!-- <div class="col-sm-10"> -->
                 <input type="text" value="{{$QuestionID}}" style="display: none" readonly name="QuestionID" />
-                {!! Form::button('Thêm',['class' => 'btn btn-info', 'onclick' => 'submitForm()']) !!}
+                {!! Form::button('Thêm',['class' => 'btn btn-primary', 'onclick' => 'submitForm()']) !!}
             {!! Form::close() !!}
         </div>
 

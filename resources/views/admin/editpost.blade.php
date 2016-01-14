@@ -198,7 +198,7 @@
 			 
 					}
 				 </script>
-				 {!! Form::button('Cập nhật',['class' => 'btn btn-info', 'onClick' => 'submitForm()']) !!}
+				 {!! Form::button('Cập nhật',['class' => 'btn btn-primary', 'onClick' => 'submitForm()']) !!}
 				<!-- </div> -->
 				{!! Form::close() !!}
 				<!-- </div> -->

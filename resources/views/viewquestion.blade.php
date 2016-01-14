@@ -27,10 +27,10 @@
         @endforeach
     </ul>
     @if ((auth()->user()) && (auth()->user()->admin == 1))
-    <a class="btn btn-info" href="{{route('question.edit', $Question['id'])}}">Sửa câu hỏi</a>
-    <a class="btn btn-info" href="{{route('answer.edit', $Question['id'])}}">Sửa đáp án</a>
-    <button class="btn btn-info" href="" onclick="del()">Xóa câu hỏi này</button>
-    <a class="btn btn-info" href="/post/{{$Question['PostID']}}">Quay lại bài đăng</a>
+    <a class="btn btn-primary col-xs-12" href="{{route('question.edit', $Question['id'])}}">Sửa câu hỏi</a>
+    <a class="btn btn-primary col-xs-12" href="{{route('answer.edit', $Question['id'])}}">Sửa đáp án</a>
+    <a class="btn btn-primary col-xs-12" href="/post/{{$Question['PostID']}}">Quay lại bài đăng</a>
+    <button class="btn btn-danger col-xs-12" href="" onclick="del()">Xóa câu hỏi này</button>
     <script type="text/javascript">
         function del(){
             if (confirm('Xác nhận xóa?') == true){
