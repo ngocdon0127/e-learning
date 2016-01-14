@@ -179,9 +179,6 @@ ul#form_test img:hover{
   font-size: 8px;
 }
   header{
-    /*height: 0px;*/
-    /*padding: 0px;*/
-    /*margin-bottom: 0px;*/
     display: none;
   }
 
@@ -193,12 +190,18 @@ ul#form_test img:hover{
   div#uhchat{
     height: 10px;
   }
-
   .content{
     margin: 0 5%;
   }
 }
-
+@media (max-width: 767px){
+    div > #uhchat{
+    bottom: 0px;
+  }
+  a> img{
+    height: 50px;
+  }
+}
 @media (min-width: 480px){
   header{
     font-size: 30px;

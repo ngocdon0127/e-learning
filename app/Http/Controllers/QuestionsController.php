@@ -11,27 +11,20 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
+use App\Http\Controllers\PostsController;
 
 class QuestionsController extends Controller
 {
     protected static $imageQuestionPath = '/public/images/imageQuestion/';
 
     public function viewQuestion($QuestionID){
-        $question = Questions::findOrNew($QuestionID)->toArray();
-        if (count($question) < 1){
+        $Question = Questions::find($QuestionID);
+        if (count($Question) < 1){
             return view('errors.404');
         }
-        $photo = $question['Photo'];
-        $answer = Answers::where('QuestionID', '=', $QuestionID)->get()->toArray();
-        $result = array(
-            'PostID' => $question['PostID'], 
-            'Question' => $question['Question'], 
-            'Description' => $question['Description'], 
-            'QuestionID' => $QuestionID, 
-            'Answers' => $answer, 
-            'Photo' => $photo
-        );
-        return view('viewquestion', $result);
+        $Question = $Question->toArray();
+        $Answers = Answers::where('QuestionID', '=', $QuestionID)->get()->toArray();
+        return view('viewquestion')->with(compact('Question', 'Answers'));
     }
 
     public function addQuestion($PostID){
@@ -48,25 +41,33 @@ class QuestionsController extends Controller
         $data = Request::capture();
         $question = new Questions();
         $question->PostID = $PostID;
+        $question->FormatID = $data['FormatID'];
         $question->Question = $data['Question'];
         $question->Description = $data['Description'];
-        $question->save();
+        switch ($data['FormatID']){
+            case '1': // Photo
+                $question->save();
+                $question = Questions::orderBy('id', 'desc')->first();
+
+                //Photo
+                $file = Request::capture()->file('Photo');
+//              $file = Request::file('Photo');
+                if ($file != null){
+                    $question->Photo = 'Question_' . $PostID . '_' . $question->id  . "." . $file->getClientOriginalExtension();
+                    $file->move(base_path() . '/public/images/imageQuestion/', $question->Photo);
+                }
+
+                // (intval(Posts::orderBy('created_at', 'desc')->first()->id) + 1)
 
 
-        $question = Questions::orderBy('id', 'desc')->first();
-
-        //Photo
-        $file = Request::capture()->file('Photo');
-//        $file = Request::file('Photo');
-        if ($file != null){
-            $question->Photo = 'Question_' . $PostID . '_' . $question->id  . "." . $file->getClientOriginalExtension();
-            $file->move(base_path() . '/public/images/imageQuestion/', $question->Photo);
+                $question->update();
+                break;
+            case '2': // Video
+                $linkVideo = $data['Video'];
+                $question->Video = PostsController::getYoutubeVideoID($linkVideo);
+                $question->save();
+                break;
         }
-
-        // (intval(Posts::orderBy('created_at', 'desc')->first()->id) + 1)
-
-
-        $question->update();
         echo $question->id;
         return;
     }
@@ -143,23 +144,31 @@ class QuestionsController extends Controller
         $data = $request->all();
         $question = Questions::find($id);
         $question->Question = $data['Question'];
+        $question->FormatID = $data['FormatID'];
         $question->Description = $data['Description'];
         $question->update();
 
-        // if admin upload new photo
-        if ($request->file('Photo') != null) {
-            $question = Questions::find($id);
+        switch ($data['FormatID']){
+            case '1': // Photo
+                // if admin upload new photo
+                if ($request->file('Photo') != null) {
+                    $question = Questions::find($id);
 
-            $file = $request->file('Photo');
-            //        $file = Request::file('Photo');
-            $question->Photo = 'Question_' . $question['PostID'] . '_' . $question->id . "." . $file->getClientOriginalExtension();
-            $file->move(base_path() . '/public/images/imageQuestion/', $question->Photo);
+                    $file = $request->file('Photo');
+                    //        $file = Request::file('Photo');
+                    $question->Photo = 'Question_' . $question['PostID'] . '_' . $question->id . "." . $file->getClientOriginalExtension();
+                    $file->move(base_path() . '/public/images/imageQuestion/', $question->Photo);
 
 
-            // (intval(Posts::orderBy('created_at', 'desc')->first()->id) + 1)
+                    // (intval(Posts::orderBy('created_at', 'desc')->first()->id) + 1)
 
 
-            $question->update();
+                    $question->update();
+                }
+                break;
+            case '2':
+                $question->Video = PostsController::getYoutubeVideoID($data['Video']);
+                $question->update();
         }
         return redirect('/question/'.$question->id);
     }
