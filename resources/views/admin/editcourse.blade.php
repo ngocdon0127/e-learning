@@ -1,7 +1,7 @@
 @extends('layouts.main')
 
  @section('head.title')
- ADD COURSE
+ EDIT COURSE
  @endsection
 
  @section('body.content')
@@ -39,13 +39,17 @@
 		</script>
  					<h1 class="title">Sửa thông tin khóa học</h1>
  							    {!! Form::model($course, ['method' => 'PUT', 'name' => 'editCourseForm', 'route' => ['course.update', $course['id']], 'role'=>'form']) !!}
- 						
+ 							    <div class="form-group">
+									{!! Form::label('CategoryID', 'Category : ',['class' => 'control-label']) !!}
+									{!! Form::select('CategoryID', \App\Categories::getColumn('Category'), ['class'=>'form-control', 'onclick' => 'this.style.background = "white"']) !!}
+								</div>
  							    <div class="form-group">
  						            {!! Form::label('Title', 'Title : ',['class' => 'control-label']) !!}
  						            <!-- <div class="col-sm-9 col-xs-9"> -->
  						                {!! Form::text('Title', null, ['class'=>'form-control']) !!}
 									<script type="text/javascript">
 										oldTitle = ob('Title').value;
+										ob('CategoryID').value = {{$course['CategoryID']}}
 									</script>
 									<span id="question_title_err"></span>
  						            <!-- </div> -->

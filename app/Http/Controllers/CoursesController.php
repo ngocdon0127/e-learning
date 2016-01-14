@@ -63,6 +63,7 @@ class CoursesController extends Controller
         $data = $request->all();
         $course = new Courses();
         $course->Title = $data['Title'];
+        $course->CategoryID = $data['CategoryID'];
         $course->Description = $data['Description'];
         $course->save();
         return redirect('/admin/addpost');
@@ -147,7 +148,7 @@ class CoursesController extends Controller
         }
         $data = $request->all();
         $course = Courses::find($id);
-
+        $course->CategoryID = $data['CategoryID'];
         $course->Title = $data['Title'];
         $course->Description = $data['Description'];
         $course->update();

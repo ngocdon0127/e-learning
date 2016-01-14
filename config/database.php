@@ -59,6 +59,7 @@ return [
             'username'  => env('DB_USERNAME', 'root'),
             'password'  => env('DB_PASSWORD', ''),
             'charset'   => 'utf8',
+            'unix_socket' => '/Applications/XAMPP/xamppfiles/var/mysql/mysql.sock',
             'collation' => 'utf8_unicode_ci',
             'prefix'    => '',
             'strict'    => false,

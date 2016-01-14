@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateFormatsTable extends Migration
+class CreateCategoriesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,12 +12,11 @@ class CreateFormatsTable extends Migration
      */
     public function up()
     {
-        Schema::create('formats', function (Blueprint $table) {
+        Schema::create('categories', function (Blueprint $table) {
             $table->increments('id');
             $table->timestamps();
-            $table->string('Title');
-            $table->string('Description');
-            $table->string('Format');
+            $table->string('Category');
+            $table->string('Description')->default('');
         });
     }
 
@@ -28,6 +27,6 @@ class CreateFormatsTable extends Migration
      */
     public function down()
     {
-        Schema::drop('formats');
+        Schema::drop('categories');
     }
 }
