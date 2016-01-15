@@ -206,3 +206,7 @@ get('/sccallback', [
     'uses' => 'Auth\AuthController@soundCloudHandleCallback'
 ]);
 
+get('/kid', [
+    'as' => 'kid.viewpost',
+    'uses' => 'PostsController@kidView'
+]);
