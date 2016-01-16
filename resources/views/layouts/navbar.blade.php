@@ -20,10 +20,11 @@
 		<div class="collapse navbar-collapse navbar-ex1-collapse">
 			<ul class="nav navbar-nav">
 				<li id="navbar-button"><a class="navbar-button" href="/">Home</a></li>
-				<li id="navbar-button"><a class="navbar-button" href="/kid">Kid</a></li>
 				@if ((auth()->user()) && (auth()->user()->admin == 1))
 				<li id="navbar-button"><a class="navbar-button" href="/admin">Admin</a></li>
 				@endif
+				<li id="navbar-button"><a class="navbar-button" href="/kid">Kid</a></li>
+				<li id="navbar-button"><a class="navbar-button" href="/toeic">Toeic</a></li>
 				@foreach(\App\Categories::all() as $cate)
 				<li class="dropdown">
 					<a id= "dropDown{{$cate->id}}" href="#" class="dropdown-toggle navbar-button" data-toggle="dropdown">{{$cate->Category}}<b class="caret"></b></a>

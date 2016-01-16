@@ -70,7 +70,6 @@
 	  <div class="col-md-4" >
 		 <div class="cover2" style="overflow: auto;">
 		 	<p>XEM NHIỀU NHẤT</p>
-			<p>ảnh và tiêu đề của post</p>
 			@foreach($newpost as $np)
 			 <a id="a_smallLink_{{$np['id']}}" style="text-decoration: none;" href="/post/{{$np['id']}}">
 				<blockquote>
@@ -91,15 +90,17 @@
 	<div class="container">
 		<h1>CÁC POST GỢI Ý</h1>
 		<div class="row">
-			@foreach($Posts as $p)
+		@foreach(\App\Courses::where('CategoryID','=',2)->get() as $c)
+			@foreach(\App\Posts::where('CourseID','=',$c->id)->get() as $p)
 				<div class="col-md-3">
-					<a id="a_smallLink_{{$np['id']}}" style="text-decoration: none;" href="/post/{{$np['id']}}">
+					<a id="a_smallLink_{{$p['id']}}" style="text-decoration: none;" href="/post/{{$p['id']}}">
 						<img class="img-responsive img" src="/images/imagePost/{{$p['Photo']}}" />
 						<h4>{{$p['Title']}}</h4>
 						<h6>{{$p['Description']}}</h6>
 					</a>
 				</div>
 			@endforeach
+		@endforeach
 		</div>
 	</div>                   
 </body>
