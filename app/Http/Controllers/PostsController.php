@@ -192,9 +192,17 @@ class PostsController extends Controller
 
 	public function kidView(){
 		$Posts = Posts::orderBy('id', 'desc')->paginate(5);
-		$newpost = Posts::orderBy('visited', 'dsc')->take(5)->get();
+		$course = Courses::where('CategoryID','=',2)->first()->toArray();
+		$newpost = Posts::where('CourseID','=', $course['id'])->orderBy('visited', 'dsc')->take(3)->get();
+		// $newpost = Posts::where('CourseID','=',$course->id)->orderBy('visited', 'dsc')->take(3)->get();
 		// dd($newpost);
 		return view('kid')->with(compact(['Posts', 'newpost']));
+	}
+
+	public function toeicView(){
+		$Posts = Posts::orderBy('id','desc')->paginate(5);
+		$newpost = Posts::orderBy('visited', 'dsc')->take(3)->get();
+		return view('toeic')->with(compact(['Posts','newpost']));
 	}
 
 	public function viewNewestPosts(){
