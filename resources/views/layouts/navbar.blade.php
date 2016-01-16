@@ -56,7 +56,7 @@
 							</ul>
 						</li>
 					@else
-						<a class="btn btn-primary" href="/auth/login" role="button">Login</a>
+						<a class="btn btn-primary" id="login-button" href="/auth/login" role="button">Login</a>
 					@endif
 				</div>
 			{!! Form::close() !!}
@@ -74,6 +74,8 @@
 		function displaySearch(){
 			@if (auth()->user())
 				ob('username-dropdown').style.display = 'none';
+			@else
+				// ob('login-button').style.display = 'none';
 			@endif
 			$("#HashtagSearch").fadeIn();
 			$('#btnHashtagSearch').fadeIn();
@@ -88,6 +90,7 @@
 				ob('btnHashtagSearch').style.display = 'none';
 				$('#spanSearch').fadeIn(2000);
 				$('#username-dropdown').fadeIn();
+				// $('#login-button').fadeIn();
 			}, 200);
 		}
 

@@ -7,11 +7,7 @@
 	<meta property="fb:app_id" content="1657402167852948" />
 	<meta name="_token" content="{!! csrf_token() !!}"/>
 	@if (auth()->user())
-		@if (auth()->user()->admin == '1')
-			<meta http-equiv="refresh" content="1, url='/admin'" />
-		@else
-			<meta http-equiv="refresh" content="1, url='/'" />
-		@endif
+		<meta http-equiv="refresh" content="1, url='/'" />
 	@endif
 	<title>Login Evangels English</title>
 

@@ -25,11 +25,12 @@
 	<meta property="og:url" content="http://{{$_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI']}}" />
 	@if ((stripos($_SERVER['REQUEST_URI'], 'post') !== false) && isset($Photo))
 	<meta property="og:image" content="http://{{$_SERVER['HTTP_HOST']}}/images/imagePost/{{$Photo}}" />
+	<meta property="og:title" content="{{$Title}}" />
 	@else
 	<meta property="og:image" content="http://{{$_SERVER['HTTP_HOST']}}/images/evangelsenglish.png" />
+	<meta property="og:title" content="Evangels English. Know English. Know the World" />
 	@endif
 	<meta property="og:description" content="Evangels English. Know English. Know the World" />
-	<meta property="og:title" content="Evangels English. Know English. Know the World" />
 	@if (auth() && (auth()->user()))
 	<script type="text/javascript">
 		var logout = 0;

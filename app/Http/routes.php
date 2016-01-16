@@ -196,16 +196,6 @@ get('/course/{courseid}', [
     'uses' => 'CoursesController@viewcourse'
 ]);
 
-get('/sc', [
-    'as' => 'upload.soundcloud',
-    'uses' => 'PostsController@uploadaudio'
-]);
-
-get('/sccallback', [
-    'as' => 'callback.soundcloud',
-    'uses' => 'Auth\AuthController@soundCloudHandleCallback'
-]);
-
 get('/kid', [
     'as' => 'kid.viewpost',
     'uses' => 'PostsController@kidView'
