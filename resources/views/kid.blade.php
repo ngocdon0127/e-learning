@@ -6,71 +6,58 @@
 	<title>Main Page</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+	<link rel="stylesheet" href="/css/admin.css">
+	<link rel="stylesheet" href="/css/style.css">
 	<script type="text/javascript" type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 	<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-	 <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery.equalheights/1.5.2/jquery.equalheights.min.js"></script>
-	 <script type="text/javascript" src="jquery.equalheights.min.js"></script>
-	 <script type="text/javascript" src="jquery.equalheights.js"></script>
+	<script type="text/javascript" src="https://cdn.jsdelivr.net/jquery.equalheights/1.5.2/jquery.equalheights.min.js"></script>
+
 	<style>
-		 header{
-			background: orange;
-			font-family: Oswald, sans-serif;
-		 }
-		 .container{
-			padding:15px;
-		 }
-		  body{
-			   background: #66ccff;
-		  }
-		  img {
-			   vertical-align: middle;
-			   border-radius: 10px;
-			   /*border: 5px solid rgba(65, 5, 93, 0.67);*/
-			   width: 100%;
-			   /*height: 400px;          */
-		  }
-		  .img{
+		body,header{
+			background: #66ccff;
+			    /*background: #ff66cc;*/
+		}
+		.navbar-default .navbar-nav>li>a {
+    		color: #1C2363;
+		}
+
+	  	img {
+			border-radius: 10px;
+			width: 100%;
+		   /*height: 400px;          */
+	  	}
+		.img{
 			height: 200px;
-			padding : 10px;
 			border-radius: 20px;
 			cursor: pointer;
-
-		  }
-		  .cover1,.cover2{
-			   padding : 15px;
-			   border-radius:10px;
+		}
+		.cover1,.cover2{
+			padding : 10px;
+			margin-top : 10px;
+			border-radius:10px;
 			   
-		  }
-		  .cover1{
-			   background: #ff66cc;
-		  }
-		  .cover2{
-			   background: #cc33ff;
-		  }
-		  th{
-		  	background: red;
-		  }
-		  button{
-		  	display: block;
-		  }
+		}
+		.navbar,
+		.cover1,
+		li#navbar-button:hover,
+		a#dropDown:visited{
+			background: #ff66cc;
+		}
+		.cover2{
+			background: #cc33ff;
+		}
+		button{
+			display: block;
+		}
 	 </style>
 
 </head>
 <body>
+@include('layouts.header')
+@include('layouts.navbar')
 <audio>
-   <source src="/audio/demen.mp3">xxx</source>
+   <source src="/audio/demen.mp3"></source>
 </audio>
-<header>
-   <div class="container">
-	 <div class="col-md-6">
-		<h1> Evangels English</h1>
-   
-	 </div>
-	 <div class="col-md-6">
-		<h1 style="float:right">Kid School</h1>
-	 </div>
-   </div>
-</header>
 <div class="container">
   <div class="row parent">
 	  <div class="col-md-8">
@@ -106,8 +93,11 @@
 		<div class="row">
 			@foreach($Posts as $p)
 				<div class="col-md-3">
-					<img class="img-responsive img" src="/images/imagePost/{{$p['Photo']}}" />
-					<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptate voluptatibus libero perferendis illum delectus eius inventore harum similique eos explicabo officia itaque minima, quo iste magni eveniet numquam. Laudantium, autem.</p>
+					<a id="a_smallLink_{{$np['id']}}" style="text-decoration: none;" href="/post/{{$np['id']}}">
+						<img class="img-responsive img" src="/images/imagePost/{{$p['Photo']}}" />
+						<h4>{{$p['Title']}}</h4>
+						<h6>{{$p['Description']}}</h6>
+					</a>
 				</div>
 			@endforeach
 		</div>
