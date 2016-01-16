@@ -22,7 +22,12 @@
 	<meta property="og:site_name" content="Evangels English" />
 	<meta property="og:type" content="website" />
 	<meta property="og:locale" content="vi_VN" />
-	<meta property="og:url" content="http://www.evangelsenglish.com/" />
+	<meta property="og:url" content="http://{{$_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI']}}" />
+	@if ((stripos($_SERVER['REQUEST_URI'], 'post') !== false) && isset($Photo))
+	<meta property="og:image" content="http://{{$_SERVER['HTTP_HOST']}}/images/imagePost/{{$Photo}}" />
+	@else
+	<meta property="og:image" content="http://{{$_SERVER['HTTP_HOST']}}/images/evangelsenglish.png" />
+	@endif
 	<meta property="og:description" content="Evangels English. Know English. Know the World" />
 	<meta property="og:title" content="Evangels English. Know English. Know the World" />
 	@if (auth() && (auth()->user()))
@@ -105,9 +110,9 @@
 	</div>
 		@include('layouts.footer')
 	</div>
-		<script type="text/javascript" src="/js/jquery/jquery.js"></script>
-		<script type="text/javascript" src="/js/bootstrap.min.js"></script>
-		<script type="text/javascript" src="/js/style.js"></script>
+	<script type="text/javascript" src="/js/jquery/jquery.js"></script>
+	<script type="text/javascript" src="/js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="/js/style.js"></script>
 		@yield('body.js')
 </body>
 </html>

@@ -20,34 +20,22 @@
 		<div class="collapse navbar-collapse navbar-ex1-collapse">
 			<ul class="nav navbar-nav">
 				<li id="navbar-button"><a class="navbar-button" href="/">Home</a></li>
+				<li id="navbar-button"><a class="navbar-button" href="/kid">Kid</a></li>
 				@if ((auth()->user()) && (auth()->user()->admin == 1))
 				<li id="navbar-button"><a class="navbar-button" href="/admin">Admin</a></li>
 				@endif
+				@foreach(\App\Categories::all() as $cate)
 				<li class="dropdown">
-					<a id= "dropDown" href="#" class="dropdown-toggle navbar-button" data-toggle="dropdown">Primary English<b class="caret"></b></a>
-					<ul id="dropdown-course" class="dropdown-menu">
-					</ul>
+					<a id= "dropDown{{$cate->id}}" href="#" class="dropdown-toggle navbar-button" data-toggle="dropdown">{{$cate->Category}}<b class="caret"></b></a>
+					@if (count($courses = \App\Courses::where('CategoryID', '=', $cate->id)->get()) > 0)
+						<ul id="dropdown-course-{{$cate->id}}" class="dropdown-menu">
+							@foreach($courses as $c)
+								<li id="navbar-button-{{$c->id}}"><a href="/course/{{$c->id}}">{{$c->Title}}</a></li>
+							@endforeach
+						</ul>
+					@endif
 				</li>
-				<li class="dropdown">
-					<a id= "dropDown" href="#" class="dropdown-toggle navbar-button" data-toggle="dropdown">Junior English<b class="caret"></b></a>
-					<ul id="dropdown-course" class="dropdown-menu">
-
-					</ul>
-				</li>
-				<li class="dropdown">
-					<a id= "dropDown" href="#" class="dropdown-toggle navbar-button" data-toggle="dropdown">TOEIC đột phá<b class="caret"></b></a>
-					<ul id="dropdown-course" class="dropdown-menu">
-
-					</ul>
-				</li>
-				<li class="dropdown">
-					<a id= "dropDown" href="#" class="dropdown-toggle navbar-button" data-toggle="dropdown">More<b class="caret"></b></a>
-					<ul id="dropdown-course" class="dropdown-menu">
-						@foreach(\App\Courses::all() as $c)
-							<li id="navbar-button"><a href="/course/{{$c->id}}">{{$c->Title}}</a></li>
-						@endforeach
-					</ul>
-				</li>
+				@endforeach
 			</ul>
 			{!! Form::open(['method' => 'GET', 'name' => 'searchForm', 'url' => '/search', 'role'=>'search', 'class' => 'navbar-form navbar-right']) !!}
 				
@@ -61,7 +49,7 @@
 				<div class="form-group">
 					@if (auth()->user())
 						<li style= "list-style: none;" class="dropdown">
-							<a href="#" style="text-decoration: none;" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">{{ auth()->user()->name }} <span class="caret"></span></a>
+							<a href="#" id="username-dropdown" style="text-decoration: none;" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">{{ auth()->user()->name }} <span class="caret"></span></a>
 							<ul class="dropdown-menu" role="menu">
 								<li><a href="{{ url('/auth/logout') }}" onclick='logout = 1;'>Logout</a></li>
 							</ul>
@@ -83,6 +71,9 @@
 			'displaySearch()');
 		x.setAttribute('onclick', 'displaySearch()');
 		function displaySearch(){
+			@if (auth()->user())
+				ob('username-dropdown').style.display = 'none';
+			@endif
 			$("#HashtagSearch").fadeIn();
 			$('#btnHashtagSearch').fadeIn();
 			ob('spanSearch').style.display="none";
@@ -92,9 +83,10 @@
 
 		function hideSearch(){
 			setTimeout(function(){
-				$("#HashtagSearch").fadeOut();
-				$('#btnHashtagSearch').fadeOut();
+				ob("HashtagSearch").style.display = 'none';
+				ob('btnHashtagSearch').style.display = 'none';
 				$('#spanSearch').fadeIn(2000);
+				$('#username-dropdown').fadeIn();
 			}, 200);
 		}
 

@@ -190,6 +190,13 @@ class PostsController extends Controller
 		return view('viewpost', $result);
 	}
 
+	public function kidView(){
+		$Posts = Posts::orderBy('id', 'desc')->paginate(5);
+		$newpost = Posts::orderBy('visited', 'dsc')->take(5)->get();
+		// dd($newpost);
+		return view('kid')->with(compact(['Posts', 'newpost']));
+	}
+
 	public function viewNewestPosts(){
 //        $posts = Posts::take(5)->skip(0)->get()->toArray();
 		$Posts = Posts::orderBy('id', 'desc')->paginate(5);

@@ -1,10 +1,10 @@
 @extends('layouts.main')
 @section('head.title')
-	Post {{$Title}}
+	{{$Title}}
 @endsection
 @section('body.content')
 	<div id="fb-root"></div>
-<script>(function(d, s, id) {
+ <script>(function(d, s, id) {
   var js, fjs = d.getElementsByTagName(s)[0];
   if (d.getElementById(id)) return;
   js = d.createElement(s); js.id = id;
@@ -21,15 +21,27 @@
     </li>
     @if ((auth()->user()) && (auth()->user()->admin == 1))
         <a class ="col-xs-12 btn btn-primary" href="{{route('post.edit', $PostID)}}">Sửa thông tin bài đăng</a>
-        <a class ="col-xs-12 btn btn-primary" href="/admin/addquestion/{{$PostID}}">Thêm câu hỏi</a>
-        <button class ="col-xs-12 btn btn-danger" onclick="del()">Xóa bài đăng này</button>
-        <script type="text/javascript">
-            function del(){
-                if (confirm('Xác nhận xóa?') == true){
-                    window.location = '/admin/post/{{$PostID}}/delete';
-                }
-            }
-        </script>
+        <a class ="col-xs-12 btn btn-primary" href="{{route('admin.addquestion',$PostID)}}">Thêm câu hỏi</a>
+
+		<a class="col-xs-12 btn btn-danger" data-toggle="modal" href='#modal-id'>Xóa bài đăng này</a>
+		<div class="modal fade" id="modal-id">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+						<h4 class="modal-title">Cảnh báo:</h4>
+					</div>
+					<div class="modal-body">
+						<h6>Xác nhận xóa?</h6>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+						<a class ="btn btn-primary" href="{{route('admin.destroypost',$PostID)}}">Xóa</a>
+					</div>
+				</div>
+			</div>
+		</div>
+
     @endif
     
     <script type="text/javascript" charset="UTF-8">
@@ -200,21 +212,17 @@
 		</div>
 		<div class="panel-body" style="max-height: 1000px; overflow: auto" id="div_right_bar">
 		@foreach($newpost as $np)
-			@if ($np['id'] == $PostID)
-		<a id="a_smallLink_{{$np['id']}}" style="text-decoration: none; background: green;" href="/post/{{$np['id']}}">
-			@else
-		 <a id="a_smallLink_{{$np['id']}}" style="text-decoration: none;" href="/post/{{$np['id']}}">
-			 @endif
-			<blockquote>
-				@if($np['FormatID'] == '1')
-					<img class="img-responsive" src="/images/imagePost/{{$np['Photo']}}" />
-				@elseif($np['FormatID'] == '2')
-					<iframe class="img-responsive" src="https://www.youtube.com/embed/{{$np['Video']}}" frameborder="0" allowfullscreen></iframe>
-				@endif
-				<h4>{{$np['Title']}}</h4>
-				<h6>{{$np['Description']}}</h6>
-			</blockquote>
-		</a>
+			<a id="a_smallLink_{{$np['id']}}" style="text-decoration: none;" href="/post/{{$np['id']}}">
+				<blockquote>
+					@if($np['FormatID'] == '1')
+						<img class="img-responsive" src="/images/imagePost/{{$np['Photo']}}" />
+					@elseif($np['FormatID'] == '2')
+						<iframe class="img-responsive" src="https://www.youtube.com/embed/{{$np['Video']}}" frameborder="0" allowfullscreen></iframe>
+					@endif
+					<h4>{{$np['Title']}}</h4>
+					<h6>{{$np['Description']}}</h6>
+				</blockquote>
+			</a>
 		@endforeach
 		</div>
 	</div>

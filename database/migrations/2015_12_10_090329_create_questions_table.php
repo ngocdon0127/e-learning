@@ -16,8 +16,10 @@ class CreateQuestionsTable extends Migration
             $table->increments('id');
             $table->timestamps();
             $table->integer('PostID');
+            $table->integer('FormatID')->default(1);
             $table->string('Question');
             $table->string('Photo')->default('');
+            $table->string('Video')->default('');
             $table->string('Description')->default('');
         });
     }

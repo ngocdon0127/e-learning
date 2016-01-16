@@ -4,13 +4,13 @@
    RewriteRule    (.*) public/$1 [L]
 </IfModule>
 <IfModule mod_deflate.c>
-AddOutputFilterByType DEFLATE text/text text/html text/plain text/xml text/css application/x-javascript application/javascript text/javascript
+AddOutputFilterByType DEFLATE image/png image/jpeg text/text text/html text/plain text/xml text/css application/x-javascript application/javascript text/javascript
 </IfModule>
 
 <ifmodule mod_expires.c>
 <Filesmatch "\.(jpg|jpeg|png|gif|swf|ico|woff|mp3)$">
  ExpiresActive on
- ExpiresDefault "access plus 1 month"
+ ExpiresDefault "access plus 1 week"
 </Filesmatch>
 </ifmodule>
 
