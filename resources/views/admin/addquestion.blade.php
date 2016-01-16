@@ -247,7 +247,7 @@ ADD QUESTION
 </div>
 		<div class="container-fluid">
 				<!-- <div class="col-sm-9"> -->
-						{!! Form::open(['name' => 'addAnswerForm', 'url' => '/admin/addanswer/','class'=>'control-label']) !!}
+						{!! Form::open(['name' => 'addAnswerForm', 'url' => '/admin/addanswer/','class'=>'form-group']) !!}
 							<!--        {!! Form::label('Detail', 'Câu trả lời: ') !!}
 						{!! Form::text('Detail') !!} -->
 						
