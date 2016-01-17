@@ -172,8 +172,9 @@
 				@elseif ($q['FormatID'] == 2)
 					@if ($q['Video'] != null)
 						<!-- <li class="list-group-item list-group-item-info"> -->
-						<iframe class="img-responsive" src="https://www.youtube.com/embed/{{$q['Video']}}" frameborder="0" allowfullscreen></iframe>
-						<!-- </li> -->
+						<div class="embed-responsive embed-responsive-4by3">
+							<iframe class="embed-responsive-item" src="https://www.youtube.com/embed/{{$q['Video']}}" frameborder="0" allowfullscreen></iframe>
+						</div><!-- </li> -->
 					@endif
 				@endif
 			
