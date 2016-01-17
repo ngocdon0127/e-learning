@@ -16,7 +16,9 @@
         @if ($Format == 1)
             <img class="img-responsive" src="{{'/images/imagePost/' . $Photo}}" />
         @elseif ($Format == 2)
-            <iframe class="img-responsive" src="https://www.youtube.com/embed/{{$Video}}" frameborder="0" allowfullscreen></iframe>
+        <div class="embed-responsive embed-responsive-4by3">
+            <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/{{$Video}}" frameborder="0" allowfullscreen></iframe>
+        </div>
         @endif
     </li>
     @if ((auth()->user()) && (auth()->user()->admin == 1))
@@ -148,10 +150,6 @@
 
 		}
 	</script>
-	@if (!auth() || !(auth()->user()))
-	<h3 style="background: rgb(255, 110, 110); color: #933" class="list_answer">Bạn chưa đăng nhập. Kết quả làm bài sẽ không được lưu lại. </h3>
-	<a class="btn btn-primary" href="/auth/login" role="button">Login now</a>
-	@endif
 	<h2 class="title">Các câu hỏi</h2>
 	<ul id="form_test" class="list-group">
 		<input id='token' type="text" value="{{$Token}}" style="display: none;" readonly />
@@ -172,8 +170,9 @@
 				@elseif ($q['FormatID'] == 2)
 					@if ($q['Video'] != null)
 						<!-- <li class="list-group-item list-group-item-info"> -->
-						<iframe class="img-responsive" src="https://www.youtube.com/embed/{{$q['Video']}}" frameborder="0" allowfullscreen></iframe>
-						<!-- </li> -->
+						<div class="embed-responsive embed-responsive-4by3">
+						<iframe class="embed-responsive-item" src="https://www.youtube.com/embed/{{$q['Video']}}" frameborder="0" allowfullscreen></iframe>
+						</div><!-- </li> -->
 					@endif
 				@endif
 			
@@ -193,15 +192,15 @@
 	<div class="form-control" id="resultText" style="display: none; height: 200px;">
 		<b class="title" id="writeResult"></b> <br />
 	</div>
-	<div style="margin-top: 10px">
+	<ul class="pager">
 		@if ($PreviousPost != null)
-			<a class="btn btn-primary movePost" href="{{route('user.viewpost', $PreviousPost)}}">Previous Post</a>
+			<li class="previous"><a href="{{route('user.viewpost', $PreviousPost)}}">Previous post</a></li>
 		@endif
 			<a id="toTop" href="#" style="float:right"></a>
 		@if ($NextPost != null)
-			<a class="btn btn-primary movePost" href="{{route('user.viewpost', $NextPost)}}">Next Post</a>
+			<li class="next"><a href="{{route('user.viewpost', $NextPost)}}">Next post</span></a></li>
 		@endif
-	</div>
+	</ul>
 	<div class="fb-comments" data-href="{!! 'http://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI']!!}" data-width="500" data-numposts="5"></div>
 	<div class="fb-like" data-href="{!! 'http://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI']!!}" data-width="450" data-layout="standard" data-action="like" data-show-faces="true" data-share="true"></div>
 @endsection
@@ -217,7 +216,9 @@
 					@if($np['FormatID'] == '1')
 						<img class="img-responsive" src="/images/imagePost/{{$np['Photo']}}" />
 					@elseif($np['FormatID'] == '2')
-						<iframe class="img-responsive" src="https://www.youtube.com/embed/{{$np['Video']}}" frameborder="0" allowfullscreen></iframe>
+					<div class="embed-responsive embed-responsive-4by3">
+						<iframe class="embed-responsive-item" src="https://www.youtube.com/embed/{{$np['Video']}}" frameborder="0" allowfullscreen></iframe>
+					</div>
 					@endif
 					<h4>{{$np['Title']}}</h4>
 					<h6>{{$np['Description']}}</h6>
