@@ -12,7 +12,9 @@
         @endif
     @elseif($Question['FormatID'] == 2)
         @if ($Question['Video'] != null)
-        <iframe class="img-responsive" src="https://www.youtube.com/embed/{{$Question['Video']}}" frameborder="0" allowfullscreen></iframe>
+            <div class="embed-responsive embed-responsive-4by3">
+                <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/{{$Question['Video']}}" frameborder="0" allowfullscreen></iframe>
+            </div>
         @endif
     @endif
 
