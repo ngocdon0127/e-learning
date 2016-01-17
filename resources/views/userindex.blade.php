@@ -11,7 +11,9 @@
                 @if($p['FormatID'] == '1')
                 <img class='img-responsive' src="/images/imagePost/{{$p['Photo']}}" />
                 @elseif($p['FormatID'] == '2')
-                    <iframe class="img-responsive" src="https://www.youtube.com/embed/{{$p['Video']}}" frameborder="0" allowfullscreen></iframe>
+                <div class="embed-responsive embed-responsive-4by3">
+                    <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/{{$p['Video']}}" frameborder="0" allowfullscreen></iframe>
+                </div>
                 @endif
                 <p>
                     {{$p['Title']}}
@@ -39,7 +41,9 @@
                @if($np['FormatID'] == '1')
                    <img class="img-responsive" src="/images/imagePost/{{$np['Photo']}}" />
                @elseif($np['FormatID'] == '2')
-                   <iframe class="img-responsive" src="https://www.youtube.com/embed/{{$np['Video']}}" frameborder="0" allowfullscreen></iframe>
+               <div class="embed-responsive embed-responsive-4by3">
+                   <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/{{$np['Video']}}" frameborder="0" allowfullscreen></iframe>
+                </div>
                @endif
                 <h4>{{$np['Title']}}</h4>
                 <h6>{{$np['Description']}}</h6>
