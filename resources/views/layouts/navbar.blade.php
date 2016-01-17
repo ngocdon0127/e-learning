@@ -19,7 +19,7 @@
 		<!-- <div class="col-sm-offset-3"> -->
 		<div class="collapse navbar-collapse navbar-ex1-collapse">
 			<ul class="nav navbar-nav">
-				<li id="navbar-button"><a class="navbar-button" href="/">Home</a></li>
+				<li id="navbar-button"><a class="navbar-button" href="/"><span class="glyphicon glyphicon-home"> Home</span></a></li>
 				@if ((auth()->user()) && (auth()->user()->admin == 1))
 				<li id="navbar-button"><a class="navbar-button" href="/admin">Admin</a></li>
 				@endif
