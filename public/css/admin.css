@@ -82,12 +82,9 @@ header{
   background-color: #ffffff;
 }
 
-p.header{
-  color: #66c0cf;
-}
-
+p.header,
 h1.header{
-  color: #66c0cf;
+  color: #ff0066;
 }
 /*==================END HEADER===========================*/
 

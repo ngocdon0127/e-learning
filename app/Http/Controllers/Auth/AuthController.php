@@ -23,6 +23,8 @@ class AuthController extends Controller
     |
     */
 
+    protected $redirectPath = '/';
+
     use AuthenticatesAndRegistersUsers, ThrottlesLogins;
     /**
      * Create a new authentication controller instance.
@@ -122,9 +124,5 @@ class AuthController extends Controller
             Auth::login($this->create($data));
         }
         return redirect('/');
-    }
-
-    public function soundCloudHandleCallback(){
-        return '3';
     }
 }

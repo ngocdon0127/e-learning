@@ -1,10 +1,10 @@
 @extends('layouts.main')
 @section('head.title')
-	Post {{$Title}}
+	{{$Title}}
 @endsection
 @section('body.content')
 	<div id="fb-root"></div>
-<script>(function(d, s, id) {
+ <script>(function(d, s, id) {
   var js, fjs = d.getElementsByTagName(s)[0];
   if (d.getElementById(id)) return;
   js = d.createElement(s); js.id = id;
@@ -212,21 +212,17 @@
 		</div>
 		<div class="panel-body" style="max-height: 1000px; overflow: auto" id="div_right_bar">
 		@foreach($newpost as $np)
-			@if ($np['id'] == $PostID)
-		<a id="a_smallLink_{{$np['id']}}" style="text-decoration: none; background: green;" href="/post/{{$np['id']}}">
-			@else
-		 <a id="a_smallLink_{{$np['id']}}" style="text-decoration: none;" href="/post/{{$np['id']}}">
-			 @endif
-			<blockquote>
-				@if($np['FormatID'] == '1')
-					<img class="img-responsive" src="/images/imagePost/{{$np['Photo']}}" />
-				@elseif($np['FormatID'] == '2')
-					<iframe class="img-responsive" src="https://www.youtube.com/embed/{{$np['Video']}}" frameborder="0" allowfullscreen></iframe>
-				@endif
-				<h4>{{$np['Title']}}</h4>
-				<h6>{{$np['Description']}}</h6>
-			</blockquote>
-		</a>
+			<a id="a_smallLink_{{$np['id']}}" style="text-decoration: none;" href="/post/{{$np['id']}}">
+				<blockquote>
+					@if($np['FormatID'] == '1')
+						<img class="img-responsive" src="/images/imagePost/{{$np['Photo']}}" />
+					@elseif($np['FormatID'] == '2')
+						<iframe class="img-responsive" src="https://www.youtube.com/embed/{{$np['Video']}}" frameborder="0" allowfullscreen></iframe>
+					@endif
+					<h4>{{$np['Title']}}</h4>
+					<h6>{{$np['Description']}}</h6>
+				</blockquote>
+			</a>
 		@endforeach
 		</div>
 	</div>

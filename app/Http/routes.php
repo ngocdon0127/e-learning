@@ -196,13 +196,11 @@ get('/course/{courseid}', [
     'uses' => 'CoursesController@viewcourse'
 ]);
 
-get('/sc', [
-    'as' => 'upload.soundcloud',
-    'uses' => 'PostsController@uploadaudio'
+get('/kid', [
+    'as' => 'kid.viewpost',
+    'uses' => 'PostsController@kidView'
 ]);
-
-get('/sccallback', [
-    'as' => 'callback.soundcloud',
-    'uses' => 'Auth\AuthController@soundCloudHandleCallback'
+get('toeic',[
+    'as' => 'toeic.viewpost',
+    'uses' => 'PostsController@toeicView'
 ]);
-

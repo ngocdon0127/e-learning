@@ -23,6 +23,8 @@
 				@if ((auth()->user()) && (auth()->user()->admin == 1))
 				<li id="navbar-button"><a class="navbar-button" href="/admin">Admin</a></li>
 				@endif
+				<li id="navbar-button"><a class="navbar-button" href="/kid">Kid</a></li>
+				<li id="navbar-button"><a class="navbar-button" href="/toeic">Toeic</a></li>
 				@foreach(\App\Categories::all() as $cate)
 				<li class="dropdown">
 					<a id= "dropDown{{$cate->id}}" href="#" class="dropdown-toggle navbar-button" data-toggle="dropdown">{{$cate->Category}}<b class="caret"></b></a>
@@ -48,13 +50,13 @@
 				<div class="form-group">
 					@if (auth()->user())
 						<li style= "list-style: none;" class="dropdown">
-							<a href="#" style="text-decoration: none;" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">{{ auth()->user()->name }} <span class="caret"></span></a>
+							<a href="#" id="username-dropdown" style="text-decoration: none;" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">{{ auth()->user()->name }} <span class="caret"></span></a>
 							<ul class="dropdown-menu" role="menu">
 								<li><a href="{{ url('/auth/logout') }}" onclick='logout = 1;'>Logout</a></li>
 							</ul>
 						</li>
 					@else
-						<a class="btn btn-primary" href="/auth/login" role="button">Login</a>
+						<a class="btn btn-primary" id="login-button" href="/auth/login" role="button">Login</a>
 					@endif
 				</div>
 			{!! Form::close() !!}
@@ -70,6 +72,11 @@
 			'displaySearch()');
 		x.setAttribute('onclick', 'displaySearch()');
 		function displaySearch(){
+			@if (auth()->user())
+				ob('username-dropdown').style.display = 'none';
+			@else
+				// ob('login-button').style.display = 'none';
+			@endif
 			$("#HashtagSearch").fadeIn();
 			$('#btnHashtagSearch').fadeIn();
 			ob('spanSearch').style.display="none";
@@ -79,9 +86,11 @@
 
 		function hideSearch(){
 			setTimeout(function(){
-				$("#HashtagSearch").fadeOut();
-				$('#btnHashtagSearch').fadeOut();
+				ob("HashtagSearch").style.display = 'none';
+				ob('btnHashtagSearch').style.display = 'none';
 				$('#spanSearch').fadeIn(2000);
+				$('#username-dropdown').fadeIn();
+				// $('#login-button').fadeIn();
 			}, 200);
 		}
 

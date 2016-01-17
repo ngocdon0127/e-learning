@@ -155,10 +155,10 @@ EDIT QUESTION
 						else{
 							console.log('ko co size');
 						}
-						if (photo.files[0].size > 2 * 1024 * 1024){
+						if (photo.files[0].size > 5 * 1024 * 1024){
 							console.log('size qua lon');
 							ob('error').style.display = 'block';
-							displayError('Chỉ chọn file có kích thước tối đa 2 MB.');
+							displayError('Chỉ chọn file có kích thước tối đa 5 MB.');
 							return;
 						}
 						ob('error').style.display = 'none';
