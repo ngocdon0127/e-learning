@@ -16,7 +16,9 @@
         @if ($Format == 1)
             <img class="img-responsive" src="{{'/images/imagePost/' . $Photo}}" />
         @elseif ($Format == 2)
-            <iframe class="img-responsive" src="https://www.youtube.com/embed/{{$Video}}" frameborder="0" allowfullscreen></iframe>
+        <div class="embed-responsive embed-responsive-4by3">
+            <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/{{$Video}}" frameborder="0" allowfullscreen></iframe>
+        </div>
         @endif
     </li>
     @if ((auth()->user()) && (auth()->user()->admin == 1))
@@ -169,7 +171,7 @@
 					@if ($q['Video'] != null)
 						<!-- <li class="list-group-item list-group-item-info"> -->
 						<div class="embed-responsive embed-responsive-4by3">
-							<iframe class="embed-responsive-item" src="https://www.youtube.com/embed/{{$q['Video']}}" frameborder="0" allowfullscreen></iframe>
+						<iframe class="embed-responsive-item" src="https://www.youtube.com/embed/{{$q['Video']}}" frameborder="0" allowfullscreen></iframe>
 						</div><!-- </li> -->
 					@endif
 				@endif
@@ -214,7 +216,9 @@
 					@if($np['FormatID'] == '1')
 						<img class="img-responsive" src="/images/imagePost/{{$np['Photo']}}" />
 					@elseif($np['FormatID'] == '2')
-						<iframe class="img-responsive" src="https://www.youtube.com/embed/{{$np['Video']}}" frameborder="0" allowfullscreen></iframe>
+					<div class="embed-responsive embed-responsive-4by3">
+						<iframe class="embed-responsive-item" src="https://www.youtube.com/embed/{{$np['Video']}}" frameborder="0" allowfullscreen></iframe>
+					</div>
 					@endif
 					<h4>{{$np['Title']}}</h4>
 					<h6>{{$np['Description']}}</h6>
