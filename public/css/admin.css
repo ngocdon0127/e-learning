@@ -180,7 +180,7 @@ ul#form_test img:hover{
   }
 
   div#uhchat{
-    height: 10px;
+    display: none;
   }
   .content{
     margin: 0 5%;
