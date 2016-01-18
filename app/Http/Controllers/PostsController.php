@@ -195,7 +195,7 @@ class PostsController extends Controller
 
 	public function kidView(){
 		$Posts = Posts::orderBy('id', 'desc')->paginate(5);
-		$course = Courses::where('CategoryID','=',2)->first()->toArray();
+		$course = Courses::where('CategoryID','=',1)->first()->toArray();
 		$newpost = Posts::where('CourseID','=', $course['id'])->orderBy('visited', 'dsc')->take(3)->get();
 		// $newpost = Posts::where('CourseID','=',$course->id)->orderBy('visited', 'dsc')->take(3)->get();
 		// dd($newpost);
