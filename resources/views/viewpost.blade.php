@@ -150,10 +150,6 @@
 
 		}
 	</script>
-	@if (!auth() || !(auth()->user()))
-	<h3 style="background: rgb(255, 110, 110); color: #933" class="list_answer">Bạn chưa đăng nhập. Kết quả làm bài sẽ không được lưu lại. </h3>
-	<a class="btn btn-primary" href="/auth/login" role="button">Login now</a>
-	@endif
 	<h2 class="title">Các câu hỏi</h2>
 	<ul id="form_test" class="list-group">
 		<input id='token' type="text" value="{{$Token}}" style="display: none;" readonly />

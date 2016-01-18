@@ -16,7 +16,7 @@ class AdminController extends Controller
     //
     public function index(){
         if (!AuthController::checkPermission()){
-            return redirect('/auth/login');
+            return redirect('/auth/login')->with('redirectPath', '/admin');
         }
         return CoursesController::viewAllCourses();
     }

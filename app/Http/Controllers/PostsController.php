@@ -17,6 +17,7 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use Redirect;
 
 class PostsController extends Controller
 {
@@ -117,8 +118,10 @@ class PostsController extends Controller
 				(stripos($_SERVER["HTTP_USER_AGENT"], 'facebook') === false) &&
 				(stripos($_SERVER["HTTP_USER_AGENT"], 'face') === false) &&
 				(stripos($_SERVER["HTTP_USER_AGENT"], 'google') === false)
-			)
-				return redirect('/auth/login');
+			){
+				$redirectPath = '/post/' . $postID;
+				return redirect('/auth/login')->with('redirectPath', $redirectPath);
+			}
 			$token = md5(rand(), false);
 		}
 
