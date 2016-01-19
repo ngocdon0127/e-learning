@@ -26,7 +26,41 @@
         </br>
     @endforeach
 </ul>
+@if ($Posts->toArray()['last_page'] < 5)
 <div class="row">{!! $Posts->render() !!}</div>
+@else
+    <?php $Posts = $Posts->toArray(); ?>
+    @if ($Posts['last_page'] > 1)
+    <div class="row">
+        <ul class="pagination">
+            <li class="disabled"><span>Page {{ $Posts['current_page'] }} of {{ $Posts['last_page'] }}</span></li>
+        @if ($Posts['current_page'] <= 1)
+            <li class="disabled"><a href="/?page=1">«</a href="/?page=1"></li>
+            <li class="disabled"><span>&lt;</span></li>
+        @else
+            <li><a href="/?page=1">«</a href="/?page=1"></li>
+            <li><a href="/?page={{$Posts['current_page'] - 1}}" rel="prev">&lt;</a></li>
+        @endif
+        <?php $index = $Posts['current_page'] - 1;?>
+            @if ($index >= 1)
+            <li><a href="/?page={{$index}}">{{$index}}</a></li>
+            @endif
+        <li class="active"><span>{{$Posts['current_page']}}</span></li>
+        <?php $index = $Posts['current_page'] + 1;?>
+            @if ($index <= $Posts['last_page'])
+                <li><a href="/?page={{$index}}">{{$index}}</a></li>
+            @endif
+        @if ($Posts['current_page'] >= $Posts['last_page'])
+            <li class="disabled"><span>&gt;</span></li>
+            <li class="disabled"><a href="/?page={{$Posts['last_page']}}">»</a></li>
+        @else
+            <li><a href="/?page={{$Posts['current_page'] + 1}}" rel="next">&gt;</a></li>
+            <li><a href="/?page={{$Posts['last_page']}}">»</a></li>
+        @endif
+        </ul>
+    </div>
+    @endif
+@endif
 
 @endsection
 @section('body.navright')

@@ -195,7 +195,7 @@ class PostsController extends Controller
 
 	public function kidView(){
 		$Posts = Posts::orderBy('id', 'desc')->paginate(5);
-		$course = Courses::where('CategoryID','=',2)->first()->toArray();
+		$course = Courses::where('CategoryID','=',2)->first();
 		$newpost = Posts::where('CourseID','=', $course['id'])->orderBy('visited', 'dsc')->take(3)->get();
 		// $newpost = Posts::where('CourseID','=',$course->id)->orderBy('visited', 'dsc')->take(3)->get();
 		// dd($newpost);
@@ -213,6 +213,8 @@ class PostsController extends Controller
 		$Posts = Posts::orderBy('id', 'desc')->paginate(5);
 		$newpost = Posts::orderBy('visited', 'dsc')->take(5)->get();
 		// dd($newpost);
+		// dd($Posts);
+		// dd($Posts->toArray());
 		return view('userindex')->with(compact(['Posts', 'newpost']));
 	}
 

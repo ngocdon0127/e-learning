@@ -23,10 +23,12 @@ body{
 }
 .sidebar{
   background:#fff;
+  border-left:15px solid  #f0f0f5; 
+  border-right:15px solid  #f0f0f5; 
 }
 /*==================NAV===========================*/
 a:hover{
-  color: #fdc20e;
+  color: #ff0066;
 }
 
 a#homesmall{
