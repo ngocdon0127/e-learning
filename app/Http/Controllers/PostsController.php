@@ -213,6 +213,8 @@ class PostsController extends Controller
 		$Posts = Posts::orderBy('id', 'desc')->paginate(5);
 		$newpost = Posts::orderBy('visited', 'dsc')->take(5)->get();
 		// dd($newpost);
+		// dd($Posts);
+		// dd($Posts->toArray());
 		return view('userindex')->with(compact(['Posts', 'newpost']));
 	}
 
