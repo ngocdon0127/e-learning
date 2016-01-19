@@ -13,9 +13,11 @@
 	<script type="text/javascript" src="https://cdn.jsdelivr.net/jquery.equalheights/1.5.2/jquery.equalheights.min.js"></script>
 
 	<style>
-		body,header{
-			background: #66ccff;
-			    /*background: #ff66cc;*/
+		body{
+			background-image: url(http://www.cbc.ca/kidscbc2/content/themes/Kids2_winter_tile.jpg);
+		}
+		header{
+			background: none;
 		}
 		.navbar-default .navbar-nav>li>a {
     		color: #1C2363;
@@ -31,20 +33,27 @@
 			border-radius: 20px;
 			cursor: pointer;
 		}
-		.cover1,.cover2{
+	 	h3.title{
+	   		color: #ff0066;
+		} 
+		.sidebar_left,
+		.sidebar_right{
 			padding : 10px;
-			margin-top : 10px;
+			margin-top : 20px;
+			margin-bottom: 20px;
 			border-radius:10px;
 			   
 		}
-		.navbar,
-		.cover1,
-		li#navbar-button:hover,
+	
+		/*li#navbar-button:hover,*/
 		a#dropDown:visited{
 			background: #ff66cc;
 		}
-		.cover2{
-			background: #cc33ff;
+		.navbar,
+		.sidebar_left,
+		.sidebar_right{
+			/*background: #ccff33;*/
+			background: #ffff99;
 		}
 		button{
 			display: block;
@@ -58,18 +67,19 @@
 <audio>
    <source src="/audio/demen.mp3"></source>
 </audio>
+
 <div class="container">
   <div class="row parent">
-	  <div class="col-md-8">
-		<div class="cover1">
-			<p>GIỚI THIỆU CHUNG VỀ KHÓA HỌC</p>
+	  <div class="col-md-8" style="margin-bottom:20px">
+		<div class="sidebar_left">
+			<h3 class="text-center title">GIỚI THIỆU CHUNG VỀ KHÓA HỌC</h3>
 			<img src="/images/kid.jpg" alt="" class="img-responsive">
-			<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Deleniti reprehenderit reiciendis, sunt fuga officiis voluptatum molestias. Voluptates fugiat aliquam, ipsam hic officia non, id, facilis nisi itaque, rerum incidunt minima expedita explicabo laborum. Ea tempora harum nemo eos quos in nobis quibusdam, dignissimos voluptates, optio eaque atque! Error laborum qui sit, accusamus repellat totam optio neque aperiam possimus quod, voluptates sed? Quaerat architecto assumenda ut odit excepturi optio, fugiat minus, facilis. Aspernatur iste cupiditate est, quis sint. Provident facilis iste assumenda est nihil nemo qui tempore similique suscipit. Blanditiis doloremque, a rem aspernatur assumenda obcaecati qui laborum, odio ullam sed.</p>
+			Lorem ipsum dolor sit amet, consectetur adipisicing elit. Deleniti reprehenderit reiciendis, sunt fuga officiis voluptatum molestias. Voluptates fugiat aliquam, ipsam hic officia non, id, facilis nisi itaque, rerum incidunt minima expedita explicabo laborum. Ea tempora harum nemo eos quos in nobis quibusdam, dignissimos voluptates, optio eaque atque! Error laborum qui sit, accusamus repellat totam optio neque aperiam possimus quod, voluptates sed? Quaerat architecto assumenda ut odit excepturi optio, fugiat minus, facilis. Aspernatur iste cupiditate est, quis sint. Provident facilis iste assumenda est nihil nemo qui tempore similique suscipit. Blanditiis doloremque, a rem aspernatur assumenda obcaecati qui laborum, odio ullam sed
 		</div>
 	  </div>
 	  <div class="col-md-4" >
-		 <div class="cover2" style="overflow: auto;">
-		 	<p>XEM NHIỀU NHẤT</p>
+		 <div class="sidebar_right" style="overflow: auto;">
+		 	<h3 class="text-center title">XEM NHIỀU NHẤT</h3>
 			@foreach($newpost as $np)
 			 <a id="a_smallLink_{{$np['id']}}" style="text-decoration: none;" href="/post/{{$np['id']}}">
 				<blockquote>
@@ -88,7 +98,7 @@
   </div>
 </div>
 	<div class="container">
-		<h1>CÁC POST GỢI Ý</h1>
+		<h2 class="title">CÁC POST GỢI Ý</h2>
 		<div class="row">
 		@foreach(\App\Courses::where('CategoryID','=',2)->get() as $c)
 			@foreach(\App\Posts::where('CourseID','=',$c->id)->get() as $p)
