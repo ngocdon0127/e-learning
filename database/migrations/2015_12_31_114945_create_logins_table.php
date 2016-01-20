@@ -18,6 +18,7 @@ class CreateLoginsTable extends Migration
             $table->integer('UserID')->default(0);
             $table->string('ip')->default('0');
             $table->integer('Crawler')->default(0);
+            $table->string('LastURI')->default('');
             $table->string('UserAgent')->default('');
             $table->string('Platform')->default('');
             $table->string('Browser')->default('');

@@ -75,7 +75,7 @@
 					}
 				},
 				@if (auth() && (auth()->user()))
-				data: {UserID: {!! auth()->user()->getAuthIdentifier() !!} },
+				data: {UserID: {!! auth()->user()->getAuthIdentifier() !!}, uri: "{{$_SERVER['REQUEST_URI']}}"},
 				@endif
 				success: function (data) {
 					console.log(data);
