@@ -46,7 +46,7 @@
 		p{
 			float: left;
 			padding-top: 20px;
-   			padding-left: 40px;
+   			/*padding-left: 40px;*/
    			font-size: 20px;
 		}
 		li#navbar-button:hover,

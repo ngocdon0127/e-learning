@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container" style="padding-right:0; padding-left:0">
 	<nav class="navbar navbar-default" role="navigation">
 		<!-- Brand and toggle get grouped for better mobile display -->
 		<div class="navbar-header">
