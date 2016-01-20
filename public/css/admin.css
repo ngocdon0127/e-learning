@@ -188,6 +188,7 @@ ul#form_test img:hover{
     margin: 0 5%;
   }
 }
+
 @media (max-width: 767px){
     div > #uhchat{
     bottom: 0px;
@@ -290,7 +291,7 @@ ul#form_test img:hover{
     z-index: 10;
     perspective-origin: 30px 30px;
     transform-origin: 30px 30px;
-    background: rgba(232, 98, 86, 0.8) url("https://codyhouse.co/demo/back-to-top/img/cd-top-arrow.svg") no-repeat scroll 50% 50% / auto padding-box border-box;
+    background: rgba(232, 98, 86, 0.7) url("https://codyhouse.co/demo/back-to-top/img/cd-top-arrow.svg") no-repeat scroll 50% 50% / auto padding-box border-box;
     border: 0px none rgb(232, 98, 86);
     font: normal normal normal normal 16px / 16px Bitter, sans-serif;
     outline: rgb(232, 98, 86) none 0px;

@@ -75,7 +75,9 @@
 					}
 				},
 				@if (auth() && (auth()->user()))
-				data: {UserID: {!! auth()->user()->getAuthIdentifier() !!} },
+				data: {UserID: {!! auth()->user()->getAuthIdentifier() !!}, uri: "{{$_SERVER['REQUEST_URI']}}"},
+				@else
+				data: {uri: "{{$_SERVER['REQUEST_URI']}}"},
 				@endif
 				success: function (data) {
 					console.log(data);
@@ -96,6 +98,7 @@
 		@include('layouts.header')
 		@include('layouts.navbar')
 		<div class="container sidebar">
+		@yield('body.sidebar')
 			<div class=" row">
 				<div class="col-sm-3 col-md-3 col-lg-3">
 					@yield('body.navleft')
