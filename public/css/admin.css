@@ -23,8 +23,8 @@ body{
 }
 .sidebar{
   background:#fff;
-  border-left:15px solid  #f0f0f5; 
-  border-right:15px solid  #f0f0f5; 
+  border-left:1px solid  #f0f0f5; 
+  border-right:1px solid  #f0f0f5; 
 }
 /*==================NAV===========================*/
 a:hover{
