@@ -100,7 +100,7 @@
 	<div class="container">
 		<h2 class="title">CÁC POST GỢI Ý</h2>
 		<div class="row">
-		@foreach(\App\Courses::where('CategoryID','=',2)->get() as $c)
+		@foreach(\App\Courses::where('CategoryID','=',1)->get() as $c)
 			@foreach(\App\Posts::where('CourseID','=',$c->id)->get() as $p)
 				<div class="col-md-3">
 					<a id="a_smallLink_{{$p['id']}}" style="text-decoration: none;" href="/post/{{$p['id']}}">
