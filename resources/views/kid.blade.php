@@ -19,10 +19,12 @@
 		header{
 			background: none;
 		}
-	/*  	.container{
-			padding-left:0px ; 
-			padding-right:0px
-		}  */
+		@media only screen and (min-width: 768px){
+			.container{
+				padding-left: 0;
+				padding-right:0;
+			}
+		}
 		.navbar-default .navbar-nav>li>a {
     		color: #1C2363;
 		}
@@ -74,14 +76,14 @@
 
 <div class="container">
   <div class="row parent">
-	  <div class="-col-md-8" style="margin-bottom:20px">
+	  <div class="col-md-8" style="margin-bottom:20px">
 		<div class="sidebar_left">
 			<h3 class="text-center title">GIỚI THIỆU CHUNG VỀ KHÓA HỌC</h3>
 			<img src="/images/kid.jpg" alt="" class="img-responsive">
 			Lorem ipsum dolor sit amet, consectetur adipisicing elit. Deleniti reprehenderit reiciendis, sunt fuga officiis voluptatum molestias. Voluptates fugiat aliquam, ipsam hic officia non, id, facilis nisi itaque, rerum incidunt minima expedita explicabo laborum. Ea tempora harum nemo eos quos in nobis quibusdam, dignissimos voluptates, optio eaque atque! Error laborum qui sit, accusamus repellat totam optio neque aperiam possimus quod, voluptates sed? Quaerat architecto assumenda ut odit excepturi optio, fugiat minus, facilis. Aspernatur iste cupiditate est, quis sint. Provident facilis iste assumenda est nihil nemo qui tempore similique suscipit. Blanditiis doloremque, a rem aspernatur assumenda obcaecati qui laborum, odio ullam sed
 		</div>
 	  </div>
-	  <div class=" col-md-4" >
+	  <div class="col-md-4">
 		 <div class="sidebar_right" style="overflow: auto;">
 		 	<h3 class="text-center title">XEM NHIỀU NHẤT</h3>
 			@foreach($newpost as $np)
