@@ -98,6 +98,7 @@
 		@include('layouts.header')
 		@include('layouts.navbar')
 		<div class="container sidebar">
+		@yield('body.sidebar')
 			<div class=" row">
 				<div class="col-sm-3 col-md-3 col-lg-3">
 					@yield('body.navleft')
