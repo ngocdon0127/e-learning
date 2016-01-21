@@ -25,6 +25,11 @@ get('/auth/google', [
 ]);
 
 Route::controllers(['/auth' => 'Auth\AuthController', 'password' => 'Auth\PasswordController',]);
+
+Route::get('/mainpage', [
+    'as' => 'homepage',
+    'uses'   => 'PageController@index'
+]);
 Route::get ('/', 'PostsController@viewnewestposts');
 
 Route::group(['prefix' => '/admin'], function(){

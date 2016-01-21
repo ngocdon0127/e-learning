@@ -85,7 +85,9 @@ class TimesController extends Controller
         echo 'start saving ip';
         $data = $request->all();
 		$UserID = array_key_exists('UserID', $data) ? $data['UserID'] : -1;
+        $uri = array_key_exists('uri', $data) ? $data['uri'] : '';
 		if ($UserID != -1){
+            // Prevent user edit userID in Javascript source.
 			if (!auth() || (auth()->user()->id != $UserID)){
 				return;
 			}
@@ -104,12 +106,14 @@ class TimesController extends Controller
             $login->UserAgent = $_SERVER['HTTP_USER_AGENT'];
             $login->Device = $browser['device_type'];
             $login->Pointing = $browser['device_pointing_method'];
+            $login->LastURI = $uri;
             $login->save();
             echo "\n ip saved";
         }
         else{
             $record = $record->first();
             $record->Accesses++;
+            $record->LastURI = $uri;
             $record->update();
 			echo "\n ip updated";
         }
