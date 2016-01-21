@@ -95,7 +95,7 @@
 
 				var resultText = 'Đúng ' + score + '/' + maxScore + ' câu.\n';
 				var x = {!! $Comments !!};
-				console.log("start chấmming");
+				// console.log("start chấmming");
 				for(var i = x.length - 1; i >= 0; i--) {
 //                    console.log(Math.floor(score / maxScore * 100));
 //                    console.log(min[i]);
@@ -110,7 +110,7 @@
 					scrollTop: $("#resultText").offset().top
 				}, 1000);
 
-				console.log('diem: ' + score);
+				// console.log('diem: ' + score);
 				// save result using AJAX
 				$.ajax({
 					url: "/finishexam",
@@ -149,18 +149,93 @@
 //                obj.send();
 
 		}
+
+		var t = '';
+		function gText(e) {
+			t = (document.all) ? document.selection.createRange().text : document.getSelection();
+			// console.log(t.length);
+			// if (t.length > 0)
+				// alert(t);
+				ob('inputDictionary').value = t;
+				console.log(ob('inputDictionary').value);
+				t = ob('inputDictionary').value;
+				if (t.length <= 0){
+					return;
+				}
+				$.ajax({
+					type: 'GET',
+					url: "{{route('ajax.dic')}}",
+					beforeSend: function(xhr){
+						var token = $('meta[name="_token"]').attr('content');
+
+						if (token) {
+							return xhr.setRequestHeader('X-CSRF-TOKEN', token);
+						}
+					},
+					data: {word: ob('inputDictionary').value.toLowerCase()},
+					success: function (data) {
+						var d = JSON.parse(data);
+						// console.log(d.meanings);
+						var ulMeanings = document.createElement('ul');
+						for(var i = 0; i < d.meanings.length; i++){
+							var liMeanings = document.createElement('li');
+							liMeanings.innerHTML = d.meanings[i];
+							ulMeanings.appendChild(liMeanings);
+						}
+						var ulExamples = document.createElement('ul');
+						for(var i = 0; i < d.examples.length; i++){
+							var liExamples = document.createElement('li');
+							liExamples.innerHTML = d.examples[i];
+							ulExamples.appendChild(liExamples);
+						}
+						var divDictionary = ob('divDictionary');
+						divDictionary.innerHTML = '';
+						var pMeanings = document.createElement('p');
+						pMeanings.innerHTML = 'Meaning of "' + t + '" : ';
+						divDictionary.appendChild(pMeanings);
+						divDictionary.appendChild(ulMeanings);
+						var divtmp = document.createElement('div');
+						divtmp.setAttribute('class', 'clear');
+						divDictionary.appendChild(divtmp);
+						var pExamples = document.createElement('p');
+						pExamples.innerHTML = 'Examples for "' + t + '" : ';
+						divDictionary.appendChild(pExamples);
+						divDictionary.appendChild(ulExamples);
+						// window.preventDefault();
+						// window.location = "#modal-id";
+						$('#modal-id-dictionary').modal();
+						if (window.getSelection) {
+							if (window.getSelection().empty) {  // Chrome
+							window.getSelection().empty();
+						}
+						else if (window.getSelection().removeAllRanges) {  // Firefox
+							window.getSelection().removeAllRanges();
+						}
+						}
+						else if (document.selection) {  // IE?
+							document.selection.empty();
+						}
+					}, error: function () {
+						console.log("error!!!!");
+					}
+				});
+		}
+
+		document.onmouseup = gText;
+		if (!document.all) document.captureEvents(Event.MOUSEUP);
+
 	</script>
 	<h2 class="title">Các câu hỏi</h2>
 	<ul id="form_test" class="list-group">
 		<input id='token' type="text" value="{{$Token}}" style="display: none;" readonly />
 		<?php $count_answer=1;?>
 		@foreach($Questions as $key => $q)
+			@if ((auth()->user()) && (auth()->user()->admin == 1))
+				<a style="text-decoration: none;" href="/question/{{$q['id']}}"><h3 class="title" id="title_question_{!! $key + 1 !!}">Câu hỏi số <?php echo $count_answer++; ?>:</h3></a>
+			@else
 			<h3 class="title" id="title_question_{!! $key + 1 !!}">Câu hỏi số <?php echo $count_answer++; ?>:</h3>
-				@if ((auth()->user()) && (auth()->user()->admin == 1))
-					<a style="text-decoration: none;" href="/question/{{$q['id']}}"><h4 class="title">{{$q['Question']}} : {{$q['Description']}}</h4></a>
-				@else
-					<h4 class="title">{{$q['Question']}} : {{$q['Description']}}</h4>
-				@endif
+			@endif
+				<h4 class="title">{{$q['Question']}} : {{$q['Description']}}</h4>
 				@if ($q['FormatID'] == 1)
 					@if ($q['Photo'] != null)
 						<li class="list-group-item list-group-item-info">
@@ -203,6 +278,23 @@
 	</ul>
 	<div class="fb-comments" data-href="{!! 'http://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI']!!}" data-width="500" data-numposts="5"></div>
 	<div class="fb-like" data-href="{!! 'http://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI']!!}" data-width="450" data-layout="standard" data-action="like" data-show-faces="true" data-share="true"></div>
+	<input type="hidden" id="inputDictionary" value="tmp">
+	<div class="modal fade" id="modal-id-dictionary">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+					<h4 class="modal-title">Modal title</h4>
+				</div>
+				<div class="modal-body" id="divDictionary">
+					
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+				</div>
+			</div>
+		</div>
+	</div>
 @endsection
 @section('body.navright')
 	<div class="panel panel-default">

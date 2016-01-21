@@ -205,7 +205,12 @@ get('/kid', [
     'as' => 'kid.viewpost',
     'uses' => 'PostsController@kidView'
 ]);
-get('toeic',[
+get('/toeic',[
     'as' => 'toeic.viewpost',
     'uses' => 'PostsController@toeicView'
+]);
+
+get('/ajax/dic', [
+    'as' => 'ajax.dic',
+    'uses' => 'PageController@dic'
 ]);
