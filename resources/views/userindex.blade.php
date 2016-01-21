@@ -38,7 +38,7 @@
         </h3>
         <div class="imagepost">
             @if($p['FormatID'] == '1')
-                <img class='img-responsive' src="images/imagePost/{{$p['Photo']}}" />
+                <img class='img-responsive' src="/images/imagePost/{{$p['Photo']}}" />
                 @elseif($p['FormatID'] == '2')
                 <div class="embed-responsive embed-responsive-4by3">
                     <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/{{$p['Video']}}" frameborder="0" allowfullscreen></iframe>
