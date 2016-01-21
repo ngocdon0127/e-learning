@@ -195,7 +195,7 @@ class PostsController extends Controller
 
 	public function kidView(){
 		$Posts = Posts::orderBy('id', 'desc')->paginate(5);
-		$course = Courses::where('CategoryID','=',2)->first();
+		$course = Courses::where('CategoryID','=',1)->first();
 		$newpost = Posts::where('CourseID','=', $course['id'])->orderBy('visited', 'dsc')->take(3)->get();
 		// $newpost = Posts::where('CourseID','=',$course->id)->orderBy('visited', 'dsc')->take(3)->get();
 		// dd($newpost);
@@ -204,7 +204,8 @@ class PostsController extends Controller
 
 	public function toeicView(){
 		$Posts = Posts::orderBy('id','desc')->paginate(5);
-		$newpost = Posts::orderBy('visited', 'dsc')->take(3)->get();
+		$course = Courses::where('CategoryID','=',4)->first();
+		$newpost = Posts::where('CourseID','=', $course['id'])->orderBy('visited', 'dsc')->take(3)->get();
 		return view('toeic')->with(compact(['Posts','newpost']));
 	}
 
