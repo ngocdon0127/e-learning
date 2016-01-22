@@ -162,6 +162,8 @@
 				if (t.length <= 0){
 					return;
 				}
+				ob('divDictionary').innerHTML = 'Searching...';
+				$('#modal-id-dictionary').modal();
 				$.ajax({
 					type: 'GET',
 					url: "{{route('ajax.dic')}}",
@@ -172,7 +174,7 @@
 							return xhr.setRequestHeader('X-CSRF-TOKEN', token);
 						}
 					},
-					data: {word: ob('inputDictionary').value.toLowerCase()},
+					data: {word: ob('inputDictionary').value.toLowerCase().trim()},
 					success: function (data) {
 						var d = JSON.parse(data);
 						// console.log(d.meanings);
@@ -191,19 +193,18 @@
 						var divDictionary = ob('divDictionary');
 						divDictionary.innerHTML = '';
 						var pMeanings = document.createElement('p');
-						pMeanings.innerHTML = 'Meaning of "' + t + '" : ';
+						pMeanings.innerHTML = 'Meaning of "' + t.trim() + '" : ';
 						divDictionary.appendChild(pMeanings);
 						divDictionary.appendChild(ulMeanings);
 						var divtmp = document.createElement('div');
 						divtmp.setAttribute('class', 'clear');
 						divDictionary.appendChild(divtmp);
 						var pExamples = document.createElement('p');
-						pExamples.innerHTML = 'Examples for "' + t + '" : ';
+						pExamples.innerHTML = 'Examples for "' + t.trim() + '" : ';
 						divDictionary.appendChild(pExamples);
 						divDictionary.appendChild(ulExamples);
 						// window.preventDefault();
 						// window.location = "#modal-id";
-						$('#modal-id-dictionary').modal();
 						if (window.getSelection) {
 							if (window.getSelection().empty) {  // Chrome
 							window.getSelection().empty();
@@ -231,7 +232,7 @@
 		<?php $count_answer=1;?>
 		@foreach($Questions as $key => $q)
 			@if ((auth()->user()) && (auth()->user()->admin == 1))
-				<a style="text-decoration: none;" href="/question/{{$q['id']}}"><h3 class="title" id="title_question_{!! $key + 1 !!}">Câu hỏi số <?php echo $count_answer++; ?>:</h3></a>
+				<a style="text-decoration: none;" href="/question/{{$q['id']}}"><h3 onmouseover="this.style.color = '#f06'" onmouseout="this.style.color = '#933'" class="title" id="title_question_{!! $key + 1 !!}">Câu hỏi số <?php echo $count_answer++; ?>:</h3></a>
 			@else
 			<h3 class="title" id="title_question_{!! $key + 1 !!}">Câu hỏi số <?php echo $count_answer++; ?>:</h3>
 			@endif
@@ -239,7 +240,11 @@
 				@if ($q['FormatID'] == 1)
 					@if ($q['Photo'] != null)
 						<li class="list-group-item list-group-item-info">
-							<img class="img-responsive" src="/images/imageQuestion/{{$q['Photo']}}" />
+							@if ((auth()->user()) && (auth()->user()->admin == 1))
+								<a style="text-decoration: none;" href="/question/{{$q['id']}}"><img class="img-responsive" src="/images/imageQuestion/{{$q['Photo']}}" /></a>
+							@else
+								<img class="img-responsive" src="/images/imageQuestion/{{$q['Photo']}}" />
+							@endif
 						</li>
 					@endif
 				@elseif ($q['FormatID'] == 2)
@@ -284,7 +289,7 @@
 			<div class="modal-content">
 				<div class="modal-header">
 					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-					<h4 class="modal-title">Modal title</h4>
+					<h4 class="modal-title">Quick Translation</h4>
 				</div>
 				<div class="modal-body" id="divDictionary">
 					
