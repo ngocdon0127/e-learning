@@ -18,7 +18,7 @@ EDIT QUESTION
 
 		<div class="form-group">
 			{!! Form::label('Question','Question : ',['class' => 'control-label']) !!}
-			{!! Form::text('Question','',['class'=>'form-control']) !!}
+			{!! Form::text('Question', null,['class'=>'form-control']) !!}
 		</div>
 		<div class="form-group">
 			{!! Form::label('FormatID', 'Format ID : ',['class' => 'control-label']) !!}
