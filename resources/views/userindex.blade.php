@@ -95,7 +95,7 @@
         <div class="panel-heading">
             Xem nhiều nhất
         </div>
-        <div class="panel-body">
+        <div class="panel-body" style="overflow: auto">
         @foreach($newpost as $np)
         <a style="text-decoration: none;" href="{{route('user.viewpost',$np['id'])}}">
            <blockquote>
