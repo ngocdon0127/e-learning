@@ -15,6 +15,53 @@ class PageController extends Controller
 		return view('mainpage')->with(compact('post'));
 	}
 
+	public function bing(){
+
+		// With Bing API, $body in Unirest must be a string, mustn't use array.
+
+		// $response = \Unirest\Request::post(
+		// 	'https://datamarket.accesscontrol.windows.net/v2/OAuth2-13',
+		// 	array(
+		// 		'Content-Type' => 'application/x-www-form-urlencoded'
+		// 	),
+		// 	'client_id=' . urlencode('evangelsenglish') .
+		// 	'&client_secret=' . urlencode('WCmJXOxBdATRAXsmrlTb0Cuq1zhjM+e+f5Faw4QQcZQ=') .
+		// 	'&scope=' . "http://api.microsofttranslator.com" .
+		// 	'&grant_type=' . 'client_credentials'
+		// );
+		// dd(json_decode(($response->raw_body)));
+
+		// Using Curl
+		$ClientID="evangelsenglish";
+		$ClientSecret="WCmJXOxBdATRAXsmrlTb0Cuq1zhjM+e+f5Faw4QQcZQ=";
+
+		$ClientSecret = urlencode ($ClientSecret);
+		$ClientID = urlencode($ClientID);
+
+		// Get a 10-minute access token for Microsoft Translator API.
+		$url = "https://datamarket.accesscontrol.windows.net/v2/OAuth2-13";
+		$postParams = "grant_type=client_credentials&client_id=$ClientID&client_secret=$ClientSecret&scope=http://api.microsofttranslator.com";
+
+		$ch = curl_init();
+		curl_setopt($ch, CURLOPT_URL, $url); 
+		curl_setopt($ch, CURLOPT_POSTFIELDS, $postParams);
+		curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);  
+		$rsp = curl_exec($ch);
+		// if (!curl_close($ch))
+			// dd(json_decode($rsp)->access_token);
+		curl_close($ch);
+
+		// $ch = curl_init("http://api.microsofttranslator.com/v2/Http.svc/Translate?text=festival&from=en&to=en");
+		// curl_setopt($ch, , value)
+		$data = Request::capture();
+		$response = \Unirest\Request::get(
+			"http://api.microsofttranslator.com/v2/Http.svc/Translate?text=" . $data['text'] . "&from=en&to=vi",
+			['Authorization' => 'Bearer ' . json_decode($rsp)->access_token],
+			null
+		);
+		dd($response);
+	}
+
 	public function dic(){
 		$data = Request::capture();
 

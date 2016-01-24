@@ -232,7 +232,7 @@
 		<?php $count_answer=1;?>
 		@foreach($Questions as $key => $q)
 			@if ((auth()->user()) && (auth()->user()->admin == 1))
-				<a style="text-decoration: none;" href="/question/{{$q['id']}}"><h3 onmouseover="this.style.color = '#f06'" onmouseout="this.style.color = '#933'" class="title" id="title_question_{!! $key + 1 !!}">Câu hỏi số <?php echo $count_answer++; ?>:</h3></a>
+				<a style="text-decoration: none;" href="{{route('user.viewquestion', $q['id'])}}"><h3 onmouseover="this.style.color = '#f06'" onmouseout="this.style.color = '#933'" class="title" id="title_question_{!! $key + 1 !!}">Câu hỏi số <?php echo $count_answer++; ?>:</h3></a>
 			@else
 			<h3 class="title" id="title_question_{!! $key + 1 !!}">Câu hỏi số <?php echo $count_answer++; ?>:</h3>
 			@endif
@@ -241,7 +241,7 @@
 					@if ($q['Photo'] != null)
 						<li class="list-group-item list-group-item-info">
 							@if ((auth()->user()) && (auth()->user()->admin == 1))
-								<a style="text-decoration: none;" href="/question/{{$q['id']}}"><img class="img-responsive" src="/images/imageQuestion/{{$q['Photo']}}" /></a>
+								<a style="text-decoration: none;" href="{{route('user.viewquestion', $q['id'])}}"><img class="img-responsive" src="/images/imageQuestion/{{$q['Photo']}}" /></a>
 							@else
 								<img class="img-responsive" src="/images/imageQuestion/{{$q['Photo']}}" />
 							@endif
@@ -308,7 +308,7 @@
 		</div>
 		<div class="panel-body" style="max-height: 1000px; overflow: auto" id="div_right_bar">
 		@foreach($newpost as $np)
-			<a id="a_smallLink_{{$np['id']}}" style="text-decoration: none;" href="/post/{{$np['id']}}">
+			<a id="a_smallLink_{{$np['id']}}" style="text-decoration: none;" href="{{route('user.viewpost', $np['id'])}}">
 				<blockquote>
 					@if($np['FormatID'] == '1')
 						<img class="img-responsive" src="/images/imagePost/{{$np['Photo']}}" />

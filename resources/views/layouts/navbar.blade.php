@@ -21,9 +21,9 @@
 			<ul class="nav navbar-nav">
 				<li id="navbar-button"><a class="navbar-button" href="/"><span class="glyphicon glyphicon-home"> Home</span></a></li>
 				@if ((auth()->user()) && (auth()->user()->admin == 1))
-				<li id="navbar-button"><a class="navbar-button" href="/admin">Admin</a></li>
+				<li id="navbar-button"><a class="navbar-button" href="{{route('admin')}}">Admin</a></li>
 				@endif
-				<li id="navbar-button"><a class="navbar-button" href="/kid">Kids</a></li>
+				<li id="navbar-button"><a class="navbar-button" href="{{route('kid.viewpost')}}">Kids</a></li>
 				<!-- <li id="navbar-button"><a class="navbar-button" href="/toeic">Toeic</a></li> -->
 				@foreach(\App\Categories::all() as $cate)
 				<li class="dropdown">
@@ -31,7 +31,7 @@
 					@if (count($courses = \App\Courses::where('CategoryID', '=', $cate->id)->get()) > 0)
 						<ul id="dropdown-course-{{$cate->id}}" class="dropdown-menu">
 							@foreach($courses as $c)
-								<li id="navbar-button-{{$c->id}}"><a href="/course/{{$c->id}}">{{$c->Title}}</a></li>
+								<li id="navbar-button-{{$c->id}}"><a href="{{route('user.viewcourse', $c->id)}}">{{$c->Title}}</a></li>
 							@endforeach
 						</ul>
 					@endif

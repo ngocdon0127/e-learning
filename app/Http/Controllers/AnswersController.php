@@ -80,7 +80,7 @@ class AnswersController extends Controller
             $answer->save();
         }
 
-        return redirect('/question/'.$answer->QuestionID);
+        return redirect(route('user.viewquestion', $answer->QuestionID));
     }
 
     public function add_answer($QuestionID, $Logical, $Detail){
@@ -92,48 +92,6 @@ class AnswersController extends Controller
         $answer->Logical = $Logical;
         $answer->Detail = $Detail;
         $answer->save();
-    }
-
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
     }
 
     /**
@@ -227,8 +185,7 @@ class AnswersController extends Controller
             $this->add_answer($id, $result != ($i + 1) ? 0 : 1, $this->c2s_convert($data['answer' . ($i + 1)]));
         }
 
-        return redirect('answer/' . $id . '/edit');
-//        return redirect('question/' . $id);
+        return redirect(route('answer.edit', $id));
     }
 
     /**

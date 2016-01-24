@@ -219,7 +219,7 @@ Cập nhật đáp án
                 <input type="text" value="{{$QuestionID}}" style="display: none" readonly name="QuestionID" />
                 {!! Form::button('Cập nhật',['class' => 'btn btn-primary', 'onclick' => 'submitForm()']) !!}
             {!! Form::close() !!}
-        <a href="/post/{{$PostID}}" class="btn btn-primary">Quay lại bài đăng</a>
+        <a href="{{route('user.viewpost', $PostID)}}" class="btn btn-primary">Quay lại bài đăng</a>
         </div>
 
 

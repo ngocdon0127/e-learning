@@ -214,3 +214,8 @@ get('/ajax/dic', [
     'as' => 'ajax.dic',
     'uses' => 'PageController@dic'
 ]);
+
+get('/ajax/bing', [
+    'as' => 'ajax.bing',
+    'uses' => 'PageController@bing'
+]);

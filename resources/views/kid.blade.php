@@ -87,7 +87,7 @@
 		 <div class="sidebar_right" style="overflow: auto;">
 		 	<h3 class="text-center title">XEM NHIỀU NHẤT</h3>
 			@foreach($newpost as $np)
-			 <a id="a_smallLink_{{$np['id']}}" style="text-decoration: none;" href="/post/{{$np['id']}}">
+			 <a id="a_smallLink_{{$np['id']}}" style="text-decoration: none;" href="{{route('user.viewpost', $np['id'])}}">
 				<blockquote>
 					@if($np['FormatID'] == '1')
 						<img class="img-responsive" src="/images/imagePost/{{$np['Photo']}}" />
@@ -109,7 +109,7 @@
 		@foreach(\App\Courses::where('CategoryID','=',1)->get() as $c)
 			@foreach(\App\Posts::where('CourseID','=',$c->id)->get() as $p)
 				<div class="col-md-3 col-lg-3">
-					<a id="a_smallLink_{{$p['id']}}" style="text-decoration: none;" href="/post/{{$p['id']}}">
+					<a id="a_smallLink_{{$p['id']}}" style="text-decoration: none;" href="{{route('user.viewpost', $p['id'])}}">
 						<img class="img-responsive img" src="/images/imagePost/{{$p['Photo']}}" />
 						<h4>{{$p['Title']}}</h4>
 						<h6>{{$p['Description']}}</h6>
