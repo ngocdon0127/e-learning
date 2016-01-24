@@ -38,7 +38,7 @@
         </h3>
         <div class="imagepost">
             @if($p['FormatID'] == '1')
-                <img class='img-responsive' src="/images/imagePost/{{$p['Photo']}}" />
+                <img class='img-responsive' alt="{{ $p['Photo'] . ' - Evangels English'}}" src="/images/imagePost/{{$p['Photo']}}" />
                 @elseif($p['FormatID'] == '2')
                 <div class="embed-responsive embed-responsive-4by3">
                     <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/{{$p['Video']}}" frameborder="0" allowfullscreen></iframe>
@@ -100,7 +100,7 @@
         <a style="text-decoration: none;" href="{{route('user.viewpost',$np['id'])}}">
            <blockquote>
                @if($np['FormatID'] == '1')
-                   <img class="img-responsive" src="/images/imagePost/{{$np['Photo']}}" />
+                   <img class="img-responsive" alt="{{ $np['Photo'] . ' - Evangels English'}}" src="/images/imagePost/{{$np['Photo']}}" />
                @elseif($np['FormatID'] == '2')
                <div class="embed-responsive embed-responsive-4by3">
                    <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/{{$np['Video']}}" frameborder="0" allowfullscreen></iframe>

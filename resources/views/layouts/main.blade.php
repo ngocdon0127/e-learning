@@ -25,7 +25,7 @@
 	<meta property="og:url" content="http://{{$_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI']}}" />
 	@if ((stripos($_SERVER['REQUEST_URI'], 'post') !== false) && isset($Photo))
 	<meta property="og:image" content="http://{{$_SERVER['HTTP_HOST']}}/images/imagePost/{{$Photo}}" />
-	<meta property="og:title" content="{{$Title}}" />
+	<meta property="og:title" content="{{$Title}} - Evangels English" />
 	@else
 	<meta property="og:image" content="http://{{$_SERVER['HTTP_HOST']}}/images/evangelsenglish.png" />
 	<meta property="og:title" content="Evangels English. Know English. Know the World" />

@@ -1,6 +1,6 @@
 @extends('layouts.main')
 @section('head.title')
-	{{$Title}}
+	{{$Title}} - Evangels English
 @endsection
 @section('body.content')
 	<div id="fb-root"></div>
@@ -14,7 +14,7 @@
     <h2 class="title">{{$Title . ' : ' . $Description}}</h2>
     <li class="list-group-item">
         @if ($Format == 1)
-            <img class="img-responsive" src="{{'/images/imagePost/' . $Photo}}" />
+            <img class="img-responsive" alt="{{$Photo . ' - Evangels English'}}" src="{{'/images/imagePost/' . $Photo}}" />
         @elseif ($Format == 2)
         <div class="embed-responsive embed-responsive-4by3">
             <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/{{$Video}}" frameborder="0" allowfullscreen></iframe>
@@ -226,7 +226,6 @@
 		if (!document.all) document.captureEvents(Event.MOUSEUP);
 
 	</script>
-	<h2 class="title">Các câu hỏi</h2>
 	<ul id="form_test" class="list-group">
 		<input id='token' type="text" value="{{$Token}}" style="display: none;" readonly />
 		<?php $count_answer=1;?>
@@ -241,9 +240,9 @@
 					@if ($q['Photo'] != null)
 						<li class="list-group-item list-group-item-info">
 							@if ((auth()->user()) && (auth()->user()->admin == 1))
-								<a style="text-decoration: none;" href="{{route('user.viewquestion', $q['id'])}}"><img class="img-responsive" src="/images/imageQuestion/{{$q['Photo']}}" /></a>
+								<a style="text-decoration: none;" href="{{route('user.viewquestion', $q['id'])}}"><img class="img-responsive" alt="{{$q['Photo'] . ' - Evangels English'}}" src="/images/imageQuestion/{{$q['Photo']}}" /></a>
 							@else
-								<img class="img-responsive" src="/images/imageQuestion/{{$q['Photo']}}" />
+								<img class="img-responsive" alt="{{$q['Photo'] . ' - Evangels English'}}" src="/images/imageQuestion/{{$q['Photo']}}" />
 							@endif
 						</li>
 					@endif
@@ -311,7 +310,7 @@
 			<a id="a_smallLink_{{$np['id']}}" style="text-decoration: none;" href="{{route('user.viewpost', $np['id'])}}">
 				<blockquote>
 					@if($np['FormatID'] == '1')
-						<img class="img-responsive" src="/images/imagePost/{{$np['Photo']}}" />
+						<img class="img-responsive" alt="{{$np['Photo'] . ' - Evangels English'}}" src="/images/imagePost/{{$np['Photo']}}" />
 					@elseif($np['FormatID'] == '2')
 					<div class="embed-responsive embed-responsive-4by3">
 						<iframe class="embed-responsive-item" src="https://www.youtube.com/embed/{{$np['Video']}}" frameborder="0" allowfullscreen></iframe>

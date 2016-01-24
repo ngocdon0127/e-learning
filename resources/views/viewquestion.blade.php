@@ -1,13 +1,13 @@
 @extends('layouts.main')
 @section('head.title')
-    Question {{$Question['id']}}
+    Question {{$Question['id']}} - Evangels English
 @endsection
 @section('body.content')
     <h2 class="title">Câu hỏi: {{$Question['Question']}}</h2>
     @if ($Question['FormatID'] == 1)
         @if ($Question['Photo'] != null)
             <li class="list-group-item ">
-                <img class= "img-responsive" src="{{'/images/imageQuestion/' . $Question['Photo']}}"/>
+                <img class= "img-responsive" alt="{{$Question['Photo'] . ' - Evangels English'}}" src="{{'/images/imageQuestion/' . $Question['Photo']}}"/>
             </li>
         @endif
     @elseif($Question['FormatID'] == 2)
