@@ -53,7 +53,7 @@ class QuestionsController extends Controller
 				$file = Request::capture()->file('Photo');
 //              $file = Request::file('Photo');
 				if ($file != null){
-					$question->Photo = 'Question_' . $PostID . '_' . $question->id  . "." . $file->getClientOriginalExtension();
+					$question->Photo = 'Question_' . $PostID . '_' . $question->id . "_- Evangels English - www.evangelsenglish.com" . "." . $file->getClientOriginalExtension();
 					$file->move(base_path() . '/public/images/imageQuestion/', $question->Photo);
 				}
 
@@ -114,7 +114,7 @@ class QuestionsController extends Controller
 
 					$file = $request->file('Photo');
 					//        $file = Request::file('Photo');
-					$question->Photo = 'Question_' . $question['PostID'] . '_' . $question->id . "." . $file->getClientOriginalExtension();
+					$question->Photo = 'Question_' . $question['PostID'] . '_' . $question->id . "_- Evangels English - www.evangelsenglish.com" . "." . $file->getClientOriginalExtension();
 					$file->move(base_path() . '/public/images/imageQuestion/', $question->Photo);
 
 

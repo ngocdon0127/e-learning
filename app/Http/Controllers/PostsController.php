@@ -57,7 +57,7 @@ class PostsController extends Controller
 				//Photo
 				$file = $request->file('Photo');
 //              $file = Request::file('Photo');
-				$post->Photo = 'Post_' . $data['CourseID'] . '_' . $post->id  . "." . $file->getClientOriginalExtension();
+				$post->Photo = 'Post_' . $data['CourseID'] . '_' . $post->id . "_- Evangels English - www.evangelsenglish.com" . "." . $file->getClientOriginalExtension();
 				$file->move(base_path() . '/public/images/imagePost/', $post->Photo);
 
 
@@ -312,7 +312,7 @@ class PostsController extends Controller
 
 				$file = $request->file('Photo');
 				//        $file = Request::file('Photo');
-				$post->Photo = 'Post_' . $data['CourseID'] . '_' . $post->id . "." . $file->getClientOriginalExtension();
+				$post->Photo = 'Post_' . $data['CourseID'] . '_' . $post->id . "_- Evangels English - www.evangelsenglish.com" . "." . $file->getClientOriginalExtension();
 				$file->move(base_path() . '/public/images/imagePost/', $post->Photo);
 
 
