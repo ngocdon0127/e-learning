@@ -3,8 +3,11 @@
 <head>
 	<meta charset="UTF-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="content-language" content="vi,en" />
+	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>@yield('head.title')</title>
+	<link rel="alternate" href="http://www.evangelsenglish.com" hreflang="vi-vn" />
+	<link rel="alternate" href="http://www.evangelsenglish.com" hreflang="en-sg" />
 	<link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css">
 	<link rel="stylesheet" type="text/css" href="/css/bootstrap.css">
 	<link rel="stylesheet" type="text/css" href="/css/style.css">
@@ -14,8 +17,13 @@
 	<link href='https://fonts.googleapis.com/css?family=Oswald:700' rel='stylesheet' type='text/css'>
 	<link rel="stylesheet" type="text/css" href="/css/admin.css">
 	<meta name="_token" content="{!! csrf_token() !!}"/>
+	@if ((stripos($_SERVER['REQUEST_URI'], 'post') !== false) && isset($Photo))
+	<meta name="description" content="{{$Title . ' ' . $Description}} Evangels English. Know English. Know the World" />
+	<meta name="keywords" content="{{$Title . ' ' . $Description}} Evangels English, Know English, Know the World, learn english online, learning online, english, online, learning" />
+	@else
 	<meta name="description" content="Evangels English. Know English. Know the World" />
 	<meta name="keywords" content="learn english online, learning online, english, online, learning" />
+	@endif
 	<meta name="author" content="TEC" />
 	<meta name="copyright" content="TEC" />
 	<meta property="fb:app_id" content="1657402167852948">
@@ -26,11 +34,13 @@
 	@if ((stripos($_SERVER['REQUEST_URI'], 'post') !== false) && isset($Photo))
 	<meta property="og:image" content="http://{{$_SERVER['HTTP_HOST']}}/images/imagePost/{{$Photo}}" />
 	<meta property="og:title" content="{{$Title}} - Evangels English" />
+	<meta property="og:description" content="{{$Description}} Evangels English. Know English. Know the World" />
 	@else
 	<meta property="og:image" content="http://{{$_SERVER['HTTP_HOST']}}/images/evangelsenglish.png" />
 	<meta property="og:title" content="Evangels English. Know English. Know the World" />
-	@endif
 	<meta property="og:description" content="Evangels English. Know English. Know the World" />
+	@endif
+	
 	@if (auth() && (auth()->user()))
 	<script type="text/javascript">
 		var logout = 0;
