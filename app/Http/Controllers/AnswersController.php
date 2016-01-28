@@ -69,7 +69,7 @@ class AnswersController extends Controller
         for($i = 0; $i < $count; $i++){
             $answer = new Answers();
             $answer->QuestionID = $data['QuestionID'];
-            $answer->Detail = $this->c2s_convert($data['answer' . ($i + 1)]);
+            $answer->Detail = trim($this->c2s_convert($data['answer' . ($i + 1)]));
             if ($result != ($i + 1)){
                 $answer->Logical = 0;
             }
@@ -162,7 +162,7 @@ class AnswersController extends Controller
 //            $answer->QuestionID = $data['QuestionID'];
             $detail = $data['answer' . ($i + 1)];
 
-            $answer->Detail = $this->c2s_convert($detail);
+            $answer->Detail = trim($this->c2s_convert($detail));
             if ($result != ($i + 1)){
                 $answer->Logical = 0;
             }

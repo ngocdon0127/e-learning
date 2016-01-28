@@ -191,7 +191,7 @@ ADD QUESTION
 				// check if admin has chosen right answer or not
 				updateID();
 				for(var i = 1; i <= count; i++){
-					ob('ta_answer' + i).innerHTML = ob('answer' + i).innerHTML = ob('answer' + i).value;
+					ob('ta_answer' + i).innerHTML = ob('answer' + i).innerHTML = ob('answer' + i).value.trim();
 				}
 					console.log(resultQuestion + ' : ' + count);
 				if ((resultQuestion < 0) && (count > 0)){
@@ -401,7 +401,7 @@ ADD QUESTION
 										function submitFormAnswers(){
 												updateID();
 												for(var i = 1; i <= count; i++){
-														ob('ta_answer' + i).innerHTML = ob('answer' + i).innerHTML = ob('answer' + i).value;
+														ob('ta_answer' + i).innerHTML = ob('answer' + i).innerHTML = ob('answer' + i).value.trim();
 												}
 //                        console.log(count);
 //                        console.log(resultQuestion);
