@@ -7,7 +7,7 @@
     @if ($Question['FormatID'] == 1)
         @if ($Question['Photo'] != null)
             <li class="list-group-item ">
-                <img class= "img-responsive" alt="{{$Question['Photo'] . ' - Evangels English'}}" src="{{'/images/imageQuestion/' . $Question['Photo']}}"/>
+                <img class= "img-responsive" alt="{{$Question['Question'] . ' - Evangels English - '}}{{$_SERVER['HTTP_HOST']}}" src="{{'/images/imageQuestion/' . $Question['Photo']}}"/>
             </li>
         @endif
     @elseif($Question['FormatID'] == 2)
