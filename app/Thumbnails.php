@@ -4,11 +4,10 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Formats extends Model
+class Thumbnails extends Model
 {
-    //
     public static function getColumn($column){
-        $array = Formats::all();
+        $array = Thumbnails::all();
         $result = array();
         foreach ($array as $item) {
             $result += array($item['id'] => $item[$column]);

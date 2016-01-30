@@ -10,9 +10,9 @@
 			<div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">	
 				<a href="{{route('user.viewpost', $p['id'])}}">
 			        <div class="imagepost">
-			            @if($p['FormatID'] == '1')
+			            @if($p['ThumbnailID'] == '1')
 			                <img class='img-responsive' src="http://www.evangelsenglish.com/images/imagePost/Post_16_89.jpg" />
-			                @elseif($p['FormatID'] == '2')
+			                @elseif($p['ThumbnailID'] == '2')
 			                <div class="embed-responsive embed-responsive-4by3">
 			                    <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/{{$p['Video']}}" frameborder="0" allowfullscreen></iframe>
 			                </div>

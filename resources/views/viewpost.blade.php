@@ -13,9 +13,9 @@
 }(document, 'script', 'facebook-jssdk'));</script>
     <h2 class="title">{{$Title . ' : ' . $Description}}</h2>
     <li class="list-group-item">
-        @if ($Format == 1)
+        @if ($Thumbnail == 1)
             <img class="img-responsive" alt="{{$Title . ' - Evangels English - '}}{{$_SERVER['HTTP_HOST']}}" src="{{'/images/imagePost/' . $Photo}}" />
-        @elseif ($Format == 2)
+        @elseif ($Thumbnail == 2)
         <div class="embed-responsive embed-responsive-4by3">
             <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/{{$Video}}" frameborder="0" allowfullscreen></iframe>
         </div>
@@ -236,7 +236,7 @@
 			<h3 class="title" id="title_question_{!! $key + 1 !!}">Câu hỏi số <?php echo $count_answer++; ?>:</h3>
 			@endif
 				<h4 class="title">{{$q['Question']}} : {{$q['Description']}}</h4>
-				@if ($q['FormatID'] == 1)
+				@if ($q['ThumbnailID'] == 1)
 					@if ($q['Photo'] != null)
 						<li class="list-group-item list-group-item-info">
 							@if ((auth()->user()) && (auth()->user()->admin == 1))
@@ -246,7 +246,7 @@
 							@endif
 						</li>
 					@endif
-				@elseif ($q['FormatID'] == 2)
+				@elseif ($q['ThumbnailID'] == 2)
 					@if ($q['Video'] != null)
 						<!-- <li class="list-group-item list-group-item-info"> -->
 						<div class="embed-responsive embed-responsive-4by3">
@@ -309,9 +309,9 @@
 		@foreach($newpost as $np)
 			<a id="a_smallLink_{{$np['id']}}" style="text-decoration: none;" href="{{route('user.viewpost', $np['id'])}}">
 				<blockquote>
-					@if($np['FormatID'] == '1')
+					@if($np['ThumbnailID'] == '1')
 						<img class="img-responsive" alt="{{$np['Title'] . ' - Evangels English - '}}{{$_SERVER['HTTP_HOST']}}" src="/images/imagePost/{{$np['Photo']}}" />
-					@elseif($np['FormatID'] == '2')
+					@elseif($np['ThumbnailID'] == '2')
 					<div class="embed-responsive embed-responsive-4by3">
 						<iframe class="embed-responsive-item" src="https://www.youtube.com/embed/{{$np['Video']}}" frameborder="0" allowfullscreen></iframe>
 					</div>

@@ -46,11 +46,11 @@ class PostsController extends Controller
 
 		$post = new Posts();
 		$post->CourseID = $data['CourseID'];
-		$post->FormatID = $data['FormatID'];
+		$post->ThumbnailID = $data['ThumbnailID'];
 		$post->Title = $data['Title'];
 		$post->Description = $data['Description'];
 
-		switch ($data['FormatID']){
+		switch ($data['ThumbnailID']){
 			case '1': // Plain Text
 				$post->save();
 				$post = Posts::orderBy('id', 'desc')->first();
@@ -161,7 +161,7 @@ class PostsController extends Controller
 			'Title' => $post['Title'],
 			'Description' => $post['Description'],
 			'PostID' => $postID,
-			'Format' => $post['FormatID'],
+			'Thumbnail' => $post['ThumbnailID'],
 			'Questions' => $questions,
 			'Photo' => $photo,
 			'Video' => $post['Video'],
@@ -297,15 +297,15 @@ class PostsController extends Controller
 		$data = $request->all();
 		$post = Posts::find($id);
 		$post->CourseID = $data['CourseID'];
-		$post->FormatID = $data['FormatID'];
+		$post->ThumbnailID = $data['ThumbnailID'];
 		$post->Title = $data['Title'];
-		if ($post->FormatID == '2'){ // Format Quizz Video
+		if ($post->ThumbnailID == '2'){ // Thumbnail Quizz Video
 			$post->Video = PostsController::getYoutubeVideoID($data['Video']);
 		}
 		$post->Description = $data['Description'];
 		$post->update();
 
-		if ($post->FormatID == '1'){ // Format Quizz Plain Text
+		if ($post->ThumbnailID == '1'){ // Thumbnail Quizz Plain Text
 			// if admin upload new photo
 			if ($request->file('Photo') != null) {
 				$post = Posts::find($id);

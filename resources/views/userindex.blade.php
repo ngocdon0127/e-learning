@@ -11,9 +11,9 @@
     @foreach($Posts as $p)
         <li class="active" style="list-style-type:none; padding-top: 10px">
             <a style="text-decoration: none; font-size: 20px;" href="/post/{{$p['id']}}">
-                @if($p['FormatID'] == '1')
+                @if($p['ThumbnailID'] == '1')
                 <img class='img-responsive' src="/images/imagePost/{{$p['Photo']}}" />
-                @elseif($p['FormatID'] == '2')
+                @elseif($p['ThumbnailID'] == '2')
                 <div class="embed-responsive embed-responsive-4by3">
                     <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/{{$p['Video']}}" frameborder="0" allowfullscreen></iframe>
                 </div>
@@ -37,9 +37,9 @@
             {{$p['Title']}}
         </h3>
         <div class="imagepost">
-            @if($p['FormatID'] == '1')
+            @if($p['ThumbnailID'] == '1')
                 <img class='img-responsive' alt="{{ $p['Title'] . ' - Evangels English - '}}{{$_SERVER['HTTP_HOST']}}" src="/images/imagePost/{{$p['Photo']}}" />
-                @elseif($p['FormatID'] == '2')
+                @elseif($p['ThumbnailID'] == '2')
                 <div class="embed-responsive embed-responsive-4by3">
                     <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/{{$p['Video']}}" frameborder="0" allowfullscreen></iframe>
                 </div>
@@ -99,9 +99,9 @@
         @foreach($newpost as $np)
         <a style="text-decoration: none;" href="{{route('user.viewpost',$np['id'])}}">
            <blockquote>
-               @if($np['FormatID'] == '1')
+               @if($np['ThumbnailID'] == '1')
                    <img class="img-responsive" alt="{{ $np['Title'] . ' - Evangels English - '}}{{$_SERVER['HTTP_HOST']}}" src="/images/imagePost/{{$np['Photo']}}" />
-               @elseif($np['FormatID'] == '2')
+               @elseif($np['ThumbnailID'] == '2')
                <div class="embed-responsive embed-responsive-4by3">
                    <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/{{$np['Video']}}" frameborder="0" allowfullscreen></iframe>
                 </div>

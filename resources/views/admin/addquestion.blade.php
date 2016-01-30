@@ -25,8 +25,8 @@ ADD QUESTION
 			{!! Form::text('Question','',['class'=>'form-control']) !!}
 		</div>
 		<div class="form-group">
-			{!! Form::label('FormatID', 'Format ID : ',['class' => 'control-label']) !!}
-			{!! Form::select('FormatID',\App\Formats::getColumn('Title'), '', ['class'=>'form-control', 'onclick' => 'this.style.background = "white";', 'onchange' => 'configForm()']) !!}
+			{!! Form::label('ThumbnailID', 'Thumbnail : ',['class' => 'control-label']) !!}
+			{!! Form::select('ThumbnailID',\App\Thumbnails::getColumn('Title'), '', ['class'=>'form-control', 'onclick' => 'this.style.background = "white";', 'onchange' => 'configForm()']) !!}
 		</div>
 		<div class="form-group" id="divPhoto">
 			{!! Form::label('Photo', 'Photo : ',['class' => 'control-label']) !!}
@@ -107,7 +107,7 @@ ADD QUESTION
 			}
 
 			function configForm(){
-				switch (ob('FormatID').value){
+				switch (ob('ThumbnailID').value){
 					case '1':
 						ob('divPhoto').style.display = 'block';
 						ob('divVideo').style.display = 'none';
@@ -128,7 +128,7 @@ ADD QUESTION
 				ob('error').innerHTML = x;
 			}
 			function submitForm(){
-				switch (ob('FormatID').value){
+				switch (ob('ThumbnailID').value){
 					case '1':  // Photo
 						var acceptedType = ['image/jpeg', 'image/png', 'image/gif'];
 						//                        console.log('clicked');
@@ -201,7 +201,7 @@ ADD QUESTION
 				ob('btnAddQuestion').disabled = true;
 				var fd = new FormData();
 				fd.append('Question', ob('Question').value);
-				fd.append('FormatID', ob('FormatID').value);
+				fd.append('ThumbnailID', ob('ThumbnailID').value);
 				fd.append('Description', ob('Description').value);
 				fd.append('Video', ob('Video').value);
 				fd.append('Photo', p);

@@ -41,10 +41,10 @@ class QuestionsController extends Controller
 		$data = Request::capture();
 		$question = new Questions();
 		$question->PostID = $PostID;
-		$question->FormatID = $data['FormatID'];
+		$question->ThumbnailID = $data['ThumbnailID'];
 		$question->Question = $data['Question'];
 		$question->Description = $data['Description'];
-		switch ($data['FormatID']){
+		switch ($data['ThumbnailID']){
 			case '1': // Photo
 				$question->save();
 				$question = Questions::orderBy('id', 'desc')->first();
@@ -102,11 +102,11 @@ class QuestionsController extends Controller
 		$data = $request->all();
 		$question = Questions::find($id);
 		$question->Question = $data['Question'];
-		$question->FormatID = $data['FormatID'];
+		$question->ThumbnailID = $data['ThumbnailID'];
 		$question->Description = $data['Description'];
 		$question->update();
 
-		switch ($data['FormatID']){
+		switch ($data['ThumbnailID']){
 			case '1': // Photo
 				// if admin upload new photo
 				if ($request->file('Photo') != null) {

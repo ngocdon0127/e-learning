@@ -4,13 +4,13 @@
 @endsection
 @section('body.content')
     <h2 class="title">Câu hỏi: {{$Question['Question']}}</h2>
-    @if ($Question['FormatID'] == 1)
+    @if ($Question['ThumbnailID'] == 1)
         @if ($Question['Photo'] != null)
             <li class="list-group-item ">
                 <img class= "img-responsive" alt="{{$Question['Question'] . ' - Evangels English - '}}{{$_SERVER['HTTP_HOST']}}" src="{{'/images/imageQuestion/' . $Question['Photo']}}"/>
             </li>
         @endif
-    @elseif($Question['FormatID'] == 2)
+    @elseif($Question['ThumbnailID'] == 2)
         @if ($Question['Video'] != null)
             <div class="embed-responsive embed-responsive-4by3">
                 <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/{{$Question['Video']}}" frameborder="0" allowfullscreen></iframe>

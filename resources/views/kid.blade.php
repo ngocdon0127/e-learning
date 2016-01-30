@@ -89,9 +89,9 @@
 			@foreach($newpost as $np)
 			 <a id="a_smallLink_{{$np['id']}}" style="text-decoration: none;" href="{{route('user.viewpost', $np['id'])}}">
 				<blockquote>
-					@if($np['FormatID'] == '1')
+					@if($np['ThumbnailID'] == '1')
 						<img class="img-responsive" src="/images/imagePost/{{$np['Photo']}}" />
-					@elseif($np['FormatID'] == '2')
+					@elseif($np['ThumbnailID'] == '2')
 						<iframe class="img-responsive" src="https://www.youtube.com/embed/{{$np['Video']}}" frameborder="0" allowfullscreen></iframe>
 					@endif
 					<h4>{{$np['Title']}}</h4>
