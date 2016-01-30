@@ -15,12 +15,13 @@ class CreatePostsTable extends Migration
         Schema::create('posts', function (Blueprint $table) {
             $table->increments('id');
             $table->timestamps();
-            $table->integer('FormatID');
+            $table->integer('FormatID')->default(1);
+            $table->integer('ThumbnailID');
             $table->integer('CourseID');
             $table->string('Title');
-            $table->string('Photo')->default('');
-            $table->string('Video')->default('');
-            $table->string('Description')->default('');
+            $table->string('Photo')->default(null);
+            $table->string('Video')->default(null);
+            $table->string('Description')->default(null);
             $table->integer('visited')->default(0);
         });
     }

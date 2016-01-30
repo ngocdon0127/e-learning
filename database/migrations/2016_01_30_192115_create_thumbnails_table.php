@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateDoexamsTable extends Migration
+class CreateThumbnailsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,14 +12,12 @@ class CreateDoexamsTable extends Migration
      */
     public function up()
     {
-        Schema::create('doexams', function (Blueprint $table) {
+        Schema::create('thumbnails', function (Blueprint $table) {
             $table->increments('id');
             $table->timestamps();
-            $table->integer('PostID');
-            $table->integer('UserID');
-            $table->integer('Score')->default(-1);
-            $table->float('Time')->default(0);
-            $table->string('token')->default(null);
+            $table->string('Title');
+            $table->string('Description');
+            $table->string('Format');
         });
     }
 
@@ -30,6 +28,6 @@ class CreateDoexamsTable extends Migration
      */
     public function down()
     {
-        Schema::drop('doexams');
+        Schema::drop('thumbnails');
     }
 }

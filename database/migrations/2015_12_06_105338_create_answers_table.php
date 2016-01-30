@@ -17,7 +17,7 @@ class CreateAnswersTable extends Migration
             $table->timestamps();
             $table->integer('QuestionID');
             $table->boolean('Logical')->default(false);
-            $table->string('Detail');
+            $table->string('Detail')->default(null);
         });
     }
 

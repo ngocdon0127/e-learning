@@ -46,6 +46,7 @@ class PostsController extends Controller
 
 		$post = new Posts();
 		$post->CourseID = $data['CourseID'];
+		$post->FormatID = $data['FormatID'];
 		$post->ThumbnailID = $data['ThumbnailID'];
 		$post->Title = $data['Title'];
 		$post->Description = $data['Description'];
