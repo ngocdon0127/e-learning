@@ -13,6 +13,7 @@ use App\Logins;
 use App\Posts;
 use App\Questions;
 use App\Tags;
+use App\Spaces;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;

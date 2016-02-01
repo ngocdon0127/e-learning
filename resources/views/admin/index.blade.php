@@ -11,5 +11,6 @@
 	</ul>
  	@if ((auth()->user()) && (auth()->user()->admin == 1))
 	<a href="{{route('admin.addcourse')}}" class="btn btn-primary">Add Course</a>
+	<a href="{{route('admin.addpost')}}" class="btn btn-primary">Add Post</a>
 	 @endif
 @endsection

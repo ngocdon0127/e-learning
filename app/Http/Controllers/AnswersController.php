@@ -115,7 +115,7 @@ class AnswersController extends Controller
         return view('admin.editanswer')->with(['PostID' => $question['PostID'], "QuestionID" => $QuestionID, 'Answers' => $Answers, 'Photo' => $photo]);
     }
 
-    private static $clientTag = ['[u]', '[/u]'];
+    public static $clientTag = ['[u]', '[/u]'];
     public static $serverTag = ['<u>', '</u>'];
 
     public static function c2s_convert($s){
