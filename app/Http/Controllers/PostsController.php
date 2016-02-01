@@ -180,7 +180,10 @@ class PostsController extends Controller
 		$result += ['newpost' => $newpost];
 		// dd($newpost);
 		// return view('viewpost')->with(compact(['result', 'newpost']));
-		return view('viewpost', $result);
+		if ($post['FormatID'] == 1)
+			return view('viewpost', $result);
+		if ($post['FormatID'] == 2)
+			return view('viewfilledpost')->with($result);
 	}
 
 	public function kidView(){
