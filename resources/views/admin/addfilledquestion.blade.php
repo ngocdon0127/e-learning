@@ -372,8 +372,9 @@ ADD QUESTION
 					}
 
 					function add(){
-						if (count >= getNumOfSpaces()){
-							count = getNumOfSpaces();
+						var curNOS = getNumOfSpaces();
+						if ((count >= curNOS) && (curNOS >= 1)){
+							count = curNOS;
 							return;
 						}
 						// count++;
