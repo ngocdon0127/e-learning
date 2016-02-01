@@ -114,9 +114,6 @@ ADD QUESTION
 					var afterText = te.value.substring(te.selectionEnd);
 					te.value = te.innerHTML = beforeText + ' [space] ' + afterText;
 					te.focus();
-					if (getNumOfSpaces() <= 1){
-						return;
-					}
 					add();
 					updateID();
 				}
@@ -282,7 +279,7 @@ ADD QUESTION
 		<div class="form-group">
 				{!! Form::label('Detail', 'Các đáp án cho từng ô trống, cách nhau bởi dấu chấm phẩy, đáp án đúng viết đầu tiên, đáp án sai viết sau: ',['class'=>'control-label']) !!}
 				<script type="text/javascript">
-					var count = 1;
+					var count = 0;
 					var minAnswer = 1;
 
 					function ob(x){
@@ -373,7 +370,7 @@ ADD QUESTION
 
 					function add(){
 						var curNOS = getNumOfSpaces();
-						if ((count >= curNOS) && (curNOS >= 1)){
+						if (count >= curNOS){
 							count = curNOS;
 							return;
 						}

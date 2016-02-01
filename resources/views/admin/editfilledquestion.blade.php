@@ -115,9 +115,6 @@ EDIT QUESTION
 					var afterText = te.value.substring(te.selectionEnd);
 					te.value = te.innerHTML = beforeText + ' [space] ' + afterText;
 					te.focus();
-					if (getNumOfSpaces() <= 1){
-						return;
-					}
 					add();
 					updateID();
 				}
@@ -374,7 +371,7 @@ EDIT QUESTION
 					function add(){
 						// console.log(getNumOfSpaces());
 						var curNOS = getNumOfSpaces();
-						if ((count >= curNOS) && (curNOS >= 1)){
+						if (count >= curNOS){
 							count = curNOS;
 							return;
 						}
