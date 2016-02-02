@@ -68,7 +68,7 @@
 		@foreach(\App\Courses::where('CategoryID','=',4)->get() as $c)
 			@foreach(\App\Posts::where('CourseID','=',$c->id)->get() as $p)
 				<div class="col-md-4">
-					<a id="a_smallLink_{{$p['id']}}" style="text-decoration: none;" href="/post/{{$p['id']}}">
+					<a id="a_smallLink_{{$p['id']}}" style="text-decoration: none;" href="{{route('user.viewpost', $p['id'])}}">
 						<img class="img-responsive img" src="/images/imagePost/{{$p['Photo']}}" />
 <!-- 						<h4>{{$p['Title']}}</h4>
 							<h6>{{$p['Description']}}</h6> -->

@@ -13,6 +13,7 @@ use App\Logins;
 use App\Posts;
 use App\Questions;
 use App\Tags;
+use App\Spaces;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
@@ -22,15 +23,6 @@ use Redirect;
 class PostsController extends Controller
 {
 	var $imagePost = '/images/imagePost/';
-	/**
-	 * Display a listing of the resource.
-	 *
-	 * @return \Illuminate\Http\Response
-	 */
-	public function index()
-	{
-		//
-	}
 
 	/**
 	 * Show the form for creating a new resource.
@@ -43,10 +35,8 @@ class PostsController extends Controller
 //        $courses->toArray();
 		if (!AuthController::checkPermission()){
 			return redirect('auth/login');
-		};
-		$courses = array('1'=>1, '2'=>3);
-		$t = array('hehe'=>$courses);
-			return view('admin.addpost', $t);
+		}
+		return view('admin.addpost');
 	}
 
 	public function savePost(Request $request){
@@ -58,17 +48,18 @@ class PostsController extends Controller
 		$post = new Posts();
 		$post->CourseID = $data['CourseID'];
 		$post->FormatID = $data['FormatID'];
+		$post->ThumbnailID = $data['ThumbnailID'];
 		$post->Title = $data['Title'];
 		$post->Description = $data['Description'];
 
-		switch ($data['FormatID']){
+		switch ($data['ThumbnailID']){
 			case '1': // Plain Text
 				$post->save();
 				$post = Posts::orderBy('id', 'desc')->first();
 				//Photo
 				$file = $request->file('Photo');
 //              $file = Request::file('Photo');
-				$post->Photo = 'Post_' . $data['CourseID'] . '_' . $post->id  . "." . $file->getClientOriginalExtension();
+				$post->Photo = 'Post_' . $data['CourseID'] . '_' . $post->id . "_-Evangels-English-www.evangelsenglish.com_" . "." . $file->getClientOriginalExtension();
 				$file->move(base_path() . '/public/images/imagePost/', $post->Photo);
 
 
@@ -91,8 +82,7 @@ class PostsController extends Controller
 		$rawHT = $data['Hashtag'];
 		TagsController::tag($rawHT, $post->id);
 
-		return redirect('/admin/course/'.$post->CourseID);
-//        return $post;
+		return redirect(route('admin.viewcourse', $post->CourseID));
 	}
 
 	public static function getYoutubeVideoID($rawLink){
@@ -173,7 +163,7 @@ class PostsController extends Controller
 			'Title' => $post['Title'],
 			'Description' => $post['Description'],
 			'PostID' => $postID,
-			'Format' => $post['FormatID'],
+			'Thumbnail' => $post['ThumbnailID'],
 			'Questions' => $questions,
 			'Photo' => $photo,
 			'Video' => $post['Video'],
@@ -190,7 +180,10 @@ class PostsController extends Controller
 		$result += ['newpost' => $newpost];
 		// dd($newpost);
 		// return view('viewpost')->with(compact(['result', 'newpost']));
-		return view('viewpost', $result);
+		if ($post['FormatID'] == 1)
+			return view('viewpost', $result);
+		if ($post['FormatID'] == 2)
+			return view('viewfilledpost')->with($result);
 	}
 
 	public function kidView(){
@@ -272,35 +265,6 @@ class PostsController extends Controller
 		$client->credentialsFlow($sc_user, $sc_pass);
 	}
 
-
-
-	public function create()
-	{
-		//
-	}
-
-	/**
-	 * Store a newly created resource in storage.
-	 *
-	 * @param  \Illuminate\Http\Request  $request
-	 * @return \Illuminate\Http\Response
-	 */
-	public function store(Request $request)
-	{
-		//
-	}
-
-	/**
-	 * Display the specified resource.
-	 *
-	 * @param  int  $id
-	 * @return \Illuminate\Http\Response
-	 */
-	public function show($id)
-	{
-		//
-	}
-
 	/**
 	 * Show the form for editing the specified resource.
 	 *
@@ -338,22 +302,22 @@ class PostsController extends Controller
 		$data = $request->all();
 		$post = Posts::find($id);
 		$post->CourseID = $data['CourseID'];
-		$post->FormatID = $data['FormatID'];
+		$post->ThumbnailID = $data['ThumbnailID'];
 		$post->Title = $data['Title'];
-		if ($post->FormatID == '2'){ // Format Quizz Video
+		if ($post->ThumbnailID == '2'){ // Thumbnail Quizz Video
 			$post->Video = PostsController::getYoutubeVideoID($data['Video']);
 		}
 		$post->Description = $data['Description'];
 		$post->update();
 
-		if ($post->FormatID == '1'){ // Format Quizz Plain Text
+		if ($post->ThumbnailID == '1'){ // Thumbnail Quizz Plain Text
 			// if admin upload new photo
 			if ($request->file('Photo') != null) {
 				$post = Posts::find($id);
 
 				$file = $request->file('Photo');
 				//        $file = Request::file('Photo');
-				$post->Photo = 'Post_' . $data['CourseID'] . '_' . $post->id . "." . $file->getClientOriginalExtension();
+				$post->Photo = 'Post_' . $data['CourseID'] . '_' . $post->id . "_-Evangels-English-www.evangelsenglish.com_" . "." . $file->getClientOriginalExtension();
 				$file->move(base_path() . '/public/images/imagePost/', $post->Photo);
 
 
@@ -393,6 +357,6 @@ class PostsController extends Controller
 		$course = Courses::find($post->CourseID);
 		$course->NoOfPosts--;
 		$course->update();
-		return redirect('/course/' . $courseid);
+		return redirect(route('admin.viewcourse', $courseid));
 	}
 }

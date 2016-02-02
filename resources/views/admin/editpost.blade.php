@@ -12,8 +12,8 @@
 					{!! Form::select('CourseID', \App\Courses::getColumn('Title'), ['class'=>'form-control', 'onclick' => 'this.style.background = "white"']) !!}
 				</div>
 				<div class="form-group">
-					{!! Form::label('FormatID', 'Format ID : ',['class' => 'control-label']) !!}
-					{!! Form::select('FormatID',\App\Formats::getColumn('Title'), '', ['class'=>'form-control', 'onclick' => 'this.style.background = "white"', 'onchange' => 'configForm()']) !!}
+					{!! Form::label('ThumbnailID', 'Thumbnail : ',['class' => 'control-label']) !!}
+					{!! Form::select('ThumbnailID',\App\Thumbnails::getColumn('Title'), '', ['class'=>'form-control', 'onclick' => 'this.style.background = "white"', 'onchange' => 'configForm()']) !!}
 				</div>
 				<div class="form-group" id="divPhoto">
 					{!! Form::label('Photo', 'New Photo : ',['class' => 'control-label']) !!}
@@ -101,10 +101,10 @@
 						 return document.getElementById(x);
 					 }
 
-					 ob('FormatID').value = {{$Post['FormatID']}};
+					 ob('ThumbnailID').value = {{$Post['ThumbnailID']}};
 
 					 function configForm(){
-						switch (ob('FormatID').value){
+						switch (ob('ThumbnailID').value){
 							case '1':
 								ob('divPhoto').style.display = 'block';
 								ob('divVideo').style.display = 'none';
@@ -133,7 +133,7 @@
 							courseob.style.background = '#ff5050';
 							return;
 						}
-						var formatob = ob('FormatID');
+						var formatob = ob('ThumbnailID');
 						if (formatob.value <= 0){
 							formatob.style.background = '#ff5050';
 							return;

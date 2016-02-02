@@ -57,11 +57,19 @@ Route::group(['prefix' => '/admin'], function(){
         'as'    => 'admin.savecourse',
         'uses'  => 'CoursesController@savecourse'
     ]);
-    Route::get ('/addanswer/{postid}',[
+    Route::get ('/addanswer/{questionid}',[
         'as'    => 'admin.addanswer',
         'uses'  => 'AnswersController@addanswer'
     ]);
-    Route::post('/addanswer/{postid}',[
+    Route::post('/addspace/{questionid}', [
+        'as'    => 'admin.addspace',
+        'uses'  => 'SpacesController@savespace'
+    ]);
+    Route::post('/editspace/{questionid}', [
+        'as'    => "admin.editspace",
+        'uses'  => "SpacesController@update"
+    ]);
+    Route::post('/addanswer/{questionid}',[
     'as'    => 'admin.saveanswer',
     'uses'  => 'AnswersController@saveanswer'
     ]);
@@ -138,6 +146,11 @@ put('/admin/editquestion/{id}', [
     'uses' => 'QuestionsController@update'
 ]);
 
+post('/admin/editquestion/{id}', [
+    'as' => 'question.update',
+    'uses' => 'QuestionsController@update'
+]);
+
 // edit question {id} (Answers) // Will merge with 2 above routes later.
 get('/answer/{questionid}/edit', [
     'as' => 'answer.edit',
@@ -205,7 +218,17 @@ get('/kid', [
     'as' => 'kid.viewpost',
     'uses' => 'PostsController@kidView'
 ]);
-get('toeic',[
+get('/toeic',[
     'as' => 'toeic.viewpost',
     'uses' => 'PostsController@toeicView'
+]);
+
+get('/ajax/dic', [
+    'as' => 'ajax.dic',
+    'uses' => 'PageController@dic'
+]);
+
+get('/ajax/bing', [
+    'as' => 'ajax.bing',
+    'uses' => 'PageController@bing'
 ]);

@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "568091b0db93f5d3c9052e9c1dbccd3c",
-    "content-hash": "93b425507872bb0372d9ff4f1eeb339d",
+    "hash": "6fe44816705393a824271f709452b789",
+    "content-hash": "1c76e4452b66968aa12f97bd8d04da9a",
     "packages": [
         {
             "name": "bestmomo/scafold",
@@ -1045,6 +1045,50 @@
                 "twitter"
             ],
             "time": "2015-10-23 04:02:07"
+        },
+        {
+            "name": "mashape/unirest-php",
+            "version": "v2.6.5",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Mashape/unirest-php.git",
+                "reference": "4a480b156b6223f123c9c12704e1f3c7ddb4c12c"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Mashape/unirest-php/zipball/4a480b156b6223f123c9c12704e1f3c7ddb4c12c",
+                "reference": "4a480b156b6223f123c9c12704e1f3c7ddb4c12c",
+                "shasum": ""
+            },
+            "require": {
+                "ext-curl": "*",
+                "ext-json": "*",
+                "php": ">=5.4.0"
+            },
+            "require-dev": {
+                "codeclimate/php-test-reporter": "0.1.*",
+                "phpunit/phpunit": "~4.4"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "Unirest": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "Unirest PHP",
+            "homepage": "https://github.com/Mashape/unirest-php",
+            "keywords": [
+                "client",
+                "curl",
+                "http",
+                "https",
+                "rest"
+            ],
+            "time": "2016-01-20 19:41:35"
         },
         {
             "name": "monolog/monolog",

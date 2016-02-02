@@ -16,8 +16,9 @@ class CreateAnswersTable extends Migration
             $table->increments('id');
             $table->timestamps();
             $table->integer('QuestionID');
+            $table->integer('SpaceID');
             $table->boolean('Logical')->default(false);
-            $table->string('Detail');
+            $table->string('Detail')->default(null);
         });
     }
 

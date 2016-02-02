@@ -18,11 +18,11 @@ EDIT QUESTION
 
 		<div class="form-group">
 			{!! Form::label('Question','Question : ',['class' => 'control-label']) !!}
-			{!! Form::text('Question','',['class'=>'form-control']) !!}
+			{!! Form::text('Question', null,['class'=>'form-control']) !!}
 		</div>
 		<div class="form-group">
-			{!! Form::label('FormatID', 'Format ID : ',['class' => 'control-label']) !!}
-			{!! Form::select('FormatID',\App\Formats::getColumn('Title'), '', ['class'=>'form-control', 'onclick' => 'this.style.background = "white";', 'onchange' => 'configForm()']) !!}
+			{!! Form::label('ThumbnailID', 'Thumbnail : ',['class' => 'control-label']) !!}
+			{!! Form::select('ThumbnailID',\App\Thumbnails::getColumn('Title'), '', ['class'=>'form-control', 'onclick' => 'this.style.background = "white";', 'onchange' => 'configForm()']) !!}
 		</div>
 		<div class="form-group" id="divPhoto">
 			{!! Form::label('Photo', 'Photo : ',['class' => 'control-label']) !!}
@@ -101,10 +101,10 @@ EDIT QUESTION
 			return document.getElementById(x);
 		}
 
-		ob('FormatID').value = {{$Question['FormatID']}};
+		ob('ThumbnailID').value = {{$Question['ThumbnailID']}};
 
 		function configForm(){
-			switch (ob('FormatID').value){
+			switch (ob('ThumbnailID').value){
 				case '1':
 					ob('divPhoto').style.display = 'block';
 					ob('divVideo').style.display = 'none';
@@ -126,7 +126,7 @@ EDIT QUESTION
 			ob('error').innerHTML = x;
 		}
 		function submitForm(){
-			switch (ob('FormatID').value){
+			switch (ob('ThumbnailID').value){
 				case '1':
 					var acceptedType = ['image/jpeg', 'image/png', 'image/gif'];
 					 //                        console.log('clicked');

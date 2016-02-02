@@ -19,7 +19,7 @@ class CreateDoexamsTable extends Migration
             $table->integer('UserID');
             $table->integer('Score')->default(-1);
             $table->float('Time')->default(0);
-            $table->string('token')->default('');
+            $table->string('token')->default(null);
         });
     }
 

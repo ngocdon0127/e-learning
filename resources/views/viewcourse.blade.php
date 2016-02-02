@@ -1,6 +1,6 @@
 @extends('layouts.main')
 @section('head.title')
-    Course {{$Title}}
+    Course {{$Title}} - Evangels English
 @endsection
 @section('body.content')
     <h1 class="title">Chủ đề : {{$Title}}</h1>
