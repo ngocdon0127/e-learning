@@ -48,7 +48,6 @@
 			margin-top : 20px;
 			margin-bottom: 20px;
 			border-radius:10px;
-			   
 		}
 	
 		/*li#navbar-button:hover,*/
@@ -80,11 +79,16 @@
 		<div class="sidebar_left">
 			<h3 class="text-center title">GIỚI THIỆU CHUNG VỀ KHÓA HỌC</h3>
 			<img src="/images/kid.jpg" alt="" class="img-responsive">
-			Lorem ipsum dolor sit amet, consectetur adipisicing elit. Deleniti reprehenderit reiciendis, sunt fuga officiis voluptatum molestias. Voluptates fugiat aliquam, ipsam hic officia non, id, facilis nisi itaque, rerum incidunt minima expedita explicabo laborum. Ea tempora harum nemo eos quos in nobis quibusdam, dignissimos voluptates, optio eaque atque! Error laborum qui sit, accusamus repellat totam optio neque aperiam possimus quod, voluptates sed? Quaerat architecto assumenda ut odit excepturi optio, fugiat minus, facilis. Aspernatur iste cupiditate est, quis sint. Provident facilis iste assumenda est nihil nemo qui tempore similique suscipit. Blanditiis doloremque, a rem aspernatur assumenda obcaecati qui laborum, odio ullam sed
+			<p>
+				Lorem ipsum dolor sit amet, consectetur adipisicing elit. Tempore incidunt nemo commodi voluptate, eveniet praesentium dolores consequatur dolorem dicta amet maiores omnis repellendus qui! Fuga aliquid facere saepe tempora dignissimos!
+				Lorem ipsum dolor sit amet, consectetur adipisicing elit. Provident, odit! Doloremque fugiat voluptatibus autem quasi vero, eveniet, dolorum magnam iste, magni, sint aut explicabo sunt earum in alias quo accusantium!
+				Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequuntur repellat nostrum, dolores qui recusandae quos assumenda non! Iure nobis adipisci quod debitis accusantium omnis totam molestias iste expedita enim, sit.
+				Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eos ipsa repellat, quia totam ab doloribus, vitae, quaerat et modi deleniti voluptate rem recusandae, reprehenderit harum deserunt veniam sequi dignissimos possimus!
+			</p>
 		</div>
 	  </div>
-	  <div class="col-md-4">
-		 <div class="sidebar_right" style="overflow: auto;">
+	  <div class="col-md-4 ">
+		 <div class="sidebar_right" style="overflow:auto;">
 		 	<h3 class="text-center title">XEM NHIỀU NHẤT</h3>
 			@foreach($newpost as $np)
 			 <a id="a_smallLink_{{$np['id']}}" style="text-decoration: none;" href="/post/{{$np['id']}}">
@@ -121,7 +125,16 @@
 	</div>                   
 </body>
 <script type="text/javascript">
-	$(function(){$('.parent div').equalHeights();});
+	// $(function(){$('.parent div').equalHeights();});
+	$(document).ready(function(){
+		var max_height = 0;
+		$('.sidebar_right,.sidebar_left').each(function(){
+			if($(this).height() > max_height)
+				max_height = $(this).height();
+		});
+		$('.sidebar_left,.sidebar_right').height(max_height);
+	});
+	
 </script> 
 <script>
 	var audio = $("audio")[0];
