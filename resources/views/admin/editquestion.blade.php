@@ -14,7 +14,7 @@ EDIT QUESTION
 				<!-- <div class="col-md-offset-3 col-md-6"> -->
 		<h1 class="col-md-offset-3 title">Chỉnh sửa câu hỏi</h1>
  
-		{!! Form::model($Question, ['method' => 'PUT', 'name' => 'editQuestionForm', 'route' => ['question.update', $Question['id']], 'role'=>'form', 'files' => true]) !!}
+		{!! Form::model($Question, ['method' => 'PUT', 'name' => 'editQuestionForm', 'route' => ['question.update', $Question['id']], 'files' => true]) !!}
 
 		<div class="form-group">
 			{!! Form::label('Question','Question : ',['class' => 'control-label']) !!}

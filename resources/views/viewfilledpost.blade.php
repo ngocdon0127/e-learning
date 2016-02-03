@@ -11,7 +11,8 @@
   js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.5&appId=1657402167852948";
   fjs.parentNode.insertBefore(js, fjs);
 }(document, 'script', 'facebook-jssdk'));</script>
-	<h2 class="title">{{$Title . ' : ' . $Description}}</h2>
+	<h2 class="title">{{$Title}}</h2>
+    <h2 class="description">{{$Description}}</h2>
 	<li class="list-group-item">
 		@if ($Thumbnail == 1)
 			<img class="img-responsive" alt="{{$Title . ' - Evangels English - '}}{{$_SERVER['HTTP_HOST']}}" src="{{'/images/imagePost/' . $Photo}}" />
@@ -134,7 +135,7 @@
 		<?php $setOfSpaces = array() ?>
 		@foreach($Questions as $key => $q)
 			@if ((auth()->user()) && (auth()->user()->admin == 1))
-				<a style="text-decoration: none;" href="{{route('user.viewquestion', $q['id'])}}"><h3 onmouseover="this.style.color = '#f06'" onmouseout="this.style.color = '#933'" class="title" id="title_question_{!! $key + 1 !!}">Câu hỏi số <?php echo $count_answer++; ?>:</h3></a>
+				<a style="text-decoration: none;" href="{{route('user.viewquestion', $q['id'])}}"><h3 onmouseover="this.style.color = '#f06'" onmouseout="this.style.color = '#6600cc'" class="title" id="title_question_{!! $key + 1 !!}">Câu hỏi số <?php echo $count_answer++; ?>:</h3></a>
 			@else
 			<h3 class="title" id="title_question_{!! $key + 1 !!}">Câu hỏi số <?php echo $count_answer++; ?>:</h3>
 			@endif
@@ -151,22 +152,26 @@
 				}
 				reset($Spaces);  // don't know what's different between this view & viewfilledquestion
 			?>
-			@foreach ($subP as $value)
-				{{$value}}
-				@if (count($Spaces) > 0)
-				<select id="select_space_{{current($Spaces)['id']}}">
-					<?php 
-						$this_answers = $Answers[current($Spaces)['id']];
-						shuffle($this_answers);
-					?>
-					@foreach ($this_answers as $a)
-					<option value="{{$a['Logical']}}">{{$a['Detail']}}</option>
-					@endforeach
-				</select>
-				<?php array_shift($Spaces) ?>
-				@endif
-			@endforeach
-			{{" : " . $q['Description']}}
+			<div  style="color:#cc0066; font-weight:bold;">
+				{{$q['Description'].":"}}
+			</div>
+			<div>
+				@foreach ($subP as $value)
+					{{$value}}
+					@if (count($Spaces) > 0)
+					<select  style="color:#cc0066" id="select_space_{{current($Spaces)['id']}}">
+						<?php 
+							$this_answers = $Answers[current($Spaces)['id']];
+							shuffle($this_answers);
+						?>
+						@foreach ($this_answers as $a)
+						<option value="{{$a['Logical']}}">{{$a['Detail']}}</option>
+						@endforeach
+					</select>
+					<?php array_shift($Spaces) ?>
+					@endif
+				@endforeach</div>
+			
 			</h4>
 				@if ($q['ThumbnailID'] == 1)
 					@if ($q['Photo'] != null)

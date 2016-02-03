@@ -88,6 +88,13 @@ EDIT QUESTION
 			<script src="/js/upload_video.js"></script>
 		</div>
 		<div class="form-group">
+			{!! Form::label('Description', 'Description : ',['class' => 'control-label']) !!}
+			{!! Form::text('Description', null,['class'=>'form-control']) !!}
+<!-- 			{!! Form::label('Question','Question : ',['class' => 'control-label']) !!}
+{!! Form::text('Question', null,['class'=>'form-control']) !!} -->
+		</div>
+		<div class="form-group">
+		<!-- {!! Form::label('Description', 'Description : ',['class' => 'control-label']) !!} -->
 			{!! Form::label('Question','Question : ',['class' => 'control-label']) !!}
 			<textarea id="Question" name="Question" class="form-control"></textarea>
 			<script>
@@ -119,12 +126,9 @@ EDIT QUESTION
 					updateID();
 				}
 			</script>
-			<input type="button" class="btn btn-info" value="Thêm chỗ trống" onclick="addSpace()" />
+			<input type="button" class="btn btn-primary" value="Thêm chỗ trống" onclick="addSpace()" />
 		</div>
-		<div class="form-group">
-			{!! Form::label('Description', 'Description : ',['class' => 'control-label']) !!}
-			{!! Form::text('Description', null,['class'=>'form-control']) !!}
-		</div>
+	
 		<div class="form-group">
 			{!! Form::label('', '',['class' => 'control-label']) !!}
 			{!! Form::label('Error', '',['id' => 'error', 'class' => 'control-label', 'style' => 'display: none;']) !!}
