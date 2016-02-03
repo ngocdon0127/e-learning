@@ -9,7 +9,7 @@
 		$subP = \App\Questions::getFilledQuestion($Question['Question']);
 	?>
 	@foreach ($subP as $value)
-		{{$value}}
+		{!! nl2br($value) !!}
 		@if (count($Spaces) > 0)
 		<select>
 			@foreach ($Answers[current($Spaces)['id']] as $a)
@@ -34,7 +34,7 @@
 		@endif
 	@endif
 
-	<h2 class="title">{{$Question['Description']}}</h2>
+	<h2 class="title">{!! nl2br($Question['Description']) !!}</h2>
 	@if ((auth()->user()) && (auth()->user()->admin == 1))
 	<a class="btn btn-primary col-xs-12" href="{{route('question.edit', $Question['id'])}}">Sửa câu hỏi</a>
 	<a class="btn btn-primary col-xs-12" href="{{route('user.viewpost',$Question['PostID'])}}">Quay lại bài đăng</a>

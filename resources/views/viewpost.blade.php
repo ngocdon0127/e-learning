@@ -4,27 +4,27 @@
 @endsection
 @section('body.content')
 	<div id="fb-root"></div>
- <script>(function(d, s, id) {
-  var js, fjs = d.getElementsByTagName(s)[0];
-  if (d.getElementById(id)) return;
-  js = d.createElement(s); js.id = id;
-  js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.5&appId=1657402167852948";
-  fjs.parentNode.insertBefore(js, fjs);
-}(document, 'script', 'facebook-jssdk'));</script>
-    <h2 class="title">{{$Title}}</h2>
-    <h2 class="description">{{$Description}}</h2>
-    <li class="list-group-item">
-        @if ($Thumbnail == 1)
-            <img class="img-responsive" alt="{{$Title . ' - Evangels English - '}}{{$_SERVER['HTTP_HOST']}}" src="{{'/images/imagePost/' . $Photo}}" />
-        @elseif ($Thumbnail == 2)
-        <div class="embed-responsive embed-responsive-4by3">
-            <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/{{$Video}}" frameborder="0" allowfullscreen></iframe>
-        </div>
-        @endif
-    </li>
-    @if ((auth()->user()) && (auth()->user()->admin == 1))
-        <a class ="col-xs-12 btn btn-primary" href="{{route('post.edit', $PostID)}}">Sửa thông tin bài đăng</a>
-        <a class ="col-xs-12 btn btn-primary" href="{{route('admin.addquestion',$PostID)}}">Thêm câu hỏi</a>
+	<script>(function(d, s, id) {
+	var js, fjs = d.getElementsByTagName(s)[0];
+	if (d.getElementById(id)) return;
+	js = d.createElement(s); js.id = id;
+	js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.5&appId=1657402167852948";
+	fjs.parentNode.insertBefore(js, fjs);
+	}(document, 'script', 'facebook-jssdk'));</script>
+	<h2 class="title">{{$Title}}</h2>
+	<h2 class="description">{{$Description}}</h2>
+	<li class="list-group-item">
+		@if ($Thumbnail == 1)
+			<img class="img-responsive" alt="{{$Title . ' - Evangels English - '}}{{$_SERVER['HTTP_HOST']}}" src="{{'/images/imagePost/' . $Photo}}" />
+		@elseif ($Thumbnail == 2)
+		<div class="embed-responsive embed-responsive-4by3">
+			<iframe class="embed-responsive-item" src="https://www.youtube.com/embed/{{$Video}}" frameborder="0" allowfullscreen></iframe>
+		</div>
+		@endif
+	</li>
+	@if ((auth()->user()) && (auth()->user()->admin == 1))
+		<a class ="col-xs-12 btn btn-primary" href="{{route('post.edit', $PostID)}}">Sửa thông tin bài đăng</a>
+		<a class ="col-xs-12 btn btn-primary" href="{{route('admin.addquestion',$PostID)}}">Thêm câu hỏi</a>
 
 		<a class="col-xs-12 btn btn-danger" data-toggle="modal" href='#modal-id'>Xóa bài đăng này</a>
 		<div class="modal fade" id="modal-id">
@@ -45,22 +45,22 @@
 			</div>
 		</div>
 
-    @endif
-    
-    <script type="text/javascript" charset="UTF-8">
-        var score = 0;
-        var fill = 0;
-        var maxScore = {{$MaxScore}};
-        function ob(x){
-            return document.getElementById(x);
-        }
-        var numQuestion = {!! count($Questions) !!};
-        function check(questionID, answerID, trueAnswerID, nextQuestionID){
-            console.log('start');
-            var date = new Date();
-            var id = 'radio_answer_' + questionID + '_' + answerID;
-            ob(id).checked = true;
-            var id = 'answer_' + questionID + '_' + answerID;
+	@endif
+	
+	<script type="text/javascript" charset="UTF-8">
+		var score = 0;
+		var fill = 0;
+		var maxScore = {{$MaxScore}};
+		function ob(x){
+			return document.getElementById(x);
+		}
+		var numQuestion = {!! count($Questions) !!};
+		function check(questionID, answerID, trueAnswerID, nextQuestionID){
+			console.log('start');
+			var date = new Date();
+			var id = 'radio_answer_' + questionID + '_' + answerID;
+			ob(id).checked = true;
+			var id = 'answer_' + questionID + '_' + answerID;
 
 //                ob(id).disabled = true;
 			var setOfRadio = document.getElementsByName('question_' + questionID);
@@ -236,7 +236,7 @@
 			@else
 			<h3 class="title" id="title_question_{!! $key + 1 !!}">Câu hỏi số <?php echo $count_answer++; ?>:</h3>
 			@endif
-			<h4 class="title">{{$q['Question'] . " : " . $q['Description']}}</h4>
+			<h4 class="title">{!! nl2br($q['Question']) . " : " . nl2br($q['Description']) !!}</h4>
 				@if ($q['ThumbnailID'] == 1)
 					@if ($q['Photo'] != null)
 						<li class="list-group-item list-group-item-info">

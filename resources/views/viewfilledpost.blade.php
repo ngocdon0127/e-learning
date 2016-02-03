@@ -4,15 +4,15 @@
 @endsection
 @section('body.content')
 	<div id="fb-root"></div>
- <script>(function(d, s, id) {
-  var js, fjs = d.getElementsByTagName(s)[0];
-  if (d.getElementById(id)) return;
-  js = d.createElement(s); js.id = id;
-  js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.5&appId=1657402167852948";
-  fjs.parentNode.insertBefore(js, fjs);
-}(document, 'script', 'facebook-jssdk'));</script>
+	<script>(function(d, s, id) {
+	var js, fjs = d.getElementsByTagName(s)[0];
+	if (d.getElementById(id)) return;
+	js = d.createElement(s); js.id = id;
+	js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.5&appId=1657402167852948";
+	fjs.parentNode.insertBefore(js, fjs);
+	}(document, 'script', 'facebook-jssdk'));</script>
 	<h2 class="title">{{$Title}}</h2>
-    <h2 class="description">{{$Description}}</h2>
+	<h2 class="description">{{$Description}}</h2>
 	<li class="list-group-item">
 		@if ($Thumbnail == 1)
 			<img class="img-responsive" alt="{{$Title . ' - Evangels English - '}}{{$_SERVER['HTTP_HOST']}}" src="{{'/images/imagePost/' . $Photo}}" />
@@ -157,7 +157,7 @@
 			</div>
 			<div>
 				@foreach ($subP as $value)
-					{{$value}}
+					{!!$value!!}
 					@if (count($Spaces) > 0)
 					<select  style="color:#cc0066" id="select_space_{{current($Spaces)['id']}}">
 						<?php 
