@@ -16,7 +16,7 @@ class Questions extends Model
 			$pos = strpos($q, $s);
 			if ($pos){
 				$subP = array_merge($subP, [substr($q, 0, $pos)]);
-				$q = nl2br(substr($q, $pos + $len));
+				$q = substr($q, $pos + $len);
 			}
 			else{
 				$subP = array_merge($subP, [$q]);
