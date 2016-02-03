@@ -161,19 +161,23 @@
 				@foreach ($subP as $value)
 					{!! nl2br($value) !!}
 					@if (count($Spaces) > 0)
-					<select  style="color:#cc0066" id="select_space_{{current($Spaces)['id']}}">
+					<select style="color:#cc0066" class="selectpicker" id="select_space_{{current($Spaces)['id']}}" data-show-icon="true">
 						<?php 
 							$this_answers = $Answers[current($Spaces)['id']];
 							shuffle($this_answers);
 						?>
 						@foreach ($this_answers as $a)
-						<option value="{{$a['Logical']}}">{{$a['Detail']}}</option>
+						<option class="option_space_{{$a['Logical']}}" value="{{$a['Logical']}}">{!! $a['Detail'] !!}</option>
 						@endforeach
 					</select>
+
+					<!-- change normal select into BS3 select manually-->
+					<!--<script type="text/javascript">
+						//$('#select_space_{{current($Spaces)['id']}}').selectpicker();
+					</script>-->
 					<?php array_shift($Spaces) ?>
 					@endif
 				@endforeach</div>
-			
 			</h4>
 				@if ($q['ThumbnailID'] == 1)
 					@if ($q['Photo'] != null)
@@ -202,7 +206,16 @@
 			var setOfSpaces = {!! json_encode($setOfSpaces) !!};
 			var maxScore = setOfSpaces.length;
 			for (var i = 0; i < setOfSpaces.length; i++) {
-				score += ob('select_space_' + setOfSpaces[i]).value == 1 ? 1 : 0;
+				var selectObj = $('#select_space_' + setOfSpaces[i]);
+				// bootstrap-select was be changed into button with data-id attribute is equal to id of old select
+				var btn = $('button[data-id="select_space_' + setOfSpaces[i] + '"]');
+				if (selectObj.val() == 1){
+					score++;
+					btn.css('background', "#66ff66");
+				}
+				else{
+					btn.css('background', "#ff5050");
+				}
 			};
 			var resultText = 'Đúng ' + score + '/' + maxScore + ' câu.\n';
 			var x = {!! $Comments !!};
@@ -220,6 +233,18 @@
 			$('html, body').animate({
 				scrollTop: $("#resultText").offset().top
 			}, 1000);
+			var setOfOptions = document.getElementsByClassName('option_space_1');
+			for (var i = 0; i < setOfOptions.length; i++) {
+				setOfOptions[i].innerHTML += '<span class="glyphicon glyphicon-ok">';
+				// setOfOptions[i].style.background = "#66ff66";
+			}
+
+			// var set = document.getElementsByTagName('option');
+			// for (var i = 0; i < set.length; i++) {
+			// 	set[i].innerHTML += '<span class="glyphicon glyphicon-ok">';
+			// 	// set[i].style.color = "white";
+			// 	// console.log(set[i].innerHTML);
+			// };
 
 			$.ajax({
 				url: "/finishexam",

@@ -16,6 +16,7 @@
 	<!-- <link href='https://fonts.googleapis.com/css?family=Droid+Sans:400,700' rel='stylesheet' type='text/css'> -->
 	<link href='https://fonts.googleapis.com/css?family=Oswald:700' rel='stylesheet' type='text/css'>
 	<link rel="stylesheet" type="text/css" href="/css/admin.css">
+	<link rel="stylesheet" type="text/css" href="/css/bootstrap-select.css">
 	<meta name="_token" content="{!! csrf_token() !!}"/>
 	@if ((stripos($_SERVER['REQUEST_URI'], 'post') !== false) && isset($Photo))
 	<meta name="description" content="{{$Title . ' ' . $Description}} Evangels English. Know English. Know the World" />
@@ -40,7 +41,6 @@
 	<meta property="og:title" content="Evangels English. Know English. Know the World" />
 	<meta property="og:description" content="Evangels English. Know English. Know the World" />
 	@endif
-	
 	@if (auth() && (auth()->user()))
 	<script type="text/javascript">
 		var logout = 0;
@@ -136,6 +136,7 @@
 	<script type="text/javascript" src="/js/jquery/jquery.js"></script>
 	<script type="text/javascript" src="/js/bootstrap.min.js"></script>
 	<script type="text/javascript" src="/js/style.js"></script>
+	<script type="text/javascript" src="/js/bootstrap-select.js"></script>
 		@yield('body.js')
 </body>
 </html>

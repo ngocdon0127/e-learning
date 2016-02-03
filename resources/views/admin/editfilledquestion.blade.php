@@ -328,7 +328,7 @@ EDIT QUESTION
 							div.children[1].setAttribute('onclick', 'xoa("divanswer' + i + '")');
 
 							// children[3] is a button allow to underline text
-							div.children[3].setAttribute('onclick', 'addTag("u", "' + i + '")');
+							// div.children[3].setAttribute('onclick', 'addTag("u", "' + i + '")');
 							console.log('finish update ' + i);
 						}
 					}
@@ -396,10 +396,10 @@ EDIT QUESTION
 						hiddenTextarea.style.display = 'none';
 						divElement.appendChild(hiddenTextarea);
 						var uButton = document.createElement('input');
-						uButton.type = 'button';
-						uButton.setAttribute('value', 'Gạch chân');
-						uButton.setAttribute('class','btn btn-primary');
-						divElement.appendChild(uButton);
+						// uButton.type = 'button';
+						// uButton.setAttribute('value', 'Gạch chân');
+						// uButton.setAttribute('class','btn btn-primary');
+						// divElement.appendChild(uButton);
 						count++;
 					}
 
