@@ -206,10 +206,11 @@ class PostsController extends Controller
 //        $posts = Posts::take(5)->skip(0)->get()->toArray();
 		$Posts = Posts::orderBy('id', 'desc')->paginate(5);
 		$newpost = Posts::orderBy('visited', 'dsc')->take(5)->get();
+		$paginateBaseLink = '/';
 		// dd($newpost);
 		// dd($Posts);
 		// dd($Posts->toArray());
-		return view('userindex')->with(compact(['Posts', 'newpost']));
+		return view('userindex')->with(compact(['Posts', 'newpost', 'paginateBaseLink']));
 	}
 
 	public function searchPostsByHashtag(Request $request){

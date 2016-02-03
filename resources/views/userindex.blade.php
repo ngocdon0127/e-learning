@@ -62,27 +62,27 @@
         <ul class="pagination">
             <li class="disabled"><span>Page {{ $Posts['current_page'] }} of {{ $Posts['last_page'] }}</span></li>
         @if ($Posts['current_page'] <= 1)
-            <li class="disabled"><a href="/?page=1"><span class="glyphicon glyphicon-backward"></span></a href="/?page=1"></li>
+            <li class="disabled"><a href="{{$paginateBaseLink}}?page=1"><span class="glyphicon glyphicon-backward"></span></a href="{{$paginateBaseLink}}?page=1"></li>
             <li class="disabled"><span class="glyphicon glyphicon-chevron-left"></span></li>
         @else
-            <li><a href="/?page=1"><span class="glyphicon glyphicon-backward"></span></a href="/?page=1"></li>
-            <li><a href="/?page={{$Posts['current_page'] - 1}}" rel="prev"><span class="glyphicon glyphicon-chevron-left"></span></a></li>
+            <li><a href="{{$paginateBaseLink}}?page=1"><span class="glyphicon glyphicon-backward"></span></a href="{{$paginateBaseLink}}?page=1"></li>
+            <li><a href="{{$paginateBaseLink}}?page={{$Posts['current_page'] - 1}}" rel="prev"><span class="glyphicon glyphicon-chevron-left"></span></a></li>
         @endif
         <?php $index = $Posts['current_page'] - 1;?>
             @if ($index >= 1)
-            <li><a href="/?page={{$index}}">{{$index}}</a></li>
+            <li><a href="{{$paginateBaseLink}}?page={{$index}}">{{$index}}</a></li>
             @endif
         <li class="active"><span>{{$Posts['current_page']}}</span></li>
         <?php $index = $Posts['current_page'] + 1;?>
             @if ($index <= $Posts['last_page'])
-                <li><a href="/?page={{$index}}">{{$index}}</a></li>
+                <li><a href="{{$paginateBaseLink}}?page={{$index}}">{{$index}}</a></li>
             @endif
         @if ($Posts['current_page'] >= $Posts['last_page'])
             <li class="disabled"><span class="glyphicon glyphicon-chevron-right"></span></li>
-            <li class="disabled"><a href="/?page={{$Posts['last_page']}}"><span class="glyphicon glyphicon-forward"></a></li>
+            <li class="disabled"><a href="{{$paginateBaseLink}}?page={{$Posts['last_page']}}"><span class="glyphicon glyphicon-forward"></a></li>
         @else
-            <li><a href="/?page={{$Posts['current_page'] + 1}}" rel="next"><span class="glyphicon glyphicon-chevron-right"></span></a></li>
-            <li><a href="/?page={{$Posts['last_page']}}"><span class="glyphicon glyphicon-forward"></span></a></li>
+            <li><a href="{{$paginateBaseLink}}?page={{$Posts['current_page'] + 1}}" rel="next"><span class="glyphicon glyphicon-chevron-right"></span></a></li>
+            <li><a href="{{$paginateBaseLink}}?page={{$Posts['last_page']}}"><span class="glyphicon glyphicon-forward"></span></a></li>
         @endif
         </ul>
     </div>
