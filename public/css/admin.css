@@ -98,11 +98,19 @@ h2.title{
   color: #660066;
   font-weight: bold;
 }
+h2.description{
+  color: green;
+}
+h2.title,
+h2.description,
 h3.title{
-  color: #993333;
+    font-weight: bold;
+}
+h3.title{
+  color: #6600cc;
 }
 h4.title{
-  color: #3366ff;
+  color: #0000ff;
 }
 img:hover{
   opacity: 0.85;

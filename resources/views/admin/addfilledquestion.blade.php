@@ -17,7 +17,7 @@ ADD QUESTION
 <!-- <div class="col-md-offset-3 col-md-6"> -->
 		<h1 class="col-md-offset-3 title">Thêm câu hỏi mới</h1>
 
-		{!! Form::open(['name' => 'addQuestionForm', 'url' => '/admin/addquestion/hehe/' . $PostID, 'class'=>'form-horizontal', 'files' => true]) !!}
+		{!! Form::open(['name' => 'addQuestionForm', 'url' => '/admin/addquestion/hehe/' . $PostID,'class'=>'form-horizontal', 'files' => true]) !!}
 			
 		<div class="form-group">
 			{!! Form::label('ThumbnailID', 'Thumbnail : ',['class' => 'control-label']) !!}
@@ -88,6 +88,10 @@ ADD QUESTION
 			<script src="/js/upload_video.js"></script>
 		</div>
 		<div class="form-group">
+			{!! Form::label('Description', 'Description : ',['class' => 'control-label']) !!}
+			{!! Form::text('Description','',['class'=>'form-control']) !!}
+		</div>
+		<div class="form-group">
 			{!! Form::label('Question','Question : ',['class' => 'control-label']) !!}
 			<textarea id="Question" name="Question" class="form-control"></textarea>
 			<script>
@@ -118,12 +122,9 @@ ADD QUESTION
 					updateID();
 				}
 			</script>
-			<input type="button" class="btn btn-info" value="Thêm chỗ trống" onclick="addSpace()" />
+			<input type="button" class="btn btn-primary" value="Thêm chỗ trống" onclick="addSpace()" />
 		</div>
-		<div class="form-group">
-			{!! Form::label('Description', 'Description : ',['class' => 'control-label']) !!}
-			{!! Form::text('Description','',['class'=>'form-control']) !!}
-		</div>
+
 		<div class="form-group">
 			{!! Form::label('', '',['class' => 'control-label']) !!}
 			{!! Form::label('Error', '',['id' => 'error', 'class' => 'control-label', 'style' => 'display: none;']) !!}
@@ -275,7 +276,6 @@ ADD QUESTION
 			{!! Form::open(['name' => 'addSpaceForm', 'url' => '/admin/addspace/','class'=>'form-group']) !!}
 				<!--        {!! Form::label('Detail', 'Câu trả lời: ') !!}
 			{!! Form::text('Detail') !!} -->
-			
 		<div class="form-group">
 				{!! Form::label('Detail', 'Các đáp án cho từng ô trống, cách nhau bởi dấu chấm phẩy, đáp án đúng viết đầu tiên, đáp án sai viết sau: ',['class'=>'control-label']) !!}
 				<script type="text/javascript">
@@ -431,9 +431,8 @@ ADD QUESTION
 			</div>
 			<input type="text" value="" style="display: none" name="QuestionID" id="QuestionID"/>
 			{!! Form::close() !!}
-		</div>
-
-				<button class="btn btn-primary" onclick="submitForm()" type="button" id="btnAddQuestion">Thêm</button>
+		<div>
+			<button class="btn btn-primary" onclick="submitForm()" type="button" id="btnAddQuestion">Thêm</button>
 		</div>
 <!-- end container -->
 

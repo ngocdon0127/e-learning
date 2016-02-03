@@ -11,7 +11,8 @@
   js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.5&appId=1657402167852948";
   fjs.parentNode.insertBefore(js, fjs);
 }(document, 'script', 'facebook-jssdk'));</script>
-    <h2 class="title">{{$Title . ' : ' . $Description}}</h2>
+    <h2 class="title">{{$Title}}</h2>
+    <h2 class="description">{{$Description}}</h2>
     <li class="list-group-item">
         @if ($Thumbnail == 1)
             <img class="img-responsive" alt="{{$Title . ' - Evangels English - '}}{{$_SERVER['HTTP_HOST']}}" src="{{'/images/imagePost/' . $Photo}}" />
@@ -231,7 +232,7 @@
 		<?php $count_answer=1;?>
 		@foreach($Questions as $key => $q)
 			@if ((auth()->user()) && (auth()->user()->admin == 1))
-				<a style="text-decoration: none;" href="{{route('user.viewquestion', $q['id'])}}"><h3 onmouseover="this.style.color = '#f06'" onmouseout="this.style.color = '#933'" class="title" id="title_question_{!! $key + 1 !!}">Câu hỏi số <?php echo $count_answer++; ?>:</h3></a>
+				<a style="text-decoration: none;" href="{{route('user.viewquestion', $q['id'])}}"><h3 onmouseover="this.style.color = '#f06'" onmouseout="this.style.color = '#60c'" class="title" id="title_question_{!! $key + 1 !!}">Câu hỏi số <?php echo $count_answer++; ?>:</h3></a>
 			@else
 			<h3 class="title" id="title_question_{!! $key + 1 !!}">Câu hỏi số <?php echo $count_answer++; ?>:</h3>
 			@endif
