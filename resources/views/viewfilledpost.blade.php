@@ -153,11 +153,13 @@
 				reset($Spaces);  // don't know what's different between this view & viewfilledquestion
 			?>
 			<div  style="color:#cc0066; font-weight:bold;">
-				{{$q['Description'].":"}}
+			@if (strlen($q['Description']) > 0)
+				{!! nl2br($q['Description']) . ":" !!}
+			@endif
 			</div>
 			<div>
 				@foreach ($subP as $value)
-					{!!$value!!}
+					{!! nl2br($value) !!}
 					@if (count($Spaces) > 0)
 					<select  style="color:#cc0066" id="select_space_{{current($Spaces)['id']}}">
 						<?php 
