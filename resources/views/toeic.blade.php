@@ -19,14 +19,14 @@
 			background: #fff;
 		}
 		.navbar-default .navbar-nav>li>a {
-    		color: #1C2363;
+			color: #1C2363;
 		}
 
-	  	img {
+		img {
 			border-radius: 10px;
 			width: 100%;
-	  	}
-	  	.img-circle{
+		}
+		.img-circle{
 			margin:5px;
 			height: 60px;
 			width: 60px;
@@ -46,8 +46,8 @@
 		p{
 			float: left;
 			padding-top: 20px;
-   			/*padding-left: 40px;*/
-   			font-size: 20px;
+			/*padding-left: 40px;*/
+			font-size: 20px;
 		}
 		li#navbar-button:hover,
 		a#dropDown:visited{
@@ -82,7 +82,7 @@
 			@endforeach
 		@endforeach
 		</div>
-	</div>                   
+	</div>
 </body>
 <script type="text/javascript">
 	$(function(){$('.parent div').equalHeights();});

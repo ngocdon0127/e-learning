@@ -14,7 +14,6 @@ EDIT QUESTION
 @endsection
 @section('body.content')
 	<div class="container-fluid">
-<!-- <div class="col-md-offset-3 col-md-6"> -->
 		<h1 class="col-md-offset-3 title">Chỉnh sửa câu hỏi</h1>
 
 		{!! Form::model($Question, ['name' => 'editQuestionForm', 'method' => 'POST', 'route' => ['question.update', $Question['id']], 'class'=>'form-horizontal', 'role' => 'form', 'files' => true]) !!}
@@ -90,11 +89,8 @@ EDIT QUESTION
 		<div class="form-group">
 			{!! Form::label('Description', 'Description : ',['class' => 'control-label']) !!}
 			{!! Form::text('Description', null,['class'=>'form-control']) !!}
-<!-- 			{!! Form::label('Question','Question : ',['class' => 'control-label']) !!}
-{!! Form::text('Question', null,['class'=>'form-control']) !!} -->
 		</div>
 		<div class="form-group">
-		<!-- {!! Form::label('Description', 'Description : ',['class' => 'control-label']) !!} -->
 			{!! Form::label('Question','Question : ',['class' => 'control-label']) !!}
 			<textarea id="Question" name="Question" class="form-control"></textarea>
 			<script>
@@ -166,7 +162,6 @@ EDIT QUESTION
 				switch (ob('ThumbnailID').value){
 					case '1':  // Photo
 						var acceptedType = ['image/jpeg', 'image/png', 'image/gif'];
-						//                        console.log('clicked');
 						var photo = ob('Photo');
 						if (photo.files.length <= 0){
 							submitViaAJAX(null);
@@ -181,11 +176,9 @@ EDIT QUESTION
 							}
 						}
 						if (!check){
-							//                            console.log('not ok');
 							displayError('Chỉ chọn file ảnh.');
 						}
 						else{
-								//                            console.log('ok');
 							if ('size' in photo.files[0]){
 								console.log(photo.files[0].size);
 							}
@@ -219,7 +212,6 @@ EDIT QUESTION
 						}
 						break;
 					}
-	//                        ob('error').innerHTML = photo.value;
 			}
 
 			function submitViaAJAX(p){
@@ -268,180 +260,166 @@ EDIT QUESTION
 			}
 		</script>
 		</div>
-					<!-- end script -->
 	
 			{!! Form::close() !!}
-				<!-- end form -->
-		<!-- </div> -->
 </div>
 <div class="container-fluid">
-		<!-- <div class="col-sm-9"> -->
-			{!! Form::open(['name' => 'editSpaceForm', 'route' => ['admin.editspace', $Question['id']],'class'=>'form-group']) !!}
-				<!--        {!! Form::label('Detail', 'Câu trả lời: ') !!}
-			{!! Form::text('Detail') !!} -->
-			
+		{!! Form::open(['name' => 'editSpaceForm', 'route' => ['admin.editspace', $Question['id']],'class'=>'form-group']) !!}
 		<div class="form-group">
-				{!! Form::label('Detail', 'Các đáp án cho từng ô trống, cách nhau bởi dấu chấm phẩy, đáp án đúng viết đầu tiên, đáp án sai viết sau: ',['class'=>'control-label']) !!}
-				<script type="text/javascript">
-					var count = 0;
-					var minAnswer = getNumOfSpaces({!! json_encode($Question['Question']) !!});
+			{!! Form::label('Detail', 'Các đáp án cho từng ô trống, cách nhau bởi dấu chấm phẩy, đáp án đúng viết đầu tiên, đáp án sai viết sau: ',['class'=>'control-label']) !!}
+			<script type="text/javascript">
+				var count = 0;
+				var minAnswer = getNumOfSpaces({!! json_encode($Question['Question']) !!});
 
-					function ob(x){
-						return document.getElementById(x);
+				function ob(x){
+					return document.getElementById(x);
+				}
+
+				function xoa(x){
+					if (count <= 1){
+						return;
 					}
+					ob('answers').removeChild(ob(x));
+					updateID();
+					count--;
+				}
 
-					function xoa(x){
-						if (count <= 1){
+				function updateID(){
+					var answers = ob('answers');
+					var childrens = answers.children;
+					if (childrens == null){
 							return;
+					}
+					ob('count').value = count = childrens.length - 1;
+					// childrens[0] is <script> element
+					// childrens[1->n] are <div> element
+					for(var i = 1; i < childrens.length; i++){
+						var div = childrens[i];
+						div.id = 'divanswer' + i;
+
+						// children[0] is textarea hold answer detail
+						div.children[0].id = 'answer' + i;
+						div.children[0].setAttribute('name', div.children[0].id);
+
+						// children[2] is a reserved textarea
+						div.children[2].id = 'ta_answer' + i;
+//                            div.children[2].setAttribute('name', div.children[0].id);
+
+						div.setAttribute('class','div_i');
+						div.children[0].setAttribute('class','col-sm-12');
+
+						// children[1] is a button which allow to delete answer i.
+						div.children[1].setAttribute('class','children btn btn-danger');
+						div.children[1].setAttribute('onclick', 'xoa("divanswer' + i + '")');
+
+						// children[3] is a button allow to underline text
+						// div.children[3].setAttribute('onclick', 'addTag("u", "' + i + '")');
+						console.log('finish update ' + i);
+					}
+				}
+
+				function addTag(tag, id){
+					var tagOpen = "[u]";
+					var tagClose = "[/u]";
+					var textarea = ob('answer' + id);
+					var oldText = textarea.value;
+					var start = textarea.selectionStart;
+					var end = textarea.selectionEnd;
+					if (start == end){
+						return;
+					}
+					var before = oldText.substring(0, start);
+					var after = oldText.substring(end, oldText.length);
+					var content = oldText.substring(start, end);
+					console.log(content);
+					if ((content.indexOf(tagOpen) != -1) && (content.indexOf(tagClose) != -1)){
+						console.log('giet no');
+						content = content.replace(tagOpen, "");
+						content = content.replace(tagClose, "");
+						textarea.value = before + content + after;
+						textarea.setSelectionRange(start, start + content.length);
+						textarea.focus();
+					}
+					else {
+						var newText = before + tagOpen + content + tagClose + after;
+						textarea.value = newText;
+						textarea.setSelectionRange(start, end + tagClose.length + tagClose.length - 1);
+						textarea.focus();
+					}
+				}
+
+				function markAnswer(x){
+					var pos = x.substring(x.indexOf('radio') + 5);
+					resultQuestion = pos;
+					ob('result').value = resultQuestion;
+				}
+
+				function add(){
+					var curNOS = getNumOfSpaces();
+					if (count >= curNOS){
+						count = curNOS;
+						return;
+					}
+					var e = document.createElement('textarea');
+					e.id = 'specialID';
+					e.setAttribute('class', 'col-sm-12');
+					var divElement = document.createElement('div');
+					divElement.id = "divanswer" + count;
+					ob('answers').appendChild(divElement);
+					divElement.appendChild(e);
+					var btnDel = document.createElement('input');
+					btnDel.value = 'Xóa';
+					btnDel.type = 'button';
+					btnDel.setAttribute('onClick','xoa("' + divElement.id + '")');
+					divElement.appendChild(btnDel);
+					var hiddenTextarea = document.createElement('textarea');
+					hiddenTextarea.style.display = 'none';
+					divElement.appendChild(hiddenTextarea);
+					var uButton = document.createElement('input');
+					// uButton.type = 'button';
+					// uButton.setAttribute('value', 'Gạch chân');
+					// uButton.setAttribute('class','btn btn-primary');
+					// divElement.appendChild(uButton);
+					count++;
+				}
+
+				function prepareAnswer(){
+					for(var i = 1; i <= count; i++){
+						var ra = ob('answer' + i).value.trim();
+						if (ra.charAt(ra.length - 1) != ';')
+							ra += ';';
+						ob('ta_answer' + i).innerHTML = ob('ta_answer' + i).value = ra;
+						ob('answer' + i).innerHTML = ob('answer' + i).value = ra;
+					}
+				}
+
+				function submitFormSpaces(){
+					updateID();
+					prepareAnswer();
+					document.editSpaceForm.submit();
+				}
+			</script>
+			<div class="" id="div_answer">
+				<input type="text" id="count" name="numAnswer" style="display: none;"/>
+				<div id="answers">
+					<script type="text/javascript">
+						for(var i = 0; i < minAnswer; i++){
+							add();
 						}
-						ob('answers').removeChild(ob(x));
 						updateID();
-						count--;
-					}
-
-					function updateID(){
-						var answers = ob('answers');
-						var childrens = answers.children;
-						if (childrens == null){
-								return;
-						}
-						ob('count').value = count = childrens.length - 1;
-						// childrens[0] is <script> element
-						// childrens[1->n] are <div> element
-						for(var i = 1; i < childrens.length; i++){
-							var div = childrens[i];
-							div.id = 'divanswer' + i;
-
-							// children[0] is textarea hold answer detail
-							div.children[0].id = 'answer' + i;
-							div.children[0].setAttribute('name', div.children[0].id);
-
-							// children[2] is a reserved textarea
-							div.children[2].id = 'ta_answer' + i;
-	//                            div.children[2].setAttribute('name', div.children[0].id);
-
-							div.setAttribute('class','div_i');
-							div.children[0].setAttribute('class','col-sm-12');
-
-							// children[1] is a button which allow to delete answer i.
-							div.children[1].setAttribute('class','children btn btn-danger');
-							div.children[1].setAttribute('onclick', 'xoa("divanswer' + i + '")');
-
-							// children[3] is a button allow to underline text
-							// div.children[3].setAttribute('onclick', 'addTag("u", "' + i + '")');
-							console.log('finish update ' + i);
-						}
-					}
-
-					function addTag(tag, id){
-						var tagOpen = "[u]";
-						var tagClose = "[/u]";
-						var textarea = ob('answer' + id);
-						var oldText = textarea.value;
-	//                        console.log(oldText);
-						var start = textarea.selectionStart;
-	//                        console.log('start ' + start);
-						var end = textarea.selectionEnd;
-	//                        console.log('end' + end);
-						if (start == end){
-							return;
-						}
-						var before = oldText.substring(0, start);
-						var after = oldText.substring(end, oldText.length);
-						var content = oldText.substring(start, end);
-						console.log(content);
-						if ((content.indexOf(tagOpen) != -1) && (content.indexOf(tagClose) != -1)){
-							console.log('giet no');
-							content = content.replace(tagOpen, "");
-							content = content.replace(tagClose, "");
-							textarea.value = before + content + after;
-							textarea.setSelectionRange(start, start + content.length);
-							textarea.focus();
-						}
-						else {
-							var newText = before + tagOpen + content + tagClose + after;
-							textarea.value = newText;
-							textarea.setSelectionRange(start, end + tagClose.length + tagClose.length - 1);
-							textarea.focus();
-						}
-					}
-
-					function markAnswer(x){
-						var pos = x.substring(x.indexOf('radio') + 5);
-						resultQuestion = pos;
-						ob('result').value = resultQuestion;
-					}
-
-					function add(){
-						// console.log(getNumOfSpaces());
-						var curNOS = getNumOfSpaces();
-						if (count >= curNOS){
-							count = curNOS;
-							return;
-						}
-						// count++;
-						var e = document.createElement('textarea');
-						e.id = 'specialID';
-						e.setAttribute('class', 'col-sm-12');
-						var divElement = document.createElement('div');
-						divElement.id = "divanswer" + count;
-						ob('answers').appendChild(divElement);
-						divElement.appendChild(e);
-						var btnDel = document.createElement('input');
-						btnDel.value = 'Xóa';
-						btnDel.type = 'button';
-						btnDel.setAttribute('onClick','xoa("' + divElement.id + '")');
-						divElement.appendChild(btnDel);
-						var hiddenTextarea = document.createElement('textarea');
-						hiddenTextarea.style.display = 'none';
-						divElement.appendChild(hiddenTextarea);
-						var uButton = document.createElement('input');
-						// uButton.type = 'button';
-						// uButton.setAttribute('value', 'Gạch chân');
-						// uButton.setAttribute('class','btn btn-primary');
-						// divElement.appendChild(uButton);
-						count++;
-					}
-
-					function prepareAnswer(){
-						for(var i = 1; i <= count; i++){
-							var ra = ob('answer' + i).value.trim();
-							if (ra.charAt(ra.length - 1) != ';')
-								ra += ';';
-							ob('ta_answer' + i).innerHTML = ob('ta_answer' + i).value = ra;
-							ob('answer' + i).innerHTML = ob('answer' + i).value = ra;
-						}
-					}
-
-					function submitFormSpaces(){
-						updateID();
-						prepareAnswer();
-						document.editSpaceForm.submit();
-					}
-				</script>
-				<div class="" id="div_answer">
-					<input type="text" id="count" name="numAnswer" style="display: none;"/>
-					<div id="answers">
-						<script type="text/javascript">
-							for(var i = 0; i < minAnswer; i++){
-								add();
-							}
-							updateID();
-							var index = 1;
-							var ra = {!! json_encode($rawAnswers) !!};
-							for (var i = 0; i < ra.length; i++) {
-								ob('answer' + (i + 1)).value = ob('answer' + (i + 1)).innerHTML = ra[i];
-							};
-						</script>
-					</div>
-					<input type="button" value="+" onclick="add(); updateID()">
+						var index = 1;
+						var ra = {!! json_encode($rawAnswers) !!};
+						for (var i = 0; i < ra.length; i++) {
+							ob('answer' + (i + 1)).value = ob('answer' + (i + 1)).innerHTML = ra[i];
+						};
+					</script>
 				</div>
+				<input type="button" value="+" onclick="add(); updateID()">
+			</div>
 			</div>
 			{!! Form::close() !!}
-		</div>
-
-				<button class="btn btn-primary" onclick="submitForm()" type="button" id="btnAddQuestion">Cập nhật</button>
-		</div>
-<!-- end container -->
+	</div>
+	<button class="btn btn-primary" onclick="submitForm()" type="button" id="btnAddQuestion">Cập nhật</button>
+</div>
 
 @endsection

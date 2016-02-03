@@ -4,7 +4,6 @@
 @endsection
 @section('body.content')
 			<div class="container-fluid"> 
-			 <!-- <div class="col-md-offset-3 col-md-6 "> -->
 				<h1 class="title">Thêm bài viết mới</h1>
 				{!! Form::open(['name' => 'addPostForm', 'url' => '/admin/addpost', 'role'=>'form', 'files' => true]) !!}
 				<div class="form-group">
@@ -99,7 +98,6 @@
 					{!! Form::label('', '',['class' => 'control-label']) !!}
 					{!! Form::label('Error', '',['id' => 'error', 'class' => 'control-label', 'style' => 'display: none;']) !!}
 				</div>
-				<!-- <div class="col-sm-offset-3 col-xs-offset-3 col-sm-10"> -->
 				<script type="text/javascript">
 					function ob(x){
 						return document.getElementById(x);
@@ -141,7 +139,6 @@
 						switch (formatob.value){
 							case '1': // Plain Text
 								var acceptedType = ['image/jpeg', 'image/png', 'image/gif'];
-								//                        console.log('clicked');
 								var photo = ob('Photo');
 								if (photo.files.length <= 0){
 									displayError('Chưa chọn file');
@@ -156,11 +153,9 @@
 									}
 								}
 								if (!check){
-									 //                            console.log('not ok');
 									displayError('Chỉ chọn file ảnh.');
 								}
 								else{
-									 //                            console.log('ok');
 									if ('size' in photo.files[0]){
 										 console.log(photo.files[0].size);
 									}
@@ -197,14 +192,11 @@
 							default:
 								console.log('dmm');
 						}
-			 //                        ob('error').innerHTML = photo.value;
 			 
 					}
 				</script>
-				 {!! Form::button('Thêm',['class' => 'btn btn-primary', 'onClick' => 'submitForm()']) !!}
-				<!-- </div> -->
-				{!! Form::close() !!}
-				<!-- </div> -->
+				{!! Form::button('Thêm',['class' => 'btn btn-primary', 'onClick' => 'submitForm()']) !!}
+			{!! Form::close() !!}
 	</div>
 
 @endsection

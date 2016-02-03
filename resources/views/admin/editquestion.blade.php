@@ -11,7 +11,6 @@ EDIT QUESTION
 @endsection
 @section('body.content')
 	 <div class="container-fluid">
-				<!-- <div class="col-md-offset-3 col-md-6"> -->
 		<h1 class="col-md-offset-3 title">Chỉnh sửa câu hỏi</h1>
  
 		{!! Form::model($Question, ['method' => 'PUT', 'name' => 'editQuestionForm', 'route' => ['question.update', $Question['id']], 'files' => true]) !!}
@@ -129,7 +128,6 @@ EDIT QUESTION
 			switch (ob('ThumbnailID').value){
 				case '1':
 					var acceptedType = ['image/jpeg', 'image/png', 'image/gif'];
-					 //                        console.log('clicked');
 					var photo = ob('Photo');
 					if (photo.files.length <= 0){
 						document.editQuestionForm.submit();
@@ -144,11 +142,9 @@ EDIT QUESTION
 						}
 					}
 					if (!check){
-							 //                            console.log('not ok');
 							displayError('Chỉ chọn file ảnh.');
 					}
 					else{
-							//                            console.log('ok');
 						if ('size' in photo.files[0]){
 							console.log(photo.files[0].size);
 						}
@@ -180,7 +176,6 @@ EDIT QUESTION
 						document.editQuestionForm.submit();
 					}
 					break;
-							 
 			}
 		}
 		</script>

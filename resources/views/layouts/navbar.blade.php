@@ -24,7 +24,6 @@
 				<li id="navbar-button"><a class="navbar-button" href="{{route('admin')}}">Admin</a></li>
 				@endif
 				<li id="navbar-button"><a class="navbar-button" href="{{route('kid.viewpost')}}">Kids</a></li>
-				<!-- <li id="navbar-button"><a class="navbar-button" href="/toeic">Toeic</a></li> -->
 				@foreach(\App\Categories::all() as $cate)
 				<li class="dropdown">
 					<a id= "dropDown{{$cate->id}}" href="#" class="dropdown-toggle navbar-button" data-toggle="dropdown">{{$cate->Category}}<b class="caret"></b></a>
@@ -41,11 +40,11 @@
 			{!! Form::open(['method' => 'GET', 'name' => 'searchForm', 'url' => '/search', 'role'=>'search', 'class' => 'navbar-form navbar-right']) !!}
 				
 				<div class="form-group">
-    				<span class="glyphicon glyphicon-search" id="spanSearch"></span>
-		        	<input style="display: none" class="glyphicon glyphicon-search form-control" name="HashtagSearch" id="HashtagSearch">
-		        	<button style="display: none" type="button" class="btn btn-default btn-sm" id="btnHashtagSearch" onclick="document.searchForm.submit()">
-		        		<span class="glyphicon glyphicon-search"></span> Search
-		        	</button>
+					<span class="glyphicon glyphicon-search" id="spanSearch"></span>
+					<input style="display: none" class="glyphicon glyphicon-search form-control" name="HashtagSearch" id="HashtagSearch">
+					<button style="display: none" type="button" class="btn btn-default btn-sm" id="btnHashtagSearch" onclick="document.searchForm.submit()">
+						<span class="glyphicon glyphicon-search"></span> Search
+					</button>
 				</div>
 				<div class="form-group">
 					@if (auth()->user())
@@ -75,7 +74,6 @@
 			@if (auth()->user())
 				ob('username-dropdown').style.display = 'none';
 			@else
-				// ob('login-button').style.display = 'none';
 			@endif
 			$("#HashtagSearch").fadeIn();
 			$('#btnHashtagSearch').fadeIn();
@@ -90,7 +88,6 @@
 				ob('btnHashtagSearch').style.display = 'none';
 				$('#spanSearch').fadeIn(2000);
 				$('#username-dropdown').fadeIn();
-				// $('#login-button').fadeIn();
 			}, 200);
 		}
 

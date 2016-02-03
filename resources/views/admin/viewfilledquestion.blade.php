@@ -5,7 +5,7 @@
 @section('body.content')
 	<h2 class="title">Câu hỏi:</h2>
 	<p>
-	<?php 
+	<?php
 		$subP = \App\Questions::getFilledQuestion($Question['Question']);
 	?>
 	@foreach ($subP as $value)

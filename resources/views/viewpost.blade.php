@@ -96,10 +96,7 @@
 
 				var resultText = 'Đúng ' + score + '/' + maxScore + ' câu.\n';
 				var x = {!! $Comments !!};
-				// console.log("start chấmming");
 				for(var i = x.length - 1; i >= 0; i--) {
-//                    console.log(Math.floor(score / maxScore * 100));
-//                    console.log(min[i]);
 					if (Math.floor(score / maxScore * 100) >= x[i]['min']){
 						resultText += x[i]['comment'];
 						break;
@@ -204,8 +201,6 @@
 						pExamples.innerHTML = 'Examples for "' + t.trim() + '" : ';
 						divDictionary.appendChild(pExamples);
 						divDictionary.appendChild(ulExamples);
-						// window.preventDefault();
-						// window.location = "#modal-id";
 						if (window.getSelection) {
 							if (window.getSelection().empty) {  // Chrome
 							window.getSelection().empty();
@@ -249,10 +244,9 @@
 					@endif
 				@elseif ($q['ThumbnailID'] == 2)
 					@if ($q['Video'] != null)
-						<!-- <li class="list-group-item list-group-item-info"> -->
 						<div class="embed-responsive embed-responsive-4by3">
 						<iframe class="embed-responsive-item" src="https://www.youtube.com/embed/{{$q['Video']}}" frameborder="0" allowfullscreen></iframe>
-						</div><!-- </li> -->
+						</div>
 					@endif
 				@endif
 			

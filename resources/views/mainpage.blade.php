@@ -1,6 +1,6 @@
 @extends('layouts.main')
 @section('head.title')
-    Main Page
+	Main Page
 @endsection
 
 @section('body.sidebar')
@@ -9,19 +9,19 @@
 			@foreach($post as $p)
 			<div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">	
 				<a href="{{route('user.viewpost', $p['id'])}}">
-			        <div class="imagepost">
-			            @if($p['ThumbnailID'] == '1')
-			                <img class='img-responsive' src="http://www.evangelsenglish.com/images/imagePost/Post_16_89.jpg" />
-			                @elseif($p['ThumbnailID'] == '2')
-			                <div class="embed-responsive embed-responsive-4by3">
-			                    <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/{{$p['Video']}}" frameborder="0" allowfullscreen></iframe>
-			                </div>
-			            @endif
-			        </div>
-			        <p class="descriptionpost">
-			            {{$p['Description']}}
-			        </p>
-			    </a>
+					<div class="imagepost">
+						@if($p['ThumbnailID'] == '1')
+							<img class='img-responsive' src="http://www.evangelsenglish.com/images/imagePost/Post_16_89.jpg" />
+							@elseif($p['ThumbnailID'] == '2')
+							<div class="embed-responsive embed-responsive-4by3">
+								<iframe class="embed-responsive-item" src="https://www.youtube.com/embed/{{$p['Video']}}" frameborder="0" allowfullscreen></iframe>
+							</div>
+						@endif
+					</div>
+					<p class="descriptionpost">
+						{{$p['Description']}}
+					</p>
+				</a>
 			</div>
 			@endforeach
 			<div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">

@@ -56,9 +56,6 @@
 		var t = '';
 		function gText(e) {
 			t = (document.all) ? document.selection.createRange().text : document.getSelection();
-			// console.log(t.length);
-			// if (t.length > 0)
-				// alert(t);
 				ob('inputDictionary').value = t;
 				console.log(ob('inputDictionary').value);
 				t = ob('inputDictionary').value;
@@ -80,7 +77,6 @@
 					data: {word: ob('inputDictionary').value.toLowerCase().trim()},
 					success: function (data) {
 						var d = JSON.parse(data);
-						// console.log(d.meanings);
 						var ulMeanings = document.createElement('ul');
 						for(var i = 0; i < d.meanings.length; i++){
 							var liMeanings = document.createElement('li');
@@ -106,8 +102,6 @@
 						pExamples.innerHTML = 'Examples for "' + t.trim() + '" : ';
 						divDictionary.appendChild(pExamples);
 						divDictionary.appendChild(ulExamples);
-						// window.preventDefault();
-						// window.location = "#modal-id";
 						if (window.getSelection) {
 							if (window.getSelection().empty) {  // Chrome
 							window.getSelection().empty();
@@ -161,7 +155,7 @@
 				@foreach ($subP as $value)
 					{!! nl2br($value) !!}
 					@if (count($Spaces) > 0)
-					<select style="color:#cc0066" class="selectpicker" id="select_space_{{current($Spaces)['id']}}" data-show-icon="true">
+					<select style="color:#cc0066" id="select_space_{{current($Spaces)['id']}}" data-show-icon="true">
 						<?php 
 							$this_answers = $Answers[current($Spaces)['id']];
 							shuffle($this_answers);
@@ -172,9 +166,9 @@
 					</select>
 
 					<!-- change normal select into BS3 select manually-->
-					<!--<script type="text/javascript">
-						//$('#select_space_{{current($Spaces)['id']}}').selectpicker();
-					</script>-->
+					<script type="text/javascript">
+						$('#select_space_{{current($Spaces)['id']}}').selectpicker();
+					</script>
 					<?php array_shift($Spaces) ?>
 					@endif
 				@endforeach</div>
@@ -191,10 +185,9 @@
 					@endif
 				@elseif ($q['ThumbnailID'] == 2)
 					@if ($q['Video'] != null)
-						<!-- <li class="list-group-item list-group-item-info"> -->
 						<div class="embed-responsive embed-responsive-4by3">
 						<iframe class="embed-responsive-item" src="https://www.youtube.com/embed/{{$q['Video']}}" frameborder="0" allowfullscreen></iframe>
-						</div><!-- </li> -->
+						</div>
 					@endif
 				@endif
 		@endforeach
@@ -207,7 +200,8 @@
 			var maxScore = setOfSpaces.length;
 			for (var i = 0; i < setOfSpaces.length; i++) {
 				var selectObj = $('#select_space_' + setOfSpaces[i]);
-				// bootstrap-select was be changed into button with data-id attribute is equal to id of old select
+
+				// bootstrap-select will be hided; a button with data-id attribute equals to id of old bootstrap-select will be added and shown.
 				var btn = $('button[data-id="select_space_' + setOfSpaces[i] + '"]');
 				if (selectObj.val() == 1){
 					score++;
@@ -219,10 +213,7 @@
 			};
 			var resultText = 'Đúng ' + score + '/' + maxScore + ' câu.\n';
 			var x = {!! $Comments !!};
-			// console.log("start chấmming");
 			for(var i = x.length - 1; i >= 0; i--) {
-//                    console.log(Math.floor(score / maxScore * 100));
-//                    console.log(min[i]);
 				if (Math.floor(score / maxScore * 100) >= x[i]['min']){
 					resultText += x[i]['comment'];
 					break;
@@ -235,16 +226,8 @@
 			}, 1000);
 			var setOfOptions = document.getElementsByClassName('option_space_1');
 			for (var i = 0; i < setOfOptions.length; i++) {
-				setOfOptions[i].innerHTML += '<span class="glyphicon glyphicon-ok">';
-				// setOfOptions[i].style.background = "#66ff66";
+				setOfOptions[i].innerHTML += ' <span class="glyphicon glyphicon-ok">';
 			}
-
-			// var set = document.getElementsByTagName('option');
-			// for (var i = 0; i < set.length; i++) {
-			// 	set[i].innerHTML += '<span class="glyphicon glyphicon-ok">';
-			// 	// set[i].style.color = "white";
-			// 	// console.log(set[i].innerHTML);
-			// };
 
 			$.ajax({
 				url: "/finishexam",

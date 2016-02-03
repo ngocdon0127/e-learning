@@ -26,21 +26,21 @@
 			}
 		}
 		.navbar-default .navbar-nav>li>a {
-    		color: #1C2363;
+			color: #1C2363;
 		}
 
-	  	img {
+		img {
 			border-radius: 10px;
 			width: 100%;
 		   /*height: 400px;          */
-	  	}
+		}
 		.img{
 			height: 200px;
 			border-radius: 20px;
 			cursor: pointer;
 		}
-	 	h3.title{
-	   		color: #ff0066;
+		h3.title{
+			color: #ff0066;
 		} 
 		.sidebar_left,
 		.sidebar_right{
@@ -70,28 +70,28 @@
 @include('layouts.header')
 @include('layouts.navbar')
 <audio>
-   <source src="/audio/demen.mp3"></source>
+	<source src="/audio/demen.mp3"></source>
 </audio>
 
 <div class="container">
-  <div class="row parent">
-	  <div class="col-md-8" style="margin-bottom:20px">
-		<div class="sidebar_left">
-			<h3 class="text-center title">GIỚI THIỆU CHUNG VỀ KHÓA HỌC</h3>
-			<img src="/images/kid.jpg" alt="" class="img-responsive">
-			<p>
-				Lorem ipsum dolor sit amet, consectetur adipisicing elit. Tempore incidunt nemo commodi voluptate, eveniet praesentium dolores consequatur dolorem dicta amet maiores omnis repellendus qui! Fuga aliquid facere saepe tempora dignissimos!
-				Lorem ipsum dolor sit amet, consectetur adipisicing elit. Provident, odit! Doloremque fugiat voluptatibus autem quasi vero, eveniet, dolorum magnam iste, magni, sint aut explicabo sunt earum in alias quo accusantium!
-				Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequuntur repellat nostrum, dolores qui recusandae quos assumenda non! Iure nobis adipisci quod debitis accusantium omnis totam molestias iste expedita enim, sit.
-				Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eos ipsa repellat, quia totam ab doloribus, vitae, quaerat et modi deleniti voluptate rem recusandae, reprehenderit harum deserunt veniam sequi dignissimos possimus!
-			</p>
+	<div class="row parent">
+		<div class="col-md-8" style="margin-bottom:20px">
+			<div class="sidebar_left">
+				<h3 class="text-center title">GIỚI THIỆU CHUNG VỀ KHÓA HỌC</h3>
+				<img src="/images/kid.jpg" alt="" class="img-responsive">
+				<p>
+					Lorem ipsum dolor sit amet, consectetur adipisicing elit. Tempore incidunt nemo commodi voluptate, eveniet praesentium dolores consequatur dolorem dicta amet maiores omnis repellendus qui! Fuga aliquid facere saepe tempora dignissimos!
+					Lorem ipsum dolor sit amet, consectetur adipisicing elit. Provident, odit! Doloremque fugiat voluptatibus autem quasi vero, eveniet, dolorum magnam iste, magni, sint aut explicabo sunt earum in alias quo accusantium!
+					Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequuntur repellat nostrum, dolores qui recusandae quos assumenda non! Iure nobis adipisci quod debitis accusantium omnis totam molestias iste expedita enim, sit.
+					Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eos ipsa repellat, quia totam ab doloribus, vitae, quaerat et modi deleniti voluptate rem recusandae, reprehenderit harum deserunt veniam sequi dignissimos possimus!
+				</p>
+			</div>
 		</div>
-	  </div>
-	  <div class="col-md-4 ">
-		 <div class="sidebar_right" style="overflow:auto;">
-		 	<h3 class="text-center title">XEM NHIỀU NHẤT</h3>
+	<div class="col-md-4 ">
+		<div class="sidebar_right" style="overflow:auto;">
+			<h3 class="text-center title">XEM NHIỀU NHẤT</h3>
 			@foreach($newpost as $np)
-			 <a id="a_smallLink_{{$np['id']}}" style="text-decoration: none;" href="{{route('user.viewpost', $np['id'])}}">
+			<a id="a_smallLink_{{$np['id']}}" style="text-decoration: none;" href="{{route('user.viewpost', $np['id'])}}">
 				<blockquote>
 					@if($np['ThumbnailID'] == '1')
 						<img class="img-responsive" src="/images/imagePost/{{$np['Photo']}}" />
@@ -103,9 +103,9 @@
 				</blockquote>
 			</a>
 			@endforeach
-		 </div>
-	  </div>  
-  </div>
+		</div>
+	</div>
+</div>
 </div>
 	<div class="container">
 		<h2 class="title">CÁC POST GỢI Ý</h2>
@@ -122,7 +122,7 @@
 			@endforeach
 		@endforeach
 		</div>
-	</div>                   
+	</div>
 </body>
 <script type="text/javascript">
 	// $(function(){$('.parent div').equalHeights();});

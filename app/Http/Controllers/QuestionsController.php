@@ -68,14 +68,10 @@ class QuestionsController extends Controller
 
 				//Photo
 				$file = Request::capture()->file('Photo');
-//              $file = Request::file('Photo');
 				if ($file != null){
 					$question->Photo = 'Question_' . $PostID . '_' . $question->id . "_-Evangels-English-www.evangelsenglish.com_" . "." . $file->getClientOriginalExtension();
 					$file->move(base_path() . '/public/images/imageQuestion/', $question->Photo);
 				}
-
-				// (intval(Posts::orderBy('created_at', 'desc')->first()->id) + 1)
-
 
 				$question->update();
 				break;
@@ -118,7 +114,6 @@ class QuestionsController extends Controller
 					}
 					$rawAnswers = array_merge($rawAnswers, [$ra]);
 				}
-				// dd($rawAnswers);
 				return view('admin.editfilledquestion', compact('Question', 'rawAnswers'));
 				break;
 		}
@@ -151,7 +146,6 @@ class QuestionsController extends Controller
 					$question = Questions::find($id);
 
 					$file = $request->file('Photo');
-					//        $file = Request::file('Photo');
 					$question->Photo = 'Question_' . $question['PostID'] . '_' . $question->id . "_-Evangels-English-www.evangelsenglish.com_" . "." . $file->getClientOriginalExtension();
 					$file->move(base_path() . '/public/images/imageQuestion/', $question->Photo);
 

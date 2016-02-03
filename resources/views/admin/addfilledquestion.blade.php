@@ -14,7 +14,6 @@ ADD QUESTION
 @endsection
 @section('body.content')
 	<div class="container-fluid">
-<!-- <div class="col-md-offset-3 col-md-6"> -->
 		<h1 class="col-md-offset-3 title">Thêm câu hỏi mới</h1>
 
 		{!! Form::open(['name' => 'addQuestionForm', 'url' => '/admin/addquestion/hehe/' . $PostID,'class'=>'form-horizontal', 'files' => true]) !!}
@@ -160,7 +159,6 @@ ADD QUESTION
 				switch (ob('ThumbnailID').value){
 					case '1':  // Photo
 						var acceptedType = ['image/jpeg', 'image/png', 'image/gif'];
-						//                        console.log('clicked');
 						var photo = ob('Photo');
 						if (photo.files.length <= 0){
 							submitViaAJAX(null);
@@ -175,11 +173,9 @@ ADD QUESTION
 							}
 						}
 						if (!check){
-							//                            console.log('not ok');
 							displayError('Chỉ chọn file ảnh.');
 						}
 						else{
-								//                            console.log('ok');
 							if ('size' in photo.files[0]){
 								console.log(photo.files[0].size);
 							}
@@ -213,7 +209,6 @@ ADD QUESTION
 						}
 						break;
 					}
-	//                        ob('error').innerHTML = photo.value;
 			}
 
 			function submitViaAJAX(p){
@@ -265,17 +260,10 @@ ADD QUESTION
 			}
 		</script>
 		</div>
-					<!-- end script -->
-	
 			{!! Form::close() !!}
-				<!-- end form -->
-		<!-- </div> -->
 </div>
 <div class="container-fluid">
-		<!-- <div class="col-sm-9"> -->
 			{!! Form::open(['name' => 'addSpaceForm', 'url' => '/admin/addspace/','class'=>'form-group']) !!}
-				<!--        {!! Form::label('Detail', 'Câu trả lời: ') !!}
-			{!! Form::text('Detail') !!} -->
 		<div class="form-group">
 				{!! Form::label('Detail', 'Các đáp án cho từng ô trống, cách nhau bởi dấu chấm phẩy, đáp án đúng viết đầu tiên, đáp án sai viết sau: ',['class'=>'control-label']) !!}
 				<script type="text/javascript">
@@ -334,11 +322,8 @@ ADD QUESTION
 						var tagClose = "[/u]";
 						var textarea = ob('answer' + id);
 						var oldText = textarea.value;
-	//                        console.log(oldText);
 						var start = textarea.selectionStart;
-	//                        console.log('start ' + start);
 						var end = textarea.selectionEnd;
-	//                        console.log('end' + end);
 						if (start == end){
 							return;
 						}
