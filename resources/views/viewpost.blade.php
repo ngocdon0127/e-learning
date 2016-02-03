@@ -236,7 +236,7 @@
 			@else
 			<h3 class="title" id="title_question_{!! $key + 1 !!}">Câu hỏi số <?php echo $count_answer++; ?>:</h3>
 			@endif
-			<h4 class="title">{!! nl2br($q['Question']) . ((strlen($q['Description']) > 0) ? (" : " . nl2br($q['Description'])) : "") !!}</h4>
+			<h4 class="title">{!! nl2br($q['Question']) . ((strlen($q['Description']) > 0) ? (" :<br /><br /> " . nl2br($q['Description'])) : "") !!}</h4>
 				@if ($q['ThumbnailID'] == 1)
 					@if ($q['Photo'] != null)
 						<li class="list-group-item list-group-item-info">
