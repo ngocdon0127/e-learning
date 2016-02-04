@@ -12,7 +12,7 @@
 	<link rel="stylesheet" type="text/css" href="/css/bootstrap.css">
 	<link rel="stylesheet" type="text/css" href="/css/style.css">
 	<link rel="stylesheet" type="text/css" href="/css/upload_video.css">
-	<link rel='stylesheet' href='http://fonts.googleapis.com/css?family=Open+Sans' type='text/css'>
+	<link rel='stylesheet' href='http://fonts.googleapis.com/css?family=Open+Sans|Syncopate|Quicksand' type='text/css'>
 	<!-- <link href='https://fonts.googleapis.com/css?family=Droid+Sans:400,700' rel='stylesheet' type='text/css'> -->
 	<link href='https://fonts.googleapis.com/css?family=Oswald:700' rel='stylesheet' type='text/css'>
 	<link rel="stylesheet" type="text/css" href="/css/admin.css">
