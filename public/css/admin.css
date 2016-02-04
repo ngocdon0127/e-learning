@@ -130,14 +130,14 @@ img:hover{
 }
 .badge-span{
   background: white;
-  color: blue;
+  color: #cc0066;
 }
 .list-group-item{
   color: #ff3300;
   font-size: 20px;
 }
 .list-group{
-  padding:2% 0;
+  padding:0;
 }
 
 img {
@@ -152,12 +152,14 @@ li.list_answer:hover{
   background: #f3d681;
 }
 .list_answer{
-     word-wrap: break-word; 
+    word-wrap: break-word; 
+    font-family: 'Quicksand';
     font-weight: bold;
+    font-size: 25px;
     background: #e0f0ff;
-    padding: 10px;
-    color: #993333;
-     vertical-align: top; 
+    padding: 5px;
+    color: #990033;
+    vertical-align: top; 
     list-style: none;
     display: list-item;
     border-radius: 10px;
@@ -172,7 +174,6 @@ ul#form_test img:hover{
 .div_i{
   padding: 10px 0;
 }
-
 /*==================END FORM-H1===========================*/
 
 /*==================RESPONSIVE===========================*/

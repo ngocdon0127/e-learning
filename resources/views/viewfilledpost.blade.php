@@ -171,7 +171,8 @@
 					</script>
 					<?php array_shift($Spaces) ?>
 					@endif
-				@endforeach</div>
+				@endforeach
+			</div>
 			</h4>
 				@if ($q['ThumbnailID'] == 1)
 					@if ($q['Photo'] != null)
@@ -194,15 +195,19 @@
 	</ul>
 	<button class="btn btn-primary" onclick="check()">Nộp bài</button>
 	<script>
+		$('div[class="btn-group bootstrap-select"').css("width","auto");
 		function check(){
 			var score = 0;
 			var setOfSpaces = {!! json_encode($setOfSpaces) !!};
 			var maxScore = setOfSpaces.length;
 			for (var i = 0; i < setOfSpaces.length; i++) {
 				var selectObj = $('#select_space_' + setOfSpaces[i]);
+				selectObj.css('width','100px');
 
 				// bootstrap-select will be hided; a button with data-id attribute equals to id of old bootstrap-select will be added and shown.
 				var btn = $('button[data-id="select_space_' + setOfSpaces[i] + '"]');
+				// btn.css('width', '100px');
+				btn.css('font-size','30px');
 				if (selectObj.val() == 1){
 					score++;
 					btn.css('background', "#66ff66");
@@ -289,7 +294,7 @@
 		<div class="panel-heading">
 			Bài đăng cùng khóa
 		</div>
-		<div class="panel-body" style="max-height: 1000px; overflow: auto" id="div_right_bar">
+		<div class="panel-body" id="div_right_bar">
 		@foreach($newpost as $np)
 			<a id="a_smallLink_{{$np['id']}}" style="text-decoration: none;" href="{{route('user.viewpost', $np['id'])}}">
 				<blockquote>

@@ -296,11 +296,11 @@
 	</div>
 @endsection
 @section('body.navright')
-	<div class="panel panel-default">
+	<div class="panel panel-default xxx">
 		<div class="panel-heading">
 			Bài đăng cùng khóa
 		</div>
-		<div class="panel-body" style="max-height: 1000px; overflow: auto" id="div_right_bar">
+		<div class="panel-body" id="div_right_bar">
 		@foreach($newpost as $np)
 			<a id="a_smallLink_{{$np['id']}}" style="text-decoration: none;" href="{{route('user.viewpost', $np['id'])}}">
 				<blockquote>
