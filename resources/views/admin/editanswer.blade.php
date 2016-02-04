@@ -177,6 +177,7 @@ Cập nhật đáp án
 								add();
 							}
 							updateID();
+							{!! $index = 1 !!}
 							var index = 1;
 							@foreach($Answers as $a)
 								var xx = "{!! $a['Detail'] !!}";
@@ -185,6 +186,7 @@ Cập nhật đáp án
 								@if ($a['Logical'] == 1)
 									ob('radio{{$index}}').checked = true;
 								@endif
+								{!! $index++ !!}
 							@endforeach
 						</script>
 					</div>
