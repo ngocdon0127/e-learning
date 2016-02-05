@@ -232,3 +232,8 @@ get('/ajax/bing', [
 	'as' => 'ajax.bing',
 	'uses' => 'PageController@bing'
 ]);
+
+get('/buy', [
+	'as' => 'user.buy',
+	'uses' => 'PaidsController@buy'
+]);

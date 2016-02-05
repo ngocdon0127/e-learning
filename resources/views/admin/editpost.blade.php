@@ -87,6 +87,10 @@
 		{!! Form::text('Description', null,['class'=>'form-control']) !!}
 	</div>
 	<div class="form-group">
+		{!! Form::label('FreeQuestions', 'Số câu hỏi cho khách xem miễn phí : ',['class' => 'control-label']) !!}
+		{!! Form::text('FreeQuestions', null,['class'=>'form-control']) !!}
+	</div>
+	<div class="form-group">
 		{!! Form::label('Hashtag', 'Hashtag : (mỗi tag cách nhau 1 dấu cách.) (ex: #grammar #PresentSimple)',['class' => 'control-label']) !!}
 		{!! Form::text('Hashtag','',['class'=>'form-control']) !!}
 	</div>

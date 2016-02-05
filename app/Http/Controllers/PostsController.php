@@ -14,6 +14,7 @@ use App\Posts;
 use App\Questions;
 use App\Tags;
 use App\Spaces;
+use App\User;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
@@ -51,6 +52,7 @@ class PostsController extends Controller
 		$post->ThumbnailID = $data['ThumbnailID'];
 		$post->Title = $data['Title'];
 		$post->Description = $data['Description'];
+		$post->FreeQuestions = $data['FreeQuestions'];
 
 		switch ($data['ThumbnailID']){
 			case '1': // Plain Text
@@ -113,6 +115,7 @@ class PostsController extends Controller
 				return redirect('/auth/login')->with('redirectPath', $redirectPath);
 			}
 			$token = md5(rand(), false);
+			$DisplayedQuestions = 5;
 		}
 
 		$post = Posts::find($postID);
@@ -143,12 +146,26 @@ class PostsController extends Controller
 			$token = md5($userID . rand(), false) . md5($postID . rand(), false);
 			$exam->token = $token;
 			$exam->save();
+
+			// Check if user is vip or not
+			$user = User::find(auth()->user()->getAuthIdentifier());
+			if ($user['vip'] == 0){
+				$DisplayedQuestions = $post['FreeQuestions'];
+			}
+			else{
+				$DisplayedQuestions = ($user['expire_at'] < (new \DateTime())) ? -1 : $post['FreeQuestions'];
+			}
+			if ($user['admin'] == 1){
+				$DisplayedQuestions = -1;
+			}
 		 }
 
 		$photo = $post['Photo'];
-		$questions = Questions::where('PostID', '=', $postID)->get()->toArray();
+		if ($DisplayedQuestions > 0)
+			$questions = Questions::where('PostID', '=', $postID)->take($DisplayedQuestions)->get()->toArray();
+		else
+			$questions = Questions::where('PostID', '=', $postID)->get()->toArray();
 		$bundle = array();
-		
 		$bundleAnswer = array();
 		$maxscore = 0;
 		foreach ($questions as $q){
@@ -170,7 +187,9 @@ class PostsController extends Controller
 			'Bundle' => $bundle,
 			'BundleAnswers' => $bundleAnswer,
 			'MaxScore' => $maxscore,
-			'Token' => $token
+			'NumOfQuestions' => count($questions = Questions::where('PostID', '=', $postID)->get()->toArray()),
+			'Token' => $token,
+			'DisplayedQuestions' => $DisplayedQuestions
 		);
 		$nextPost = Posts::where('CourseID', '=', $post['CourseID'])->where('id', '>=', $post['id'])->get()->toArray();
 		$result += ['NextPost' => (count($nextPost) > 1) ? $nextPost[1]['id'] : Posts::where('CourseID', '=', $post['CourseID'])->first()->toArray()['id']];
@@ -304,6 +323,7 @@ class PostsController extends Controller
 		$post = Posts::find($id);
 		$post->CourseID = $data['CourseID'];
 		$post->ThumbnailID = $data['ThumbnailID'];
+		$post->FreeQuestions = $data['FreeQuestions'];
 		$post->Title = $data['Title'];
 		if ($post->ThumbnailID == '2'){ // Thumbnail Quizz Video
 			$post->Video = PostsController::getYoutubeVideoID($data['Video']);

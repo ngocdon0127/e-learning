@@ -146,7 +146,7 @@
 				}
 				reset($Spaces);  // don't know what's different between this view & viewfilledquestion
 			?>
-			<div  style="color:#cc0066; font-weight:bold;">
+			<div style="color:#cc0066; font-weight:bold;">
 			@if (strlen($q['Description']) > 0)
 				{!! nl2br($q['Description']) . ":" !!}
 			@endif
@@ -174,26 +174,30 @@
 				@endforeach
 			</div>
 			</h4>
-				@if ($q['ThumbnailID'] == 1)
-					@if ($q['Photo'] != null)
-						<li class="list-group-item list-group-item-info">
-							@if ((auth()->user()) && (auth()->user()->admin == 1))
-								<a style="text-decoration: none;" href="{{route('user.viewquestion', $q['id'])}}"><img class="img-responsive" alt="{{$q['Question'] . ' - Evangels English - '}}{{$_SERVER['HTTP_HOST']}}" src="/images/imageQuestion/{{$q['Photo']}}" /></a>
-							@else
-								<img class="img-responsive" alt="{{$q['Question'] . ' - Evangels English - '}}{{$_SERVER['HTTP_HOST']}}" src="/images/imageQuestion/{{$q['Photo']}}" />
-							@endif
-						</li>
-					@endif
-				@elseif ($q['ThumbnailID'] == 2)
-					@if ($q['Video'] != null)
-						<div class="embed-responsive embed-responsive-4by3">
-						<iframe class="embed-responsive-item" src="https://www.youtube.com/embed/{{$q['Video']}}" frameborder="0" allowfullscreen></iframe>
-						</div>
-					@endif
+			@if ($q['ThumbnailID'] == 1)
+				@if ($q['Photo'] != null)
+					<li class="list-group-item list-group-item-info">
+						@if ((auth()->user()) && (auth()->user()->admin == 1))
+							<a style="text-decoration: none;" href="{{route('user.viewquestion', $q['id'])}}"><img class="img-responsive" alt="{{$q['Question'] . ' - Evangels English - '}}{{$_SERVER['HTTP_HOST']}}" src="/images/imageQuestion/{{$q['Photo']}}" /></a>
+						@else
+							<img class="img-responsive" alt="{{$q['Question'] . ' - Evangels English - '}}{{$_SERVER['HTTP_HOST']}}" src="/images/imageQuestion/{{$q['Photo']}}" />
+						@endif
+					</li>
 				@endif
+			@elseif ($q['ThumbnailID'] == 2)
+				@if ($q['Video'] != null)
+					<div class="embed-responsive embed-responsive-4by3">
+					<iframe class="embed-responsive-item" src="https://www.youtube.com/embed/{{$q['Video']}}" frameborder="0" allowfullscreen></iframe>
+					</div>
+				@endif
+			@endif
 		@endforeach
 	</ul>
 	<button class="btn btn-primary" onclick="check()">Nộp bài</button>
+	@if ($DisplayedQuestions < $NumOfQuestions)
+		<p>Bạn đang xem {{$DisplayedQuestions . "/" . $NumOfQuestions}} câu hỏi của bài này.</p>
+		<a href="{{route('user.buy')}}" class="btn btn-info">Purchase to see full post</a>
+	@endif
 	<script>
 		$('div[class="btn-group bootstrap-select"').css("width","auto");
 		function check(){

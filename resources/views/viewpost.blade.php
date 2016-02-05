@@ -260,9 +260,12 @@
 					<div class="clear"></div>
 				@endforeach
 			</ul>
-
 		@endforeach
 	</ul>
+	@if ($DisplayedQuestions < $NumOfQuestions)
+		<p>Bạn đang xem {{$DisplayedQuestions . "/" . $NumOfQuestions}} câu hỏi của bài này.</p>
+		<a href="{{route('user.buy')}}" class="btn btn-info">Purchase to see full post</a>
+	@endif
 	<div class="form-control" id="resultText" style="display: none; height: 200px;">
 		<b class="title" id="writeResult"></b> <br />
 	</div>

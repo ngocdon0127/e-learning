@@ -50,6 +50,7 @@ class AuthController extends Controller
             'email' => 'required|email|max:255|unique:users',
             'password' => 'required|confirmed|min:6',
             'Type' => 'max:255',
+            'expire_at' => 'max:255',
         ]);
     }
 
@@ -69,6 +70,7 @@ class AuthController extends Controller
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
 			'Type' =>  $Type,
+            'expire_at' => new \DateTime()
         ]);
     }
 

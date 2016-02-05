@@ -15,6 +15,7 @@ return array(
     'CreateHashtagsTable' => $baseDir . '/database/migrations/2016_01_11_004843_create_hashtags_table.php',
     'CreateLearningTable' => $baseDir . '/database/migrations/2015_12_06_105409_create_learning_table.php',
     'CreateLoginsTable' => $baseDir . '/database/migrations/2015_12_31_114945_create_logins_table.php',
+    'CreatePaidsTable' => $baseDir . '/database/migrations/2016_02_05_201830_create_paids_table.php',
     'CreatePasswordResetsTable' => $baseDir . '/database/migrations/2014_10_12_100000_create_password_resets_table.php',
     'CreatePostsTable' => $baseDir . '/database/migrations/2015_12_06_104124_create_posts_table.php',
     'CreateQuestionsTable' => $baseDir . '/database/migrations/2015_12_10_090329_create_questions_table.php',
