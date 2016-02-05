@@ -171,7 +171,8 @@
 					</script>
 					<?php array_shift($Spaces) ?>
 					@endif
-				@endforeach</div>
+				@endforeach
+			</div>
 			</h4>
 				@if ($q['ThumbnailID'] == 1)
 					@if ($q['Photo'] != null)
@@ -194,6 +195,7 @@
 	</ul>
 	<button class="btn btn-primary" onclick="check()">Nộp bài</button>
 	<script>
+		$('div[class="btn-group bootstrap-select"').css("width","auto");
 		function check(){
 			var score = 0;
 			var setOfSpaces = {!! json_encode($setOfSpaces) !!};

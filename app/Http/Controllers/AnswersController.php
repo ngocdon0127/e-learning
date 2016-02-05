@@ -117,6 +117,7 @@ class AnswersController extends Controller
 
     public static $clientTag = ['[u]', '[/u]'];
     public static $serverTag = ['<u>', '</u>'];
+    public static $underlineTag = ['<span style="border-bottom:1px solid;">', '</span>'];
 
     public static function c2s_convert($s){
         for($i = 0; $i < count(AnswersController::$clientTag); $i++){
@@ -128,6 +129,13 @@ class AnswersController extends Controller
     public static function s2c_convert($s){
         for($i = 0; $i < count(AnswersController::$clientTag); $i++){
             $s = str_replace(AnswersController::$serverTag[$i], AnswersController::$clientTag[$i], $s);
+        }
+        return $s;
+    }
+
+    public static function underline($s){
+        for ($i=0; $i < count(AnswersController::$underlineTag); $i++) { 
+            $s = str_replace(AnswersController::$serverTag[$i], AnswersController::$underlineTag[$i], $s);
         }
         return $s;
     }

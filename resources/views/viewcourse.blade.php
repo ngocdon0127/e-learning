@@ -7,8 +7,12 @@
 	<ul class="list-group">
 		@foreach ($posts as $key => $value)
 			<li class="list-group-item list-group-item-success">
-				<a href="{{route('user.viewpost',$value['id'])}}">{{$value['Title']}}</a>
-				<span class="badge badge-span">Hiện có {{$NumQuestions[$value['id']]}} câu hỏi</span>
+				<div>
+					<a href="{{route('user.viewpost',$value['id'])}}">{{$value['Title']}}</a>
+				</div>
+				<div>
+					<span class="badge badge-span">Hiện có {{$NumQuestions[$value['id']]}} câu hỏi</span>
+				</div>
 			</li>
 		@endforeach
 	</ul>

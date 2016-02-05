@@ -254,7 +254,7 @@
 				@foreach($Bundle[$q['id']] as $k => $a)
 					<li id="answer_{{$q['id']}}_{{$a['id']}}" class="list_answer"  onclick="check({{$q['id']}}, {{$a['id']}}, {{$BundleAnswers[$q['id']]}}, {!! $key + 2 !!})" style="cursor: pointer">
 						<input type="checkbox" id="radio_answer_{{$q['id']}}_{{$a['id']}}" name="question_{{$q['id']}}"/>
-						<span class="answer_content">{!! $a['Detail'] !!}</span>
+						<span class="answer_content">{!! \App\Http\Controllers\AnswersController::underline($a['Detail']) !!}</span>
 					</li>
 
 					<div class="clear"></div>
@@ -296,11 +296,11 @@
 	</div>
 @endsection
 @section('body.navright')
-	<div class="panel panel-default">
+	<div class="panel panel-default xxx">
 		<div class="panel-heading">
 			Bài đăng cùng khóa
 		</div>
-		<div class="panel-body" style="max-height: 1000px; overflow: auto" id="div_right_bar">
+		<div class="panel-body" id="div_right_bar">
 		@foreach($newpost as $np)
 			<a id="a_smallLink_{{$np['id']}}" style="text-decoration: none;" href="{{route('user.viewpost', $np['id'])}}">
 				<blockquote>
