@@ -5,6 +5,7 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta http-equiv="content-language" content="vi,en" />
 	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="google-site-verification" content="M4Hy67xVwi5V-pQzvd8jppN6cZHeClnx8MvCvIk-cvw" />
 	<title>@yield('head.title')</title>
 	<link rel="alternate" href="http://www.evangelsenglish.com" hreflang="vi-vn" />
 	<link rel="alternate" href="http://www.evangelsenglish.com" hreflang="en-sg" />
