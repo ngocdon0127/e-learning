@@ -15,6 +15,7 @@ use App\Questions;
 use App\Tags;
 use App\Spaces;
 use App\User;
+use App\ConstsAndFuncs;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
@@ -115,7 +116,7 @@ class PostsController extends Controller
 				return redirect('/auth/login')->with('redirectPath', $redirectPath);
 			}
 			$token = md5(rand(), false);
-			$DisplayedQuestions = 5;
+			$DisplayedQuestions = ConstsAndFuncs::$FreeQuestionsForCrawler;
 		}
 
 		$post = Posts::find($postID);
@@ -153,7 +154,7 @@ class PostsController extends Controller
 				$DisplayedQuestions = $post['FreeQuestions'];
 			}
 			else{
-				$DisplayedQuestions = ($user['expire_at'] < (new \DateTime())) ? -1 : $post['FreeQuestions'];
+				$DisplayedQuestions = ((new \DateTime($user['expire_at'])) >= (new \DateTime())) ? -1 : $post['FreeQuestions'];
 			}
 			if ($user['admin'] == 1){
 				$DisplayedQuestions = -1;

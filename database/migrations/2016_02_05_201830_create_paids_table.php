@@ -16,8 +16,7 @@ class CreatePaidsTable extends Migration
 			$table->increments('id');
 			$table->timestamps();
 			$table->integer('UserID');
-			$table->string('Key');
-			$table->integer('Activated')->default(0);
+			$table->integer('LicenseID');
 		});
 	}
 

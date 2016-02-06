@@ -237,3 +237,13 @@ get('/buy', [
 	'as' => 'user.buy',
 	'uses' => 'PaidsController@buy'
 ]);
+
+get('/active', [
+	'as' => 'user.getactive',
+	'uses' => 'PaidsController@getActive'
+]);
+
+post('/active', [
+	'as' => 'user.postactive',
+	'uses' => 'PaidsController@postactive'
+]);
