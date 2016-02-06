@@ -262,7 +262,7 @@
 			</ul>
 		@endforeach
 	</ul>
-	@if ($DisplayedQuestions < $NumOfQuestions)
+	@if (($DisplayedQuestions >= 0) && ($DisplayedQuestions < $NumOfQuestions))
 		<p>Bạn đang xem {{$DisplayedQuestions . "/" . $NumOfQuestions}} câu hỏi của bài này.</p>
 		<a href="{{route('user.buy')}}" class="btn btn-info">Purchase to see full post</a>
 	@endif

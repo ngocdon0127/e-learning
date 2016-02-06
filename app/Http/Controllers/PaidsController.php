@@ -36,6 +36,9 @@ class PaidsController extends Controller
 		if (count($li) < 1){
 			return view('active')->with('result', 'Mã số không đúng hoặc đã được sử dụng.');
 		}
+		if ($li->Duration <= 0){
+			return view('active')->with('result', 'Có lỗi xảy ra. Bạn vui lòng liên hệ với hỗ trợ trực tuyến, cung cấp số serial của thẻ để được trợ giúp.');
+		}
 		$li->Activated = 1;
 		$li->update();
 		$paid = new Paids();

@@ -19,10 +19,12 @@
 		<p>{{$result}}</p>
 	</div>
 	@endif
-	@if (App\ConstsAndFuncs::is_vip(auth()->user()->getAuthIdentifier()))
-	<div class="form-group">
+	<div class="form-group control-label">
+	@if (App\User::find(auth()->user()->getAuthIdentifier())['admin'] == 1)
+		<p>Admin được sử dụng web với full quyền lợi VIP, forever :)))</p>
+	@elseif (App\ConstsAndFuncs::is_vip(auth()->user()->getAuthIdentifier()))
 		<p>Bạn đang là VIP. Bạn có thể nhập thêm mã thẻ, thời gian dùng VIP sẽ được cộng dồn.</p>
-	</div>
 	@endif
+	</div>
 </div>
 @endsection
