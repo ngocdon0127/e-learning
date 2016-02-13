@@ -180,7 +180,6 @@ Cập nhật đáp án
 							{!! $index = 1 !!}
 							var index = 1;
 							@foreach($Answers as $a)
-								var xx = "{!! $a['Detail'] !!}";
 								var inner = ob('answer{{ $index }}').innerHTML = {!! json_encode($a['Detail']) !!};
 								ob('answer{{ $index }}').innerHTML = inner;
 								@if ($a['Logical'] == 1)
