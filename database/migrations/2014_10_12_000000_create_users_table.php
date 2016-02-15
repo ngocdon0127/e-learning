@@ -17,6 +17,7 @@ class CreateUsersTable extends Migration
             $table->string('name');
             $table->string('email')->unique();
             $table->string('password', 60);
+            $table->string('token');
             $table->integer('admin')->default(0);
             $table->integer('Type')->default(1);
             $table->integer('vip')->default(0);
