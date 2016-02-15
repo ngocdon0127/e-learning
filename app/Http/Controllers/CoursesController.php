@@ -44,8 +44,6 @@ class CoursesController extends Controller
 
     public function addCourse(){
         if (!AuthController::checkPermission()){
-//            RedirectIfAuthenticated::$backPath = 'add/course';
-//            AuthController::$redirectPath = '/admin/adcourse';
             return redirect('auth/login');
         };
         return view('admin.addcourse');
