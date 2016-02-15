@@ -20,7 +20,7 @@
 		</ul>
 	</ul>
 	<h1 class="title">Thêm câu trả lời mới</h1>
-		{!! Form::open(['name' => 'addAnswerForm', 'url' => '/admin/addanswer/' . $QuestionID,'class'=>'control-label']) !!}
+		{!! Form::open(['name' => 'addAnswerForm', 'route' => ['admin.addanswer', $QuestionID],'class'=>'control-label']) !!}
 		
 		<div class="form-group">
 			{!! Form::label('Detail', 'Câu trả lời: ',['class'=>'control-label']) !!}

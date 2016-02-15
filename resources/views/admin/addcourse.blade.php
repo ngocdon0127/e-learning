@@ -28,7 +28,7 @@ ADD COURSE
 			}
 		</script>
 		<h1 class="title">Thêm khóa học mới</h1>
-		{!! Form::open(['name' => 'addCourseForm', 'url' => '/admin/addcourse','role'=>'form']) !!}
+		{!! Form::open(['name' => 'addCourseForm', 'route' => ['admin.addcourse'],'role'=>'form']) !!}
 			<div class="form-group">
 				{!! Form::label('CategoryID', 'Category : ',['class' => 'control-label']) !!}
 				{!! Form::select('CategoryID', \App\Categories::getColumn('Category'), ['class'=>'form-control', 'onclick' => 'this.style.background = "white"']) !!}

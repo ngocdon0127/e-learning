@@ -16,7 +16,7 @@ ADD QUESTION
 	<div class="container-fluid">
 		<h1 class="col-md-offset-3 title">Thêm câu hỏi mới</h1>
 
-		{!! Form::open(['name' => 'addQuestionForm', 'url' => '/admin/addquestion/' . $PostID, 'class'=>'form-horizontal', 'files' => true]) !!}
+		{!! Form::open(['name' => 'addQuestionForm', 'route' => ['admin.addquestion', $PostID], 'class'=>'form-horizontal', 'files' => true]) !!}
 
 		<div class="form-group">
 			{!! Form::label('Question','Question : ',['class' => 'control-label']) !!}
