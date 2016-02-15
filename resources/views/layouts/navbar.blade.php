@@ -23,7 +23,7 @@
 				@if ((auth()->user()) && (auth()->user()->admin == 1))
 				<li id="navbar-button"><a class="navbar-button" href="{{route('admin')}}">Admin</a></li>
 				@endif
-				<li id="navbar-button"><a class="navbar-button" href="{{route('kid.viewpost')}}">Kids</a></li>
+				<li id="navbar-button"><a class="navbar-button" href="http://kids.evangelsenglish.com">Kids</a></li>
 				@foreach(\App\Categories::all() as $cate)
 				<li class="dropdown">
 					<a id= "dropDown{{$cate->id}}" href="#" class="dropdown-toggle navbar-button" data-toggle="dropdown">{{$cate->Category}}<b class="caret"></b></a>
