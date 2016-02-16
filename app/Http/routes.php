@@ -103,7 +103,7 @@ Route::group(['prefix' => '/subadmin'], function(){
     Route::get('/',[
         'middleware' =>  'admin',
         'as'    => 'subadmin.view',
-        'uses'  => 'CLassController@index'
+        'uses'  => 'ClassController@index'
     ]);
 
     Route::get('/addclass', [
