@@ -22,6 +22,7 @@
 				<li id="navbar-button"><a class="navbar-button" href="/"><span class="glyphicon glyphicon-home"> Home</span></a></li>
 				@if ((auth()->user()) && (auth()->user()->admin == 1))
 				<li id="navbar-button"><a class="navbar-button" href="{{route('admin')}}">Admin</a></li>
+				<li id="navbar-button"><a class="navbar-button" href="{{route('subadmin.view')}}">SubAdmin</a></li>
 				@endif
 				<li id="navbar-button"><a class="navbar-button" href="http://kids.evangelsenglish.com">Kids</a></li>
 				@foreach(\App\Categories::all() as $cate)

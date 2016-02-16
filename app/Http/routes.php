@@ -98,6 +98,50 @@ Route::group(['prefix' => '/admin'], function(){
 		'uses'  => 'CoursesController@destroy'
 	]);
 });
+
+Route::group(['prefix' => '/subadmin'], function(){
+    Route::get('/',[
+        'middleware' =>  'admin',
+        'as'    => 'subadmin.view',
+        'uses'  => 'CLassController@index'
+    ]);
+
+    Route::get('/addclass', [
+        'middleware' =>  'admin',
+        'as'    => 'subadmin.addclass',
+        'uses'   => 'ClassController@addclass'
+    ]);
+
+    Route::post('/addclass',[
+        'middleware' =>  'admin',
+        'as'    => 'subadmin.saveclass',
+        'uses'  => 'ClassController@saveclass'
+        ]);
+
+    Route::get('/class/{id}',[
+        'middleware' =>  'admin',
+        'as'    => 'subadmin.viewclass',
+        'uses'  =>  'ClassController@viewclass'
+    ]);
+
+    Route::get('/class/{id}/addmembers',[
+        'middleware' =>  'admin',
+        'as'    => 'subadmin.addmembers',
+        'uses'  =>  'ClassController@addmembers'
+    ]);
+
+    Route::post('/class/{id}/addmembers',[
+        'middleware' =>  'admin',
+        'as'    => 'subadmin.savemembers',
+        'uses'  =>  'ClassController@savemembers'
+    ]);
+
+    Route::get('/class/{id}/delete',[
+        'middleware' =>  'admin',
+        'as'    => 'subadmin.deleteclass',
+        'uses'  => 'ClassController@deleteclass'
+    ]);
+});
 get('/post/{postid}', [
 	'as' => 'user.viewpost',
 	'uses' => 'PostsController@viewpost'
