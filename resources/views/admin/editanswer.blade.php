@@ -21,7 +21,7 @@ Cập nhật đáp án
 		</ul>
 		<h1 class="title">Thêm câu trả lời mới</h1>
 		<h2>Câu hỏi phát âm => Bôi đen + Click Gạch chân</h2>
-			{!! Form::open(['method' => 'PUT', 'name' => 'editAnswerForm', 'route' => ['admin.editanswer', $QuestionID],'class'=>'control-label']) !!}
+			{!! Form::open(['method' => 'PUT', 'name' => 'editAnswerForm', 'route' => ['answer.update', $QuestionID],'class'=>'control-label']) !!}
 			
 			<div class="form-group">
 				{!! Form::label('Detail', 'Câu trả lời: ',['class'=>'control-label']) !!}

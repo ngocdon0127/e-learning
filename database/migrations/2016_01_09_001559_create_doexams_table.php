@@ -17,7 +17,7 @@ class CreateDoexamsTable extends Migration
             $table->timestamps();
             $table->integer('PostID');
             $table->integer('UserID');
-            $table->integer('Score')->default(-1);
+            $table->string('Score')->default('-1');
             $table->float('Time')->default(0);
             $table->string('token')->default(null);
         });
