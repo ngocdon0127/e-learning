@@ -13,6 +13,9 @@ use App\Logins;
 use App\Posts;
 use App\Questions;
 use App\Tags;
+use App\Spaces;
+use App\User;
+use App\ConstsAndFuncs;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
@@ -50,6 +53,7 @@ class PostsController extends Controller
 		$post->ThumbnailID = $data['ThumbnailID'];
 		$post->Title = $data['Title'];
 		$post->Description = $data['Description'];
+		$post->FreeQuestions = $data['FreeQuestions'];
 
 		switch ($data['ThumbnailID']){
 			case '1': // Plain Text
@@ -112,6 +116,7 @@ class PostsController extends Controller
 				return redirect('/auth/login')->with('redirectPath', $redirectPath);
 			}
 			$token = md5(rand(), false);
+			$DisplayedQuestions = ConstsAndFuncs::$FreeQuestionsForCrawler;
 		}
 
 		$post = Posts::find($postID);
@@ -142,12 +147,26 @@ class PostsController extends Controller
 			$token = md5($userID . rand(), false) . md5($postID . rand(), false);
 			$exam->token = $token;
 			$exam->save();
+
+			// Check if user is vip or not
+			$user = User::find(auth()->user()->getAuthIdentifier());
+			if ($user['vip'] == 0){
+				$DisplayedQuestions = $post['FreeQuestions'];
+			}
+			else{
+				$DisplayedQuestions = ((new \DateTime($user['expire_at'])) >= (new \DateTime())) ? -1 : $post['FreeQuestions'];
+			}
+			if ($user['admin'] == 1){
+				$DisplayedQuestions = -1;
+			}
 		 }
 
 		$photo = $post['Photo'];
-		$questions = Questions::where('PostID', '=', $postID)->get()->toArray();
+		if ($DisplayedQuestions > 0)
+			$questions = Questions::where('PostID', '=', $postID)->take($DisplayedQuestions)->get()->toArray();
+		else
+			$questions = Questions::where('PostID', '=', $postID)->get()->toArray();
 		$bundle = array();
-		
 		$bundleAnswer = array();
 		$maxscore = 0;
 		foreach ($questions as $q){
@@ -169,7 +188,9 @@ class PostsController extends Controller
 			'Bundle' => $bundle,
 			'BundleAnswers' => $bundleAnswer,
 			'MaxScore' => $maxscore,
-			'Token' => $token
+			'NumOfQuestions' => count($questions = Questions::where('PostID', '=', $postID)->get()->toArray()),
+			'Token' => $token,
+			'DisplayedQuestions' => $DisplayedQuestions
 		);
 		$nextPost = Posts::where('CourseID', '=', $post['CourseID'])->where('id', '>=', $post['id'])->get()->toArray();
 		$result += ['NextPost' => (count($nextPost) > 1) ? $nextPost[1]['id'] : Posts::where('CourseID', '=', $post['CourseID'])->first()->toArray()['id']];
@@ -179,7 +200,10 @@ class PostsController extends Controller
 		$result += ['newpost' => $newpost];
 		// dd($newpost);
 		// return view('viewpost')->with(compact(['result', 'newpost']));
-		return view('viewpost', $result);
+		if ($post['FormatID'] == 1)
+			return view('viewpost', $result);
+		if ($post['FormatID'] == 2)
+			return view('viewfilledpost')->with($result);
 	}
 
 	public function kidView(){
@@ -202,10 +226,11 @@ class PostsController extends Controller
 //        $posts = Posts::take(5)->skip(0)->get()->toArray();
 		$Posts = Posts::orderBy('id', 'desc')->paginate(5);
 		$newpost = Posts::orderBy('visited', 'dsc')->take(5)->get();
+		$paginateBaseLink = '/';
 		// dd($newpost);
 		// dd($Posts);
 		// dd($Posts->toArray());
-		return view('userindex')->with(compact(['Posts', 'newpost']));
+		return view('userindex')->with(compact(['Posts', 'newpost', 'paginateBaseLink']));
 	}
 
 	public function searchPostsByHashtag(Request $request){
@@ -299,6 +324,7 @@ class PostsController extends Controller
 		$post = Posts::find($id);
 		$post->CourseID = $data['CourseID'];
 		$post->ThumbnailID = $data['ThumbnailID'];
+		$post->FreeQuestions = $data['FreeQuestions'];
 		$post->Title = $data['Title'];
 		if ($post->ThumbnailID == '2'){ // Thumbnail Quizz Video
 			$post->Video = PostsController::getYoutubeVideoID($data['Video']);

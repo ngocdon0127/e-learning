@@ -3,7 +3,7 @@
     Evangels English
 @endsection
 @section('body.content')
-	<h2 class="title">Danh sách thành viên lớp:</h2> {{$stdList[0]->classname}}
+	<h2 class="title">Danh sách thành viên lớp: {{$stdList[0]->classname}}</h2>
 		<div class="container-fluid">
 		<div class="row">
 			<div class="col-md-6"><h4><strong>Tên thành viên</strong></h4></div>

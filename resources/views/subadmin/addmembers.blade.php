@@ -30,5 +30,6 @@
 
 	
 	<button type="submit" class="btn btn-info">Add</button>
+	<a class="btn btn-info" href="{{route('subadmin.viewclass',$id)}}">Quay lại</a>
 	{!!Form::close()!!}
  @endsection

@@ -19,6 +19,7 @@ class CreatePostsTable extends Migration
             $table->integer('ThumbnailID');
             $table->integer('CourseID');
             $table->string('Title');
+            $table->integer('FreeQuestions')->default(5);
             $table->string('Photo')->default(null);
             $table->string('Video')->default(null);
             $table->string('Description')->default(null);

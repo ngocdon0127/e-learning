@@ -4,26 +4,27 @@
 @endsection
 @section('body.content')
 	<div id="fb-root"></div>
- <script>(function(d, s, id) {
-  var js, fjs = d.getElementsByTagName(s)[0];
-  if (d.getElementById(id)) return;
-  js = d.createElement(s); js.id = id;
-  js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.5&appId=1657402167852948";
-  fjs.parentNode.insertBefore(js, fjs);
-}(document, 'script', 'facebook-jssdk'));</script>
-    <h2 class="title">{{$Title . ' : ' . $Description}}</h2>
-    <li class="list-group-item">
-        @if ($Thumbnail == 1)
-            <img class="img-responsive" alt="{{$Title . ' - Evangels English - '}}{{$_SERVER['HTTP_HOST']}}" src="{{'/images/imagePost/' . $Photo}}" />
-        @elseif ($Thumbnail == 2)
-        <div class="embed-responsive embed-responsive-4by3">
-            <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/{{$Video}}" frameborder="0" allowfullscreen></iframe>
-        </div>
-        @endif
-    </li>
-    @if ((auth()->user()) && (auth()->user()->admin == 1))
-        <a class ="col-xs-12 btn btn-primary" href="{{route('post.edit', $PostID)}}">Sửa thông tin bài đăng</a>
-        <a class ="col-xs-12 btn btn-primary" href="{{route('admin.addquestion',$PostID)}}">Thêm câu hỏi</a>
+	<script>(function(d, s, id) {
+	var js, fjs = d.getElementsByTagName(s)[0];
+	if (d.getElementById(id)) return;
+	js = d.createElement(s); js.id = id;
+	js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.5&appId=1657402167852948";
+	fjs.parentNode.insertBefore(js, fjs);
+	}(document, 'script', 'facebook-jssdk'));</script>
+	<h2 class="title">{{$Title}}</h2>
+	<h2 class="description">{{$Description}}</h2>
+	<li class="list-group-item">
+		@if ($Thumbnail == 1)
+			<img class="img-responsive" alt="{{$Title . ' - Evangels English - '}}{{$_SERVER['HTTP_HOST']}}" src="{{'/images/imagePost/' . $Photo}}" />
+		@elseif ($Thumbnail == 2)
+		<div class="embed-responsive embed-responsive-4by3">
+			<iframe class="embed-responsive-item" src="https://www.youtube.com/embed/{{$Video}}" frameborder="0" allowfullscreen></iframe>
+		</div>
+		@endif
+	</li>
+	@if ((auth()->user()) && (auth()->user()->admin == 1))
+		<a class ="col-xs-12 btn btn-primary" href="{{route('post.edit', $PostID)}}">Sửa thông tin bài đăng</a>
+		<a class ="col-xs-12 btn btn-primary" href="{{route('admin.addquestion',$PostID)}}">Thêm câu hỏi</a>
 
 		<a class="col-xs-12 btn btn-danger" data-toggle="modal" href='#modal-id'>Xóa bài đăng này</a>
 		<div class="modal fade" id="modal-id">
@@ -44,22 +45,22 @@
 			</div>
 		</div>
 
-    @endif
-    
-    <script type="text/javascript" charset="UTF-8">
-        var score = 0;
-        var fill = 0;
-        var maxScore = {{$MaxScore}};
-        function ob(x){
-            return document.getElementById(x);
-        }
-        var numQuestion = {!! count($Questions) !!};
-        function check(questionID, answerID, trueAnswerID, nextQuestionID){
-            console.log('start');
-            var date = new Date();
-            var id = 'radio_answer_' + questionID + '_' + answerID;
-            ob(id).checked = true;
-            var id = 'answer_' + questionID + '_' + answerID;
+	@endif
+	
+	<script type="text/javascript" charset="UTF-8">
+		var score = 0;
+		var fill = 0;
+		var maxScore = {{$MaxScore}};
+		function ob(x){
+			return document.getElementById(x);
+		}
+		var numQuestion = {!! count($Questions) !!};
+		function check(questionID, answerID, trueAnswerID, nextQuestionID){
+			console.log('start');
+			var date = new Date();
+			var id = 'radio_answer_' + questionID + '_' + answerID;
+			ob(id).checked = true;
+			var id = 'answer_' + questionID + '_' + answerID;
 
 //                ob(id).disabled = true;
 			var setOfRadio = document.getElementsByName('question_' + questionID);
@@ -95,10 +96,7 @@
 
 				var resultText = 'Đúng ' + score + '/' + maxScore + ' câu.\n';
 				var x = {!! $Comments !!};
-				// console.log("start chấmming");
 				for(var i = x.length - 1; i >= 0; i--) {
-//                    console.log(Math.floor(score / maxScore * 100));
-//                    console.log(min[i]);
 					if (Math.floor(score / maxScore * 100) >= x[i]['min']){
 						resultText += x[i]['comment'];
 						break;
@@ -203,8 +201,6 @@
 						pExamples.innerHTML = 'Examples for "' + t.trim() + '" : ';
 						divDictionary.appendChild(pExamples);
 						divDictionary.appendChild(ulExamples);
-						// window.preventDefault();
-						// window.location = "#modal-id";
 						if (window.getSelection) {
 							if (window.getSelection().empty) {  // Chrome
 							window.getSelection().empty();
@@ -231,11 +227,11 @@
 		<?php $count_answer=1;?>
 		@foreach($Questions as $key => $q)
 			@if ((auth()->user()) && (auth()->user()->admin == 1))
-				<a style="text-decoration: none;" href="{{route('user.viewquestion', $q['id'])}}"><h3 onmouseover="this.style.color = '#f06'" onmouseout="this.style.color = '#933'" class="title" id="title_question_{!! $key + 1 !!}">Câu hỏi số <?php echo $count_answer++; ?>:</h3></a>
+				<a style="text-decoration: none;" href="{{route('user.viewquestion', $q['id'])}}"><h3 onmouseover="this.style.color = '#f06'" onmouseout="this.style.color = '#60c'" class="title" id="title_question_{!! $key + 1 !!}">Câu hỏi số <?php echo $count_answer++; ?>:</h3></a>
 			@else
 			<h3 class="title" id="title_question_{!! $key + 1 !!}">Câu hỏi số <?php echo $count_answer++; ?>:</h3>
 			@endif
-				<h4 class="title">{{$q['Question']}} : {{$q['Description']}}</h4>
+			<h4 class="title">{!! nl2br($q['Question']) . ((strlen($q['Description']) > 0) ? (" :<br /><br /> " . nl2br($q['Description'])) : "") !!}</h4>
 				@if ($q['ThumbnailID'] == 1)
 					@if ($q['Photo'] != null)
 						<li class="list-group-item list-group-item-info">
@@ -248,10 +244,9 @@
 					@endif
 				@elseif ($q['ThumbnailID'] == 2)
 					@if ($q['Video'] != null)
-						<!-- <li class="list-group-item list-group-item-info"> -->
 						<div class="embed-responsive embed-responsive-4by3">
 						<iframe class="embed-responsive-item" src="https://www.youtube.com/embed/{{$q['Video']}}" frameborder="0" allowfullscreen></iframe>
-						</div><!-- </li> -->
+						</div>
 					@endif
 				@endif
 			
@@ -259,15 +254,18 @@
 				@foreach($Bundle[$q['id']] as $k => $a)
 					<li id="answer_{{$q['id']}}_{{$a['id']}}" class="list_answer"  onclick="check({{$q['id']}}, {{$a['id']}}, {{$BundleAnswers[$q['id']]}}, {!! $key + 2 !!})" style="cursor: pointer">
 						<input type="checkbox" id="radio_answer_{{$q['id']}}_{{$a['id']}}" name="question_{{$q['id']}}"/>
-						<span class="answer_content">{!! $a['Detail'] !!}</span>
+						<span class="answer_content">{!! \App\Http\Controllers\AnswersController::underline($a['Detail']) !!}</span>
 					</li>
 
 					<div class="clear"></div>
 				@endforeach
 			</ul>
-
 		@endforeach
 	</ul>
+	@if (($DisplayedQuestions >= 0) && ($DisplayedQuestions < $NumOfQuestions))
+		<p>Bạn đang xem {{$DisplayedQuestions . "/" . $NumOfQuestions}} câu hỏi của bài này.</p>
+		<a href="{{route('user.buy')}}" class="btn btn-info">Purchase to see full post</a>
+	@endif
 	<div class="form-control" id="resultText" style="display: none; height: 200px;">
 		<b class="title" id="writeResult"></b> <br />
 	</div>
@@ -301,11 +299,11 @@
 	</div>
 @endsection
 @section('body.navright')
-	<div class="panel panel-default">
+	<div class="panel panel-default xxx">
 		<div class="panel-heading">
 			Bài đăng cùng khóa
 		</div>
-		<div class="panel-body" style="max-height: 1000px; overflow: auto" id="div_right_bar">
+		<div class="panel-body" id="div_right_bar">
 		@foreach($newpost as $np)
 			<a id="a_smallLink_{{$np['id']}}" style="text-decoration: none;" href="{{route('user.viewpost', $np['id'])}}">
 				<blockquote>

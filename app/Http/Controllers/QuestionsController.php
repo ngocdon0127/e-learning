@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Answers;
 use App\Http\Controllers\Auth\AuthController;
 use App\Questions;
+use App\Posts;
+use App\Spaces;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
@@ -23,15 +25,30 @@ class QuestionsController extends Controller
 			return view('errors.404');
 		}
 		$Question = $Question->toArray();
-		$Answers = Answers::where('QuestionID', '=', $QuestionID)->get()->toArray();
-		return view('viewquestion')->with(compact('Question', 'Answers'));
+		$format = Posts::find($Question['PostID'])->FormatID;
+		if ($format == 1){ // Multiple-choice Question
+			$Answers = Answers::where('QuestionID', '=', $QuestionID)->get()->toArray();
+			return view('viewquestion')->with(compact('Question', 'Answers'));
+		}
+		else if ($format == 2){ // Filled Question
+			$Answers = array();
+			$Spaces = Spaces::where('QuestionID', '=', $QuestionID)->get()->toArray();
+			foreach ($Spaces as $value) {
+				$Answers += array($value['id'] => Answers::where('SpaceID', '=', $value['id'])->get()->toArray());
+			}
+			// dd($Answers);
+			return view('admin.viewfilledquestion')->with(compact('Question', 'Spaces', 'Answers'));
+		}
+		
 	}
 
 	public function addQuestion($PostID){
 		if (!AuthController::checkPermission()){
 			return redirect('auth/login');
 		};
-		return view('admin.addquestion')->with(['PostID' => $PostID]);
+		$post = Posts::find($PostID);
+
+		return view(($post['FormatID'] == 1) ? 'admin.addquestion' : 'admin.addfilledquestion')->with(['PostID' => $PostID]);
 	}
 
 	public function saveQuestion($PostID){
@@ -51,14 +68,10 @@ class QuestionsController extends Controller
 
 				//Photo
 				$file = Request::capture()->file('Photo');
-//              $file = Request::file('Photo');
 				if ($file != null){
 					$question->Photo = 'Question_' . $PostID . '_' . $question->id . "_-Evangels-English-www.evangelsenglish.com_" . "." . $file->getClientOriginalExtension();
 					$file->move(base_path() . '/public/images/imageQuestion/', $question->Photo);
 				}
-
-				// (intval(Posts::orderBy('created_at', 'desc')->first()->id) + 1)
-
 
 				$question->update();
 				break;
@@ -84,7 +97,27 @@ class QuestionsController extends Controller
 			return redirect('/');
 		}
 		$Question = Questions::find($id);
-		return view('admin.editquestion', compact('Question'));
+		$format = Posts::find($Question['PostID'])['FormatID'];
+		// dd($format);
+		switch ($format) {
+			case 1:			// Multiple-choices Question
+				return view('admin.editquestion', compact('Question'));
+				break;
+			case 2:			// Filled Question
+				$Spaces = Spaces::where('QuestionID', '=', $Question['id'])->get()->toArray();
+				$rawAnswers = array();
+				foreach ($Spaces as $key => $value) {
+					$ra = '';
+					$Answers = Answers::where('SpaceID', '=', $value['id'])->get()->toArray();
+					foreach ($Answers as $key => $v) {
+						$ra .= $v['Detail'] . "; ";
+					}
+					$rawAnswers = array_merge($rawAnswers, [$ra]);
+				}
+				return view('admin.editfilledquestion', compact('Question', 'rawAnswers'));
+				break;
+		}
+		
 	}
 
 	/**
@@ -113,13 +146,8 @@ class QuestionsController extends Controller
 					$question = Questions::find($id);
 
 					$file = $request->file('Photo');
-					//        $file = Request::file('Photo');
 					$question->Photo = 'Question_' . $question['PostID'] . '_' . $question->id . "_-Evangels-English-www.evangelsenglish.com_" . "." . $file->getClientOriginalExtension();
 					$file->move(base_path() . '/public/images/imageQuestion/', $question->Photo);
-
-
-					// (intval(Posts::orderBy('created_at', 'desc')->first()->id) + 1)
-
 
 					$question->update();
 				}
@@ -128,7 +156,9 @@ class QuestionsController extends Controller
 				$question->Video = PostsController::getYoutubeVideoID($data['Video']);
 				$question->update();
 		}
-		return redirect(route('user.viewquestion', $question->id));
+		$format = Posts::find($question->PostID)['FormatID'];
+		if ($format == 1)
+			return redirect(route('user.viewquestion', $question->id));
 	}
 
 	/**
@@ -144,11 +174,20 @@ class QuestionsController extends Controller
 		}
 		$question = Questions::find($id);
 		@unlink(public_path('images/imageQuestion/' . $question['Photo']));
-		$answers = Answers::where('QuestionID', '=', $id)->get()->toArray();
-		foreach ($answers as $answer) {
-			Answers::destroy($answer['id']);
-		}
 		$postid = $question['PostID'];
+		$format = Posts::find($postid)['FormatID'];
+		if ($format == 1){
+			$answers = Answers::where('QuestionID', '=', $id)->get()->toArray();
+			foreach ($answers as $answer) {
+				Answers::destroy($answer['id']);
+			}
+		}
+		else if ($format == 2){
+			$spaces = Spaces::where('QuestionID', '=', $id)->get()->toArray();
+			foreach ($spaces as $value) {
+				SpacesController::destroy($value['id']);
+			}
+		}
 		$question->delete();
 		return redirect(route('user.viewpost', $postid));
 	}

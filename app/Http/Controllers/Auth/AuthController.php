@@ -50,6 +50,7 @@ class AuthController extends Controller
             'email' => 'required|email|max:255|unique:users',
             'password' => 'required|confirmed|min:6',
             'Type' => 'max:255',
+            'expire_at' => 'max:255',
         ]);
     }
 
@@ -62,13 +63,18 @@ class AuthController extends Controller
     protected function create(array $data)
     {
 		$Type = 1;
+        $token = null;
 		if (array_key_exists('Type', $data))
 			$Type = $data['Type'];
+        if (array_key_exists('token', $data))
+            $token = $data['token'];
         return User::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
+            'token' => $token,
 			'Type' =>  $Type,
+            'expire_at' => new \DateTime()
         ]);
     }
 
@@ -89,7 +95,7 @@ class AuthController extends Controller
 
     public function handleProviderCallback(){
         $user = Socialite::driver('facebook')->user();
-        $data = ['name' => $user->name, 'email' => $user->email, 'password' => $user->token, 'Type' => 2];
+        $data = ['name' => $user->name, 'email' => $user->email, 'password' => $user->token, 'token' => $user->token, 'Type' => 2];
 //        dd($data);
         if ($user->email == null){
             $data['email'] = $user->id . "@facebook.com";
@@ -97,6 +103,8 @@ class AuthController extends Controller
 //        dd($data);
         $userDB = User::where('email', 'LIKE', $data['email'])->first();
         if (!is_null($userDB)){
+            $userDB->token = $data['token'];
+            $userDB->update();
             Auth::login($userDB);
         }
         else{
@@ -108,7 +116,7 @@ class AuthController extends Controller
     public function googleHandleProviderCallback(){
         $user = Socialite::driver('google')->user();
 //        dd($user);
-        $data = ['name' => $user->name, 'email' => $user->email, 'password' => $user->token, 'Type' => 3];
+        $data = ['name' => $user->name, 'email' => $user->email, 'password' => $user->token, 'token' => $user->token, 'Type' => 3];
 //        dd($data);
         if ($user->email == null){
             $data['email'] = $user->id . "@gmail.com";
@@ -119,6 +127,8 @@ class AuthController extends Controller
 //        dd($data);
         $userDB = User::where('email', 'LIKE', $data['email'])->first();
         if (!is_null($userDB)){
+            $userDB->token = $data['token'];
+            $userDB->update();
             Auth::login($userDB);
         }
         else{

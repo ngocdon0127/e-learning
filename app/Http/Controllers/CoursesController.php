@@ -39,13 +39,11 @@ class CoursesController extends Controller
     public function viewCourse($courseID){
         $posts = Posts::where('CourseID', '=', $courseID)->orderBy('id', 'asc')->paginate(5);
         $newpost = Posts::orderBy('id', 'dsc')->take(5)->get()->toArray();
-        return view('userindex')->with(['Posts' => $posts, 'newpost' => $newpost]);
+        return view('userindex')->with(['Posts' => $posts, 'newpost' => $newpost, 'paginateBaseLink' => '/course/' . $courseID]);
     }
 
     public function addCourse(){
         if (!AuthController::checkPermission()){
-//            RedirectIfAuthenticated::$backPath = 'add/course';
-//            AuthController::$redirectPath = '/admin/adcourse';
             return redirect('auth/login');
         };
         return view('admin.addcourse');
