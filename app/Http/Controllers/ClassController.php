@@ -63,18 +63,18 @@ class ClassController extends Controller
         if ($member->count()) {
             $find = StudentsList::where('UserID','=',$member[0]->id)->where('ClassID','=',$classID)->count();
             if ($find) {
-                return redirect(route('subadmin.addmembers'))->with('error', 'User vừa nhập đã là thành viên của lớp');
+                return redirect(route('subadmin.addmembers',$classID))->with('error', 'User vừa nhập đã là thành viên của lớp');
             }
             else {
                 StudentsList::create([
                 'ClassID'   => $classID,
                 'UserID'    => $member[0]->id
                 ]);
-                return redirect(route('subadmin.addmembers'))->with('error','Thêm thành công');
+                return redirect(route('subadmin.addmembers',$classID))->with('error','Thêm thành công');
             }
         } else { 
           //echo 'User vừa nhập không tồn tại';
-          return redirect(route('subadmin.addmembers'))->with('error', 'User vừa nhập không tồn tại!');
+          return redirect(route('subadmin.addmembers',$classID))->with('error', 'User vừa nhập không tồn tại!');
         }
    }
 
