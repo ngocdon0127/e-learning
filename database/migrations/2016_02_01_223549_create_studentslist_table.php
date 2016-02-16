@@ -1,8 +1,9 @@
+<?php
 
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateThumbnailsTable extends Migration
+class CreateStudentslistTable extends Migration
 {
     /**
      * Run the migrations.
@@ -11,13 +12,11 @@ class CreateThumbnailsTable extends Migration
      */
     public function up()
     {
-        Schema::create('thumbnails', function (Blueprint $table) {
-            $table->increments('id');
+         Schema::create('studentslist', function (Blueprint $table) {
+            $table->string('UserID');
+            $table->string('ClassID');
             $table->timestamps();
-            $table->string('Title');
-            $table->string('Description');
-            $table->string('Format');
-        });
+        });   
     }
 
     /**
@@ -27,6 +26,6 @@ class CreateThumbnailsTable extends Migration
      */
     public function down()
     {
-        Schema::drop('thumbnails');
+        Schema::drop('studentslist');
     }
 }
