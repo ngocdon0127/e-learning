@@ -69,6 +69,14 @@ Route::group(['prefix' => '/admin'], function(){
 		'as'    => "admin.editspace",
 		'uses'  => "SpacesController@update"
 	]);
+	Route::post('/addsubquestion/{questionid}', [
+		'as'    => 'admin.addsubquestion',
+		'uses'  => 'SubquestionsController@savesubquestion'
+	]);
+	Route::post('/editsubquestion/{questionid}', [
+		'as'    => "admin.editsubquestion",
+		'uses'  => "SubquestionsController@update"
+	]);
 	Route::post('/addanswer/{questionid}',[
 	'as'    => 'admin.saveanswer',
 	'uses'  => 'AnswersController@saveanswer'

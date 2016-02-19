@@ -20,7 +20,7 @@ EDIT QUESTION
 			
 		<div class="form-group">
 			{!! Form::label('ThumbnailID', 'Thumbnail : ',['class' => 'control-label']) !!}
-			{!! Form::select('ThumbnailID',\App\Thumbnails::getColumn('Title'), '', ['class'=>'form-control', 'onclick' => 'this.style.background = "white";', 'onchange' => 'configForm()']) !!}
+			{!! Form::select('ThumbnailID', App\ConstsAndFuncs::$THUMBNAILS, '', ['class'=>'form-control', 'onclick' => 'this.style.background = "white";', 'onchange' => 'configForm()']) !!}
 		</div>
 		<div class="form-group" id="divPhoto">
 			{!! Form::label('Photo', 'Photo : ',['class' => 'control-label']) !!}

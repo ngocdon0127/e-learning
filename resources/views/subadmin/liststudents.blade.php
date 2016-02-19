@@ -3,7 +3,9 @@
     Evangels English
 @endsection
 @section('body.content')
+	@if ($count > 0)
 	<h2 class="title">Danh sách thành viên lớp: {{$stdList[0]->classname}}</h2>
+	@endif
 		<div class="container-fluid">
 		<div class="row">
 			<div class="col-md-6"><h4><strong>Tên thành viên</strong></h4></div>
@@ -39,4 +41,3 @@
 		
 	</div>
 @endsection
-

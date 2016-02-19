@@ -16,10 +16,8 @@
 		<div class="imagepost">
 			@if($p['ThumbnailID'] == '1')
 				<img class='img-responsive' alt="{{ $p['Title'] . ' - Evangels English - '}}{{$_SERVER['HTTP_HOST']}}" src="/images/imagePost/{{$p['Photo']}}" />
-				@elseif($p['ThumbnailID'] == '2')
-				<div class="embed-responsive embed-responsive-4by3">
-					<iframe onmousedown="alert(1)" class="embed-responsive-item" src="https://www.youtube.com/embed/{{$p['Video']}}" frameborder="0" allowfullscreen></iframe>
-				</div>
+			@elseif ($p['ThumbnailID'] == 2)
+				<img class="img-responsive" alt="{{$p['Title'] . ' - Evangels English - '}}{{$_SERVER['HTTP_HOST']}}" src="http://img.youtube.com/vi/{{$p['Video']}}/0.jpg" />
 			@endif
 		</div>
 		<p class="descriptionpost">

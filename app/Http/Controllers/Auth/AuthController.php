@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\User;
 use Validator;
 use App\Http\Controllers\Controller;
+use App\ConstsAndFuncs;
 use Illuminate\Foundation\Auth\ThrottlesLogins;
 use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
 use Socialite;
@@ -79,7 +80,7 @@ class AuthController extends Controller
     }
 
     public static function checkPermission(){
-        if ((!auth()->user()) || (auth()->user()->admin != 1)) {
+        if ((!auth()->user()) || (auth()->user()->admin < ConstsAndFuncs::PERM_ADMIN)) {
             return false;
         }
         return true;

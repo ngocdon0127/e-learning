@@ -24,8 +24,8 @@ class ClassFormRequest extends Request
     public function rules()
     {
         return [
-            'name'      => 'required|min:10',
-            'address'   => 'required|min:4'
+            'classname'      => 'required|min:10',
+            'classaddress'   => 'required|min:4'
         ];
     }
 }

@@ -9,7 +9,7 @@
 		<li class="list-group-item list-group-item-warning"><a href="{{route('admin.viewcourse',$course['id'])}}">{{$course['Title']}}</a></li>
 	@endforeach
 	</ul>
-	@if ((auth()->user()) && (auth()->user()->admin == 1))
+	@if ((auth()->user()) && (auth()->user()->admin >= App\ConstsAndFuncs::PERM_ADMIN))
 	<a href="{{route('admin.addcourse')}}" class="btn btn-primary">Add Course</a>
 	<a href="{{route('admin.addpost')}}" class="btn btn-primary">Add Post</a>
 	 @endif

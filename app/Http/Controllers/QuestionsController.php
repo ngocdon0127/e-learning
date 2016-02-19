@@ -4,9 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Answers;
 use App\Http\Controllers\Auth\AuthController;
+use App\Http\Controllers\SubquestionsController;
 use App\Questions;
 use App\Posts;
 use App\Spaces;
+use App\Subquestions;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
@@ -20,37 +22,91 @@ class QuestionsController extends Controller
 	protected static $imageQuestionPath = '/public/images/imageQuestion/';
 
 	public function viewQuestion($QuestionID){
+		if (!AuthController::checkPermission()){
+			return redirect('/');
+		}
 		$Question = Questions::find($QuestionID);
 		if (count($Question) < 1){
 			return view('errors.404');
 		}
 		$Question = $Question->toArray();
-		$format = Posts::find($Question['PostID'])->FormatID;
-		if ($format == 1){ // Multiple-choice Question
-			$Answers = Answers::where('QuestionID', '=', $QuestionID)->get()->toArray();
-			return view('viewquestion')->with(compact('Question', 'Answers'));
-		}
-		else if ($format == 2){ // Filled Question
-			$Answers = array();
-			$Spaces = Spaces::where('QuestionID', '=', $QuestionID)->get()->toArray();
-			foreach ($Spaces as $value) {
-				$Answers += array($value['id'] => Answers::where('SpaceID', '=', $value['id'])->get()->toArray());
-			}
-			// dd($Answers);
-			return view('admin.viewfilledquestion')->with(compact('Question', 'Spaces', 'Answers'));
+		$format = $Question['FormatID'];
+
+		switch ($format){
+			case 1:		// Multiple-choice Question
+				$Answers = Answers::where('QuestionID', '=', $QuestionID)->get()->toArray();
+				return view('viewquestion')->with(compact('Question', 'Answers'));
+				break;
+			case 2:		// Filled Question
+				$Answers = array();
+				$Spaces = Spaces::where('QuestionID', '=', $QuestionID)->get()->toArray();
+				foreach ($Spaces as $value) {
+					$Answers += array($value['id'] => Answers::where('SpaceID', '=', $value['id'])->get()->toArray());
+				}
+				return view('admin.viewfilledquestion')->with(compact('Question', 'Spaces', 'Answers'));
+			case 3:
+				$Answers = Answers::where('QuestionID', '=', $QuestionID)->get()->toArray();
+				return view('admin.viewarangedquestion')->with(compact('Question', 'Answers'));
+			case 4:
+				$Answers = Answers::where('QuestionID', '=', $QuestionID)->get()->toArray();
+				return view('admin.viewfillcharacterquestion')->with(compact('Question', 'Answers'));
+
+				// dd($Answers);
+				return view('admin.viewfilledquestion')->with(compact('Question', 'Spaces', 'Answers'));
+				break;
+			case 5:		// Connected Question
+				$Subquestions = Subquestions::where('QuestionID', '=', $QuestionID)->get()->toArray();
+				$Answers = array();
+				foreach ($Subquestions as $s) {
+					$Answers += [$s['id'] => Answers::where('SubQuestionID', '=', $s['id'])->get()->toArray()];
+				}
+				return view('admin.viewconnectedquestion')->with(compact('Question', 'Subquestions', 'Answers'));
+				break;
+			case 6:		// Drag Drop Question
+				$Answers = Answers::where('QuestionID', '=', $QuestionID)->get()->toArray();
+				return view('admin.viewdragdropquestion')->with(compact('Question', 'Answers'));
+				break;
+			default:
+				return '1';
 		}
 		
 	}
 
 	public function addQuestion($PostID){
 		if (!AuthController::checkPermission()){
-			return redirect('auth/login');
+			return redirect('/login');
 		};
-		$post = Posts::find($PostID);
-
-		return view(($post['FormatID'] == 1) ? 'admin.addquestion' : 'admin.addfilledquestion')->with(['PostID' => $PostID]);
+		if (array_key_exists('FormatID', $_GET)){
+			switch ($_GET['FormatID']) {
+				case 1:
+					$view = 'admin.addquestion';
+					break;
+				case 2:
+					$view = 'admin.addfilledquestion';
+					break;
+				case 3:
+					$view = 'admin.addarangedquestion';
+					break;
+				case 4:
+					$view = 'admin.addfillcharaterquestion';
+					break;
+				case 5:
+					$view = 'admin.addconnectedquestion';
+					break;
+				case 6:
+					$view = 'admin.adddragdropquestion';
+					break;
+				default:
+					$view = 'admin.addquestion';
+					break;
+			}
+		}
+		else {
+			$view = 'admin.addquestion';
+		}
+		return view($view)->with(['PostID' => $PostID]);
 	}
-
+	
 	public function saveQuestion($PostID){
 		if (!AuthController::checkPermission()){
 			return redirect('/');
@@ -61,6 +117,8 @@ class QuestionsController extends Controller
 		$question->ThumbnailID = $data['ThumbnailID'];
 		$question->Question = $data['Question'];
 		$question->Description = $data['Description'];
+		$question->FormatID = $data['FormatID'];
+		$a = $data['Answer'];
 		switch ($data['ThumbnailID']){
 			case '1': // Photo
 				$question->save();
@@ -81,26 +139,32 @@ class QuestionsController extends Controller
 				$question->save();
 				break;
 		}
+		// var_dump($data);
+
+
+		if ($question->FormatID == '3' || $question->FormatID == '4') {
+
+			$answer = new Answers();
+			$answer->Detail = $a;
+			$answer->QuestionID = $question->id;
+			$answer->Logical = 1;
+			$answer->save();
+		}
 		echo $question->id;
 		return;
 	}
 
-	/**
-	 * Show the form for editing the specified resource.
-	 *
-	 * @param  int  $id
-	 * @return \Illuminate\Http\Response
-	 */
 	public function edit($id)
 	{
 		if (!AuthController::checkPermission()){
 			return redirect('/');
 		}
 		$Question = Questions::find($id);
-		$format = Posts::find($Question['PostID'])['FormatID'];
+		$format = $Question['FormatID'];
 		// dd($format);
 		switch ($format) {
 			case 1:			// Multiple-choices Question
+			case 6:			// Drag Drop Question
 				return view('admin.editquestion', compact('Question'));
 				break;
 			case 2:			// Filled Question
@@ -115,6 +179,26 @@ class QuestionsController extends Controller
 					$rawAnswers = array_merge($rawAnswers, [$ra]);
 				}
 				return view('admin.editfilledquestion', compact('Question', 'rawAnswers'));
+				break;
+
+			case 3:
+				return view('admin.editarangedquestion', compact('Question'));
+				break;
+			case 4:
+				return view('admin.editfillcharacterquestion', compact('Question'));
+
+			case 5:			// Connected Question
+				$sq = Subquestions::where('QuestionID', '=', $id)->get()->toArray();
+				$Answers = array();
+				$old_answers = array();
+				$Subquestions = array();
+				foreach ($sq as $s) {
+					$Subquestions = array_merge($Subquestions, [$s['Question']]);
+					$a = Answers::where('SubQuestionID', '=', $s['id'])->first()->toArray();
+					$Answers += [$s['id'] => $a];
+					$old_answers = array_merge($old_answers, [$a['Detail']]);
+				}
+				return view('admin.editconnectedquestion')->with(compact('Question', 'Subquestions', 'Answers', 'old_answers'));
 				break;
 		}
 		
@@ -156,17 +240,9 @@ class QuestionsController extends Controller
 				$question->Video = PostsController::getYoutubeVideoID($data['Video']);
 				$question->update();
 		}
-		$format = Posts::find($question->PostID)['FormatID'];
-		if ($format == 1)
-			return redirect(route('user.viewquestion', $question->id));
+		return redirect(route('user.viewquestion', $question->id));
 	}
 
-	/**
-	 * Remove the specified resource from storage.
-	 *
-	 * @param  int  $id
-	 * @return \Illuminate\Http\Response
-	 */
 	public static function destroy($id)
 	{
 		if (!AuthController::checkPermission()){
@@ -175,18 +251,38 @@ class QuestionsController extends Controller
 		$question = Questions::find($id);
 		@unlink(public_path('images/imageQuestion/' . $question['Photo']));
 		$postid = $question['PostID'];
-		$format = Posts::find($postid)['FormatID'];
-		if ($format == 1){
-			$answers = Answers::where('QuestionID', '=', $id)->get()->toArray();
-			foreach ($answers as $answer) {
-				Answers::destroy($answer['id']);
-			}
-		}
-		else if ($format == 2){
-			$spaces = Spaces::where('QuestionID', '=', $id)->get()->toArray();
-			foreach ($spaces as $value) {
-				SpacesController::destroy($value['id']);
-			}
+		$format = $question['FormatID'];
+
+		switch ($format){
+			case 1:
+				$answers = Answers::where('QuestionID', '=', $id)->get()->toArray();
+				foreach ($answers as $answer) {
+					Answers::destroy($answer['id']);
+				}
+				break;
+			case 2:
+				$spaces = Spaces::where('QuestionID', '=', $id)->get()->toArray();
+				foreach ($spaces as $value) {
+					SpacesController::destroy($value['id']);
+				}
+				break;
+			case 3:
+				$answers = Answers::where('QuestionID', '=', $id)->get()->toArray();
+				foreach ($answers as $answer) {
+					Answers::destroy($answer['id']);
+				}
+				break;
+			case 4:
+				$answers = Answers::where('QuestionID', '=', $id)->get()->toArray();
+				foreach ($answers as $answer) {
+					Answers::destroy($answer['id']);
+				}
+				break;
+			case 5:
+				$subq = Subquestions::where('QuestionID', '=', $id)->get()->toArray();
+				foreach ($subq as $s) {
+					SubquestionsController::destroy($s['id']);
+				}
 		}
 		$question->delete();
 		return redirect(route('user.viewpost', $postid));

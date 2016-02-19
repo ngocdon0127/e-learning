@@ -39,8 +39,8 @@ class ClassController extends Controller
 
    public function saveclass(ClassFormRequest $request){
 
-    $name = $request->input('name');
-    $address = $request->input('address');
+    $name = $request->input('classname');
+    $address = $request->input('classaddress');
 
     Classes::create([
         'classname'          => $name,
@@ -70,7 +70,7 @@ class ClassController extends Controller
                 'ClassID'   => $classID,
                 'UserID'    => $member[0]->id
                 ]);
-                return redirect(route('subadmin.addmembers',$classID))->with('error','Thêm thành công');
+                return redirect(route('subadmin.addmembers',$classID))->with('status','Thêm thành công');
             }
         } else { 
           //echo 'User vừa nhập không tồn tại';

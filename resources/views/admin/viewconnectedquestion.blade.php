@@ -3,23 +3,7 @@
 	Question {{$Question['id']}} - Evangels English
 @endsection
 @section('body.content')
-	<h2 class="title">Câu hỏi:</h2>
-	<p>
-	<?php
-		$subP = \App\Questions::getFilledQuestion($Question['Question']);
-	?>
-	@foreach ($subP as $value)
-		{!! nl2br($value) !!}
-		@if (count($Spaces) > 0)
-		<select>
-			@foreach ($Answers[current($Spaces)['id']] as $a)
-				<option value="{{$a['Logical']}}">{{$a['Detail']}}</option>
-			@endforeach
-			<?php array_shift($Spaces) ?>
-		</select>
-		@endif
-	@endforeach
-	</p>
+	<h2 class="title">Câu hỏi: {!! nl2br($Question['Question']) !!}</h2>
 	@if ($Question['ThumbnailID'] == 1)
 		@if ($Question['Photo'] != null)
 			<li class="list-group-item ">
@@ -35,6 +19,14 @@
 	@endif
 
 	<h2 class="title">{!! nl2br($Question['Description']) !!}</h2>
+	<ul class="list-group">
+		@foreach($Subquestions as $s)
+			<li class="list-group-item list-group-item-info">
+				{!! $s['Question'] !!} | {!! $Answers[$s['id']][0]['Detail']!!}
+			</li>
+			<div class="clear"></div>
+		@endforeach
+	</ul>
 	@if ((auth()->user()) && (auth()->user()->admin >= App\ConstsAndFuncs::PERM_ADMIN))
 	<a class="btn btn-primary col-xs-12" href="{{route('question.edit', $Question['id'])}}">Sửa câu hỏi</a>
 	<a class="btn btn-primary col-xs-12" href="{{route('user.viewpost',$Question['PostID'])}}">Quay lại bài đăng</a>

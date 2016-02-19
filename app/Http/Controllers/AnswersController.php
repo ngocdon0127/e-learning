@@ -110,9 +110,25 @@ class AnswersController extends Controller
             $answer['Detail'] = $this->s2c_convert($answer['Detail']);
         }
         $question = Questions::find($QuestionID)->toArray();
+        switch ($question['FormatID']) {
+            case 1:
+                $view = 'admin.editanswer';
+                break;
+            case 6:
+                $view = 'admin.editdragdropanswer';
+                break;
+            default:
+                $view = 'admin.editanswer';
+                break;
+        }
 
         $photo = $question['Photo'];
-        return view('admin.editanswer')->with(['PostID' => $question['PostID'], "QuestionID" => $QuestionID, 'Answers' => $Answers, 'Photo' => $photo]);
+        return view($view)->with([
+            'PostID' => $question['PostID'], 
+            "QuestionID" => $QuestionID, 
+            'Answers' => $Answers, 
+            'Photo' => $photo
+        ]);
     }
 
     public static $clientTag = ['[u]', '[/u]'];

@@ -11,12 +11,8 @@
 		{!! Form::select('CourseID', \App\Courses::getColumn('Title'), '', ['class'=>'form-control', 'onclick' => 'this.style.background = "white"']) !!}
 	</div>
 	<div class="form-group">
-		{!! Form::label('FormatID', 'Format : ',['class' => 'control-label']) !!}
-		{!! Form::select('FormatID', \App\Formats::getColumn('FormatTitle'), '', ['class'=>'form-control', 'onclick' => 'this.style.background = "white"']) !!}
-	</div>
-	<div class="form-group">
 		{!! Form::label('ThumbnailID', 'Thumbnail : ',['class' => 'control-label']) !!}
-		{!! Form::select('ThumbnailID',\App\Thumbnails::getColumn('Title'), '', ['class'=>'form-control', 'onclick' => 'this.style.background = "white";', 'onchange' => 'configForm()']) !!}
+		{!! Form::select('ThumbnailID', App\ConstsAndFuncs::$THUMBNAILS, '', ['class'=>'form-control', 'onclick' => 'this.style.background = "white";', 'onchange' => 'configForm()']) !!}
 	</div>
 	<div class="form-group" id="divPhoto">
 		{!! Form::label('Photo', 'Photo : ',['class' => 'control-label']) !!}
@@ -91,8 +87,8 @@
 		{!! Form::text('Description','',['class'=>'form-control']) !!}
 	</div>
 	<div class="form-group">
-		{!! Form::label('FreeQuestions', 'Số câu hỏi cho khách xem miễn phí : ',['class' => 'control-label']) !!}
-		{!! Form::text('FreeQuestions', '5',['class'=>'form-control']) !!}
+		{!! Form::label('NoOfFreeQuestions', 'Số câu hỏi cho khách xem miễn phí : ',['class' => 'control-label']) !!}
+		{!! Form::text('NoOfFreeQuestions', '5',['class'=>'form-control']) !!}
 	</div>
 	<div class="form-group">
 		{!! Form::label('Hashtag', 'Hashtag : (mỗi tag cách nhau 1 dấu cách.) (ex: #grammar #PresentSimple)',['class' => 'control-label']) !!}

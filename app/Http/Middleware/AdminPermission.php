@@ -4,6 +4,7 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Auth;
+use App\ConstsAndFuncs;
 
 class AdminPermission
 {
@@ -16,7 +17,7 @@ class AdminPermission
      */
     public function handle($request, Closure $next)
     {
-        if (!Auth::check() or auth()->user()->admin != 1) {
+        if (!Auth::check() or auth()->user()->admin < ConstsAndFuncs::PERM_SUBADMIN) {
                     return view('errors.404');
                 }
         return $next($request);

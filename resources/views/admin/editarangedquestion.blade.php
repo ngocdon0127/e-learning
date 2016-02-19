@@ -11,7 +11,7 @@ EDIT QUESTION
 @endsection
 @section('body.content')
 	 <div class="container-fluid">
-		<h1 class="col-md-offset-3 title">Chỉnh sửa câu hỏi</h1>
+		<h1 class="title">Chỉnh sửa câu hỏi sắp xếp</h1>
  
 		{!! Form::model($Question, ['method' => 'PUT', 'name' => 'editQuestionForm', 'route' => ['question.update', $Question['id']], 'files' => true]) !!}
 
@@ -19,7 +19,7 @@ EDIT QUESTION
 			{!! Form::label('Question','Question : ',['class' => 'control-label']) !!}
 			{!! Form::text('Question', null,['class'=>'form-control']) !!}
 		</div>
-		<div class="form-group">
+		<div class="form-group" style="display: none;">
 			{!! Form::label('ThumbnailID', 'Thumbnail : ',['class' => 'control-label']) !!}
 			{!! Form::select('ThumbnailID', App\ConstsAndFuncs::$THUMBNAILS, '', ['class'=>'form-control', 'onclick' => 'this.style.background = "white";', 'onchange' => 'configForm()']) !!}
 		</div>

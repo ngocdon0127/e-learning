@@ -1,10 +1,10 @@
 @extends('layouts.main')
 
- @section('head.title')
- ADD CLASS
- @endsection
+@section('head.title')
+ADD CLASS
+@endsection
 
- @section('body.content')
+@section('body.content')
 	<h2 class="title">Thêm lớp học mới</h2>
 	@if (count($errors) > 0)
 		<div class="alert alert-danger">
@@ -23,12 +23,12 @@
 		])
 	!!}
 
-	{!!Form::label('name', 'Class name:')!!}
-	{!!Form::text('name','',['class'=>'form-control', 'id' => 'name', 'placeholder' => 'Nhập tên lớp học']) !!}
+	{!!Form::label('classname', 'Class name:')!!}
+	{!!Form::text('classname','',['class'=>'form-control', 'id' => 'classname', 'placeholder' => 'Nhập tên lớp học']) !!}
 
-	{!!Form::label('address', 'Address class:')!!}
-	{!!Form::text('address','',['class'=>'form-control', 'id' => 'address', 'placeholder' => 'Nhập địa chỉ của lớp học']) !!}
+	{!!Form::label('classaddress', 'Address class:')!!}
+	{!!Form::text('classaddress','',['class'=>'form-control', 'id' => 'classaddress', 'placeholder' => 'Nhập địa chỉ của lớp học']) !!}
 	
 	<button type="submit" class="btn btn-primary">Save class</button>
 	{!! Form::close() !!}
- @endsection
+@endsection

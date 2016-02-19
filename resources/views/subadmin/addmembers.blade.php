@@ -1,10 +1,10 @@
 @extends('layouts.main')
 
- @section('head.title')
- ADD MEMBERS
- @endsection
+@section('head.title')
+ADD MEMBERS
+@endsection
 
- @section('body.content')
+@section('body.content')
 	{!!Form::open([
 		'route'		=> ['subadmin.savemembers', $id],
 		'method'	=> 'POST',
@@ -25,6 +25,9 @@
 	@if(Session::get('error') != NULL)
 	<p class="alert alert-danger"> {{Session::get('error')}}</p>
 	@endif
+	@if (Session::get('status') != NULL)
+	<p class="alert alert-success"> {{Session::get('status')}}</p>
+	@endif
 	{!!Form::label('email', 'Email User: ')!!}
 	{!!Form::text('email','',['class'	=> 'form-control', 'id'	=> 'email', 'placeholder'	=> 'Nhập vào địa chỉ email', 'type'	=> 'email'])	!!}
 
@@ -32,4 +35,4 @@
 	<button type="submit" class="btn btn-info">Add</button>
 	<a class="btn btn-info" href="{{route('subadmin.viewclass',$id)}}">Quay lại</a>
 	{!!Form::close()!!}
- @endsection
+@endsection

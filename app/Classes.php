@@ -8,8 +8,8 @@ class Classes extends Model
 {
     protected $table = 'classes';
     protected $fillable = [
-    	'name',
-    	'address',
+    	'classname',
+    	'classaddress',
     	'subAdminID'
     ];
 }
