@@ -74,7 +74,7 @@ class QuestionsController extends Controller
 
 	public function addQuestion($PostID){
 		if (!AuthController::checkPermission()){
-			return redirect('/login');
+			return redirect('/auth/login');
 		};
 		if (array_key_exists('FormatID', $_GET)){
 			switch ($_GET['FormatID']) {
