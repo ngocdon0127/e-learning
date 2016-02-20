@@ -401,7 +401,7 @@
 			@endif
 			@if($q['FormatID'] == 4)
 			<!-- Điền chữ cái -->
-				<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 fill_word" style="padding: 0; margin-bottom: 20px;">
+				<!-- <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 fill_word" style="padding: 0; margin-bottom: 20px;">
 					<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 fw_left" style="border: #ecf0f1 solid 1px;">
 						<h2 class="title text-center fw_left_above" id="h2_fillcharacter_{{$q['id']}}">{{$q['Question']}}</h2>
 						<input type="text" id="input_fillcharacter_{{$q['id']}}" class="form-control fw_left_below" value="" placeholder="Input here..." required="required" pattern="" title="Nhập câu trả lời">
@@ -416,7 +416,29 @@
 								@endif
 						@endif
 					</div>
-				</div>
+				</div> -->
+				<table class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style="padding: 0; margin-bottom: 20px;">
+					<tr style="border: #ecf0f1 solid 1px;">
+						<td class="col-xs-6 col-sm-6 col-md-6 col-lg-6" style="padding: auto auto">
+							<h2 style="font-size: 25px" class="title text-center fw_left_above" id="h2_fillcharacter_{{$q['id']}}">{{$q['Question']}}</h2>
+						</td>
+						<td class="col-xs-6 col-sm-6 col-md-6 col-lg-6" style="padding: 0" rowspan="2">
+							@if ($q['Photo'] != null)
+								@if ((auth()->user()) && (auth()->user()->admin == 1))
+									<a style="text-decoration: none;" href="{{route('user.viewquestion', $q['id'])}}"><img class="img-responsive" alt="{{$q['Question'] . ' - Evangels English - '}}{{$_SERVER['HTTP_HOST']}}" src="/images/imageQuestion/{{$q['Photo']}}" /></a>
+								@else
+									<img class="img-responsive" alt="{{$q['Question'] . ' - Evangels English - '}}{{$_SERVER['HTTP_HOST']}}" src="/images/imageQuestion/{{$q['Photo']}}" />
+								@endif
+							@endif
+						</td>
+					</tr>
+					<tr style="border: #ecf0f1 solid 1px;">
+						<td class="col-xs-6 col-sm-6 col-md-6 col-lg-6" style="padding: auto auto">
+							<input style="margin: 0" type="text" id="input_fillcharacter_{{$q['id']}}" class="form-control fw_left_below" value="" placeholder="Input here..." required="required" pattern="" title="Nhập câu trả lời">
+							<input style="margin: 0" type="hidden" id="answer_fillcharacter_{{$q['id']}}" value="{{$AnswersFor4[$q['id']]['Detail']}}" />
+						</td>
+					</tr>
+				</table>
 			<!-- End of Điền chữ cái -->
 			@endif
 		@endforeach
