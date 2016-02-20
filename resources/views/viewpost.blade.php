@@ -437,8 +437,8 @@
 		<a href="{{route('user.buy')}}" class="btn btn-info">Purchase to see full post</a>
 	@endif
 	<script type="text/javascript">
-		$('div[class="btn-group bootstrap-select"').css("width","auto");
-		$('button[class="btn dropdown-toggle btn-default"]').css({"background":"#e0f0ff","color":"#993333","font-weight":"bold"});
+		jQuery('div[class="btn-group bootstrap-select"').css("width","auto");
+		jQuery('button[class="btn dropdown-toggle btn-default"]').css({"background":"#e0f0ff","color":"#993333","font-weight":"bold"});
 		$(document).ready(function(){
 			// var max_height = 0;
 			//Duyệt qua 3 cột để lấy kích thước của cột lớn nhất
@@ -453,19 +453,19 @@
 			// $(".fw_left_above").height(max_height * 0.7 - 30);
 			// // $(".fw_left_above").css({"top":"50%","margin-bottom":h2_height*0.5});
 			// $(".fw_left_below").height(max_height * 0.3 - 30);
-			var setOfDivs = document.getElementsByClassName('fill_word');
-			console.log(setOfDivs.length);
-			for (var i = 0; i < setOfDivs.length; i++) {
-				console.log('i = ' + i);
-				var max_height = setOfDivs[i].children[1].children[0].clientHeight;
-				console.log(max_height);
-				// setOfDivs[i].children[0].style.height =  (max_height + 60) + "px";
-				setOfDivs[i].children[0].children[0].style.height = (max_height * 0.7 - 30) + "px";
-				console.log(setOfDivs[i].children[0].children[0].nodeName);
-				setOfDivs[i].children[0].children[1].style.height = (max_height * 0.3 - 15) + "px";
-				console.log(setOfDivs[i].children[0].children[1].nodeName);
-				console.log('set');
-			};
+			// var setOfDivs = document.getElementsByClassName('fill_word');
+			// console.log(setOfDivs.length);
+			// for (var i = 0; i < setOfDivs.length; i++) {
+			// 	console.log('i = ' + i);
+			// 	var max_height = setOfDivs[i].children[1].children[0].clientHeight;
+			// 	console.log(max_height);
+			// 	// setOfDivs[i].children[0].style.height =  (max_height + 60) + "px";
+			// 	setOfDivs[i].children[0].children[0].style.height = (max_height * 0.7 - 30) + "px";
+			// 	console.log(setOfDivs[i].children[0].children[0].nodeName);
+			// 	setOfDivs[i].children[0].children[1].style.height = (max_height * 0.3 - 15) + "px";
+			// 	console.log(setOfDivs[i].children[0].children[1].nodeName);
+			// 	console.log('set');
+			// };
 
 		});
 		function checkFilledQuestions(){
