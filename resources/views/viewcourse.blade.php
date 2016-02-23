@@ -16,7 +16,7 @@
 			</li>
 		@endforeach
 	</ul>
-	@if ((auth()->user()) && (auth()->user()->admin == 1))
+	@if ((auth()->user()) && (auth()->user()->admin >= App\ConstsAndFuncs::PERM_ADMIN))
 		<a class="col-xs-12 btn btn-primary" href="{{route('course.edit', $CourseID)}}">Sửa thông tin khóa học</a>
 		<a class="col-xs-12 btn btn-primary" href="{{route('admin.addpost')}}">Thêm bài đăng mới</a>
 		<a class="col-xs-12 btn btn-danger" data-toggle="modal" href='#modal-id'>Xóa khóa học này</a>
