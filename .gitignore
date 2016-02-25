@@ -8,3 +8,7 @@
 browscap*
 public/images/imagePost/*
 public/images/imageQuestion/*
+public/images/imageSubquestion/*
+public/images/imageAnswer/*
+*.sublime-project
+*.sublime-workspace

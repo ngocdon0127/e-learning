@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Answers;
 use App\Http\Controllers\Auth\AuthController;
+use App\Http\Controllers\AnswersController;
 use App\Posts;
 use App\Questions;
 use Illuminate\Http\Request;
@@ -218,12 +219,17 @@ class AnswersController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public static function destroy($id)
     {
         if (!AuthController::checkPermission()){
             return redirect('/');
         }
+        // return redirect('/');
         $answer = Answers::find($id);
+        if (count($answer) < 1){
+            return redirect('/');
+        }
+        @unlink(public_path('images/imageAnswer/' . $answer['Photo']));
         $answer->delete();
     }
 }

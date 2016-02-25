@@ -27,7 +27,7 @@ EDIT QUESTION
 			{!! Form::select('ThumbnailID', App\ConstsAndFuncs::$THUMBNAILS, '', ['class'=>'form-control', 'onclick' => 'this.style.background = "white";', 'onchange' => 'configForm()']) !!}
 		</div>
 		<div class="form-group" id="divPhoto">
-			{!! Form::label('Photo', 'Photo : ',['class' => 'control-label']) !!}
+			{!! Form::label('Photo', 'Ảnh mới (Optional) : ',['class' => 'control-label']) !!}
 			{!! Form::file('Photo', ['accept' => 'image/jpeg, image/png, image/gif']) !!}
 		</div>
 		<div class="form-group" id="divVideo">
@@ -104,6 +104,8 @@ EDIT QUESTION
 				return document.getElementById(x);
 			}
 
+			var acceptedType = ['image/jpeg', 'image/png', 'image/gif'];
+
 			function configForm(){
 				switch (ob('ThumbnailID').value){
 					case '1':
@@ -128,7 +130,6 @@ EDIT QUESTION
 			function submitForm(){
 				switch (ob('ThumbnailID').value){
 					case '1':  // Photo
-						var acceptedType = ['image/jpeg', 'image/png', 'image/gif'];
 						//                        console.log('clicked');
 						var photo = ob('Photo');
 						if (photo.files.length <= 0){
@@ -212,7 +213,7 @@ EDIT QUESTION
 					data: fd,
 					processData: false,
 					success: function (data) {
-						console.log(data);
+						// console.log(data);
 						// return;
 						if (count < 1){
 								window.location = '/question/{{$Question["id"]}}';
@@ -232,10 +233,10 @@ EDIT QUESTION
 			{!! Form::close() !!}
 </div>
 		<div class="container-fluid">
-			{!! Form::open(['name' => 'editSubQuestionForm', 'route' => ['admin.editsubquestion', $Question['id']],'class'=>'form-group']) !!}
+			{!! Form::open(['name' => 'editSubQuestionForm', 'route' => ['admin.editsubquestion', $Question['id']], 'class'=>'form-group', 'files' => true]) !!}
 
 			<div class="form-group">
-					{!! Form::label('Detail', 'Nhập các hàng: ',['class'=>'control-label']) !!}
+					{!! Form::label('Detail', 'Nhập các hàng: (Phải up lại ảnh)',['class'=>'control-label']) !!}
 						<script type="text/javascript">
 							var count = {{ count($Subquestions) }};
 							var minAnswer = count;
@@ -276,16 +277,22 @@ EDIT QUESTION
 
 									// children[1] is a coresponding textarea
 									div.children[1].id = 'ta_answer' + i;
-									div.children[1].setAttribute('name', div.children[1].id);
 
-									
+									// children[2] & children[3] is inputs[type=file]
+									div.children[2].id = 'subquestion_photo_' + i;
+									div.children[3].id = 'answer_photo_' + i;
+									div.children[2].name = div.children[2].id;
+									div.children[3].name = div.children[3].id;
+
+									// children[4] is a button which allow to delete answer i.
+									div.children[1].setAttribute('name', div.children[1].id);
 									div.setAttribute('class','div_i');
 									div.children[0].setAttribute('class','col-sm-12');
-									div.children[2].setAttribute('class','children btn btn-danger');
+									div.children[4].setAttribute('class','children btn btn-danger');
 
-									// children[2] is a button which allow to delete answer i.
-									div.children[2].setAttribute('onclick', 'xoa("divanswer' + i + '")');
-									div.children[3].setAttribute('onclick', 'addTag("u", "' + i + '")');
+
+									div.children[4].setAttribute('onclick', 'xoa("divanswer' + i + '")');
+									div.children[5].setAttribute('onclick', 'addTag("u", "' + i + '")');
 									console.log('finish update ' + i);
 								}
 								ob('result').value = resultQuestion;
@@ -329,16 +336,37 @@ EDIT QUESTION
 								divElement.id = "divanswer" + count;
 								ob('answers').appendChild(divElement);
 								divElement.appendChild(e);
-								var hiddenTextarea = document.createElement('textarea');
-								hiddenTextarea.style.display = 'inline';
-								hiddenTextarea.setAttribute('class', 'col-sm-12');
-								hiddenTextarea.setAttribute('style', 'width: 45%');
-								divElement.appendChild(hiddenTextarea);
+
+								var taAnswer = document.createElement('textarea');
+								taAnswer.style.display = 'inline';
+								taAnswer.setAttribute('class', 'col-sm-12');
+								taAnswer.setAttribute('style', 'width: 45%');
+								divElement.appendChild(taAnswer);
+
+								var a = '';
+								for (var i = 0; i < acceptedType.length; i++) {
+									a += acceptedType[i] + ', ';
+								}
+								var file1 = document.createElement('input');
+								file1.setAttribute('type', 'file');
+								file1.setAttribute('accept', 'image/jpeg, image/png, image/gif');
+								file1.style.width = '49%';
+								file1.style.display = 'inline';
+								divElement.appendChild(file1);
+
+								var file2 = document.createElement('input');
+								file2.setAttribute('type', 'file');
+								file2.setAttribute('accept', a);
+								file2.style.width = '45%';
+								file2.style.display = 'inline';
+								divElement.appendChild(file2);
+
 								var btnDel = document.createElement('input');
 								btnDel.value = 'Xóa';
 								btnDel.type = 'button';
 								btnDel.setAttribute('onClick','xoa("' + divElement.id + '")');
 								divElement.appendChild(btnDel);
+
 								var uButton = document.createElement('input');
 								uButton.type = 'button';
 								uButton.setAttribute('value', 'Gạch chân');
