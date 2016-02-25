@@ -7,6 +7,10 @@
 	<h1 class="title">Sửa bài viết</h1>
 	{!! Form::model($Post, ['method' => 'PUT', 'name' => 'editPostForm', 'route' => ['post.update', $Post['id']], 'role'=>'form', 'files' => true]) !!}
 	<div class="form-group">
+		{!! Form::label('Hidden', 'Bài viết ẩn? ', ['class' => 'control-label']) !!}
+		{!! Form::checkbox('Hidden', null) !!}
+	</div>
+	<div class="form-group">
 		{!! Form::label('CourseID', 'Course ID : ',['class' => 'control-label']) !!}
 		{!! Form::select('CourseID', \App\Courses::getColumn('Title'), ['class'=>'form-control', 'onclick' => 'this.style.background = "white"']) !!}
 	</div>

@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Courses;
 use App\Http\Middleware\RedirectIfAuthenticated;
 use App\Posts;
+use App\User;
+use App\ConstsAndFuncs;
 use App\Questions;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Auth\AuthController;
@@ -37,9 +39,20 @@ class CoursesController extends Controller
     }
 
     public function viewCourse($courseID){
-        $posts = Posts::where('CourseID', '=', $courseID)->orderBy('id', 'asc')->paginate(5);
-        $newpost = Posts::orderBy('id', 'dsc')->take(5)->get()->toArray();
-        return view('userindex')->with(['Posts' => $posts, 'newpost' => $newpost, 'paginateBaseLink' => '/course/' . $courseID]);
+        $course = Courses::find($courseID);
+        if (count($course) < 1){
+            return view('errors.404');
+        }
+        if (auth() && auth()->user() && (User::find(auth()->user()->getAuthIdentifier())['admin'] >= ConstsAndFuncs::PERM_ADMIN)){
+            $posts = Posts::where('CourseID', '=', $courseID)->orderBy('id', 'asc')->paginate(5);
+            $newpost = Posts::orderBy('id', 'dsc')->take(5)->get()->toArray();
+            return view('userindex')->with(['Posts' => $posts, 'newpost' => $newpost, 'paginateBaseLink' => '/course/' . $courseID]);
+        }
+        else{
+            $posts = Posts::where('CourseID', '=', $courseID)->where('Hidden', '=', 0)->orderBy('id', 'asc')->paginate(5);
+            $newpost = Posts::orderBy('id', 'dsc')->where('Hidden', '=', 0)->take(5)->get()->toArray();
+            return view('userindex')->with(['Posts' => $posts, 'newpost' => $newpost, 'paginateBaseLink' => '/course/' . $courseID]);
+        }
     }
 
     public function addCourse(){
@@ -60,6 +73,10 @@ class CoursesController extends Controller
         }
         $data = $request->all();
         $course = new Courses();
+        if (array_key_exists('Hidden', $data) && ($data['Hidden'] == 'on'))
+            $course->Hidden = 1;
+        else
+            $course->Hidden = 0;
         $course->Title = $data['Title'];
         $course->CategoryID = $data['CategoryID'];
         $course->Description = $data['Description'];
@@ -98,6 +115,13 @@ class CoursesController extends Controller
         }
         $data = $request->all();
         $course = Courses::find($id);
+        if (count($course) < 1){
+            return redirect('/');
+        }
+        if (array_key_exists('Hidden', $data) && ($data['Hidden'] == 'on'))
+            $course->Hidden = 1;
+        else
+            $course->Hidden = 0;
         $course->CategoryID = $data['CategoryID'];
         $course->Title = $data['Title'];
         $course->Description = $data['Description'];

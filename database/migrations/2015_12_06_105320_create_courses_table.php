@@ -15,6 +15,7 @@ class CreateCoursesTable extends Migration
         Schema::create('courses', function (Blueprint $table) {
             $table->increments('id');
             $table->timestamps();
+            $table->integer('Hidden')->default(0);
             $table->integer('CategoryID')->default(1);
             $table->string('Title')->unique();
             $table->string('Description')->default(null);

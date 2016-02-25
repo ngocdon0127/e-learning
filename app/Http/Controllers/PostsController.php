@@ -26,14 +26,23 @@ class PostsController extends Controller
 {
 
 	public function viewNewestPosts(){
-//        $posts = Posts::take(5)->skip(0)->get()->toArray();
-		$Posts = Posts::orderBy('id', 'desc')->paginate(5);
-		$newpost = Posts::orderBy('visited', 'dsc')->take(5)->get();
-		$paginateBaseLink = '/';
-		// dd($newpost);
-		// dd($Posts);
-		// dd($Posts->toArray());
-		return view('userindex')->with(compact(['Posts', 'newpost', 'paginateBaseLink']));
+		if (auth() && auth()->user() && (User::find(auth()->user()->getAuthIdentifier())['admin'] >= ConstsAndFuncs::PERM_ADMIN)){
+			$Posts = Posts::orderBy('id', 'desc')->paginate(5);
+			$newpost = Posts::orderBy('visited', 'dsc')->take(5)->get();
+			$paginateBaseLink = '/';
+			return view('userindex')->with(compact(['Posts', 'newpost', 'paginateBaseLink']));
+		}
+		else{
+			$hidden_course_ids = array();
+			$courses = Courses::where('Hidden', '=', 1)->get()->toArray();
+			foreach ($courses as $value) {
+				$hidden_course_ids = array_merge($hidden_course_ids, [$value['id']]);
+			}
+			$Posts = Posts::whereNotIn('CourseID', $hidden_course_ids)->where('Hidden', '=', 0)->orderBy('id', 'desc')->paginate(5);
+			$newpost = Posts::whereNotIn('CourseID', $hidden_course_ids)->where('Hidden', '=', 0)->orderBy('visited', 'dsc')->take(5)->get();
+			$paginateBaseLink = '/';
+			return view('userindex')->with(compact(['Posts', 'newpost', 'paginateBaseLink']));
+		}
 	}
 
 	public function viewPost($postID){
@@ -59,19 +68,23 @@ class PostsController extends Controller
 		if (count($post) < 1){
 			return view('errors.404');
 		}
+		$courseID = $post['CourseID'];
+		$course = Courses::find($courseID);
 		$post->visited++;
 		$post->update();
 		$post = $post->toArray();
-		$courseID = $post['CourseID'];
 		if (auth() && (auth()->user())){
 			$userID = auth()->user()->getAuthIdentifier();
+			if (User::find($userID)['admin'] < ConstsAndFuncs::PERM_ADMIN){
+				if (($course['Hidden'] == 1) || ($post['Hidden'] == 1))
+					return view('errors.404');
+			}
 			$tmp = Learnings::where('UserID', '=', $userID)->where('CourseID', '=', $courseID)->get()->toArray();
 			if (count($tmp) < 1){
 				$learnings = new Learnings();
 				$learnings->UserID = $userID;
 				$learnings->CourseID = $courseID;
 				$learnings->save();
-				$course = Courses::find($courseID);
 				$course->NoOfUsers++;
 				$course->update();
 			}
@@ -198,10 +211,45 @@ class PostsController extends Controller
 			'Token' => $token,
 			'DisplayedQuestions' => $DisplayedQuestions
 		);
-		$nextPost = Posts::where('CourseID', '=', $post['CourseID'])->where('id', '>=', $post['id'])->get()->toArray();
-		$result += ['NextPost' => (count($nextPost) > 1) ? $nextPost[1]['id'] : Posts::where('CourseID', '=', $post['CourseID'])->first()->toArray()['id']];
-		$previousPost = Posts::where('CourseID', '=', $post['CourseID'])->where('id', '<', $post['id'])->get()->toArray();
-		$result += ['PreviousPost' => (count($previousPost) > 0) ? $previousPost[count($previousPost) - 1]['id'] : Posts::where('CourseID', '=', $post['CourseID'])->orderBy('created_at', 'desc')->first()->toArray()['id']];
+		if (auth() && auth()->user() && User::find(auth()->user()->getAuthIdentifier())['admin'] >= ConstsAndFuncs::PERM_ADMIN){
+			$nextPost = Posts::where('CourseID', '=', $post['CourseID'])
+				->where('id', '>=', $post['id'])
+				->get()->toArray();
+			$previousPost = Posts::where('CourseID', '=', $post['CourseID'])
+				->where('id', '<', $post['id'])
+				->get()->toArray();
+			$result += ['NextPost' => (count($nextPost) > 1) ? 
+			$nextPost[1]['id'] : 
+			Posts::where('CourseID', '=', $post['CourseID'])
+				->first()->toArray()['id']];
+			$result += ['PreviousPost' => (count($previousPost) > 0) ? 
+			$previousPost[count($previousPost) - 1]['id'] : 
+			Posts::where('CourseID', '=', $post['CourseID'])
+				->orderBy('created_at', 'desc')
+				->first()->toArray()['id']];
+		}
+		else {
+			$nextPost = Posts::where('CourseID', '=', $post['CourseID'])
+				->where('id', '>=', $post['id'])
+				->where('Hidden', '=', 0)
+				->get()->toArray();
+			$previousPost = Posts::where('CourseID', '=', $post['CourseID'])
+				->where('id', '<', $post['id'])
+				->where('Hidden', '=', 0)
+				->get()->toArray();
+			$result += ['NextPost' => (count($nextPost) > 1) ? 
+				$nextPost[1]['id'] : 
+				Posts::where('CourseID', '=', $post['CourseID'])
+					->where('Hidden', '=', 0)
+					->first()->toArray()['id']];
+			$result += ['PreviousPost' => (count($previousPost) > 0) ? 
+				$previousPost[count($previousPost) - 1]['id'] : 
+				Posts::where('CourseID', '=', $post['CourseID'])
+					->where('Hidden', '=', 0)
+					->orderBy('created_at', 'desc')
+					->first()->toArray()['id']];
+		}
+
 		$newpost = array_merge($nextPost, $previousPost);
 		$result += ['newpost' => $newpost];
 		// dd($newpost);
@@ -249,6 +297,10 @@ class PostsController extends Controller
 		$data = $request->all();
 
 		$post = new Posts();
+		if (array_key_exists('Hidden', $data) && ($data['Hidden'] == 'on'))
+			$post->Hidden = 1;
+		else
+			$post->Hidden = 0;
 		$post->CourseID = $data['CourseID'];
 		$post->ThumbnailID = $data['ThumbnailID'];
 		$post->Title = $data['Title'];
@@ -264,11 +316,6 @@ class PostsController extends Controller
 //              $file = Request::file('Photo');
 				$post->Photo = 'Post_' . $data['CourseID'] . '_' . $post->id . "_-Evangels-English-www.evangelsenglish.com_" . "." . $file->getClientOriginalExtension();
 				$file->move(base_path() . '/public/images/imagePost/', $post->Photo);
-
-
-				// (intval(Posts::orderBy('created_at', 'desc')->first()->id) + 1)
-
-
 				$post->update();
 				break;
 			case '2': // Video
@@ -330,6 +377,13 @@ class PostsController extends Controller
 		}
 		$data = $request->all();
 		$post = Posts::find($id);
+		if (count($post) < 1){
+			return redirect('/');
+		}
+		if (array_key_exists('Hidden', $data) && ($data['Hidden'] == 'on'))
+			$post->Hidden = 1;
+		else
+			$post->Hidden = 0;
 		$post->CourseID = $data['CourseID'];
 		$post->ThumbnailID = $data['ThumbnailID'];
 		$post->NoOfFreeQuestions = $data['NoOfFreeQuestions'];
