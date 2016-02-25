@@ -49,6 +49,9 @@ class CoursesController extends Controller
             return view('userindex')->with(['Posts' => $posts, 'newpost' => $newpost, 'paginateBaseLink' => '/course/' . $courseID]);
         }
         else{
+            if ($course['Hidden'] == 1){
+                return view('errors.404');
+            }
             $posts = Posts::where('CourseID', '=', $courseID)->where('Hidden', '=', 0)->orderBy('id', 'asc')->paginate(5);
             $newpost = Posts::orderBy('id', 'dsc')->where('Hidden', '=', 0)->take(5)->get()->toArray();
             return view('userindex')->with(['Posts' => $posts, 'newpost' => $newpost, 'paginateBaseLink' => '/course/' . $courseID]);
