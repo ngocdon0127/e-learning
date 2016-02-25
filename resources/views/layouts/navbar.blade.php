@@ -30,7 +30,7 @@
 				@foreach(\App\Categories::all() as $cate)
 				<li class="dropdown">
 					<a id= "dropDown{{$cate->id}}" href="#" class="dropdown-toggle navbar-button" data-toggle="dropdown">{{$cate->Category}}<b class="caret"></b></a>
-					@if (count($courses = \App\Courses::where('CategoryID', '=', $cate->id)->get()) > 0)
+					@if (count($courses = \App\Courses::where('CategoryID', '=', $cate->id)->where('Hidden', '=', 0)->get()) > 0)
 						<ul id="dropdown-course-{{$cate->id}}" class="dropdown-menu">
 							@foreach($courses as $c)
 								<li id="navbar-button-{{$c->id}}"><a href="{{route('user.viewcourse', $c->id)}}">{{$c->Title}}</a></li>
