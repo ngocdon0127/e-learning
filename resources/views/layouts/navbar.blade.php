@@ -45,9 +45,9 @@
 				<div class="form-group">
 					<span class="glyphicon glyphicon-search" id="spanSearch"></span>
 					<input style="display: none" class="glyphicon glyphicon-search form-control" name="HashtagSearch" id="HashtagSearch">
-					<button style="display: none" type="button" class="btn btn-default btn-sm" id="btnHashtagSearch" onclick="document.searchForm.submit()">
-						<span class="glyphicon glyphicon-search"></span> Search
-					</button>
+					<!-- <button style="display: none" type="button" class="btn btn-default btn-sm" id="btnHashtagSearch" onclick="document.searchForm.submit()">
+						 Search
+					</button> -->
 				</div>
 				<div class="form-group">
 					@if (auth()->user())
@@ -65,6 +65,14 @@
 			{!! Form::close() !!}
 		</div>
 	</nav>
+	<style>
+		#spanSearch, #HashtagSearch{
+			transition: all linear 0.2s;
+		}
+		#HashtagSearch{
+			width: 0px;
+		}
+	</style>
 	<script>
 		function ob(x){
 			return document.getElementById(x);
@@ -76,11 +84,13 @@
 		x.setAttribute('onclick', 'displaySearch()');
 		function displaySearch(){
 			@if (auth()->user())
-				ob('username-dropdown').style.display = 'none';
+				// ob('username-dropdown').style.display = 'none';
 			@else
 			@endif
 			$("#HashtagSearch").fadeIn();
-			$('#btnHashtagSearch').fadeIn();
+			// ob('HashtagSearch').style.display = "block";
+			ob('HashtagSearch').style.width = "200px";
+			// $('#btnHashtagSearch').fadeIn();
 			ob('spanSearch').style.display="none";
 			ob('HashtagSearch').focus();
 			ob('HashtagSearch').setAttribute('onBlur', 'hideSearch()');
@@ -88,10 +98,11 @@
 
 		function hideSearch(){
 			setTimeout(function(){
-				ob("HashtagSearch").style.display = 'none';
-				ob('btnHashtagSearch').style.display = 'none';
-				$('#spanSearch').fadeIn(2000);
-				$('#username-dropdown').fadeIn();
+				ob('HashtagSearch').style.width = "0px";
+				$("#HashtagSearch").fadeOut(200);
+				// ob('btnHashtagSearch').style.display = 'none';
+				$('#spanSearch').fadeIn(100);
+				// $('#username-dropdown').fadeIn();
 			}, 200);
 		}
 
