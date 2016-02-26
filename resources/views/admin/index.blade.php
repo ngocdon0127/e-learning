@@ -6,7 +6,11 @@
 	<h1 class="title">Các khóa học</h1>
 	<ul class="list-group">
 	@foreach (\App\Courses::all()->toArray() as $course)
-		<li class="list-group-item list-group-item-warning"><a href="{{route('admin.viewcourse',$course['id'])}}">{{$course['Title']}}</a></li>
+		@if ($course['Hidden'] == 1)
+		<li class="list-group-item list-group-item-warning"><a href="{{route('admin.viewcourse',$course['id'])}}">{{$course['Title'] . ' (ẩn)'}}</a></li>
+		@else
+		<li class="list-group-item list-group-item-info"><a href="{{route('admin.viewcourse',$course['id'])}}">{{$course['Title']}}</a></li>
+		@endif
 	@endforeach
 	</ul>
 	@if ((auth()->user()) && (auth()->user()->admin >= App\ConstsAndFuncs::PERM_ADMIN))

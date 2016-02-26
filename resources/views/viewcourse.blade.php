@@ -6,9 +6,13 @@
 	<h1 class="title">Chủ đề : {{$Title}}</h1>
 	<ul class="list-group">
 		@foreach ($posts as $key => $value)
-			<li class="list-group-item list-group-item-success">
+			@if ($value['Hidden'] == 0)
+			<li class="list-group-item list-group-item-info">
+			@else
+			<li class="list-group-item list-group-item-warning">
+			@endif
 				<div>
-					<a href="{{route('user.viewpost',$value['id'])}}">{{$value['Title']}}</a>
+					<a href="{{route('user.viewpost',$value['id'])}}">{{$value['Title'] . ($value['Hidden'] == 1 ? ' (ẩn)' : '')}}</a>
 				</div>
 				<div>
 					<span class="badge badge-span">Hiện có {{$NumQuestions[$value['id']]}} câu hỏi</span>
