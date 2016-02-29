@@ -12,6 +12,12 @@
 	fjs.parentNode.insertBefore(js, fjs);
 	}(document, 'script', 'facebook-jssdk'));</script>
 	<h2 class="title">{{$Post['Title']}}</h2>
+	@if (count($Hashtag) > 0)
+		<h4>Từ khóa: </h4>
+		@foreach($Hashtag as $h)
+			<a href="/search?HashtagSearch={{strtolower($h)}}">{{strtolower($h)}}</a>
+		@endforeach
+	@endif
 	<h2 class="description">{{$Post['Description']}}</h2>
 	<li class="list-group-item">
 		@if ($Post['ThumbnailID'] == 1)

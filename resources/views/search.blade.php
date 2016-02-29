@@ -9,7 +9,11 @@
 	@foreach($Posts as $p)
 		<li class="active" style="list-style-type:none; padding-top: 10px">
 			<a style="text-decoration: none; font-size: 20px;" href="{{route('user.viewpost',$p['id'])}}">
-				<img class='img-responsive' src="/images/imagePost/{{$p['Photo']}}" />
+				@if($p['ThumbnailID'] == '1')
+					<img class='img-responsive' alt="{{ $p['Title'] . ' - Evangels English - '}}{{$_SERVER['HTTP_HOST']}}" src="/images/imagePost/{{$p['Photo']}}" />
+				@elseif ($p['ThumbnailID'] == 2)
+					<img class="img-responsive" alt="{{$p['Title'] . ' - Evangels English - '}}{{$_SERVER['HTTP_HOST']}}" src="http://img.youtube.com/vi/{{$p['Video']}}/0.jpg" />
+				@endif
 				<p>
 					{{$p['Title']}}
 				</p>

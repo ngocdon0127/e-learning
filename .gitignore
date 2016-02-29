@@ -12,3 +12,4 @@ public/images/imageSubquestion/*
 public/images/imageAnswer/*
 *.sublime-project
 *.sublime-workspace
+deploy
