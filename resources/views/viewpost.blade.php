@@ -727,7 +727,7 @@
 						<img class="img-responsive" alt="{{$np['Title'] . ' - Evangels English - '}}{{$_SERVER['HTTP_HOST']}}" src="/images/imagePost/{{$np['Photo']}}" />
 					@elseif($np['ThumbnailID'] == '2')
 					<div class="embed-responsive embed-responsive-4by3">
-						<img class="img-responsive" alt="{{$np['Title'] . ' - Evangels English - '}}{{$_SERVER['HTTP_HOST']}}" src="http://img.youtube.com/vi/{{$np['Video']}}/2.jpg" />
+						<img class="img-responsive" alt="{{$np['Title'] . ' - Evangels English - '}}{{$_SERVER['HTTP_HOST']}}" src="//img.youtube.com/vi/{{$np['Video']}}/2.jpg" />
 					</div>
 					@endif
 					<h4>{{$np['Title']}}</h4>

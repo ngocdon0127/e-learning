@@ -26,7 +26,7 @@
 				@if ((auth()->user()) && (auth()->user()->admin >= App\ConstsAndFuncs::PERM_SUBADMIN))
 				<li id="navbar-button"><a class="navbar-button" href="{{route('subadmin.view')}}">SubAdmin</a></li>
 				@endif
-				<li id="navbar-button"><a class="navbar-button" href="http://kids.evangelsenglish.com">Kids</a></li>
+				<li id="navbar-button"><a class="navbar-button" href="//kids.evangelsenglish.com">Kids</a></li>
 				@foreach(\App\Categories::all() as $cate)
 				<li class="dropdown">
 					<a id= "dropDown{{$cate->id}}" href="#" class="dropdown-toggle navbar-button" data-toggle="dropdown">{{$cate->Category}}<b class="caret"></b></a>

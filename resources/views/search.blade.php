@@ -12,7 +12,7 @@
 				@if($p['ThumbnailID'] == '1')
 					<img class='img-responsive' alt="{{ $p['Title'] . ' - Evangels English - '}}{{$_SERVER['HTTP_HOST']}}" src="/images/imagePost/{{$p['Photo']}}" />
 				@elseif ($p['ThumbnailID'] == 2)
-					<img class="img-responsive" alt="{{$p['Title'] . ' - Evangels English - '}}{{$_SERVER['HTTP_HOST']}}" src="http://img.youtube.com/vi/{{$p['Video']}}/0.jpg" />
+					<img class="img-responsive" alt="{{$p['Title'] . ' - Evangels English - '}}{{$_SERVER['HTTP_HOST']}}" src="//img.youtube.com/vi/{{$p['Video']}}/0.jpg" />
 				@endif
 				<p>
 					{{$p['Title']}}
