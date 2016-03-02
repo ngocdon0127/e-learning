@@ -42,10 +42,10 @@
 	<meta property="og:title" content="Evangels English. Know English. Know the World" />
 	<meta property="og:description" content="Evangels English. Know English. Know the World" />
 	@endif
-	<script type="text/javascript" src="/js/jquery/jquery.js"></script>
-	<script type="text/javascript" src="/js/bootstrap.min.js"></script>
-	<script type="text/javascript" src="/js/style.js"></script>
-	<script type="text/javascript" src="/js/bootstrap-select.js"></script>
+	<script async type="text/javascript" src="/js/jquery/jquery.js"></script>
+	<script async type="text/javascript" src="/js/bootstrap.min.js"></script>
+	<script async type="text/javascript" src="/js/style.js"></script>
+	<script async type="text/javascript" src="/js/bootstrap-select.js"></script>
 	@if (auth() && (auth()->user()))
 	<script type="text/javascript">
 		var logout = 0;
