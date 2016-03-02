@@ -7,8 +7,8 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta name="google-site-verification" content="M4Hy67xVwi5V-pQzvd8jppN6cZHeClnx8MvCvIk-cvw" />
 	<title>@yield('head.title')</title>
-	<link rel="alternate" href="//www.evangelsenglish.com" hreflang="vi-vn" />
-	<link rel="alternate" href="//www.evangelsenglish.com" hreflang="en-sg" />
+	<link rel="alternate" href="https://www.evangelsenglish.com" hreflang="vi-vn" />
+	<link rel="alternate" href="https://www.evangelsenglish.com" hreflang="en-sg" />
 	<link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css">
 	<link rel="stylesheet" type="text/css" href="/css/bootstrap.css">
 	<link rel="stylesheet" type="text/css" href="/css/style.css">
@@ -32,13 +32,13 @@
 	<meta property="og:site_name" content="Evangels English" />
 	<meta property="og:type" content="website" />
 	<meta property="og:locale" content="vi_VN" />
-	<meta property="og:url" content="//{{$_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI']}}" />
+	<meta property="og:url" content="https://{{$_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI']}}" />
 	@if ((stripos($_SERVER['REQUEST_URI'], '/post/') !== false) && isset($Post) && isset($Post['Photo']))
-	<meta property="og:image" content="//{{$_SERVER['HTTP_HOST']}}/images/imagePost/{{$Post['Photo']}}" />
+	<meta property="og:image" content="https://{{$_SERVER['HTTP_HOST']}}/images/imagePost/{{$Post['Photo']}}" />
 	<meta property="og:title" content="{{$Post['Title']}} - Evangels English" />
 	<meta property="og:description" content="{{$Post['Description']}} Evangels English. Know English. Know the World" />
 	@else
-	<meta property="og:image" content="//{{$_SERVER['HTTP_HOST']}}/images/evangelsenglish.png" />
+	<meta property="og:image" content="https://{{$_SERVER['HTTP_HOST']}}/images/evangelsenglish.png" />
 	<meta property="og:title" content="Evangels English. Know English. Know the World" />
 	<meta property="og:description" content="Evangels English. Know English. Know the World" />
 	@endif
