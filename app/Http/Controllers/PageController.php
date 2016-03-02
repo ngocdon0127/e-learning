@@ -59,7 +59,7 @@ class PageController extends Controller
 			['Authorization' => 'Bearer ' . json_decode($rsp)->access_token],
 			null
 		);
-		dd($response);
+		echo $response->body;
 	}
 
 	public function dic(){
