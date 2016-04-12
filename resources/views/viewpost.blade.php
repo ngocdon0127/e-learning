@@ -13,7 +13,7 @@
 	}(document, 'script', 'facebook-jssdk'));</script>
 	<h2 class="title">{{$Post['Title']}}</h2>
 	@if ($MaxScoreSaved > -1)
-		<h3>Điểm cao nhất: {{$MaxScoreSaved}}</h3>
+		<h3>Điểm cao nhất: {{$MaxScoreSaved}} / {{$MaxScore}}</h3>
 		<h3>Những bạn đã đạt điểm cao nhất:</h3>
 		@foreach ($BestUsers as $bu)
 			@if (strlen($bu['Name']) > 0)
@@ -399,8 +399,16 @@
 				@endif
 				<ul id="ul_dragdrop_{{$q['id']}}" class="sortable" style="margin-top: 20px; margin-bottom: 20px">
 					<?php shuffle($AnswersFor6[$q['id']]) ?>
+					<?php $c = 0; ?>
 					@foreach($AnswersFor6[$q['id']] as $a)
 						<li id="li_dragdrop_{{$a['id']}}" class="ui-state-default li-dragdrop form-control">{{$a['Detail']}}</li>
+						<?php
+							$c++;
+							if ($c >= 5){
+								echo "<br/><br/>";
+								$c = 0;
+							}
+						?>
 					@endforeach
 				</ul>
 				<input type="hidden" id="answer_dragdrop_{{$q['id']}}" style="color: #933; font-weight: bold;" class="form-control" value="{{$CompleteAnswersFor6[$q['id']]}}" />
