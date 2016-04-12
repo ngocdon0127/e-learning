@@ -260,6 +260,43 @@ class PostsController extends Controller
 			if (strlen($ht) > 0)
 				$Hashtag = array_merge($Hashtag, [$ht]);
 		}
+
+		// highest score.
+		$doexams = Doexams::where('PostID', '=', $postID)
+			->where('Score', 'NOT LIKE', '-1')->get()->toArray();
+		// dd($doexams);
+		$max_score_saved = -1;
+		foreach ($doexams as $v) {
+			preg_match_all('/([0-9]+)\/.*/', $v['Score'], $matches);
+			if ((count($matches) >= 2) && (count($matches[1]) >=1)){
+				$s = $matches[1][0];
+			}
+			else{
+				$s = $v['Score'];
+			}
+			$max_score_saved = ($max_score_saved < $s) ? $s : $max_score_saved;
+		}
+		$best_users = [];
+		foreach ($doexams as $v) {
+			preg_match_all('/([0-9]+)\/.*/', $v['Score'], $matches);
+			// if $v['Score'] is in format: '9/10'
+			if ((count($matches) >= 2) && (count($matches[1]) >=1)){
+				$s = $matches[1][0];
+			}
+			// if $v['Score'] is just: '9'
+			else{
+				$s = $v['Score'];
+			}
+			if ($max_score_saved == $s){
+				$best_users[$v['UserID']] = [];
+				$best_users[$v['UserID']]['Time'] = $v['Time'];
+				$best_users[$v['UserID']]['Name'] = User::find($v['UserID'])['name'];
+			}
+		}
+		$BestUsers = $best_users;
+		// dd($best_users);
+		$MaxScoreSaved = $max_score_saved;
+		// dd($MaxScoreSaved);
 		return view('viewpost')->with($result)->with(compact([
 			'result',
 			'newpost',
@@ -286,6 +323,9 @@ class PostsController extends Controller
 			'AnswersFor6',
 			'DragDropIDs',
 			'CompleteAnswersFor6',
+			// Best Users
+			'BestUsers',
+			'MaxScoreSaved'
 		]));
 	}
 

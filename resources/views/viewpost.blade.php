@@ -12,6 +12,15 @@
 	fjs.parentNode.insertBefore(js, fjs);
 	}(document, 'script', 'facebook-jssdk'));</script>
 	<h2 class="title">{{$Post['Title']}}</h2>
+	@if ($MaxScoreSaved > -1)
+		<h3>Điểm cao nhất: {{$MaxScoreSaved}}</h3>
+		<h3>Những bạn đã đạt điểm cao nhất:</h3>
+		@foreach ($BestUsers as $bu)
+			@if (strlen($bu['Name']) > 0)
+				<h4>{{$bu['Name']}} ({{$bu['Time'] * 60}} phút)</h4>
+			@endif
+		@endforeach
+	@endif
 	@if (count($Hashtag) > 0)
 		<h4>Từ khóa: </h4>
 		@foreach($Hashtag as $h)
