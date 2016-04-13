@@ -17,7 +17,8 @@
 		<h3>Những bạn đã đạt điểm cao nhất:</h3>
 		@foreach ($BestUsers as $bu)
 			@if (strlen($bu['Name']) > 0)
-				<h4>{{$bu['Name']}} ({{$bu['Time'] * 60}} phút)</h4>
+				<h4>{{$bu['Name']}} ({{number_format($bu['Time'] * 60, 2)}} phút)</h4>
+				<!-- <h4>{{$bu['Name']}} ({{number_format($bu['Time'] * 60, 2, '.', '')}} phút)</h4> -->
 			@endif
 		@endforeach
 	@endif
