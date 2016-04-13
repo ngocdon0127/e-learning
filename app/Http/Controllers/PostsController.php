@@ -267,6 +267,11 @@ class PostsController extends Controller
 		// dd($doexams);
 		$max_score_saved = -1;
 		foreach ($doexams as $v) {
+			// ignore admins' score
+			$u = User::find($v['UserID']);
+			if ($u['admin'] >= ConstsAndFuncs::PERM_SUBADMIN){
+				continue;
+			}
 			preg_match_all('/([0-9]+)\/.*/', $v['Score'], $matches);
 			if ((count($matches) >= 2) && (count($matches[1]) >=1)){
 				$s = $matches[1][0];
@@ -278,6 +283,11 @@ class PostsController extends Controller
 		}
 		$best_users = [];
 		foreach ($doexams as $v) {
+			// ignore admins' score
+			$u = User::find($v['UserID']);
+			if ($u['admin'] >= ConstsAndFuncs::PERM_SUBADMIN){
+				continue;
+			}
 			preg_match_all('/([0-9]+)\/.*/', $v['Score'], $matches);
 			// if $v['Score'] is in format: '9/10'
 			if ((count($matches) >= 2) && (count($matches[1]) >=1)){
