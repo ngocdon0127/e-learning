@@ -18,8 +18,8 @@ class AdminPermission
     public function handle($request, Closure $next)
     {
         if (!Auth::check() or auth()->user()->admin < ConstsAndFuncs::PERM_SUBADMIN) {
-                    return view('errors.404');
-                }
+            return view('errors.404');
+        }
         return $next($request);
     }
 }
