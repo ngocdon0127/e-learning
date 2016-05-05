@@ -17,7 +17,7 @@ class ConstsAndFuncs
 	const PERM_SUBADMIN = 990;
 
 	// Website is free if this value is set to 0
-	const IS_PAID = 0;
+	const IS_PAID = 1;
 
 
 	public static $THUMBNAILS = [1 => 'Photo', 2 => 'Video'];

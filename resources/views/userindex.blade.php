@@ -89,3 +89,7 @@
 		</div>
 	</div>
 @endsection
+
+@section('body.navleft')
+<a href="https://goo.gl/y71RZA"><h3 class="titlepost descriptionpost" style="margin: 20px auto;">Anh ngữ Evangels chiêu sinh các khóa tiếng Anh cho tháng 5/2016.</h3></a>
+@endsection
