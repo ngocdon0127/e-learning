@@ -65,7 +65,7 @@ class PostsController extends Controller
 		}
 
 		$post = Posts::find($postID);
-		if (count($post) < 1){
+		if (!$post){
 			return view('errors.404');
 		}
 		$courseID = $post['CourseID'];
