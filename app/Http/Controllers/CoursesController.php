@@ -19,7 +19,7 @@ class CoursesController extends Controller
 
     public function adminViewCourse($courseid){
         $course = Courses::find($courseid);
-        if (count($course) < 1){
+        if (!$course){
             return view('errors.404');
         }
 //        $result = array('Title' => $course['Title']);
@@ -40,7 +40,7 @@ class CoursesController extends Controller
 
     public function viewCourse($courseID){
         $course = Courses::find($courseID);
-        if (count($course) < 1){
+        if (!$course){
             return view('errors.404');
         }
         if (auth() && auth()->user() && (User::find(auth()->user()->getAuthIdentifier())['admin'] >= ConstsAndFuncs::PERM_ADMIN)){
@@ -118,7 +118,7 @@ class CoursesController extends Controller
         }
         $data = $request->all();
         $course = Courses::find($id);
-        if (count($course) < 1){
+        if (!$course){
             return redirect('/');
         }
         if (array_key_exists('Hidden', $data) && ($data['Hidden'] == 'on'))
