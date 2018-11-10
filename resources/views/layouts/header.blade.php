@@ -2,8 +2,9 @@
 	<div style="padding: 35px 0" class="container">
 		<div class="row">
 			<div id="head" class="col-xs-7 col-md-6 col-sm-6">
-				<a href="/" style="text-decoration: none"><h1 class="header" style="font-family: 'Oswald', sans-serif;">Evangels English</h1>
-				<p class="header" style="font-family: 'Oswald', sans-serif;">Know English. Know the World</p></a>
+				<img class="img img-responsive" src="/images/logoc2.png" alt="" style="max-width: 200px">
+				<!-- <a href="/" style="text-decoration: none"><h1 class="header" style="font-family: 'Oswald', sans-serif;">Evangels English</h1>
+				<p class="header" style="font-family: 'Oswald', sans-serif;">Know English. Know the World</p></a> -->
 			</div>
 			<div class="col-xs-5 col-md-3  col-sm-5" style="float:right">
 				<div style="padding-left: 15px;">

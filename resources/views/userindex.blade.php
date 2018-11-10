@@ -1,13 +1,25 @@
 ﻿@extends('layouts.main')
 @section('head.title')
-	Evangels English
+	Tiếng Anh Buffalo
 @endsection
 @section('head.css')
 	<link rel="stylesheet" type="text/css" href="/css/userindex.css">
 @endsection
 @section('body.content')
 
+<center><h2>Luyện TOEIC ngay!</h2></center>
+@if (count($courses = \App\Courses::where('Hidden', '=', 0)->get()) > 0)
+<div style="text-align: center;">
+	<ul id="" class="" style="list-style-type: none">
+		@foreach($courses as $c)
+			<li id="navbar-button-{{$c->id}}"><a href="{{route('user.viewcourse', $c->id)}}">#{{$c->Title}}</a></li>
+		@endforeach
+	</ul>
+</div>
+@endif
+
 @foreach($Posts as $p)
+<!--
 <div class="userindexpost">
 	<a href="{{route('user.viewpost', $p['id'])}}">
 		<h3 class="titlepost">
@@ -25,9 +37,10 @@
 		</p>
 	</a>
 </div>
+-->
 @endforeach
 
-
+<!--
 @if ($Posts->toArray()['last_page'] < 5)
 <div class="row">{!! $Posts->render() !!}</div>
 @else
@@ -63,9 +76,11 @@
 	</div>
 	@endif
 @endif
+-->
 
 @endsection
 @section('body.navright')
+<!--
 	<div class="panel panel-default">
 		<div class="panel-heading">
 			Xem nhiều nhất
@@ -88,8 +103,9 @@
 		@endforeach
 		</div>
 	</div>
+-->
 @endsection
 
 @section('body.navleft')
-<a href="https://goo.gl/y71RZA"><h3 class="titlepost descriptionpost" style="margin: 20px auto;">Anh ngữ Evangels chiêu sinh các khóa tiếng Anh cho tháng 5/2016.</h3></a>
+<!-- <a href="https://goo.gl/y71RZA"><h3 class="titlepost descriptionpost" style="margin: 20px auto;">Anh ngữ Evangels chiêu sinh các khóa tiếng Anh cho tháng 5/2016.</h3></a> -->
 @endsection
