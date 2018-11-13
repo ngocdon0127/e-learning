@@ -26,7 +26,7 @@ class QuestionsController extends Controller
 			return redirect('/');
 		}
 		$Question = Questions::find($QuestionID);
-		if (count($Question) < 1){
+		if (!$Question){
 			return view('errors.404');
 		}
 		$Question = $Question->toArray();

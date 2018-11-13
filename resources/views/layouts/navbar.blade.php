@@ -3,7 +3,7 @@
 		<!-- Brand and toggle get grouped for better mobile display -->
 		<div class="navbar-header">
 			<div class="col-xs-9 col-sm-9 col-md-9 col-lg-9" style="padding-top: 9px;">
-					<a id="homesmall" href="/"><b><b style="font-size: 25px">E</b>vangels<b style="font-size: 25px">E</b>nglish</b></a>
+					<a id="homesmall" href="/"><b><b style="font-size: 25px">T</b>iengAnh<b style="font-size: 25px">B</b>uffalo</b></a>
 			</div>
 			<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
 				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">

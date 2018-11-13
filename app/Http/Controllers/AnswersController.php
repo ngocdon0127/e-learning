@@ -226,7 +226,7 @@ class AnswersController extends Controller
         }
         // return redirect('/');
         $answer = Answers::find($id);
-        if (count($answer) < 1){
+        if (!$answer){
             return redirect('/');
         }
         @unlink(public_path('images/imageAnswer/' . $answer['Photo']));
